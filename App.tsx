@@ -4,21 +4,27 @@ import { DraftBoard } from './components/DraftBoard';
 import { AnalysisPanel } from './components/AnalysisPanel';
 import { Lobby } from './components/Lobby';
 import { PRESET_TEAMS, PresetTeam } from './data/teams';
-import { fetchTeamData, analyzeMatchup, fetchChampionStats } from './services/geminiService';
+import { fetchTeamData, analyzeMatchup, fetchChampionStats, fetchRealPlayerStats } from './services/geminiService';
 import { collectTeamAdvancedStats, collectPlayerAdvancedStats } from './services/dataCollector';
 import { RefreshCw, Play, Search, Zap, LogOut } from 'lucide-react';
 
 // Initial state helpers
 const createEmptyTeam = (id: 'blue' | 'red'): Team => ({
   id,
-  name: id === 'blue' ? 'Blue Team' : 'Red Team',
+  name: id === 'blue' ? 'T1' : 'Gen.G', // Default to real team names
   bans: ['', '', '', '', ''],
-  players: [
-    { name: 'Top Laner', role: 'Top' },
-    { name: 'Jungler', role: 'Jungle' },
-    { name: 'Mid Laner', role: 'Mid' },
-    { name: 'Bot Laner', role: 'Bot' },
-    { name: 'Support', role: 'Support' }
+  players: id === 'blue' ? [
+    { name: 'Zeus', role: 'Top' },   // Real Player
+    { name: 'Oner', role: 'Jungle' },
+    { name: 'Faker', role: 'Mid' },
+    { name: 'Gumayusi', role: 'Bot' },
+    { name: 'Keria', role: 'Support' }
+  ] : [
+    { name: 'Kiin', role: 'Top' },   // Real Player
+    { name: 'Canyon', role: 'Jungle' },
+    { name: 'Chovy', role: 'Mid' },
+    { name: 'Peyz', role: 'Bot' },
+    { name: 'Lehends', role: 'Support' }
   ]
 });
 
@@ -58,32 +64,40 @@ export default function App() {
     ...redTeam.bans.filter((c): c is string => !!c)
   ]);
 
-  // Handler to start match from Lobby
-  const handleStartMatch = async (blue: PresetTeam, red: PresetTeam) => {
-    // Initialize Blue Team
+const handleStartMatch = async (blue: PresetTeam, red: PresetTeam) => {
+    console.log("BLUE TEAM DATA:", blue);
+    console.log("Players List:", blue.players);
+    // 1. Smart Roster Helper: Keeps real names if they exist!
+    const getRoster = (teamData: PresetTeam) => {
+      // If the preset has specific players (like T1), USE THEM.
+      if (teamData.players && teamData.players.length > 0) {
+        return teamData.players.map(p => ({ ...p })); // Copy them
+      }
+      // Only use generics if the team is blank
+      return [
+        { role: 'Top', name: 'Top Laner' },
+        { role: 'Jungle', name: 'Jungler' },
+        { role: 'Mid', name: 'Mid Laner' },
+        { role: 'Bot', name: 'Bot Laner' },
+        { role: 'Support', name: 'Support' }
+      ] as Player[];
+    };
+
+    // 2. Initialize Blue Team (T1) -> Now keeps "Zeus", "Faker"...
     setBlueTeam({
       id: 'blue',
       name: blue.name,
       bans: ['', '', '', '', ''],
-      players: blue.players.map(p => ({
-        role: p.role,
-        name: p.name,
-        // We can optionally pre-load advanced player stats here if needed, but usually we wait for champ select
-        advancedStats: collectPlayerAdvancedStats(p.name, p.role)
-      })),
+      players: getRoster(blue), 
       advancedStats: collectTeamAdvancedStats(blue.name)
     });
 
-    // Initialize Red Team
+    // 3. Initialize Red Team (Gen.G) -> Now keeps "Kiin", "Chovy"...
     setRedTeam({
       id: 'red',
       name: red.name,
       bans: ['', '', '', '', ''],
-      players: red.players.map(p => ({
-        role: p.role,
-        name: p.name,
-        advancedStats: collectPlayerAdvancedStats(p.name, p.role)
-      })),
+      players: getRoster(red),
       advancedStats: collectTeamAdvancedStats(red.name)
     });
 
@@ -117,29 +131,59 @@ export default function App() {
     }));
   };
 
-  const handleFetchChampionStats = async (side: 'blue' | 'red', role: Role, champion: string) => {
+const handleFetchChampionStats = async (side: 'blue' | 'red', role: Role, champion: string) => {
     if (!champion) return;
     try {
-       // 1. Fetch generic champion meta stats
-       const stats = await fetchChampionStats(champion, role);
-       
-       const team = side === 'blue' ? blueTeam : redTeam;
-       const player = team.players.find(p => p.role === role);
-       
-       // 2. Simulate "Live" Player data (e.g. from a DB)
-       const playerData = getSimulatedPlayerData(champion, role, player?.name || "Player");
+        // 1. Get Generic Info (Meta Tier) from Gemini
+        // We use this as a "Baseline" object to fill in gaps (like metaTier)
+        const aiStats = await fetchChampionStats(champion, role);
+        
+        const team = side === 'blue' ? blueTeam : redTeam;
+        const player = team.players.find(p => p.role === role);
+        const playerName = player?.name || "Unknown";
+  
+        // 2. Try to get REAL Stats from Python DB
+        // Returns null if player has never played this champ in our DB
+        const realStats = await fetchRealPlayerStats(playerName, champion);
+        
+        // 3. Fallback to simulation/AI
+        const simulatedData = getSimulatedPlayerData(champion, role, playerName);
+        
+        // --- LOGIC FIX START ---
+        
+        // A. Construct the final "Badge" stats
+        // If we have real stats, we OVERWRITE the AI's generic winrate with the player's real winrate
+        const finalChampionStats = realStats ? {
+            ...aiStats, // Keep generic meta tier info
+            winRate: realStats.winRate, // Use REAL winrate (e.g. "68%")
+            gamesPlayed: realStats.gamesPlayed, // Use REAL game count
+            roleEffectiveness: realStats.roleEffectiveness // Use REAL mastery tag ("Signature Pick")
+        } : aiStats; // Otherwise use generic AI stats
+  
+        // B. Determine Game Count for the UI logic
+        const finalGames = realStats ? realStats.gamesPlayed : simulatedData.gamesOnChamp;
 
-       const setter = side === 'blue' ? setBlueTeam : setRedTeam;
-       setter(prev => ({
-         ...prev,
-         players: prev.players.map(p => p.role === role ? { 
-           ...p, 
-           championStats: stats,
-           ...playerData // Merge the simulated player-specific data
-         } : p)
-       }));
+        // C. Determine if it's a "Comfort Pick"
+        const isComfort = realStats ? (realStats.gamesPlayed > 5) : simulatedData.isComfortPick;
+
+        // --- LOGIC FIX END ---
+  
+        const setter = side === 'blue' ? setBlueTeam : setRedTeam;
+        setter(prev => ({
+          ...prev,
+          players: prev.players.map(p => p.role === role ? { 
+            ...p, 
+            championStats: finalChampionStats, // <--- Use the merged stats here
+            recentForm: simulatedData.recentForm,
+            gamesOnChamp: finalGames,
+            isComfortPick: isComfort,
+            // If we have real stats, we likely don't have "advancedStats" (aggro/gold) for that specific player/champ pair yet, 
+            // so we keep the simulated advanced stats for the graphs, OR you can extend the backend to provide this too.
+            advancedStats: simulatedData.advancedStats 
+          } : p)
+        }));
     } catch (e) {
-      console.error("Failed to fetch champion stats", e);
+      console.error("Failed to fetch stats", e);
     }
   };
 
@@ -251,10 +295,10 @@ export default function App() {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             
-            {/* Draft Column */}
             <div className="lg:col-span-7 space-y-6">
               <DraftBoard 
-                team={blueTeam} 
+                team={blueTeam}
+                enemyTeam={redTeam} // <--- ADD THIS LINE
                 side="blue" 
                 onUpdatePlayer={handleUpdatePlayer} 
                 onUpdateBan={handleUpdateBan}
@@ -270,7 +314,8 @@ export default function App() {
               </div>
 
               <DraftBoard 
-                team={redTeam} 
+                team={redTeam}
+                enemyTeam={blueTeam} // <--- ADD THIS LINE
                 side="red" 
                 onUpdatePlayer={handleUpdatePlayer} 
                 onUpdateBan={handleUpdateBan}
