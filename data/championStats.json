@@ -1,0 +1,1998 @@
+{
+  "Aatrox": {
+    "name": "Aatrox",
+    "winRate": 51.3,
+    "pickRate": 19.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "JUGGERNAUT",
+      "TANK"
+    ],
+    "isReal": true
+  },
+  "Ahri": {
+    "name": "Ahri",
+    "winRate": 51.8,
+    "pickRate": 9.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "BURST",
+      "MAGE"
+    ],
+    "isReal": true
+  },
+  "Akali": {
+    "name": "Akali",
+    "winRate": 49.2,
+    "pickRate": 13.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN"
+    ],
+    "isReal": true
+  },
+  "Akshan": {
+    "name": "Akshan",
+    "winRate": 48.8,
+    "pickRate": 9.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "MARKSMAN"
+    ],
+    "isReal": true
+  },
+  "Alistar": {
+    "name": "Alistar",
+    "winRate": 49.0,
+    "pickRate": 1.0,
+    "banRate": 0.0,
+    "roles": [
+      "SUPPORT",
+      "TANK",
+      "VANGUARD"
+    ],
+    "isReal": true
+  },
+  "Ambessa": {
+    "name": "Ambessa",
+    "winRate": 53.0,
+    "pickRate": 1.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "DIVER",
+      "FIGHTER",
+      "SKIRMISHER"
+    ],
+    "isReal": true
+  },
+  "Amumu": {
+    "name": "Amumu",
+    "winRate": 52.7,
+    "pickRate": 3.0,
+    "banRate": 0.0,
+    "roles": [
+      "SUPPORT",
+      "TANK",
+      "VANGUARD"
+    ],
+    "isReal": true
+  },
+  "Anivia": {
+    "name": "Anivia",
+    "winRate": 49.0,
+    "pickRate": 1.0,
+    "banRate": 0.0,
+    "roles": [
+      "BATTLEMAGE",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Annie": {
+    "name": "Annie",
+    "winRate": 50.1,
+    "pickRate": 7.0,
+    "banRate": 0.0,
+    "roles": [
+      "BURST",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Aphelios": {
+    "name": "Aphelios",
+    "winRate": 53.1,
+    "pickRate": 7.0,
+    "banRate": 0.0,
+    "roles": [
+      "MARKSMAN"
+    ],
+    "isReal": true
+  },
+  "Ashe": {
+    "name": "Ashe",
+    "winRate": 51.5,
+    "pickRate": 11.0,
+    "banRate": 0.0,
+    "roles": [
+      "MARKSMAN",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "AurelionSol": {
+    "name": "Aurelion Sol",
+    "winRate": 51.5,
+    "pickRate": 11.0,
+    "banRate": 0.0,
+    "roles": [
+      "BATTLEMAGE",
+      "MAGE"
+    ],
+    "isReal": true
+  },
+  "Aurora": {
+    "name": "Aurora",
+    "winRate": 50.8,
+    "pickRate": 9.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "BURST",
+      "MAGE"
+    ],
+    "isReal": true
+  },
+  "Azir": {
+    "name": "Azir",
+    "winRate": 53.6,
+    "pickRate": 17.0,
+    "banRate": 0.0,
+    "roles": [
+      "MAGE",
+      "MARKSMAN",
+      "SPECIALIST"
+    ],
+    "isReal": true
+  },
+  "Bard": {
+    "name": "Bard",
+    "winRate": 50.7,
+    "pickRate": 3.0,
+    "banRate": 0.0,
+    "roles": [
+      "CATCHER",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Belveth": {
+    "name": "Bel'Veth",
+    "winRate": 49.1,
+    "pickRate": 7.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "SKIRMISHER"
+    ],
+    "isReal": true
+  },
+  "Blitzcrank": {
+    "name": "Blitzcrank",
+    "winRate": 51.4,
+    "pickRate": 5.0,
+    "banRate": 0.0,
+    "roles": [
+      "CATCHER",
+      "SUPPORT",
+      "TANK"
+    ],
+    "isReal": true
+  },
+  "Brand": {
+    "name": "Brand",
+    "winRate": 49.7,
+    "pickRate": 3.0,
+    "banRate": 0.0,
+    "roles": [
+      "BURST",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Braum": {
+    "name": "Braum",
+    "winRate": 51.3,
+    "pickRate": 19.0,
+    "banRate": 0.0,
+    "roles": [
+      "SUPPORT",
+      "TANK",
+      "WARDEN"
+    ],
+    "isReal": true
+  },
+  "Briar": {
+    "name": "Briar",
+    "winRate": 50.6,
+    "pickRate": 17.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "DIVER",
+      "FIGHTER"
+    ],
+    "isReal": true
+  },
+  "Caitlyn": {
+    "name": "Caitlyn",
+    "winRate": 49.4,
+    "pickRate": 5.0,
+    "banRate": 0.0,
+    "roles": [
+      "MARKSMAN"
+    ],
+    "isReal": true
+  },
+  "Camille": {
+    "name": "Camille",
+    "winRate": 52.5,
+    "pickRate": 11.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "DIVER",
+      "FIGHTER"
+    ],
+    "isReal": true
+  },
+  "Cassiopeia": {
+    "name": "Cassiopeia",
+    "winRate": 49.5,
+    "pickRate": 11.0,
+    "banRate": 0.0,
+    "roles": [
+      "BATTLEMAGE",
+      "MAGE"
+    ],
+    "isReal": true
+  },
+  "Chogath": {
+    "name": "Cho'Gath",
+    "winRate": 53.9,
+    "pickRate": 15.0,
+    "banRate": 0.0,
+    "roles": [
+      "MAGE",
+      "SPECIALIST",
+      "TANK"
+    ],
+    "isReal": true
+  },
+  "Corki": {
+    "name": "Corki",
+    "winRate": 51.4,
+    "pickRate": 5.0,
+    "banRate": 0.0,
+    "roles": [
+      "MAGE",
+      "MARKSMAN"
+    ],
+    "isReal": true
+  },
+  "Darius": {
+    "name": "Darius",
+    "winRate": 50.6,
+    "pickRate": 17.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "JUGGERNAUT",
+      "TANK"
+    ],
+    "isReal": true
+  },
+  "Diana": {
+    "name": "Diana",
+    "winRate": 48.7,
+    "pickRate": 3.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "DIVER",
+      "FIGHTER"
+    ],
+    "isReal": true
+  },
+  "DrMundo": {
+    "name": "Dr. Mundo",
+    "winRate": 48.5,
+    "pickRate": 11.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "JUGGERNAUT",
+      "TANK"
+    ],
+    "isReal": true
+  },
+  "Draven": {
+    "name": "Draven",
+    "winRate": 49.8,
+    "pickRate": 9.0,
+    "banRate": 0.0,
+    "roles": [
+      "MARKSMAN"
+    ],
+    "isReal": true
+  },
+  "Ekko": {
+    "name": "Ekko",
+    "winRate": 52.4,
+    "pickRate": 5.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "MAGE"
+    ],
+    "isReal": true
+  },
+  "Elise": {
+    "name": "Elise",
+    "winRate": 50.8,
+    "pickRate": 9.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "DIVER",
+      "MAGE"
+    ],
+    "isReal": true
+  },
+  "Evelynn": {
+    "name": "Evelynn",
+    "winRate": 50.7,
+    "pickRate": 3.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "MAGE"
+    ],
+    "isReal": true
+  },
+  "Ezreal": {
+    "name": "Ezreal",
+    "winRate": 50.1,
+    "pickRate": 7.0,
+    "banRate": 0.0,
+    "roles": [
+      "MAGE",
+      "MARKSMAN"
+    ],
+    "isReal": true
+  },
+  "Fiddlesticks": {
+    "name": "Fiddlesticks",
+    "winRate": 53.1,
+    "pickRate": 7.0,
+    "banRate": 0.0,
+    "roles": [
+      "MAGE",
+      "SPECIALIST",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Fiora": {
+    "name": "Fiora",
+    "winRate": 50.7,
+    "pickRate": 3.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "FIGHTER",
+      "SKIRMISHER"
+    ],
+    "isReal": true
+  },
+  "Fizz": {
+    "name": "Fizz",
+    "winRate": 48.9,
+    "pickRate": 15.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "FIGHTER"
+    ],
+    "isReal": true
+  },
+  "Galio": {
+    "name": "Galio",
+    "winRate": 50.2,
+    "pickRate": 13.0,
+    "banRate": 0.0,
+    "roles": [
+      "MAGE",
+      "TANK",
+      "WARDEN"
+    ],
+    "isReal": true
+  },
+  "Gangplank": {
+    "name": "Gangplank",
+    "winRate": 50.5,
+    "pickRate": 11.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "SPECIALIST"
+    ],
+    "isReal": true
+  },
+  "Garen": {
+    "name": "Garen",
+    "winRate": 50.3,
+    "pickRate": 19.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "JUGGERNAUT",
+      "TANK"
+    ],
+    "isReal": true
+  },
+  "Gnar": {
+    "name": "Gnar",
+    "winRate": 52.2,
+    "pickRate": 13.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "SPECIALIST",
+      "TANK"
+    ],
+    "isReal": true
+  },
+  "Gragas": {
+    "name": "Gragas",
+    "winRate": 48.7,
+    "pickRate": 3.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "MAGE",
+      "VANGUARD"
+    ],
+    "isReal": true
+  },
+  "Graves": {
+    "name": "Graves",
+    "winRate": 50.6,
+    "pickRate": 17.0,
+    "banRate": 0.0,
+    "roles": [
+      "MARKSMAN",
+      "SPECIALIST"
+    ],
+    "isReal": true
+  },
+  "Gwen": {
+    "name": "Gwen",
+    "winRate": 53.1,
+    "pickRate": 7.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "FIGHTER",
+      "SKIRMISHER"
+    ],
+    "isReal": true
+  },
+  "Hecarim": {
+    "name": "Hecarim",
+    "winRate": 52.7,
+    "pickRate": 3.0,
+    "banRate": 0.0,
+    "roles": [
+      "DIVER",
+      "FIGHTER",
+      "TANK"
+    ],
+    "isReal": true
+  },
+  "Heimerdinger": {
+    "name": "Heimerdinger",
+    "winRate": 52.5,
+    "pickRate": 11.0,
+    "banRate": 0.0,
+    "roles": [
+      "MAGE",
+      "SPECIALIST",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Hwei": {
+    "name": "Hwei",
+    "winRate": 52.7,
+    "pickRate": 3.0,
+    "banRate": 0.0,
+    "roles": [
+      "ARTILLERY",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Illaoi": {
+    "name": "Illaoi",
+    "winRate": 49.2,
+    "pickRate": 13.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "JUGGERNAUT",
+      "TANK"
+    ],
+    "isReal": true
+  },
+  "Irelia": {
+    "name": "Irelia",
+    "winRate": 48.8,
+    "pickRate": 9.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "DIVER",
+      "FIGHTER"
+    ],
+    "isReal": true
+  },
+  "Ivern": {
+    "name": "Ivern",
+    "winRate": 52.6,
+    "pickRate": 17.0,
+    "banRate": 0.0,
+    "roles": [
+      "CATCHER",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Janna": {
+    "name": "Janna",
+    "winRate": 49.8,
+    "pickRate": 9.0,
+    "banRate": 0.0,
+    "roles": [
+      "ENCHANTER",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "JarvanIV": {
+    "name": "Jarvan IV",
+    "winRate": 51.1,
+    "pickRate": 7.0,
+    "banRate": 0.0,
+    "roles": [
+      "DIVER",
+      "FIGHTER",
+      "TANK"
+    ],
+    "isReal": true
+  },
+  "Jax": {
+    "name": "Jax",
+    "winRate": 48.1,
+    "pickRate": 7.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "FIGHTER",
+      "SKIRMISHER"
+    ],
+    "isReal": true
+  },
+  "Jayce": {
+    "name": "Jayce",
+    "winRate": 50.2,
+    "pickRate": 13.0,
+    "banRate": 0.0,
+    "roles": [
+      "ARTILLERY",
+      "FIGHTER",
+      "MARKSMAN"
+    ],
+    "isReal": true
+  },
+  "Jhin": {
+    "name": "Jhin",
+    "winRate": 52.3,
+    "pickRate": 19.0,
+    "banRate": 0.0,
+    "roles": [
+      "CATCHER",
+      "MAGE",
+      "MARKSMAN"
+    ],
+    "isReal": true
+  },
+  "Jinx": {
+    "name": "Jinx",
+    "winRate": 53.9,
+    "pickRate": 15.0,
+    "banRate": 0.0,
+    "roles": [
+      "MARKSMAN"
+    ],
+    "isReal": true
+  },
+  "KSante": {
+    "name": "K'Sante",
+    "winRate": 51.1,
+    "pickRate": 7.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "SKIRMISHER",
+      "TANK",
+      "WARDEN"
+    ],
+    "isReal": true
+  },
+  "Kaisa": {
+    "name": "Kai'Sa",
+    "winRate": 50.6,
+    "pickRate": 17.0,
+    "banRate": 0.0,
+    "roles": [
+      "MAGE",
+      "MARKSMAN"
+    ],
+    "isReal": true
+  },
+  "Kalista": {
+    "name": "Kalista",
+    "winRate": 48.3,
+    "pickRate": 19.0,
+    "banRate": 0.0,
+    "roles": [
+      "MARKSMAN"
+    ],
+    "isReal": true
+  },
+  "Karma": {
+    "name": "Karma",
+    "winRate": 50.2,
+    "pickRate": 13.0,
+    "banRate": 0.0,
+    "roles": [
+      "BURST",
+      "ENCHANTER",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Karthus": {
+    "name": "Karthus",
+    "winRate": 50.8,
+    "pickRate": 9.0,
+    "banRate": 0.0,
+    "roles": [
+      "BATTLEMAGE",
+      "MAGE"
+    ],
+    "isReal": true
+  },
+  "Kassadin": {
+    "name": "Kassadin",
+    "winRate": 52.4,
+    "pickRate": 5.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "MAGE"
+    ],
+    "isReal": true
+  },
+  "Katarina": {
+    "name": "Katarina",
+    "winRate": 52.1,
+    "pickRate": 7.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "MAGE"
+    ],
+    "isReal": true
+  },
+  "Kayle": {
+    "name": "Kayle",
+    "winRate": 51.2,
+    "pickRate": 13.0,
+    "banRate": 0.0,
+    "roles": [
+      "MAGE",
+      "MARKSMAN",
+      "SPECIALIST"
+    ],
+    "isReal": true
+  },
+  "Kayn": {
+    "name": "Kayn",
+    "winRate": 53.3,
+    "pickRate": 19.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "FIGHTER",
+      "SKIRMISHER"
+    ],
+    "isReal": true
+  },
+  "Kennen": {
+    "name": "Kennen",
+    "winRate": 49.7,
+    "pickRate": 3.0,
+    "banRate": 0.0,
+    "roles": [
+      "MAGE",
+      "MARKSMAN",
+      "SPECIALIST"
+    ],
+    "isReal": true
+  },
+  "Khazix": {
+    "name": "Kha'Zix",
+    "winRate": 52.0,
+    "pickRate": 1.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN"
+    ],
+    "isReal": true
+  },
+  "Kindred": {
+    "name": "Kindred",
+    "winRate": 53.5,
+    "pickRate": 11.0,
+    "banRate": 0.0,
+    "roles": [
+      "MARKSMAN"
+    ],
+    "isReal": true
+  },
+  "Kled": {
+    "name": "Kled",
+    "winRate": 51.4,
+    "pickRate": 5.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "SKIRMISHER",
+      "TANK"
+    ],
+    "isReal": true
+  },
+  "KogMaw": {
+    "name": "Kog'Maw",
+    "winRate": 51.1,
+    "pickRate": 7.0,
+    "banRate": 0.0,
+    "roles": [
+      "MAGE",
+      "MARKSMAN"
+    ],
+    "isReal": true
+  },
+  "Leblanc": {
+    "name": "LeBlanc",
+    "winRate": 48.7,
+    "pickRate": 3.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "BURST",
+      "MAGE"
+    ],
+    "isReal": true
+  },
+  "LeeSin": {
+    "name": "Lee Sin",
+    "winRate": 49.8,
+    "pickRate": 9.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "DIVER",
+      "FIGHTER"
+    ],
+    "isReal": true
+  },
+  "Leona": {
+    "name": "Leona",
+    "winRate": 50.5,
+    "pickRate": 11.0,
+    "banRate": 0.0,
+    "roles": [
+      "SUPPORT",
+      "TANK",
+      "VANGUARD"
+    ],
+    "isReal": true
+  },
+  "Lillia": {
+    "name": "Lillia",
+    "winRate": 48.9,
+    "pickRate": 15.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "MAGE",
+      "SKIRMISHER"
+    ],
+    "isReal": true
+  },
+  "Lissandra": {
+    "name": "Lissandra",
+    "winRate": 51.9,
+    "pickRate": 15.0,
+    "banRate": 0.0,
+    "roles": [
+      "BURST",
+      "MAGE"
+    ],
+    "isReal": true
+  },
+  "Lucian": {
+    "name": "Lucian",
+    "winRate": 49.4,
+    "pickRate": 5.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "MARKSMAN"
+    ],
+    "isReal": true
+  },
+  "Lulu": {
+    "name": "Lulu",
+    "winRate": 48.8,
+    "pickRate": 9.0,
+    "banRate": 0.0,
+    "roles": [
+      "ENCHANTER",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Lux": {
+    "name": "Lux",
+    "winRate": 50.3,
+    "pickRate": 19.0,
+    "banRate": 0.0,
+    "roles": [
+      "ARTILLERY",
+      "BURST",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Malphite": {
+    "name": "Malphite",
+    "winRate": 53.0,
+    "pickRate": 1.0,
+    "banRate": 0.0,
+    "roles": [
+      "MAGE",
+      "TANK",
+      "VANGUARD"
+    ],
+    "isReal": true
+  },
+  "Malzahar": {
+    "name": "Malzahar",
+    "winRate": 52.6,
+    "pickRate": 17.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "BATTLEMAGE",
+      "MAGE"
+    ],
+    "isReal": true
+  },
+  "Maokai": {
+    "name": "Maokai",
+    "winRate": 48.4,
+    "pickRate": 5.0,
+    "banRate": 0.0,
+    "roles": [
+      "SUPPORT",
+      "TANK",
+      "VANGUARD"
+    ],
+    "isReal": true
+  },
+  "MasterYi": {
+    "name": "Master Yi",
+    "winRate": 49.6,
+    "pickRate": 17.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "FIGHTER",
+      "SKIRMISHER"
+    ],
+    "isReal": true
+  },
+  "Mel": {
+    "name": "Mel",
+    "winRate": 53.6,
+    "pickRate": 17.0,
+    "banRate": 0.0,
+    "roles": [
+      "ARTILLERY",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Milio": {
+    "name": "Milio",
+    "winRate": 51.6,
+    "pickRate": 17.0,
+    "banRate": 0.0,
+    "roles": [
+      "ENCHANTER",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "MissFortune": {
+    "name": "Miss Fortune",
+    "winRate": 53.3,
+    "pickRate": 19.0,
+    "banRate": 0.0,
+    "roles": [
+      "MAGE",
+      "MARKSMAN"
+    ],
+    "isReal": true
+  },
+  "Mordekaiser": {
+    "name": "Mordekaiser",
+    "winRate": 49.2,
+    "pickRate": 13.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "JUGGERNAUT",
+      "MAGE"
+    ],
+    "isReal": true
+  },
+  "Morgana": {
+    "name": "Morgana",
+    "winRate": 53.9,
+    "pickRate": 15.0,
+    "banRate": 0.0,
+    "roles": [
+      "CATCHER",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Naafiri": {
+    "name": "Naafiri",
+    "winRate": 52.8,
+    "pickRate": 9.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "FIGHTER"
+    ],
+    "isReal": true
+  },
+  "Nami": {
+    "name": "Nami",
+    "winRate": 51.9,
+    "pickRate": 15.0,
+    "banRate": 0.0,
+    "roles": [
+      "ENCHANTER",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Nasus": {
+    "name": "Nasus",
+    "winRate": 53.2,
+    "pickRate": 13.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "JUGGERNAUT",
+      "TANK"
+    ],
+    "isReal": true
+  },
+  "Nautilus": {
+    "name": "Nautilus",
+    "winRate": 50.3,
+    "pickRate": 19.0,
+    "banRate": 0.0,
+    "roles": [
+      "SUPPORT",
+      "TANK",
+      "VANGUARD"
+    ],
+    "isReal": true
+  },
+  "Neeko": {
+    "name": "Neeko",
+    "winRate": 50.8,
+    "pickRate": 9.0,
+    "banRate": 0.0,
+    "roles": [
+      "BURST",
+      "CATCHER",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Nidalee": {
+    "name": "Nidalee",
+    "winRate": 52.0,
+    "pickRate": 1.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "MAGE",
+      "SPECIALIST"
+    ],
+    "isReal": true
+  },
+  "Nilah": {
+    "name": "Nilah",
+    "winRate": 50.2,
+    "pickRate": 13.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "FIGHTER",
+      "SKIRMISHER"
+    ],
+    "isReal": true
+  },
+  "Nocturne": {
+    "name": "Nocturne",
+    "winRate": 49.6,
+    "pickRate": 17.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "FIGHTER"
+    ],
+    "isReal": true
+  },
+  "Nunu": {
+    "name": "Nunu & Willump",
+    "winRate": 50.0,
+    "pickRate": 1.0,
+    "banRate": 0.0,
+    "roles": [
+      "MAGE",
+      "TANK",
+      "VANGUARD"
+    ],
+    "isReal": true
+  },
+  "Olaf": {
+    "name": "Olaf",
+    "winRate": 51.6,
+    "pickRate": 17.0,
+    "banRate": 0.0,
+    "roles": [
+      "DIVER",
+      "FIGHTER",
+      "TANK"
+    ],
+    "isReal": true
+  },
+  "Orianna": {
+    "name": "Orianna",
+    "winRate": 48.2,
+    "pickRate": 13.0,
+    "banRate": 0.0,
+    "roles": [
+      "BURST",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Ornn": {
+    "name": "Ornn",
+    "winRate": 48.3,
+    "pickRate": 19.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "TANK",
+      "VANGUARD"
+    ],
+    "isReal": true
+  },
+  "Pantheon": {
+    "name": "Pantheon",
+    "winRate": 53.9,
+    "pickRate": 15.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "DIVER",
+      "FIGHTER"
+    ],
+    "isReal": true
+  },
+  "Poppy": {
+    "name": "Poppy",
+    "winRate": 48.6,
+    "pickRate": 17.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "TANK",
+      "WARDEN"
+    ],
+    "isReal": true
+  },
+  "Pyke": {
+    "name": "Pyke",
+    "winRate": 53.9,
+    "pickRate": 15.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "CATCHER",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Qiyana": {
+    "name": "Qiyana",
+    "winRate": 50.1,
+    "pickRate": 7.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "FIGHTER"
+    ],
+    "isReal": true
+  },
+  "Quinn": {
+    "name": "Quinn",
+    "winRate": 53.3,
+    "pickRate": 19.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "MARKSMAN",
+      "SPECIALIST"
+    ],
+    "isReal": true
+  },
+  "Rakan": {
+    "name": "Rakan",
+    "winRate": 50.3,
+    "pickRate": 19.0,
+    "banRate": 0.0,
+    "roles": [
+      "CATCHER",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Rammus": {
+    "name": "Rammus",
+    "winRate": 51.9,
+    "pickRate": 15.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "TANK",
+      "VANGUARD"
+    ],
+    "isReal": true
+  },
+  "RekSai": {
+    "name": "Rek'Sai",
+    "winRate": 50.4,
+    "pickRate": 5.0,
+    "banRate": 0.0,
+    "roles": [
+      "DIVER",
+      "FIGHTER",
+      "TANK"
+    ],
+    "isReal": true
+  },
+  "Rell": {
+    "name": "Rell",
+    "winRate": 52.9,
+    "pickRate": 15.0,
+    "banRate": 0.0,
+    "roles": [
+      "SUPPORT",
+      "TANK",
+      "VANGUARD"
+    ],
+    "isReal": true
+  },
+  "Renata": {
+    "name": "Renata Glasc",
+    "winRate": 53.5,
+    "pickRate": 11.0,
+    "banRate": 0.0,
+    "roles": [
+      "ENCHANTER",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Renekton": {
+    "name": "Renekton",
+    "winRate": 48.8,
+    "pickRate": 9.0,
+    "banRate": 0.0,
+    "roles": [
+      "DIVER",
+      "FIGHTER",
+      "TANK"
+    ],
+    "isReal": true
+  },
+  "Rengar": {
+    "name": "Rengar",
+    "winRate": 49.7,
+    "pickRate": 3.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "DIVER",
+      "FIGHTER"
+    ],
+    "isReal": true
+  },
+  "Riven": {
+    "name": "Riven",
+    "winRate": 52.6,
+    "pickRate": 17.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "FIGHTER",
+      "SKIRMISHER"
+    ],
+    "isReal": true
+  },
+  "Rumble": {
+    "name": "Rumble",
+    "winRate": 50.5,
+    "pickRate": 11.0,
+    "banRate": 0.0,
+    "roles": [
+      "BATTLEMAGE",
+      "FIGHTER",
+      "MAGE"
+    ],
+    "isReal": true
+  },
+  "Ryze": {
+    "name": "Ryze",
+    "winRate": 49.6,
+    "pickRate": 17.0,
+    "banRate": 0.0,
+    "roles": [
+      "BATTLEMAGE",
+      "FIGHTER",
+      "MAGE"
+    ],
+    "isReal": true
+  },
+  "Samira": {
+    "name": "Samira",
+    "winRate": 49.5,
+    "pickRate": 11.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "MARKSMAN"
+    ],
+    "isReal": true
+  },
+  "Sejuani": {
+    "name": "Sejuani",
+    "winRate": 48.9,
+    "pickRate": 15.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "TANK",
+      "VANGUARD"
+    ],
+    "isReal": true
+  },
+  "Senna": {
+    "name": "Senna",
+    "winRate": 51.1,
+    "pickRate": 7.0,
+    "banRate": 0.0,
+    "roles": [
+      "ENCHANTER",
+      "MARKSMAN",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Seraphine": {
+    "name": "Seraphine",
+    "winRate": 51.7,
+    "pickRate": 3.0,
+    "banRate": 0.0,
+    "roles": [
+      "BURST",
+      "ENCHANTER",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Sett": {
+    "name": "Sett",
+    "winRate": 48.6,
+    "pickRate": 17.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "JUGGERNAUT",
+      "TANK"
+    ],
+    "isReal": true
+  },
+  "Shaco": {
+    "name": "Shaco",
+    "winRate": 50.4,
+    "pickRate": 5.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN"
+    ],
+    "isReal": true
+  },
+  "Shen": {
+    "name": "Shen",
+    "winRate": 52.8,
+    "pickRate": 9.0,
+    "banRate": 0.0,
+    "roles": [
+      "TANK",
+      "WARDEN"
+    ],
+    "isReal": true
+  },
+  "Shyvana": {
+    "name": "Shyvana",
+    "winRate": 50.0,
+    "pickRate": 1.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "JUGGERNAUT",
+      "MAGE"
+    ],
+    "isReal": true
+  },
+  "Singed": {
+    "name": "Singed",
+    "winRate": 49.2,
+    "pickRate": 13.0,
+    "banRate": 0.0,
+    "roles": [
+      "MAGE",
+      "SPECIALIST",
+      "TANK"
+    ],
+    "isReal": true
+  },
+  "Sion": {
+    "name": "Sion",
+    "winRate": 53.9,
+    "pickRate": 15.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "TANK",
+      "VANGUARD"
+    ],
+    "isReal": true
+  },
+  "Sivir": {
+    "name": "Sivir",
+    "winRate": 53.5,
+    "pickRate": 11.0,
+    "banRate": 0.0,
+    "roles": [
+      "MARKSMAN"
+    ],
+    "isReal": true
+  },
+  "Skarner": {
+    "name": "Skarner",
+    "winRate": 49.6,
+    "pickRate": 17.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "JUGGERNAUT",
+      "TANK",
+      "VANGUARD"
+    ],
+    "isReal": true
+  },
+  "Smolder": {
+    "name": "Smolder",
+    "winRate": 49.6,
+    "pickRate": 17.0,
+    "banRate": 0.0,
+    "roles": [
+      "MAGE",
+      "MARKSMAN"
+    ],
+    "isReal": true
+  },
+  "Sona": {
+    "name": "Sona",
+    "winRate": 53.1,
+    "pickRate": 7.0,
+    "banRate": 0.0,
+    "roles": [
+      "ENCHANTER",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Soraka": {
+    "name": "Soraka",
+    "winRate": 49.9,
+    "pickRate": 15.0,
+    "banRate": 0.0,
+    "roles": [
+      "ENCHANTER",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Swain": {
+    "name": "Swain",
+    "winRate": 52.4,
+    "pickRate": 5.0,
+    "banRate": 0.0,
+    "roles": [
+      "BATTLEMAGE",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Sylas": {
+    "name": "Sylas",
+    "winRate": 53.4,
+    "pickRate": 5.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "BURST",
+      "MAGE",
+      "SKIRMISHER"
+    ],
+    "isReal": true
+  },
+  "Syndra": {
+    "name": "Syndra",
+    "winRate": 51.5,
+    "pickRate": 11.0,
+    "banRate": 0.0,
+    "roles": [
+      "BURST",
+      "MAGE"
+    ],
+    "isReal": true
+  },
+  "TahmKench": {
+    "name": "Tahm Kench",
+    "winRate": 50.5,
+    "pickRate": 11.0,
+    "banRate": 0.0,
+    "roles": [
+      "SUPPORT",
+      "TANK",
+      "WARDEN"
+    ],
+    "isReal": true
+  },
+  "Taliyah": {
+    "name": "Taliyah",
+    "winRate": 48.6,
+    "pickRate": 17.0,
+    "banRate": 0.0,
+    "roles": [
+      "BATTLEMAGE",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Talon": {
+    "name": "Talon",
+    "winRate": 52.0,
+    "pickRate": 1.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN"
+    ],
+    "isReal": true
+  },
+  "Taric": {
+    "name": "Taric",
+    "winRate": 50.9,
+    "pickRate": 15.0,
+    "banRate": 0.0,
+    "roles": [
+      "ENCHANTER",
+      "SUPPORT",
+      "TANK",
+      "WARDEN"
+    ],
+    "isReal": true
+  },
+  "Teemo": {
+    "name": "Teemo",
+    "winRate": 51.6,
+    "pickRate": 17.0,
+    "banRate": 0.0,
+    "roles": [
+      "MAGE",
+      "MARKSMAN",
+      "SPECIALIST"
+    ],
+    "isReal": true
+  },
+  "Thresh": {
+    "name": "Thresh",
+    "winRate": 51.2,
+    "pickRate": 13.0,
+    "banRate": 0.0,
+    "roles": [
+      "CATCHER",
+      "SUPPORT",
+      "TANK"
+    ],
+    "isReal": true
+  },
+  "Tristana": {
+    "name": "Tristana",
+    "winRate": 48.8,
+    "pickRate": 9.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "MARKSMAN"
+    ],
+    "isReal": true
+  },
+  "Trundle": {
+    "name": "Trundle",
+    "winRate": 50.4,
+    "pickRate": 5.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "JUGGERNAUT",
+      "TANK"
+    ],
+    "isReal": true
+  },
+  "Tryndamere": {
+    "name": "Tryndamere",
+    "winRate": 52.1,
+    "pickRate": 7.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "FIGHTER",
+      "SKIRMISHER"
+    ],
+    "isReal": true
+  },
+  "TwistedFate": {
+    "name": "Twisted Fate",
+    "winRate": 50.6,
+    "pickRate": 17.0,
+    "banRate": 0.0,
+    "roles": [
+      "BURST",
+      "MAGE",
+      "MARKSMAN"
+    ],
+    "isReal": true
+  },
+  "Twitch": {
+    "name": "Twitch",
+    "winRate": 51.7,
+    "pickRate": 3.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "MARKSMAN"
+    ],
+    "isReal": true
+  },
+  "Udyr": {
+    "name": "Udyr",
+    "winRate": 49.0,
+    "pickRate": 1.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "JUGGERNAUT",
+      "TANK"
+    ],
+    "isReal": true
+  },
+  "Urgot": {
+    "name": "Urgot",
+    "winRate": 53.9,
+    "pickRate": 15.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "JUGGERNAUT",
+      "TANK"
+    ],
+    "isReal": true
+  },
+  "Varus": {
+    "name": "Varus",
+    "winRate": 53.9,
+    "pickRate": 15.0,
+    "banRate": 0.0,
+    "roles": [
+      "ARTILLERY",
+      "MAGE",
+      "MARKSMAN"
+    ],
+    "isReal": true
+  },
+  "Vayne": {
+    "name": "Vayne",
+    "winRate": 52.5,
+    "pickRate": 11.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "MARKSMAN"
+    ],
+    "isReal": true
+  },
+  "Veigar": {
+    "name": "Veigar",
+    "winRate": 49.6,
+    "pickRate": 17.0,
+    "banRate": 0.0,
+    "roles": [
+      "BURST",
+      "MAGE"
+    ],
+    "isReal": true
+  },
+  "Velkoz": {
+    "name": "Vel'Koz",
+    "winRate": 53.2,
+    "pickRate": 13.0,
+    "banRate": 0.0,
+    "roles": [
+      "ARTILLERY",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Vex": {
+    "name": "Vex",
+    "winRate": 49.7,
+    "pickRate": 3.0,
+    "banRate": 0.0,
+    "roles": [
+      "BURST",
+      "MAGE"
+    ],
+    "isReal": true
+  },
+  "Vi": {
+    "name": "Vi",
+    "winRate": 50.1,
+    "pickRate": 7.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "DIVER",
+      "FIGHTER"
+    ],
+    "isReal": true
+  },
+  "Viego": {
+    "name": "Viego",
+    "winRate": 51.6,
+    "pickRate": 17.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "FIGHTER",
+      "SKIRMISHER"
+    ],
+    "isReal": true
+  },
+  "Viktor": {
+    "name": "Viktor",
+    "winRate": 52.9,
+    "pickRate": 15.0,
+    "banRate": 0.0,
+    "roles": [
+      "BATTLEMAGE",
+      "MAGE"
+    ],
+    "isReal": true
+  },
+  "Vladimir": {
+    "name": "Vladimir",
+    "winRate": 53.4,
+    "pickRate": 5.0,
+    "banRate": 0.0,
+    "roles": [
+      "BATTLEMAGE",
+      "FIGHTER",
+      "MAGE"
+    ],
+    "isReal": true
+  },
+  "Volibear": {
+    "name": "Volibear",
+    "winRate": 53.0,
+    "pickRate": 1.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "JUGGERNAUT",
+      "TANK"
+    ],
+    "isReal": true
+  },
+  "Warwick": {
+    "name": "Warwick",
+    "winRate": 49.8,
+    "pickRate": 9.0,
+    "banRate": 0.0,
+    "roles": [
+      "DIVER",
+      "FIGHTER",
+      "TANK"
+    ],
+    "isReal": true
+  },
+  "MonkeyKing": {
+    "name": "Wukong",
+    "winRate": 52.5,
+    "pickRate": 11.0,
+    "banRate": 0.0,
+    "roles": [
+      "DIVER",
+      "FIGHTER",
+      "TANK"
+    ],
+    "isReal": true
+  },
+  "Xayah": {
+    "name": "Xayah",
+    "winRate": 51.7,
+    "pickRate": 3.0,
+    "banRate": 0.0,
+    "roles": [
+      "MARKSMAN"
+    ],
+    "isReal": true
+  },
+  "Xerath": {
+    "name": "Xerath",
+    "winRate": 51.0,
+    "pickRate": 1.0,
+    "banRate": 0.0,
+    "roles": [
+      "ARTILLERY",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "XinZhao": {
+    "name": "Xin Zhao",
+    "winRate": 50.7,
+    "pickRate": 3.0,
+    "banRate": 0.0,
+    "roles": [
+      "DIVER",
+      "FIGHTER",
+      "TANK"
+    ],
+    "isReal": true
+  },
+  "Yasuo": {
+    "name": "Yasuo",
+    "winRate": 53.9,
+    "pickRate": 15.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "FIGHTER",
+      "SKIRMISHER"
+    ],
+    "isReal": true
+  },
+  "Yone": {
+    "name": "Yone",
+    "winRate": 48.1,
+    "pickRate": 7.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN",
+      "FIGHTER",
+      "SKIRMISHER"
+    ],
+    "isReal": true
+  },
+  "Yorick": {
+    "name": "Yorick",
+    "winRate": 51.5,
+    "pickRate": 11.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "JUGGERNAUT",
+      "TANK"
+    ],
+    "isReal": true
+  },
+  "Yunara": {
+    "name": "Yunara",
+    "winRate": 51.4,
+    "pickRate": 5.0,
+    "banRate": 0.0,
+    "roles": [
+      "MARKSMAN"
+    ],
+    "isReal": true
+  },
+  "Yuumi": {
+    "name": "Yuumi",
+    "winRate": 48.7,
+    "pickRate": 3.0,
+    "banRate": 0.0,
+    "roles": [
+      "ENCHANTER",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Zac": {
+    "name": "Zac",
+    "winRate": 53.6,
+    "pickRate": 17.0,
+    "banRate": 0.0,
+    "roles": [
+      "FIGHTER",
+      "TANK",
+      "VANGUARD"
+    ],
+    "isReal": true
+  },
+  "Zed": {
+    "name": "Zed",
+    "winRate": 48.1,
+    "pickRate": 7.0,
+    "banRate": 0.0,
+    "roles": [
+      "ASSASSIN"
+    ],
+    "isReal": true
+  },
+  "Zeri": {
+    "name": "Zeri",
+    "winRate": 48.0,
+    "pickRate": 1.0,
+    "banRate": 0.0,
+    "roles": [
+      "MARKSMAN"
+    ],
+    "isReal": true
+  },
+  "Ziggs": {
+    "name": "Ziggs",
+    "winRate": 52.6,
+    "pickRate": 17.0,
+    "banRate": 0.0,
+    "roles": [
+      "ARTILLERY",
+      "MAGE"
+    ],
+    "isReal": true
+  },
+  "Zilean": {
+    "name": "Zilean",
+    "winRate": 50.1,
+    "pickRate": 7.0,
+    "banRate": 0.0,
+    "roles": [
+      "MAGE",
+      "SPECIALIST",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Zoe": {
+    "name": "Zoe",
+    "winRate": 49.2,
+    "pickRate": 13.0,
+    "banRate": 0.0,
+    "roles": [
+      "BURST",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  },
+  "Zyra": {
+    "name": "Zyra",
+    "winRate": 49.2,
+    "pickRate": 13.0,
+    "banRate": 0.0,
+    "roles": [
+      "CATCHER",
+      "MAGE",
+      "SUPPORT"
+    ],
+    "isReal": true
+  }
+}

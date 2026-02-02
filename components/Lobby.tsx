@@ -1,186 +1,257 @@
-import React, { useState } from 'react';
-import { PRESET_TEAMS, PresetTeam } from '../data/teams';
-import { Search, Swords, Shield } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Search, Swords, Shield, Loader2, ArrowRight } from 'lucide-react';
+import { PRESET_TEAMS } from '../data/teams';
+import { TeamLogo } from './TeamLogo';
+
+interface LobbyTeam {
+  id: string;
+  name: string;
+  region?: string;
+  logo?: string;
+  players?: any[]; 
+}
 
 interface LobbyProps {
-  onStartMatch: (blue: PresetTeam, red: PresetTeam) => void;
+  onStartMatch: (blue: any, red: any) => void;
 }
 
-interface TeamCardProps {
-  team: PresetTeam;
+// 🆕 Reusable Team Selection Modal (Clean UX)
+const TeamSelectModal: React.FC<{
+  isOpen: boolean;
+  onClose: () => void;
+  onSelect: (team: LobbyTeam) => void;
+  teams: LobbyTeam[];
   side: 'blue' | 'red';
-  isSelected: boolean;
-  onClick: () => void;
-}
-
-const TeamCard: React.FC<TeamCardProps> = ({ team, side, isSelected, onClick }) => (
-  <div 
-    onClick={onClick}
-    className={`
-      relative p-4 rounded-xl border cursor-pointer transition-all duration-300 group overflow-hidden
-      ${isSelected 
-        ? side === 'blue' 
-          ? 'border-esport-blue bg-blue-900/40 shadow-[0_0_20px_rgba(0,168,255,0.2)]' 
-          : 'border-esport-red bg-red-900/40 shadow-[0_0_20px_rgba(255,51,51,0.2)]'
-        : 'border-gray-800 bg-gray-900/40 hover:border-gray-600 hover:bg-gray-800/60'
-      }
-    `}
-  >
-    <div className="flex justify-between items-start mb-3 relative z-10">
-      <h3 className={`font-display font-bold text-lg tracking-wide ${isSelected ? 'text-white' : 'text-gray-400 group-hover:text-gray-200'}`}>
-        {team.name}
-      </h3>
-      {isSelected && (
-        <Shield size={18} className={side === 'blue' ? 'text-esport-blue' : 'text-esport-red'} fill="currentColor" />
-      )}
-    </div>
-    
-    <div className="space-y-1.5 relative z-10">
-      {team.players.map(p => (
-          <div key={p.role} className="flex items-center text-xs">
-            <span className={`font-bold uppercase w-8 ${isSelected ? 'text-gray-300' : 'text-gray-600'}`}>{p.role.substring(0, 3)}</span>
-            <span className={`${isSelected ? 'text-gray-200' : 'text-gray-500'}`}>{p.name}</span>
-          </div>
-      ))}
-    </div>
-
-    {/* Background Gradient Effect */}
-    <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 bg-gradient-to-br ${side === 'blue' ? 'from-blue-600 to-transparent' : 'from-red-600 to-transparent'}`}></div>
-  </div>
-);
-
-export const Lobby: React.FC<LobbyProps> = ({ onStartMatch }) => {
-  const [selectedBlue, setSelectedBlue] = useState<PresetTeam | null>(null);
-  const [selectedRed, setSelectedRed] = useState<PresetTeam | null>(null);
-  const [blueSearch, setBlueSearch] = useState('');
-  const [redSearch, setRedSearch] = useState('');
-
-  const filteredBlue = PRESET_TEAMS.filter(t => 
-    t.name.toLowerCase().includes(blueSearch.toLowerCase())
-  );
+}> = ({ isOpen, onClose, onSelect, teams, side }) => {
+  const [search, setSearch] = useState('');
   
-  const filteredRed = PRESET_TEAMS.filter(t => 
-    t.name.toLowerCase().includes(redSearch.toLowerCase())
-  );
+  if (!isOpen) return null;
+
+  const filtered = teams.filter(t => t.name.toLowerCase().includes(search.toLowerCase()));
+  const colorClass = side === 'blue' ? 'border-blue-500 text-blue-400' : 'border-red-500 text-red-400';
+  const bgClass = side === 'blue' ? 'hover:bg-blue-900/20 hover:border-blue-500' : 'hover:bg-red-900/20 hover:border-red-500';
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 flex flex-col h-[calc(100vh-64px)]">
-      
-      {/* Header Section */}
-      <div className="text-center mb-8 shrink-0">
-        <h2 className="text-5xl font-display font-bold text-white tracking-widest mb-2">
-          MATCH <span className="text-esport-gold">LOBBY</span>
-        </h2>
-        <p className="text-gray-400 text-sm tracking-wide uppercase">Select two teams to begin simulation</p>
-      </div>
-
-      {/* Main Selection Area */}
-      <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-[1fr_80px_1fr] gap-4 mb-8">
-        
-        {/* Blue Side Panel */}
-        <div className="flex flex-col bg-gray-900/20 rounded-2xl border border-blue-900/30 overflow-hidden relative">
-           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-esport-blue to-transparent opacity-50"></div>
-           
-           <div className="p-6 pb-4 shrink-0">
-              <div className="flex items-center justify-between mb-4">
-                 <h3 className="text-esport-blue font-display text-3xl font-bold uppercase tracking-wider">Blue Side</h3>
-                 <Shield className="text-esport-blue" size={24} />
-              </div>
-              
-              <div className="relative group">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-500/50 group-focus-within:text-blue-400 transition-colors" size={18} />
-                <input 
-                  type="text" 
-                  placeholder="Find Blue Team..."
-                  className="w-full bg-gray-900/50 border border-blue-900/50 rounded-lg py-3 pl-10 pr-4 text-gray-200 placeholder-blue-500/30 focus:outline-none focus:border-esport-blue focus:bg-gray-900 focus:ring-1 focus:ring-esport-blue/50 transition-all"
-                  value={blueSearch}
-                  onChange={(e) => setBlueSearch(e.target.value)}
-                />
-              </div>
-           </div>
-
-           <div className="flex-1 overflow-y-auto custom-scrollbar p-6 pt-0">
-              <div className="grid grid-cols-1 xl:grid-cols-2 gap-3">
-                {filteredBlue.map(team => (
-                  <TeamCard 
-                    key={team.id} 
-                    team={team} 
-                    side="blue" 
-                    isSelected={selectedBlue?.id === team.id}
-                    onClick={() => setSelectedBlue(team)}
-                  />
-                ))}
-              </div>
-           </div>
-        </div>
-
-        {/* VS Divider (Desktop) */}
-        <div className="hidden lg:flex flex-col items-center justify-center relative">
-           <div className="h-full w-px bg-gradient-to-b from-transparent via-gray-700 to-transparent absolute"></div>
-           <div className="relative z-10 bg-esport-dark border-2 border-gray-700 w-16 h-16 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(0,0,0,0.8)]">
-             <span className="font-display font-bold text-2xl text-gray-500 italic pr-1">VS</span>
-           </div>
-        </div>
-
-        {/* Red Side Panel */}
-        <div className="flex flex-col bg-gray-900/20 rounded-2xl border border-red-900/30 overflow-hidden relative">
-           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-esport-red to-transparent opacity-50"></div>
-           
-           <div className="p-6 pb-4 shrink-0">
-              <div className="flex items-center justify-between mb-4">
-                 <Shield className="text-esport-red" size={24} />
-                 <h3 className="text-esport-red font-display text-3xl font-bold uppercase tracking-wider">Red Side</h3>
-              </div>
-              
-              <div className="relative group">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-red-500/50 group-focus-within:text-red-400 transition-colors" size={18} />
-                <input 
-                  type="text" 
-                  placeholder="Find Red Team..."
-                  className="w-full bg-gray-900/50 border border-red-900/50 rounded-lg py-3 pl-10 pr-4 text-gray-200 placeholder-red-500/30 focus:outline-none focus:border-esport-red focus:bg-gray-900 focus:ring-1 focus:ring-esport-red/50 transition-all text-right"
-                  value={redSearch}
-                  onChange={(e) => setRedSearch(e.target.value)}
-                />
-              </div>
-           </div>
-
-           <div className="flex-1 overflow-y-auto custom-scrollbar p-6 pt-0">
-              <div className="grid grid-cols-1 xl:grid-cols-2 gap-3">
-                {filteredRed.map(team => (
-                  <TeamCard 
-                    key={team.id} 
-                    team={team} 
-                    side="red" 
-                    isSelected={selectedRed?.id === team.id}
-                    onClick={() => setSelectedRed(team)}
-                  />
-                ))}
-              </div>
-           </div>
-        </div>
-      </div>
-
-      {/* Start Button */}
-      <div className="shrink-0 flex justify-center pb-8">
-        <button 
-          disabled={!selectedBlue || !selectedRed}
-          onClick={() => selectedBlue && selectedRed && onStartMatch(selectedBlue, selectedRed)}
-          className={`
-            group relative px-16 py-5 rounded-xl font-display font-bold text-2xl tracking-[0.2em] transition-all duration-300 overflow-hidden
-            ${selectedBlue && selectedRed 
-              ? 'bg-esport-gold text-black hover:scale-105 hover:shadow-[0_0_40px_rgba(200,170,110,0.4)]' 
-              : 'bg-gray-800 text-gray-600 cursor-not-allowed border border-gray-700'}
-          `}
-        >
-          <div className="relative z-10 flex items-center gap-4">
-             {selectedBlue && selectedRed ? <Swords size={28} className="animate-pulse" /> : <Swords size={28} />}
-             <span>ENTER DRAFT</span>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-in fade-in zoom-in-95 duration-200">
+      <div className={`bg-esport-dark border ${colorClass} rounded-xl w-full max-w-2xl h-[70vh] flex flex-col shadow-2xl overflow-hidden`}>
+        {/* Header */}
+        <div className="p-4 border-b border-gray-800 bg-gray-900/80">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
+            <input 
+              autoFocus
+              type="text" 
+              placeholder={`Search ${side === 'blue' ? 'Blue' : 'Red'} Team...`}
+              className="w-full bg-gray-800 text-white rounded-lg pl-10 pr-4 py-3 focus:outline-none focus:ring-2 border border-gray-700 focus:border-transparent"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
           </div>
-          {selectedBlue && selectedRed && (
-             <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 skew-y-12"></div>
-          )}
+        </div>
+        {/* List */}
+        <div className="flex-1 overflow-y-auto p-2 space-y-1 custom-scrollbar">
+          {filtered.map(team => (
+            <button
+              key={team.id}
+              onClick={() => { onSelect(team); onClose(); setSearch(''); }}
+              className={`w-full text-left p-3 rounded-lg border border-transparent transition-all flex items-center gap-4 group ${bgClass}`}
+            >
+              {/* Smart Logo - Subtle Container */}
+              <div className="w-16 h-16 flex-shrink-0 bg-gray-900/40 border border-gray-800/50 p-2 rounded-xl overflow-hidden shadow-lg">
+                 <TeamLogo team={team} className="w-full h-full object-contain filter drop-shadow-[0_0_3px_rgba(255,255,255,0.3)]" />
+              </div>
+
+              <div className="flex-1">
+                  <span className="font-bold text-gray-300 group-hover:text-white block text-lg">{team.name}</span>
+                  <span className="text-xs text-gray-500 group-hover:text-gray-400 uppercase tracking-widest">{team.region}</span>
+              </div>
+            </button>
+          ))}
+        </div>
+        {/* Close */}
+        <button onClick={onClose} className="p-3 text-gray-500 hover:text-white text-sm border-t border-gray-800">
+          Cancel Selection
         </button>
       </div>
+    </div>
+  );
+};
+
+export const Lobby: React.FC<LobbyProps> = ({ onStartMatch }) => {
+  const [allTeams, setAllTeams] = useState<LobbyTeam[]>([]);
+  const [loading, setLoading] = useState(true);
+  
+  const [selectedBlue, setSelectedBlue] = useState<LobbyTeam | null>(null);
+  const [selectedRed, setSelectedRed] = useState<LobbyTeam | null>(null);
+  
+  // Modal State
+  const [modalOpen, setModalOpen] = useState<'blue' | 'red' | null>(null);
+
+  useEffect(() => {
+    const fetchTeams = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/api/teams');
+        const data = await response.json();
+        
+        const formatted: LobbyTeam[] = data.teams.map((name: string) => {
+            const existingRichData = PRESET_TEAMS.find(t => t.name.toLowerCase() === name.toLowerCase());
+            return existingRichData || {
+                id: name.toLowerCase().replace(/[^a-z0-9]/g, ''), // Strict regex
+                name: name,
+                region: "World" 
+            };
+        });
+        setAllTeams(formatted);
+      } catch (error) {
+        setAllTeams(PRESET_TEAMS as LobbyTeam[]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchTeams();
+  }, []);
+
+  const handleStart = () => {
+    if (selectedBlue && selectedRed) {
+      onStartMatch(selectedBlue, selectedRed);
+    }
+  };
+
+  return (
+    <div className="h-full flex flex-col p-8 max-w-5xl mx-auto animate-in fade-in duration-500">
+      
+      {/* Header */}
+      <div className="text-center mb-12 mt-8">
+        <h1 className="text-6xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-esport-gold via-white to-esport-gold mb-2 tracking-tighter drop-shadow-lg">
+          NEXUS SIGHT
+        </h1>
+        <p className="text-gray-500 font-mono text-sm tracking-widest uppercase">Predictive Draft Analysis Engine</p>
+      </div>
+
+      {loading ? (
+        <div className="flex-1 flex flex-col items-center justify-center text-esport-gold opacity-50">
+          <Loader2 className="animate-spin mb-4" size={32} />
+          <p className="text-xs tracking-widest">CONNECTING TO DATABASE...</p>
+        </div>
+      ) : (
+        <div className="flex-1 flex flex-col items-center justify-center gap-10">
+          
+          {/* Spotlight Selectors */}
+          <div className="flex w-full items-center justify-center gap-12">
+            
+            {/* BLUE CARD */}
+            <button 
+                onClick={() => setModalOpen('blue')}
+                className={`
+                    w-80 h-96 rounded-2xl border-2 flex flex-col items-center justify-center gap-6 transition-all duration-300 group relative overflow-hidden
+                    ${selectedBlue 
+                        ? 'border-blue-500 bg-blue-900/10 shadow-[0_0_40px_rgba(59,130,246,0.2)]' 
+                        : 'border-gray-800 bg-gray-900/40 hover:border-blue-500/50 hover:bg-gray-900/60'}
+                `}
+            >
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                
+                {selectedBlue ? (
+                    <>
+                        <div className="w-40 h-40 relative flex items-center justify-center">
+                            {/* Glow Effect */}
+                            <div className="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full animate-pulse" />
+                            
+                            {/* Logo with Fallback */}
+                        <div className="w-40 h-40 z-10 drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]">
+                           <TeamLogo team={selectedBlue} className="w-full h-full object-contain filter drop-shadow-[0_0_5px_rgba(255,255,255,0.4)]" />
+                        </div>
+                        </div>
+                        
+                        <div className="text-center z-10">
+                            <h2 className="text-4xl font-display font-bold text-white mb-2 tracking-tight">{selectedBlue.name}</h2>
+                            <p className="text-blue-400 text-xs font-bold uppercase tracking-[0.2em]">Blue Side</p>
+                        </div>
+                        <span className="text-xs text-gray-500 absolute bottom-6 group-hover:text-blue-300 transition-colors">Click to Change</span>
+                    </>
+                ) : (
+                    <>
+                        <div className="w-20 h-20 rounded-full bg-gray-800 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <Search className="text-gray-600 group-hover:text-blue-400" size={32} />
+                        </div>
+                        <span className="text-xl font-bold text-gray-600 group-hover:text-blue-400">Select Blue Team</span>
+                    </>
+                )}
+            </button>
+
+            {/* VS */}
+            <div className="text-4xl font-display font-bold text-gray-700 italic select-none">VS</div>
+
+            {/* RED CARD */}
+            <button 
+                onClick={() => setModalOpen('red')}
+                className={`
+                    w-80 h-96 rounded-2xl border-2 flex flex-col items-center justify-center gap-6 transition-all duration-300 group relative overflow-hidden
+                    ${selectedRed 
+                        ? 'border-red-500 bg-red-900/10 shadow-[0_0_40px_rgba(239,68,68,0.2)]' 
+                        : 'border-gray-800 bg-gray-900/40 hover:border-red-500/50 hover:bg-gray-900/60'}
+                `}
+            >
+                <div className="absolute inset-0 bg-gradient-to-bl from-red-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                
+                {selectedRed ? (
+                    <>
+                        <div className="w-40 h-40 relative flex items-center justify-center">
+                            <div className="absolute inset-0 bg-red-500/20 blur-3xl rounded-full animate-pulse" />
+                            <div className="w-40 h-40 z-10 drop-shadow-[0_0_15px_rgba(239,68,68,0.5)] bg-white p-4 rounded-3xl shadow-xl">
+                                <TeamLogo team={selectedRed} className="w-full h-full object-contain" />
+                            </div>
+                        </div>
+                        <div className="text-center z-10">
+                            <h2 className="text-3xl font-bold text-white mb-1">{selectedRed.name}</h2>
+                            <p className="text-red-400 text-xs font-bold uppercase tracking-widest">Red Side</p>
+                        </div>
+                        <span className="text-xs text-gray-500 absolute bottom-6 group-hover:text-red-300 transition-colors">Click to Change</span>
+                    </>
+                ) : (
+                    <>
+                        <div className="w-20 h-20 rounded-full bg-gray-800 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <Search className="text-gray-600 group-hover:text-red-400" size={32} />
+                        </div>
+                        <span className="text-xl font-bold text-gray-600 group-hover:text-red-400">Select Red Team</span>
+                    </>
+                )}
+            </button>
+
+          </div>
+
+          {/* Action Button */}
+          <button
+            onClick={handleStart}
+            disabled={!selectedBlue || !selectedRed}
+            className={`
+              flex items-center gap-3 px-12 py-5 rounded-full font-display font-bold text-lg tracking-widest transition-all duration-300
+              ${selectedBlue && selectedRed 
+                ? 'bg-esport-gold text-black hover:scale-105 hover:bg-white shadow-[0_0_30px_rgba(200,170,110,0.4)]' 
+                : 'bg-gray-800 text-gray-600 cursor-not-allowed grayscale'}
+            `}
+          >
+            ENTER DRAFT PHASE <ArrowRight size={20} />
+          </button>
+
+        </div>
+      )}
+
+      {/* Modals */}
+      <TeamSelectModal 
+        isOpen={modalOpen === 'blue'} 
+        onClose={() => setModalOpen(null)} 
+        onSelect={setSelectedBlue} 
+        teams={allTeams} 
+        side="blue" 
+      />
+      <TeamSelectModal 
+        isOpen={modalOpen === 'red'} 
+        onClose={() => setModalOpen(null)} 
+        onSelect={setSelectedRed} 
+        teams={allTeams} 
+        side="red" 
+      />
 
     </div>
   );

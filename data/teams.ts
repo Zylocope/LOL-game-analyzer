@@ -3,14 +3,15 @@ import { Role } from '../types';
 export interface PresetTeam {
   name: string;
   id: string;
+  logo?: string;
   players: { role: Role; name: string }[];
 }
 
 export const PRESET_TEAMS: PresetTeam[] = [
-  // --- LCK (Korea) ---
   {
     name: "T1",
     id: "t1",
+    logo: "t1.png",
     players: [
       { role: 'Top', name: 'Zeus' },
       { role: 'Jungle', name: 'Oner' },
@@ -22,6 +23,7 @@ export const PRESET_TEAMS: PresetTeam[] = [
   {
     name: "Gen.G",
     id: "geng",
+    logo: "gen_g.png",
     players: [
       { role: 'Top', name: 'Kiin' },
       { role: 'Jungle', name: 'Canyon' },
@@ -33,6 +35,7 @@ export const PRESET_TEAMS: PresetTeam[] = [
   {
     name: "Hanwha Life Esports",
     id: "hle",
+    logo: "hanwha_life_esports.png",
     players: [
       { role: 'Top', name: 'Doran' },
       { role: 'Jungle', name: 'Peanut' },
@@ -44,6 +47,7 @@ export const PRESET_TEAMS: PresetTeam[] = [
   {
     name: "Dplus KIA",
     id: "dk",
+    logo: "dplus_kia.png",
     players: [
       { role: 'Top', name: 'Kingen' },
       { role: 'Jungle', name: 'Lucid' },
@@ -55,6 +59,7 @@ export const PRESET_TEAMS: PresetTeam[] = [
   {
     name: "KT Rolster",
     id: "kt",
+    logo: "kt_rolster.png",
     players: [
       { role: 'Top', name: 'PerfecT' },
       { role: 'Jungle', name: 'Pyosik' },
@@ -64,10 +69,10 @@ export const PRESET_TEAMS: PresetTeam[] = [
     ]
   },
 
-  // --- LPL (China) ---
   {
     name: "Bilibili Gaming",
     id: "blg",
+    logo: "bilibili_gaming.png",
     players: [
       { role: 'Top', name: 'Bin' },
       { role: 'Jungle', name: 'Xun' },
@@ -79,6 +84,7 @@ export const PRESET_TEAMS: PresetTeam[] = [
   {
     name: "Top Esports",
     id: "tes",
+    logo: "top_esports.png",
     players: [
       { role: 'Top', name: '369' },
       { role: 'Jungle', name: 'Tian' },
@@ -90,6 +96,7 @@ export const PRESET_TEAMS: PresetTeam[] = [
   {
     name: "JD Gaming",
     id: "jdg",
+    logo: "jd_gaming.png",
     players: [
       { role: 'Top', name: 'Sheer' },
       { role: 'Jungle', name: 'Kanavi' },
@@ -101,6 +108,7 @@ export const PRESET_TEAMS: PresetTeam[] = [
   {
     name: "LNG Esports",
     id: "lng",
+    logo: "lngesports.png",
     players: [
       { role: 'Top', name: 'Zika' },
       { role: 'Jungle', name: 'Weiwei' },
@@ -112,6 +120,7 @@ export const PRESET_TEAMS: PresetTeam[] = [
   {
     name: "Weibo Gaming",
     id: "wbg",
+    logo: "weibo_gaming.png",
     players: [
       { role: 'Top', name: 'Breathe' },
       { role: 'Jungle', name: 'Tarzan' },
@@ -121,10 +130,10 @@ export const PRESET_TEAMS: PresetTeam[] = [
     ]
   },
 
-  // --- LEC (EMEA) ---
   {
     name: "G2 Esports",
     id: "g2",
+    logo: "g2esports.png",
     players: [
       { role: 'Top', name: 'BrokenBlade' },
       { role: 'Jungle', name: 'Yike' },
@@ -136,6 +145,7 @@ export const PRESET_TEAMS: PresetTeam[] = [
   {
     name: "Fnatic",
     id: "fnc",
+    logo: "fnatic.png",
     players: [
       { role: 'Top', name: 'Oscarinin' },
       { role: 'Jungle', name: 'Razork' },
@@ -147,6 +157,7 @@ export const PRESET_TEAMS: PresetTeam[] = [
   {
     name: "Team BDS",
     id: "bds",
+    logo: "team_bds.png",
     players: [
       { role: 'Top', name: 'Adam' },
       { role: 'Jungle', name: 'Sheo' },
@@ -158,6 +169,7 @@ export const PRESET_TEAMS: PresetTeam[] = [
   {
     name: "MAD Lions KOI",
     id: "mdk",
+    logo: "mad_lions.png",
     players: [
       { role: 'Top', name: 'Myrwn' },
       { role: 'Jungle', name: 'Elyoya' },
@@ -167,10 +179,10 @@ export const PRESET_TEAMS: PresetTeam[] = [
     ]
   },
 
-  // --- LCS (North America) ---
   {
     name: "Team Liquid",
     id: "tl",
+    logo: "team_liquid.png",
     players: [
       { role: 'Top', name: 'Impact' },
       { role: 'Jungle', name: 'UmTi' },
@@ -182,6 +194,7 @@ export const PRESET_TEAMS: PresetTeam[] = [
   {
     name: "FlyQuest",
     id: "fly",
+    logo: "flyquest.png",
     players: [
       { role: 'Top', name: 'Bwipo' },
       { role: 'Jungle', name: 'Inspired' },
@@ -193,6 +206,7 @@ export const PRESET_TEAMS: PresetTeam[] = [
   {
     name: "Cloud9",
     id: "c9",
+    logo: "cloud9.png",
     players: [
       { role: 'Top', name: 'Thanatos' },
       { role: 'Jungle', name: 'Blaber' },
@@ -204,6 +218,7 @@ export const PRESET_TEAMS: PresetTeam[] = [
   {
     name: "100 Thieves",
     id: "100t",
+    logo: "100thieves.png",
     players: [
       { role: 'Top', name: 'Sniper' },
       { role: 'Jungle', name: 'River' },
@@ -213,10 +228,10 @@ export const PRESET_TEAMS: PresetTeam[] = [
     ]
   },
 
-  // --- Minor Regions ---
   {
     name: "PSG Talon",
     id: "psg",
+    logo: "psg.png",
     players: [
       { role: 'Top', name: 'Azhi' },
       { role: 'Jungle', name: 'JunJia' },
@@ -228,6 +243,7 @@ export const PRESET_TEAMS: PresetTeam[] = [
   {
     name: "GAM Esports",
     id: "gam",
+    logo: "gam.png",
     players: [
       { role: 'Top', name: 'Kiaya' },
       { role: 'Jungle', name: 'Levi' },
@@ -236,11 +252,11 @@ export const PRESET_TEAMS: PresetTeam[] = [
       { role: 'Support', name: 'Elio' }
     ]
   },
-
-  // --- Second Leagues (Tier 2) ---
+  
   {
     name: "T1 Esports Academy",
     id: "t1ca",
+    logo: "t1.png",
     players: [
       { role: 'Top', name: 'Dal' },
       { role: 'Jungle', name: 'Guwon' },
@@ -252,6 +268,7 @@ export const PRESET_TEAMS: PresetTeam[] = [
   {
     name: "DK Challengers",
     id: "dkcl",
+    logo: "dplus_kia.png",
     players: [
       { role: 'Top', name: 'Siwoo' },
       { role: 'Jungle', name: 'Sharvel' },
@@ -263,6 +280,7 @@ export const PRESET_TEAMS: PresetTeam[] = [
   {
     name: "Karmine Corp Blue",
     id: "kcb",
+    logo: "karmine_corp_blue.png",
     players: [
       { role: 'Top', name: 'Maynter' },
       { role: 'Jungle', name: '113' },
