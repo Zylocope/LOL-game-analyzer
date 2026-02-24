@@ -1,0 +1,9 @@
+# Pro Stats Miner (Fixed)
+# 1. We ONLY have Pro Match Data (nexus_sight.db).
+# 2. We do NOT have a Global Win Rate source (Meraki doesn't provide it).
+# 3. Strategy: If Pro Games < 5, we show "N/A" (hidden badge).
+
+# Explanation for User:
+# "I currently filter out champions with < 5 pro games to avoid misleading '0% winrate' stats.
+#  If a champion like Master Yi has 0 pro games, he gets no badge.
+#  This is accurate for a Pro Analyzer tool: 'No Data' means 'Not Viable in Pro Play'."

@@ -1,0 +1,1572 @@
+{
+  "Aatrox": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 89.1,
+      "mid": 5.9
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 1712
+  },
+  "Ahri": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "mid": 99.1
+    },
+    "dmg_type": "Magic",
+    "class": "Mage",
+    "total_pro_games": 849
+  },
+  "Akali": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "top": 24.8,
+      "mid": 75.2
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 1034
+  },
+  "Alistar": {
+    "primary_role": "sup",
+    "viable_roles": {
+      "sup": 100.0
+    },
+    "dmg_type": "Utility",
+    "class": "Unknown",
+    "total_pro_games": 2285
+  },
+  "Ambessa": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 97.1
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 416
+  },
+  "Amumu": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "jng": 80.6,
+      "sup": 19.4
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 31
+  },
+  "Anivia": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "top": 18.9,
+      "mid": 81.1
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 37
+  },
+  "Annie": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "mid": 87.7,
+      "sup": 11.8
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 634
+  },
+  "Aphelios": {
+    "primary_role": "bot",
+    "viable_roles": {
+      "bot": 100.0
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 1837
+  },
+  "Ashe": {
+    "primary_role": "bot",
+    "viable_roles": {
+      "bot": 82.9,
+      "sup": 17.1
+    },
+    "dmg_type": "Physical",
+    "class": "Marksman",
+    "total_pro_games": 1383
+  },
+  "Aurelion Sol": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "mid": 99.3
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 138
+  },
+  "Aurora": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "top": 30.7,
+      "mid": 69.3
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 358
+  },
+  "Azir": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "mid": 99.8
+    },
+    "dmg_type": "Magic",
+    "class": "Mage",
+    "total_pro_games": 2475
+  },
+  "Bard": {
+    "primary_role": "sup",
+    "viable_roles": {
+      "sup": 98.8
+    },
+    "dmg_type": "Utility",
+    "class": "Unknown",
+    "total_pro_games": 429
+  },
+  "Bel'Veth": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "jng": 100.0
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 16
+  },
+  "Blitzcrank": {
+    "primary_role": "sup",
+    "viable_roles": {
+      "sup": 100.0
+    },
+    "dmg_type": "Utility",
+    "class": "Unknown",
+    "total_pro_games": 285
+  },
+  "Brand": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "jng": 97.0
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 203
+  },
+  "Braum": {
+    "primary_role": "sup",
+    "viable_roles": {
+      "sup": 99.1
+    },
+    "dmg_type": "Utility",
+    "class": "Unknown",
+    "total_pro_games": 2095
+  },
+  "Caitlyn": {
+    "primary_role": "bot",
+    "viable_roles": {
+      "bot": 97.6
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 588
+  },
+  "Camille": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 75.5,
+      "jng": 21.8
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 1088
+  },
+  "Cassiopeia": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "top": 5.0,
+      "mid": 86.0,
+      "bot": 8.7
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 378
+  },
+  "Cho'Gath": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 95.8
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 264
+  },
+  "Corki": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "mid": 78.5,
+      "bot": 20.1
+    },
+    "dmg_type": "Hybrid",
+    "class": "Marksman",
+    "total_pro_games": 1480
+  },
+  "Darius": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 91.0
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 155
+  },
+  "Diana": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "jng": 90.5,
+      "mid": 9.2
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 326
+  },
+  "Dr. Mundo": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 86.6,
+      "jng": 13.4
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 276
+  },
+  "Draven": {
+    "primary_role": "bot",
+    "viable_roles": {
+      "bot": 97.6
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 339
+  },
+  "Ekko": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "jng": 22.9,
+      "mid": 77.1
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 144
+  },
+  "Elise": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "jng": 86.1,
+      "sup": 13.9
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 488
+  },
+  "Evelynn": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "jng": 100.0
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 31
+  },
+  "Ezreal": {
+    "primary_role": "bot",
+    "viable_roles": {
+      "bot": 99.0
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 2625
+  },
+  "Fiddlesticks": {
+    "primary_role": "sup",
+    "viable_roles": {
+      "jng": 16.9,
+      "mid": 6.7,
+      "sup": 74.2
+    },
+    "dmg_type": "Utility",
+    "class": "Unknown",
+    "total_pro_games": 89
+  },
+  "Fiora": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 97.6
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 253
+  },
+  "Fizz": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "top": 10.0,
+      "mid": 90.0
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 10
+  },
+  "Galio": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "mid": 61.7,
+      "sup": 34.3
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 1298
+  },
+  "Gangplank": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 99.1
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 895
+  },
+  "Garen": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 57.7,
+      "mid": 11.5,
+      "bot": 30.8
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 26
+  },
+  "Gnar": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 100.0
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 1649
+  },
+  "Gragas": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "top": 34.2,
+      "jng": 42.7,
+      "mid": 6.5,
+      "sup": 16.5
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 1606
+  },
+  "Graves": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "jng": 98.8
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 596
+  },
+  "Gwen": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 93.3,
+      "jng": 6.3
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 735
+  },
+  "Hecarim": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "top": 14.3,
+      "jng": 85.7
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 335
+  },
+  "Heimerdinger": {
+    "primary_role": "sup",
+    "viable_roles": {
+      "bot": 6.3,
+      "sup": 92.5
+    },
+    "dmg_type": "Utility",
+    "class": "Unknown",
+    "total_pro_games": 174
+  },
+  "Hwei": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "mid": 96.8
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 249
+  },
+  "Illaoi": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 100.0
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 29
+  },
+  "Irelia": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "top": 42.9,
+      "mid": 55.4
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 592
+  },
+  "Ivern": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "jng": 98.1
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 216
+  },
+  "Janna": {
+    "primary_role": "sup",
+    "viable_roles": {
+      "top": 7.7,
+      "sup": 91.0
+    },
+    "dmg_type": "Utility",
+    "class": "Unknown",
+    "total_pro_games": 78
+  },
+  "Jarvan IV": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "jng": 94.7
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 1392
+  },
+  "Jax": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 87.3,
+      "jng": 12.5
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 1044
+  },
+  "Jayce": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 67.6,
+      "mid": 31.7
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 1769
+  },
+  "Jhin": {
+    "primary_role": "bot",
+    "viable_roles": {
+      "bot": 98.8
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 825
+  },
+  "Jinx": {
+    "primary_role": "bot",
+    "viable_roles": {
+      "bot": 100.0
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 688
+  },
+  "K'Sante": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 97.6
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 1890
+  },
+  "Kai'Sa": {
+    "primary_role": "bot",
+    "viable_roles": {
+      "bot": 98.9
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 2619
+  },
+  "Kalista": {
+    "primary_role": "bot",
+    "viable_roles": {
+      "bot": 97.4
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 1445
+  },
+  "Karma": {
+    "primary_role": "sup",
+    "viable_roles": {
+      "top": 14.0,
+      "mid": 40.7,
+      "sup": 43.9
+    },
+    "dmg_type": "Utility",
+    "class": "Unknown",
+    "total_pro_games": 1022
+  },
+  "Karthus": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "jng": 85.0,
+      "mid": 9.0,
+      "bot": 5.6
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 233
+  },
+  "Kassadin": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "mid": 98.9
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 189
+  },
+  "Kayle": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 91.7,
+      "mid": 6.7
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 60
+  },
+  "Kayn": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "jng": 98.0
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 49
+  },
+  "Kennen": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 97.8
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 883
+  },
+  "Kha'Zix": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "jng": 99.7
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 334
+  },
+  "Kindred": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "jng": 98.8
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 416
+  },
+  "Kled": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 71.8,
+      "mid": 27.5
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 142
+  },
+  "Kog'Maw": {
+    "primary_role": "bot",
+    "viable_roles": {
+      "bot": 95.7
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 234
+  },
+  "LeBlanc": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "mid": 99.2
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 1103
+  },
+  "Lee Sin": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "top": 6.9,
+      "jng": 88.0
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 2000
+  },
+  "Leona": {
+    "primary_role": "sup",
+    "viable_roles": {
+      "sup": 100.0
+    },
+    "dmg_type": "Utility",
+    "class": "Unknown",
+    "total_pro_games": 1853
+  },
+  "Lillia": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "jng": 98.8
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 641
+  },
+  "Lissandra": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "mid": 96.8
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 502
+  },
+  "Lucian": {
+    "primary_role": "bot",
+    "viable_roles": {
+      "top": 5.6,
+      "mid": 25.5,
+      "bot": 68.9
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 1749
+  },
+  "Lulu": {
+    "primary_role": "sup",
+    "viable_roles": {
+      "mid": 15.3,
+      "sup": 80.9
+    },
+    "dmg_type": "Utility",
+    "class": "Unknown",
+    "total_pro_games": 776
+  },
+  "Lux": {
+    "primary_role": "sup",
+    "viable_roles": {
+      "sup": 96.2
+    },
+    "dmg_type": "Utility",
+    "class": "Unknown",
+    "total_pro_games": 292
+  },
+  "Malphite": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 97.7
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 176
+  },
+  "Malzahar": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "mid": 99.0
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 105
+  },
+  "Maokai": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "top": 9.4,
+      "jng": 78.2,
+      "sup": 12.1
+    },
+    "dmg_type": "Magic",
+    "class": "Tank",
+    "total_pro_games": 1275
+  },
+  "Mel": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "mid": 69.2,
+      "bot": 30.8
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 13
+  },
+  "Milio": {
+    "primary_role": "sup",
+    "viable_roles": {
+      "sup": 100.0
+    },
+    "dmg_type": "Utility",
+    "class": "Unknown",
+    "total_pro_games": 288
+  },
+  "Miss Fortune": {
+    "primary_role": "bot",
+    "viable_roles": {
+      "bot": 99.3
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 919
+  },
+  "Mordekaiser": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 92.5
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 359
+  },
+  "Morgana": {
+    "primary_role": "sup",
+    "viable_roles": {
+      "jng": 9.6,
+      "mid": 6.6,
+      "bot": 8.1,
+      "sup": 75.7
+    },
+    "dmg_type": "Utility",
+    "class": "Unknown",
+    "total_pro_games": 469
+  },
+  "Naafiri": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "jng": 99.5
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 193
+  },
+  "Nami": {
+    "primary_role": "sup",
+    "viable_roles": {
+      "sup": 100.0
+    },
+    "dmg_type": "Utility",
+    "class": "Unknown",
+    "total_pro_games": 502
+  },
+  "Nasus": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 72.0,
+      "mid": 28.0
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 25
+  },
+  "Nautilus": {
+    "primary_role": "sup",
+    "viable_roles": {
+      "sup": 97.6
+    },
+    "dmg_type": "Utility",
+    "class": "Unknown",
+    "total_pro_games": 2754
+  },
+  "Neeko": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "top": 12.6,
+      "mid": 47.0,
+      "sup": 37.0
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 802
+  },
+  "Nidalee": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "jng": 95.5
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 713
+  },
+  "Nilah": {
+    "primary_role": "bot",
+    "viable_roles": {
+      "bot": 100.0
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 25
+  },
+  "Nocturne": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "top": 15.1,
+      "jng": 77.0,
+      "mid": 7.9
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 695
+  },
+  "Nunu & Willump": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "jng": 100.0
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 16
+  },
+  "Olaf": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "top": 7.6,
+      "jng": 92.4
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 1223
+  },
+  "Orianna": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "mid": 98.2
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 1384
+  },
+  "Ornn": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 89.6,
+      "sup": 6.8
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 1505
+  },
+  "Pantheon": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "jng": 72.0,
+      "mid": 10.8,
+      "sup": 13.7
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 547
+  },
+  "Poppy": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "top": 32.8,
+      "jng": 47.7,
+      "sup": 19.1
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 832
+  },
+  "Pyke": {
+    "primary_role": "sup",
+    "viable_roles": {
+      "top": 5.0,
+      "sup": 90.8
+    },
+    "dmg_type": "Utility",
+    "class": "Unknown",
+    "total_pro_games": 218
+  },
+  "Qiyana": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "jng": 25.8,
+      "mid": 69.7
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 178
+  },
+  "Quinn": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 95.5
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 66
+  },
+  "Rakan": {
+    "primary_role": "sup",
+    "viable_roles": {
+      "sup": 99.6
+    },
+    "dmg_type": "Utility",
+    "class": "Unknown",
+    "total_pro_games": 2437
+  },
+  "Rek'Sai": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "top": 9.5,
+      "jng": 90.5
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 642
+  },
+  "Rell": {
+    "primary_role": "sup",
+    "viable_roles": {
+      "jng": 12.5,
+      "sup": 87.5
+    },
+    "dmg_type": "Utility",
+    "class": "Unknown",
+    "total_pro_games": 1788
+  },
+  "Renata Glasc": {
+    "primary_role": "sup",
+    "viable_roles": {
+      "sup": 100.0
+    },
+    "dmg_type": "Utility",
+    "class": "Unknown",
+    "total_pro_games": 465
+  },
+  "Renekton": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 93.2,
+      "mid": 6.6
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 2338
+  },
+  "Rengar": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "top": 7.0,
+      "jng": 93.0
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 57
+  },
+  "Riven": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 73.5,
+      "jng": 18.4,
+      "mid": 8.2
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 49
+  },
+  "Rumble": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 65.8,
+      "jng": 19.6,
+      "mid": 11.5
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 1354
+  },
+  "Ryze": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "top": 12.0,
+      "mid": 86.8
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 1478
+  },
+  "Samira": {
+    "primary_role": "bot",
+    "viable_roles": {
+      "bot": 100.0
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 200
+  },
+  "Sejuani": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "jng": 98.2
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 2453
+  },
+  "Senna": {
+    "primary_role": "bot",
+    "viable_roles": {
+      "bot": 91.7,
+      "sup": 8.3
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 870
+  },
+  "Seraphine": {
+    "primary_role": "sup",
+    "viable_roles": {
+      "mid": 35.9,
+      "bot": 19.9,
+      "sup": 44.2
+    },
+    "dmg_type": "Utility",
+    "class": "Unknown",
+    "total_pro_games": 156
+  },
+  "Sett": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 42.3,
+      "jng": 17.1,
+      "mid": 16.2,
+      "sup": 24.3
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 979
+  },
+  "Shen": {
+    "primary_role": "sup",
+    "viable_roles": {
+      "top": 32.1,
+      "sup": 66.2
+    },
+    "dmg_type": "Utility",
+    "class": "Unknown",
+    "total_pro_games": 471
+  },
+  "Shyvana": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "top": 6.7,
+      "jng": 93.3
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 30
+  },
+  "Singed": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 95.6
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 45
+  },
+  "Sion": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 93.1,
+      "mid": 5.6
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 1199
+  },
+  "Sivir": {
+    "primary_role": "bot",
+    "viable_roles": {
+      "bot": 100.0
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 675
+  },
+  "Skarner": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "top": 17.3,
+      "jng": 82.6
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 728
+  },
+  "Smolder": {
+    "primary_role": "bot",
+    "viable_roles": {
+      "mid": 24.0,
+      "bot": 72.1
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 229
+  },
+  "Sona": {
+    "primary_role": "bot",
+    "viable_roles": {
+      "bot": 85.4,
+      "sup": 13.5
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 89
+  },
+  "Soraka": {
+    "primary_role": "sup",
+    "viable_roles": {
+      "top": 18.9,
+      "sup": 75.7
+    },
+    "dmg_type": "Utility",
+    "class": "Unknown",
+    "total_pro_games": 111
+  },
+  "Swain": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "top": 21.0,
+      "mid": 40.7,
+      "bot": 38.0
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 300
+  },
+  "Sylas": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "top": 13.7,
+      "jng": 12.2,
+      "mid": 74.1
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 1296
+  },
+  "Syndra": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "mid": 95.8
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 1012
+  },
+  "Tahm Kench": {
+    "primary_role": "sup",
+    "viable_roles": {
+      "sup": 98.2
+    },
+    "dmg_type": "Utility",
+    "class": "Unknown",
+    "total_pro_games": 1794
+  },
+  "Taliyah": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "jng": 17.0,
+      "mid": 82.0
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 1399
+  },
+  "Talon": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "mid": 93.3
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 45
+  },
+  "Taric": {
+    "primary_role": "sup",
+    "viable_roles": {
+      "sup": 97.5
+    },
+    "dmg_type": "Utility",
+    "class": "Unknown",
+    "total_pro_games": 365
+  },
+  "Thresh": {
+    "primary_role": "sup",
+    "viable_roles": {
+      "sup": 100.0
+    },
+    "dmg_type": "Utility",
+    "class": "Unknown",
+    "total_pro_games": 1294
+  },
+  "Tristana": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "mid": 52.9,
+      "bot": 46.2
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 1306
+  },
+  "Trundle": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "jng": 93.9
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 1156
+  },
+  "Twisted Fate": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "top": 20.6,
+      "mid": 77.1
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 647
+  },
+  "Twitch": {
+    "primary_role": "bot",
+    "viable_roles": {
+      "bot": 82.1,
+      "sup": 14.3
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 28
+  },
+  "Udyr": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "top": 32.3,
+      "jng": 67.7
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 659
+  },
+  "Urgot": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 81.8,
+      "mid": 16.5
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 369
+  },
+  "Varus": {
+    "primary_role": "bot",
+    "viable_roles": {
+      "bot": 98.2
+    },
+    "dmg_type": "Hybrid",
+    "class": "Marksman",
+    "total_pro_games": 2628
+  },
+  "Vayne": {
+    "primary_role": "bot",
+    "viable_roles": {
+      "top": 9.2,
+      "bot": 87.1
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 272
+  },
+  "Veigar": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "mid": 91.6
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 107
+  },
+  "Vel'Koz": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "mid": 92.3,
+      "sup": 5.1
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 78
+  },
+  "Vex": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "top": 8.3,
+      "mid": 91.7
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 12
+  },
+  "Vi": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "jng": 100.0
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 1175
+  },
+  "Viego": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "top": 15.7,
+      "jng": 77.3,
+      "mid": 6.9
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 980
+  },
+  "Viktor": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "top": 7.6,
+      "mid": 87.8
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 746
+  },
+  "Vladimir": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 61.3,
+      "mid": 21.7,
+      "bot": 17.0
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 600
+  },
+  "Volibear": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "top": 23.9,
+      "jng": 68.7,
+      "sup": 7.3
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 645
+  },
+  "Wukong": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "top": 21.9,
+      "jng": 76.9
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 1263
+  },
+  "Xayah": {
+    "primary_role": "bot",
+    "viable_roles": {
+      "bot": 99.9
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 1917
+  },
+  "Xerath": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "mid": 100.0
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 25
+  },
+  "Xin Zhao": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "jng": 100.0
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 1389
+  },
+  "Yasuo": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "top": 7.9,
+      "mid": 75.5,
+      "bot": 16.6
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 343
+  },
+  "Yone": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "top": 5.7,
+      "mid": 94.3
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 616
+  },
+  "Yorick": {
+    "primary_role": "top",
+    "viable_roles": {
+      "top": 100.0
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 269
+  },
+  "Yunara": {
+    "primary_role": "bot",
+    "viable_roles": {
+      "bot": 100.0
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 73
+  },
+  "Yuumi": {
+    "primary_role": "sup",
+    "viable_roles": {
+      "sup": 99.6
+    },
+    "dmg_type": "Utility",
+    "class": "Unknown",
+    "total_pro_games": 544
+  },
+  "Zac": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "top": 16.7,
+      "jng": 81.3
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 299
+  },
+  "Zed": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "jng": 51.6,
+      "mid": 43.5
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 62
+  },
+  "Zeri": {
+    "primary_role": "bot",
+    "viable_roles": {
+      "mid": 8.7,
+      "bot": 91.1
+    },
+    "dmg_type": "Physical",
+    "class": "Marksman",
+    "total_pro_games": 1117
+  },
+  "Ziggs": {
+    "primary_role": "bot",
+    "viable_roles": {
+      "mid": 15.2,
+      "bot": 84.3
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 394
+  },
+  "Zilean": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "top": 7.1,
+      "mid": 64.6,
+      "sup": 27.3
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 99
+  },
+  "Zoe": {
+    "primary_role": "mid",
+    "viable_roles": {
+      "mid": 99.4
+    },
+    "dmg_type": "Magic",
+    "class": "Unknown",
+    "total_pro_games": 1234
+  },
+  "Zyra": {
+    "primary_role": "jng",
+    "viable_roles": {
+      "jng": 95.9
+    },
+    "dmg_type": "Physical",
+    "class": "Unknown",
+    "total_pro_games": 243
+  }
+}

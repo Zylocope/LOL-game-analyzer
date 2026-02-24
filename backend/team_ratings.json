@@ -1,0 +1,698 @@
+[
+  {
+    "rank": 1,
+    "team": "Gen.G",
+    "rating": 2096,
+    "region": "LCK"
+  },
+  {
+    "rank": 2,
+    "team": "Hanwha Life Esports",
+    "rating": 2006,
+    "region": "LCK"
+  },
+  {
+    "rank": 3,
+    "team": "KT Rolster",
+    "rating": 1947,
+    "region": "LCK"
+  },
+  {
+    "rank": 4,
+    "team": "T1",
+    "rating": 1936,
+    "region": "LCK"
+  },
+  {
+    "rank": 5,
+    "team": "JD Gaming",
+    "rating": 1908,
+    "region": "LPL"
+  },
+  {
+    "rank": 6,
+    "team": "Dplus KIA",
+    "rating": 1894,
+    "region": "LCK"
+  },
+  {
+    "rank": 7,
+    "team": "Royal Never Give Up",
+    "rating": 1824,
+    "region": "LPL"
+  },
+  {
+    "rank": 8,
+    "team": "EDward Gaming",
+    "rating": 1819,
+    "region": "LPL"
+  },
+  {
+    "rank": 9,
+    "team": "Griffin",
+    "rating": 1818,
+    "region": "LCK"
+  },
+  {
+    "rank": 10,
+    "team": "BNK FEARX",
+    "rating": 1792,
+    "region": "LCK"
+  },
+  {
+    "rank": 11,
+    "team": "LNG Esports",
+    "rating": 1777,
+    "region": "LPL"
+  },
+  {
+    "rank": 12,
+    "team": "Nongshim RedForce",
+    "rating": 1745,
+    "region": "LCK"
+  },
+  {
+    "rank": 13,
+    "team": "Anyone's Legend",
+    "rating": 1745,
+    "region": "LPL"
+  },
+  {
+    "rank": 14,
+    "team": "Kingzone DragonX",
+    "rating": 1739,
+    "region": "LCK"
+  },
+  {
+    "rank": 15,
+    "team": "Weibo Gaming",
+    "rating": 1733,
+    "region": "LPL"
+  },
+  {
+    "rank": 16,
+    "team": "SK Telecom T1",
+    "rating": 1732,
+    "region": "LCK"
+  },
+  {
+    "rank": 17,
+    "team": "Bilibili Gaming",
+    "rating": 1720,
+    "region": "LPL"
+  },
+  {
+    "rank": 18,
+    "team": "Oh My God",
+    "rating": 1700,
+    "region": "LPL"
+  },
+  {
+    "rank": 19,
+    "team": "DRX",
+    "rating": 1695,
+    "region": "LCK"
+  },
+  {
+    "rank": 20,
+    "team": "Suning",
+    "rating": 1693,
+    "region": "LPL"
+  },
+  {
+    "rank": 21,
+    "team": "Liiv SANDBOX",
+    "rating": 1686,
+    "region": "LCK"
+  },
+  {
+    "rank": 22,
+    "team": "Top Esports",
+    "rating": 1664,
+    "region": "LPL"
+  },
+  {
+    "rank": 23,
+    "team": "Team WE",
+    "rating": 1655,
+    "region": "LPL"
+  },
+  {
+    "rank": 24,
+    "team": "Movistar KOI",
+    "rating": 1655,
+    "region": "LEC"
+  },
+  {
+    "rank": 25,
+    "team": "OKSavingsBank BRION",
+    "rating": 1655,
+    "region": "LCK"
+  },
+  {
+    "rank": 26,
+    "team": "SinoDragon Gaming",
+    "rating": 1654,
+    "region": "LPL"
+  },
+  {
+    "rank": 27,
+    "team": "KSV eSports",
+    "rating": 1644,
+    "region": "LCK"
+  },
+  {
+    "rank": 28,
+    "team": "G2 Esports",
+    "rating": 1640,
+    "region": "LEC"
+  },
+  {
+    "rank": 29,
+    "team": "FlyQuest",
+    "rating": 1638,
+    "region": "LCS"
+  },
+  {
+    "rank": 30,
+    "team": "ROX Tigers",
+    "rating": 1637,
+    "region": "LCK"
+  },
+  {
+    "rank": 31,
+    "team": "Team BattleComics",
+    "rating": 1627,
+    "region": "LCK"
+  },
+  {
+    "rank": 32,
+    "team": "Jin Air Green Wings",
+    "rating": 1626,
+    "region": "LCK"
+  },
+  {
+    "rank": 33,
+    "team": "BRION",
+    "rating": 1623,
+    "region": "LCK"
+  },
+  {
+    "rank": 34,
+    "team": "Vici Gaming",
+    "rating": 1620,
+    "region": "LPL"
+  },
+  {
+    "rank": 35,
+    "team": "DN Freecs",
+    "rating": 1615,
+    "region": "LCK"
+  },
+  {
+    "rank": 36,
+    "team": "ThunderTalk Gaming",
+    "rating": 1605,
+    "region": "LPL"
+  },
+  {
+    "rank": 37,
+    "team": "FunPlus Phoenix",
+    "rating": 1597,
+    "region": "LPL"
+  },
+  {
+    "rank": 38,
+    "team": "Invictus Gaming",
+    "rating": 1595,
+    "region": "LPL"
+  },
+  {
+    "rank": 39,
+    "team": "Flash Wolves",
+    "rating": 1580,
+    "region": "MSI"
+  },
+  {
+    "rank": 40,
+    "team": "Team Dynamics",
+    "rating": 1576,
+    "region": "LCK"
+  },
+  {
+    "rank": 41,
+    "team": "LGD Gaming",
+    "rating": 1560,
+    "region": "LPL"
+  },
+  {
+    "rank": 42,
+    "team": "Team Liquid",
+    "rating": 1560,
+    "region": "MSI"
+  },
+  {
+    "rank": 43,
+    "team": "Fnatic",
+    "rating": 1556,
+    "region": "MSI"
+  },
+  {
+    "rank": 44,
+    "team": "Rare Atom",
+    "rating": 1548,
+    "region": "LPL"
+  },
+  {
+    "rank": 45,
+    "team": "Ninjas in Pyjamas",
+    "rating": 1542,
+    "region": "LPL"
+  },
+  {
+    "rank": 46,
+    "team": "TALON",
+    "rating": 1535,
+    "region": "MSI"
+  },
+  {
+    "rank": 47,
+    "team": "VSG",
+    "rating": 1522,
+    "region": "LCK"
+  },
+  {
+    "rank": 48,
+    "team": "Cloud9",
+    "rating": 1520,
+    "region": "LCS"
+  },
+  {
+    "rank": 49,
+    "team": "Seorabeol Gaming",
+    "rating": 1513,
+    "region": "LCK"
+  },
+  {
+    "rank": 50,
+    "team": "Rogue Warriors",
+    "rating": 1508,
+    "region": "LPL"
+  },
+  {
+    "rank": 51,
+    "team": "Karmine Corp",
+    "rating": 1507,
+    "region": "LEC"
+  },
+  {
+    "rank": 52,
+    "team": "SeolHaeOne Prince",
+    "rating": 1505,
+    "region": "LCK"
+  },
+  {
+    "rank": 53,
+    "team": "Ever8 Winners",
+    "rating": 1502,
+    "region": "LCK"
+  },
+  {
+    "rank": 54,
+    "team": "MVP",
+    "rating": 1496,
+    "region": "LCK"
+  },
+  {
+    "rank": 55,
+    "team": "bbq Olivers",
+    "rating": 1494,
+    "region": "LCK"
+  },
+  {
+    "rank": 56,
+    "team": "Team BDS",
+    "rating": 1489,
+    "region": "LEC"
+  },
+  {
+    "rank": 57,
+    "team": "Splyce",
+    "rating": 1478,
+    "region": "LEC"
+  },
+  {
+    "rank": 58,
+    "team": "100 Thieves",
+    "rating": 1474,
+    "region": "LCS"
+  },
+  {
+    "rank": 59,
+    "team": "CTBC Flying Oyster",
+    "rating": 1473,
+    "region": "MSI"
+  },
+  {
+    "rank": 60,
+    "team": "TSM",
+    "rating": 1460,
+    "region": "LCS"
+  },
+  {
+    "rank": 61,
+    "team": "Snake Esports",
+    "rating": 1456,
+    "region": "LPL"
+  },
+  {
+    "rank": 62,
+    "team": "ES Sharks",
+    "rating": 1455,
+    "region": "LCK"
+  },
+  {
+    "rank": 63,
+    "team": "Kongdoo Monster",
+    "rating": 1452,
+    "region": "LCK"
+  },
+  {
+    "rank": 64,
+    "team": "Evil Geniuses",
+    "rating": 1443,
+    "region": "LCS"
+  },
+  {
+    "rank": 65,
+    "team": "Papara SuperMassive",
+    "rating": 1433,
+    "region": "MSI"
+  },
+  {
+    "rank": 66,
+    "team": "GiantX",
+    "rating": 1431,
+    "region": "LEC"
+  },
+  {
+    "rank": 67,
+    "team": "Gambit Esports",
+    "rating": 1428,
+    "region": "MSI"
+  },
+  {
+    "rank": 68,
+    "team": "KaBuM! Esports",
+    "rating": 1426,
+    "region": "MSI"
+  },
+  {
+    "rank": 69,
+    "team": "MAD Lions KOI",
+    "rating": 1426,
+    "region": "LEC"
+  },
+  {
+    "rank": 70,
+    "team": "EVOS Esports",
+    "rating": 1425,
+    "region": "MSI"
+  },
+  {
+    "rank": 71,
+    "team": "Ultra Prime",
+    "rating": 1425,
+    "region": "LPL"
+  },
+  {
+    "rank": 72,
+    "team": "Fenerbah\u00e7e Esports",
+    "rating": 1420,
+    "region": "MSI"
+  },
+  {
+    "rank": 73,
+    "team": "Origen",
+    "rating": 1419,
+    "region": "LEC"
+  },
+  {
+    "rank": 74,
+    "team": "Misfits Gaming",
+    "rating": 1418,
+    "region": "LEC"
+  },
+  {
+    "rank": 75,
+    "team": "FURIA",
+    "rating": 1406,
+    "region": "MSI"
+  },
+  {
+    "rank": 76,
+    "team": "Vega Squadron",
+    "rating": 1404,
+    "region": "MSI"
+  },
+  {
+    "rank": 77,
+    "team": "Golden Guardians",
+    "rating": 1401,
+    "region": "LCS"
+  },
+  {
+    "rank": 78,
+    "team": "Dominus Esports",
+    "rating": 1389,
+    "region": "LPL"
+  },
+  {
+    "rank": 79,
+    "team": "DetonatioN FocusMe",
+    "rating": 1388,
+    "region": "MSI"
+  },
+  {
+    "rank": 80,
+    "team": "Excel Esports",
+    "rating": 1381,
+    "region": "LEC"
+  },
+  {
+    "rank": 81,
+    "team": "inf",
+    "rating": 1379,
+    "region": "MSI"
+  },
+  {
+    "rank": 82,
+    "team": "Movistar R7",
+    "rating": 1378,
+    "region": "MSI"
+  },
+  {
+    "rank": 83,
+    "team": "paiN Gaming",
+    "rating": 1378,
+    "region": "MSI"
+  },
+  {
+    "rank": 84,
+    "team": "Isurus",
+    "rating": 1378,
+    "region": "MSI"
+  },
+  {
+    "rank": 85,
+    "team": "Dire Wolves",
+    "rating": 1378,
+    "region": "MSI"
+  },
+  {
+    "rank": 86,
+    "team": "MEGA",
+    "rating": 1377,
+    "region": "MSI"
+  },
+  {
+    "rank": 87,
+    "team": "Kaos Latin Gamers",
+    "rating": 1376,
+    "region": "MSI"
+  },
+  {
+    "rank": 88,
+    "team": "GAM Esports",
+    "rating": 1375,
+    "region": "MSI"
+  },
+  {
+    "rank": 89,
+    "team": "Bombers",
+    "rating": 1372,
+    "region": "MSI"
+  },
+  {
+    "rank": 90,
+    "team": "Phong V\u0169 Buffalo",
+    "rating": 1372,
+    "region": "MSI"
+  },
+  {
+    "rank": 91,
+    "team": "Pentanet.GG",
+    "rating": 1371,
+    "region": "MSI"
+  },
+  {
+    "rank": 92,
+    "team": "eStar",
+    "rating": 1369,
+    "region": "LPL"
+  },
+  {
+    "rank": 93,
+    "team": "LOUD",
+    "rating": 1367,
+    "region": "MSI"
+  },
+  {
+    "rank": 94,
+    "team": "Ascension Gaming",
+    "rating": 1365,
+    "region": "MSI"
+  },
+  {
+    "rank": 95,
+    "team": "Dignitas",
+    "rating": 1364,
+    "region": "LCS"
+  },
+  {
+    "rank": 96,
+    "team": "SK Gaming",
+    "rating": 1364,
+    "region": "LEC"
+  },
+  {
+    "rank": 97,
+    "team": "Unicorns of Love.CIS",
+    "rating": 1364,
+    "region": "MSI"
+  },
+  {
+    "rank": 98,
+    "team": "Victory Five",
+    "rating": 1354,
+    "region": "LPL"
+  },
+  {
+    "rank": 99,
+    "team": "NRG Kia",
+    "rating": 1354,
+    "region": "LCS"
+  },
+  {
+    "rank": 100,
+    "team": "Astralis",
+    "rating": 1352,
+    "region": "LEC"
+  },
+  {
+    "rank": 101,
+    "team": "Estral Esports",
+    "rating": 1350,
+    "region": "MSI"
+  },
+  {
+    "rank": 102,
+    "team": "\u0130stanbul Wildcats",
+    "rating": 1349,
+    "region": "MSI"
+  },
+  {
+    "rank": 103,
+    "team": "INTZ",
+    "rating": 1345,
+    "region": "MSI"
+  },
+  {
+    "rank": 104,
+    "team": "PENTAGRAM",
+    "rating": 1343,
+    "region": "MSI"
+  },
+  {
+    "rank": 105,
+    "team": "Clutch Gaming",
+    "rating": 1341,
+    "region": "LCS"
+  },
+  {
+    "rank": 106,
+    "team": "Team Heretics",
+    "rating": 1337,
+    "region": "LEC"
+  },
+  {
+    "rank": 107,
+    "team": "Team Vitality",
+    "rating": 1337,
+    "region": "LEC"
+  },
+  {
+    "rank": 108,
+    "team": "KOI",
+    "rating": 1319,
+    "region": "LEC"
+  },
+  {
+    "rank": 109,
+    "team": "OpTic Gaming",
+    "rating": 1301,
+    "region": "LCS"
+  },
+  {
+    "rank": 110,
+    "team": "FC Schalke 04 Esports",
+    "rating": 1300,
+    "region": "LEC"
+  },
+  {
+    "rank": 111,
+    "team": "Shopify Rebellion",
+    "rating": 1297,
+    "region": "LCS"
+  },
+  {
+    "rank": 112,
+    "team": "Counter Logic Gaming",
+    "rating": 1270,
+    "region": "LCS"
+  },
+  {
+    "rank": 113,
+    "team": "Rogue",
+    "rating": 1240,
+    "region": "LEC"
+  },
+  {
+    "rank": 114,
+    "team": "Echo Fox",
+    "rating": 1232,
+    "region": "LCS"
+  },
+  {
+    "rank": 115,
+    "team": "Immortals",
+    "rating": 1228,
+    "region": "LCS"
+  },
+  {
+    "rank": 116,
+    "team": "Natus Vincere",
+    "rating": 1224,
+    "region": "LEC"
+  }
+]

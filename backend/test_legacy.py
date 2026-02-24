@@ -2,7 +2,7 @@ import sqlite3
 import pandas as pd
 
 # Connect to the database we just built
-conn = sqlite3.connect("nexus_sight.db")
+conn = sqlite3.connect("/opt/clawdbot/projects/LOL-game-analyzer/backend/nexus_sight.db")
 
 print("--- 📊 TESTING DATABASE: FAKER'S MOST PLAYED ---")
 

@@ -1,0 +1,13 @@
+# How to Run the Backend
+# The "ImportError: attempted relative import..." happens if you run from INSIDE the backend folder.
+# You must run from the ROOT folder.
+
+# 1. Open Terminal in: D:\C_analyzer\LOL-game-analyzer
+# (Go up one level from backend)
+
+# 2. Run this command:
+uvicorn backend.main:app --reload
+
+# Why?
+# Python needs to see "backend" as a package to understand "from .services import ...".
+# If you are inside backend, it doesn't know what "." refers to.

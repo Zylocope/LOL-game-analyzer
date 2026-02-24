@@ -1,0 +1,1199 @@
+{
+  "Trundle": {
+    "pro_win_rate": 50.5,
+    "pro_pick_rate": 9.6,
+    "pro_games": 1156,
+    "global_pick_rate": 4.5,
+    "global_win_rate": null
+  },
+  "Lucian": {
+    "pro_win_rate": 48.0,
+    "pro_pick_rate": 14.5,
+    "pro_games": 1749,
+    "global_pick_rate": 6.3,
+    "global_win_rate": null
+  },
+  "Bel'Veth": {
+    "pro_win_rate": 50.0,
+    "pro_pick_rate": 0.1,
+    "pro_games": 16,
+    "global_pick_rate": 1.1,
+    "global_win_rate": null
+  },
+  "Karthus": {
+    "pro_win_rate": 49.4,
+    "pro_pick_rate": 1.9,
+    "pro_games": 233,
+    "global_pick_rate": 0.8,
+    "global_win_rate": null
+  },
+  "Singed": {
+    "pro_win_rate": 44.4,
+    "pro_pick_rate": 0.4,
+    "pro_games": 45,
+    "global_pick_rate": 1.0,
+    "global_win_rate": null
+  },
+  "Alistar": {
+    "pro_win_rate": 51.7,
+    "pro_pick_rate": 19.0,
+    "pro_games": 2285,
+    "global_pick_rate": 3.0,
+    "global_win_rate": null
+  },
+  "Lux": {
+    "pro_win_rate": 55.8,
+    "pro_pick_rate": 2.4,
+    "pro_games": 292,
+    "global_pick_rate": 5.6,
+    "global_win_rate": null
+  },
+  "Shyvana": {
+    "pro_win_rate": 26.7,
+    "pro_pick_rate": 0.2,
+    "pro_games": 30,
+    "global_pick_rate": 0.9,
+    "global_win_rate": null
+  },
+  "Veigar": {
+    "pro_win_rate": 45.8,
+    "pro_pick_rate": 0.9,
+    "pro_games": 107,
+    "global_pick_rate": 1.8,
+    "global_win_rate": null
+  },
+  "Ivern": {
+    "pro_win_rate": 54.6,
+    "pro_pick_rate": 1.8,
+    "pro_games": 216,
+    "global_pick_rate": 0.7,
+    "global_win_rate": null
+  },
+  "Caitlyn": {
+    "pro_win_rate": 49.0,
+    "pro_pick_rate": 4.9,
+    "pro_games": 588,
+    "global_pick_rate": 6.1,
+    "global_win_rate": null
+  },
+  "Katarina": {
+    "pro_win_rate": 0,
+    "pro_pick_rate": 0,
+    "pro_games": 0,
+    "global_pick_rate": 3.0,
+    "global_win_rate": null
+  },
+  "Elise": {
+    "pro_win_rate": 50.4,
+    "pro_pick_rate": 4.1,
+    "pro_games": 488,
+    "global_pick_rate": 1.2,
+    "global_win_rate": null
+  },
+  "Zac": {
+    "pro_win_rate": 49.8,
+    "pro_pick_rate": 2.5,
+    "pro_games": 299,
+    "global_pick_rate": 1.5,
+    "global_win_rate": null
+  },
+  "Teemo": {
+    "pro_win_rate": 0,
+    "pro_pick_rate": 0,
+    "pro_games": 0,
+    "global_pick_rate": 1.7,
+    "global_win_rate": null
+  },
+  "Seraphine": {
+    "pro_win_rate": 46.8,
+    "pro_pick_rate": 1.3,
+    "pro_games": 156,
+    "global_pick_rate": 1.5,
+    "global_win_rate": null
+  },
+  "Syndra": {
+    "pro_win_rate": 47.8,
+    "pro_pick_rate": 8.4,
+    "pro_games": 1012,
+    "global_pick_rate": 2.4,
+    "global_win_rate": null
+  },
+  "Urgot": {
+    "pro_win_rate": 48.5,
+    "pro_pick_rate": 3.1,
+    "pro_games": 369,
+    "global_pick_rate": 1.3,
+    "global_win_rate": null
+  },
+  "Lee Sin": {
+    "pro_win_rate": 49.8,
+    "pro_pick_rate": 16.6,
+    "pro_games": 2000,
+    "global_pick_rate": 7.1,
+    "global_win_rate": null
+  },
+  "Wukong": {
+    "pro_win_rate": 47.8,
+    "pro_pick_rate": 10.5,
+    "pro_games": 1263,
+    "global_pick_rate": 1.9,
+    "global_win_rate": null
+  },
+  "Yunara": {
+    "pro_win_rate": 56.2,
+    "pro_pick_rate": 0.6,
+    "pro_games": 73,
+    "global_pick_rate": 0,
+    "global_win_rate": null
+  },
+  "Xerath": {
+    "pro_win_rate": 36.0,
+    "pro_pick_rate": 0.2,
+    "pro_games": 25,
+    "global_pick_rate": 3.5,
+    "global_win_rate": null
+  },
+  "Yuumi": {
+    "pro_win_rate": 46.5,
+    "pro_pick_rate": 4.5,
+    "pro_games": 544,
+    "global_pick_rate": 3.2,
+    "global_win_rate": null
+  },
+  "Nami": {
+    "pro_win_rate": 49.4,
+    "pro_pick_rate": 4.2,
+    "pro_games": 502,
+    "global_pick_rate": 5.3,
+    "global_win_rate": null
+  },
+  "Pyke": {
+    "pro_win_rate": 47.2,
+    "pro_pick_rate": 1.8,
+    "pro_games": 218,
+    "global_pick_rate": 3.7,
+    "global_win_rate": null
+  },
+  "Sona": {
+    "pro_win_rate": 51.7,
+    "pro_pick_rate": 0.7,
+    "pro_games": 89,
+    "global_pick_rate": 1.3,
+    "global_win_rate": null
+  },
+  "Twisted Fate": {
+    "pro_win_rate": 58.1,
+    "pro_pick_rate": 5.4,
+    "pro_games": 647,
+    "global_pick_rate": 2.9,
+    "global_win_rate": null
+  },
+  "Ambessa": {
+    "pro_win_rate": 43.5,
+    "pro_pick_rate": 3.5,
+    "pro_games": 416,
+    "global_pick_rate": 2.5,
+    "global_win_rate": null
+  },
+  "Master Yi": {
+    "pro_win_rate": 33.3,
+    "pro_pick_rate": 0.1,
+    "pro_games": 9,
+    "global_pick_rate": 2.6,
+    "global_win_rate": null
+  },
+  "Shaco": {
+    "pro_win_rate": 0,
+    "pro_pick_rate": 0,
+    "pro_games": 0,
+    "global_pick_rate": 3.9,
+    "global_win_rate": null
+  },
+  "Irelia": {
+    "pro_win_rate": 47.1,
+    "pro_pick_rate": 4.9,
+    "pro_games": 592,
+    "global_pick_rate": 3.6,
+    "global_win_rate": null
+  },
+  "Cho'Gath": {
+    "pro_win_rate": 52.3,
+    "pro_pick_rate": 2.2,
+    "pro_games": 264,
+    "global_pick_rate": 1.7,
+    "global_win_rate": null
+  },
+  "Poppy": {
+    "pro_win_rate": 53.6,
+    "pro_pick_rate": 6.9,
+    "pro_games": 832,
+    "global_pick_rate": 1.4,
+    "global_win_rate": null
+  },
+  "Amumu": {
+    "pro_win_rate": 61.3,
+    "pro_pick_rate": 0.3,
+    "pro_games": 31,
+    "global_pick_rate": 1.3,
+    "global_win_rate": null
+  },
+  "Lulu": {
+    "pro_win_rate": 46.4,
+    "pro_pick_rate": 6.4,
+    "pro_games": 776,
+    "global_pick_rate": 5.8,
+    "global_win_rate": null
+  },
+  "Vi": {
+    "pro_win_rate": 52.1,
+    "pro_pick_rate": 9.8,
+    "pro_games": 1175,
+    "global_pick_rate": 2.5,
+    "global_win_rate": null
+  },
+  "Yasuo": {
+    "pro_win_rate": 48.1,
+    "pro_pick_rate": 2.9,
+    "pro_games": 343,
+    "global_pick_rate": 5.9,
+    "global_win_rate": null
+  },
+  "Orianna": {
+    "pro_win_rate": 49.9,
+    "pro_pick_rate": 11.5,
+    "pro_games": 1384,
+    "global_pick_rate": 2.9,
+    "global_win_rate": null
+  },
+  "Swain": {
+    "pro_win_rate": 55.0,
+    "pro_pick_rate": 2.5,
+    "pro_games": 300,
+    "global_pick_rate": 1.4,
+    "global_win_rate": null
+  },
+  "Rell": {
+    "pro_win_rate": 50.7,
+    "pro_pick_rate": 14.9,
+    "pro_games": 1788,
+    "global_pick_rate": 2.3,
+    "global_win_rate": null
+  },
+  "Jax": {
+    "pro_win_rate": 49.5,
+    "pro_pick_rate": 8.7,
+    "pro_games": 1044,
+    "global_pick_rate": 3.6,
+    "global_win_rate": null
+  },
+  "Camille": {
+    "pro_win_rate": 53.9,
+    "pro_pick_rate": 9.0,
+    "pro_games": 1088,
+    "global_pick_rate": 1.4,
+    "global_win_rate": null
+  },
+  "Riven": {
+    "pro_win_rate": 53.1,
+    "pro_pick_rate": 0.4,
+    "pro_games": 49,
+    "global_pick_rate": 2.0,
+    "global_win_rate": null
+  },
+  "Ryze": {
+    "pro_win_rate": 48.3,
+    "pro_pick_rate": 12.3,
+    "pro_games": 1478,
+    "global_pick_rate": 1.8,
+    "global_win_rate": null
+  },
+  "Nidalee": {
+    "pro_win_rate": 53.4,
+    "pro_pick_rate": 5.9,
+    "pro_games": 713,
+    "global_pick_rate": 2.1,
+    "global_win_rate": null
+  },
+  "Ezreal": {
+    "pro_win_rate": 48.3,
+    "pro_pick_rate": 21.8,
+    "pro_games": 2625,
+    "global_pick_rate": 5.7,
+    "global_win_rate": null
+  },
+  "Miss Fortune": {
+    "pro_win_rate": 47.2,
+    "pro_pick_rate": 7.6,
+    "pro_games": 919,
+    "global_pick_rate": 3.3,
+    "global_win_rate": null
+  },
+  "Kayn": {
+    "pro_win_rate": 49.0,
+    "pro_pick_rate": 0.4,
+    "pro_games": 49,
+    "global_pick_rate": 3.9,
+    "global_win_rate": null
+  },
+  "Vayne": {
+    "pro_win_rate": 50.4,
+    "pro_pick_rate": 2.3,
+    "pro_games": 272,
+    "global_pick_rate": 3.3,
+    "global_win_rate": null
+  },
+  "Smolder": {
+    "pro_win_rate": 47.2,
+    "pro_pick_rate": 1.9,
+    "pro_games": 229,
+    "global_pick_rate": 3.8,
+    "global_win_rate": null
+  },
+  "Volibear": {
+    "pro_win_rate": 47.1,
+    "pro_pick_rate": 5.4,
+    "pro_games": 645,
+    "global_pick_rate": 3.8,
+    "global_win_rate": null
+  },
+  "Kled": {
+    "pro_win_rate": 54.9,
+    "pro_pick_rate": 1.2,
+    "pro_games": 142,
+    "global_pick_rate": 1.3,
+    "global_win_rate": null
+  },
+  "Rek'Sai": {
+    "pro_win_rate": 50.9,
+    "pro_pick_rate": 5.3,
+    "pro_games": 642,
+    "global_pick_rate": 0.5,
+    "global_win_rate": null
+  },
+  "Xin Zhao": {
+    "pro_win_rate": 48.4,
+    "pro_pick_rate": 11.5,
+    "pro_games": 1389,
+    "global_pick_rate": 2.9,
+    "global_win_rate": null
+  },
+  "Vladimir": {
+    "pro_win_rate": 50.3,
+    "pro_pick_rate": 5.0,
+    "pro_games": 600,
+    "global_pick_rate": 3.4,
+    "global_win_rate": null
+  },
+  "Corki": {
+    "pro_win_rate": 47.0,
+    "pro_pick_rate": 12.3,
+    "pro_games": 1480,
+    "global_pick_rate": 1.1,
+    "global_win_rate": null
+  },
+  "Taric": {
+    "pro_win_rate": 49.0,
+    "pro_pick_rate": 3.0,
+    "pro_games": 365,
+    "global_pick_rate": 0.6,
+    "global_win_rate": null
+  },
+  "Tristana": {
+    "pro_win_rate": 51.0,
+    "pro_pick_rate": 10.9,
+    "pro_games": 1306,
+    "global_pick_rate": 2.6,
+    "global_win_rate": null
+  },
+  "Zeri": {
+    "pro_win_rate": 49.5,
+    "pro_pick_rate": 9.3,
+    "pro_games": 1117,
+    "global_pick_rate": 2.1,
+    "global_win_rate": null
+  },
+  "Sylas": {
+    "pro_win_rate": 51.5,
+    "pro_pick_rate": 10.8,
+    "pro_games": 1296,
+    "global_pick_rate": 4.6,
+    "global_win_rate": null
+  },
+  "Ziggs": {
+    "pro_win_rate": 51.5,
+    "pro_pick_rate": 3.3,
+    "pro_games": 394,
+    "global_pick_rate": 0.9,
+    "global_win_rate": null
+  },
+  "Kayle": {
+    "pro_win_rate": 51.7,
+    "pro_pick_rate": 0.5,
+    "pro_games": 60,
+    "global_pick_rate": 1.8,
+    "global_win_rate": null
+  },
+  "Nautilus": {
+    "pro_win_rate": 47.1,
+    "pro_pick_rate": 22.9,
+    "pro_games": 2754,
+    "global_pick_rate": 4.3,
+    "global_win_rate": null
+  },
+  "Taliyah": {
+    "pro_win_rate": 53.7,
+    "pro_pick_rate": 11.6,
+    "pro_games": 1399,
+    "global_pick_rate": 1.3,
+    "global_win_rate": null
+  },
+  "Aphelios": {
+    "pro_win_rate": 49.9,
+    "pro_pick_rate": 15.3,
+    "pro_games": 1837,
+    "global_pick_rate": 3.6,
+    "global_win_rate": null
+  },
+  "K'Sante": {
+    "pro_win_rate": 49.6,
+    "pro_pick_rate": 15.7,
+    "pro_games": 1890,
+    "global_pick_rate": 1.9,
+    "global_win_rate": null
+  },
+  "Blitzcrank": {
+    "pro_win_rate": 55.4,
+    "pro_pick_rate": 2.4,
+    "pro_games": 285,
+    "global_pick_rate": 2.9,
+    "global_win_rate": null
+  },
+  "Gangplank": {
+    "pro_win_rate": 52.4,
+    "pro_pick_rate": 7.4,
+    "pro_games": 895,
+    "global_pick_rate": 2.0,
+    "global_win_rate": null
+  },
+  "Draven": {
+    "pro_win_rate": 50.1,
+    "pro_pick_rate": 2.8,
+    "pro_games": 339,
+    "global_pick_rate": 1.8,
+    "global_win_rate": null
+  },
+  "Mel": {
+    "pro_win_rate": 15.4,
+    "pro_pick_rate": 0.1,
+    "pro_games": 13,
+    "global_pick_rate": 0,
+    "global_win_rate": null
+  },
+  "Akshan": {
+    "pro_win_rate": 0,
+    "pro_pick_rate": 0,
+    "pro_games": 0,
+    "global_pick_rate": 1.1,
+    "global_win_rate": null
+  },
+  "Milio": {
+    "pro_win_rate": 45.8,
+    "pro_pick_rate": 2.4,
+    "pro_games": 288,
+    "global_pick_rate": 4.0,
+    "global_win_rate": null
+  },
+  "Thresh": {
+    "pro_win_rate": 50.2,
+    "pro_pick_rate": 10.8,
+    "pro_games": 1294,
+    "global_pick_rate": 6.2,
+    "global_win_rate": null
+  },
+  "Gnar": {
+    "pro_win_rate": 49.8,
+    "pro_pick_rate": 13.7,
+    "pro_games": 1649,
+    "global_pick_rate": 1.5,
+    "global_win_rate": null
+  },
+  "Gragas": {
+    "pro_win_rate": 51.2,
+    "pro_pick_rate": 13.3,
+    "pro_games": 1606,
+    "global_pick_rate": 1.7,
+    "global_win_rate": null
+  },
+  "Shen": {
+    "pro_win_rate": 51.4,
+    "pro_pick_rate": 3.9,
+    "pro_games": 471,
+    "global_pick_rate": 2.1,
+    "global_win_rate": null
+  },
+  "Vel'Koz": {
+    "pro_win_rate": 44.9,
+    "pro_pick_rate": 0.6,
+    "pro_games": 78,
+    "global_pick_rate": 1.3,
+    "global_win_rate": null
+  },
+  "Zoe": {
+    "pro_win_rate": 50.4,
+    "pro_pick_rate": 10.3,
+    "pro_games": 1234,
+    "global_pick_rate": 1.7,
+    "global_win_rate": null
+  },
+  "Bard": {
+    "pro_win_rate": 53.4,
+    "pro_pick_rate": 3.6,
+    "pro_games": 429,
+    "global_pick_rate": 2.4,
+    "global_win_rate": null
+  },
+  "Malphite": {
+    "pro_win_rate": 40.9,
+    "pro_pick_rate": 1.5,
+    "pro_games": 176,
+    "global_pick_rate": 2.5,
+    "global_win_rate": null
+  },
+  "Rengar": {
+    "pro_win_rate": 49.1,
+    "pro_pick_rate": 0.5,
+    "pro_games": 57,
+    "global_pick_rate": 1.5,
+    "global_win_rate": null
+  },
+  "Warwick": {
+    "pro_win_rate": 0,
+    "pro_pick_rate": 0,
+    "pro_games": 0,
+    "global_pick_rate": 3.2,
+    "global_win_rate": null
+  },
+  "Darius": {
+    "pro_win_rate": 49.7,
+    "pro_pick_rate": 1.3,
+    "pro_games": 155,
+    "global_pick_rate": 3.4,
+    "global_win_rate": null
+  },
+  "Mordekaiser": {
+    "pro_win_rate": 49.6,
+    "pro_pick_rate": 3.0,
+    "pro_games": 359,
+    "global_pick_rate": 3.0,
+    "global_win_rate": null
+  },
+  "Nunu & Willump": {
+    "pro_win_rate": 25.0,
+    "pro_pick_rate": 0.1,
+    "pro_games": 16,
+    "global_pick_rate": 1.2,
+    "global_win_rate": null
+  },
+  "Lillia": {
+    "pro_win_rate": 50.1,
+    "pro_pick_rate": 5.3,
+    "pro_games": 641,
+    "global_pick_rate": 1.7,
+    "global_win_rate": null
+  },
+  "Diana": {
+    "pro_win_rate": 52.8,
+    "pro_pick_rate": 2.7,
+    "pro_games": 326,
+    "global_pick_rate": 4.5,
+    "global_win_rate": null
+  },
+  "Rumble": {
+    "pro_win_rate": 49.1,
+    "pro_pick_rate": 11.3,
+    "pro_games": 1354,
+    "global_pick_rate": 0.9,
+    "global_win_rate": null
+  },
+  "Graves": {
+    "pro_win_rate": 45.5,
+    "pro_pick_rate": 5.0,
+    "pro_games": 596,
+    "global_pick_rate": 2.5,
+    "global_win_rate": null
+  },
+  "Pantheon": {
+    "pro_win_rate": 49.4,
+    "pro_pick_rate": 4.5,
+    "pro_games": 547,
+    "global_pick_rate": 6.6,
+    "global_win_rate": null
+  },
+  "Sejuani": {
+    "pro_win_rate": 47.5,
+    "pro_pick_rate": 20.4,
+    "pro_games": 2453,
+    "global_pick_rate": 1.3,
+    "global_win_rate": null
+  },
+  "Senna": {
+    "pro_win_rate": 55.2,
+    "pro_pick_rate": 7.2,
+    "pro_games": 870,
+    "global_pick_rate": 4.4,
+    "global_win_rate": null
+  },
+  "Jinx": {
+    "pro_win_rate": 51.0,
+    "pro_pick_rate": 5.7,
+    "pro_games": 688,
+    "global_pick_rate": 6.2,
+    "global_win_rate": null
+  },
+  "Nasus": {
+    "pro_win_rate": 48.0,
+    "pro_pick_rate": 0.2,
+    "pro_games": 25,
+    "global_pick_rate": 1.7,
+    "global_win_rate": null
+  },
+  "Kassadin": {
+    "pro_win_rate": 53.4,
+    "pro_pick_rate": 1.6,
+    "pro_games": 189,
+    "global_pick_rate": 1.1,
+    "global_win_rate": null
+  },
+  "Sion": {
+    "pro_win_rate": 48.9,
+    "pro_pick_rate": 10.0,
+    "pro_games": 1199,
+    "global_pick_rate": 2.5,
+    "global_win_rate": null
+  },
+  "Skarner": {
+    "pro_win_rate": 52.3,
+    "pro_pick_rate": 6.0,
+    "pro_games": 728,
+    "global_pick_rate": 0.6,
+    "global_win_rate": null
+  },
+  "Nocturne": {
+    "pro_win_rate": 46.8,
+    "pro_pick_rate": 5.8,
+    "pro_games": 695,
+    "global_pick_rate": 3.3,
+    "global_win_rate": null
+  },
+  "Janna": {
+    "pro_win_rate": 48.7,
+    "pro_pick_rate": 0.6,
+    "pro_games": 78,
+    "global_pick_rate": 1.9,
+    "global_win_rate": null
+  },
+  "Nilah": {
+    "pro_win_rate": 52.0,
+    "pro_pick_rate": 0.2,
+    "pro_games": 25,
+    "global_pick_rate": 1.0,
+    "global_win_rate": null
+  },
+  "Aurora": {
+    "pro_win_rate": 47.2,
+    "pro_pick_rate": 3.0,
+    "pro_games": 358,
+    "global_pick_rate": 2.7,
+    "global_win_rate": null
+  },
+  "Olaf": {
+    "pro_win_rate": 52.1,
+    "pro_pick_rate": 10.2,
+    "pro_games": 1223,
+    "global_pick_rate": 0.8,
+    "global_win_rate": null
+  },
+  "Fiddlesticks": {
+    "pro_win_rate": 44.9,
+    "pro_pick_rate": 0.7,
+    "pro_games": 89,
+    "global_pick_rate": 1.3,
+    "global_win_rate": null
+  },
+  "Hwei": {
+    "pro_win_rate": 46.6,
+    "pro_pick_rate": 2.1,
+    "pro_games": 249,
+    "global_pick_rate": 2.5,
+    "global_win_rate": null
+  },
+  "Yorick": {
+    "pro_win_rate": 48.7,
+    "pro_pick_rate": 2.2,
+    "pro_games": 269,
+    "global_pick_rate": 1.8,
+    "global_win_rate": null
+  },
+  "Morgana": {
+    "pro_win_rate": 46.9,
+    "pro_pick_rate": 3.9,
+    "pro_games": 469,
+    "global_pick_rate": 2.5,
+    "global_win_rate": null
+  },
+  "Kha'Zix": {
+    "pro_win_rate": 50.3,
+    "pro_pick_rate": 2.8,
+    "pro_games": 334,
+    "global_pick_rate": 3.1,
+    "global_win_rate": null
+  },
+  "Illaoi": {
+    "pro_win_rate": 34.5,
+    "pro_pick_rate": 0.2,
+    "pro_games": 29,
+    "global_pick_rate": 1.1,
+    "global_win_rate": null
+  },
+  "Kindred": {
+    "pro_win_rate": 49.5,
+    "pro_pick_rate": 3.5,
+    "pro_games": 416,
+    "global_pick_rate": 1.5,
+    "global_win_rate": null
+  },
+  "Rakan": {
+    "pro_win_rate": 54.3,
+    "pro_pick_rate": 20.3,
+    "pro_games": 2437,
+    "global_pick_rate": 2.5,
+    "global_win_rate": null
+  },
+  "Karma": {
+    "pro_win_rate": 45.8,
+    "pro_pick_rate": 8.5,
+    "pro_games": 1022,
+    "global_pick_rate": 4.0,
+    "global_win_rate": null
+  },
+  "Ekko": {
+    "pro_win_rate": 48.6,
+    "pro_pick_rate": 1.2,
+    "pro_games": 144,
+    "global_pick_rate": 3.9,
+    "global_win_rate": null
+  },
+  "Fiora": {
+    "pro_win_rate": 46.6,
+    "pro_pick_rate": 2.1,
+    "pro_games": 253,
+    "global_pick_rate": 2.2,
+    "global_win_rate": null
+  },
+  "Qiyana": {
+    "pro_win_rate": 56.7,
+    "pro_pick_rate": 1.5,
+    "pro_games": 178,
+    "global_pick_rate": 1.2,
+    "global_win_rate": null
+  },
+  "Neeko": {
+    "pro_win_rate": 52.4,
+    "pro_pick_rate": 6.7,
+    "pro_games": 802,
+    "global_pick_rate": 1.5,
+    "global_win_rate": null
+  },
+  "Braum": {
+    "pro_win_rate": 49.1,
+    "pro_pick_rate": 17.4,
+    "pro_games": 2095,
+    "global_pick_rate": 3.6,
+    "global_win_rate": null
+  },
+  "Zilean": {
+    "pro_win_rate": 43.4,
+    "pro_pick_rate": 0.8,
+    "pro_games": 99,
+    "global_pick_rate": 1.2,
+    "global_win_rate": null
+  },
+  "Naafiri": {
+    "pro_win_rate": 50.8,
+    "pro_pick_rate": 1.6,
+    "pro_games": 193,
+    "global_pick_rate": 1.5,
+    "global_win_rate": null
+  },
+  "Azir": {
+    "pro_win_rate": 49.9,
+    "pro_pick_rate": 20.6,
+    "pro_games": 2475,
+    "global_pick_rate": 2.1,
+    "global_win_rate": null
+  },
+  "Aurelion Sol": {
+    "pro_win_rate": 48.6,
+    "pro_pick_rate": 1.1,
+    "pro_games": 138,
+    "global_pick_rate": 1.1,
+    "global_win_rate": null
+  },
+  "Galio": {
+    "pro_win_rate": 50.1,
+    "pro_pick_rate": 10.8,
+    "pro_games": 1298,
+    "global_pick_rate": 2.4,
+    "global_win_rate": null
+  },
+  "Twitch": {
+    "pro_win_rate": 39.3,
+    "pro_pick_rate": 0.2,
+    "pro_games": 28,
+    "global_pick_rate": 2.1,
+    "global_win_rate": null
+  },
+  "Kennen": {
+    "pro_win_rate": 50.6,
+    "pro_pick_rate": 7.3,
+    "pro_games": 883,
+    "global_pick_rate": 1.0,
+    "global_win_rate": null
+  },
+  "Jhin": {
+    "pro_win_rate": 45.0,
+    "pro_pick_rate": 6.9,
+    "pro_games": 825,
+    "global_pick_rate": 7.2,
+    "global_win_rate": null
+  },
+  "Kog'Maw": {
+    "pro_win_rate": 45.7,
+    "pro_pick_rate": 1.9,
+    "pro_games": 234,
+    "global_pick_rate": 1.0,
+    "global_win_rate": null
+  },
+  "Quinn": {
+    "pro_win_rate": 53.0,
+    "pro_pick_rate": 0.5,
+    "pro_games": 66,
+    "global_pick_rate": 1.0,
+    "global_win_rate": null
+  },
+  "Renekton": {
+    "pro_win_rate": 50.3,
+    "pro_pick_rate": 19.4,
+    "pro_games": 2338,
+    "global_pick_rate": 3.1,
+    "global_win_rate": null
+  },
+  "Lissandra": {
+    "pro_win_rate": 54.0,
+    "pro_pick_rate": 4.2,
+    "pro_games": 502,
+    "global_pick_rate": 1.4,
+    "global_win_rate": null
+  },
+  "Fizz": {
+    "pro_win_rate": 60.0,
+    "pro_pick_rate": 0.1,
+    "pro_games": 10,
+    "global_pick_rate": 1.8,
+    "global_win_rate": null
+  },
+  "Vex": {
+    "pro_win_rate": 75.0,
+    "pro_pick_rate": 0.1,
+    "pro_games": 12,
+    "global_pick_rate": 1.4,
+    "global_win_rate": null
+  },
+  "Anivia": {
+    "pro_win_rate": 51.4,
+    "pro_pick_rate": 0.3,
+    "pro_games": 37,
+    "global_pick_rate": 0.9,
+    "global_win_rate": null
+  },
+  "Yone": {
+    "pro_win_rate": 53.4,
+    "pro_pick_rate": 5.1,
+    "pro_games": 616,
+    "global_pick_rate": 5.0,
+    "global_win_rate": null
+  },
+  "Aatrox": {
+    "pro_win_rate": 47.5,
+    "pro_pick_rate": 14.2,
+    "pro_games": 1712,
+    "global_pick_rate": 4.7,
+    "global_win_rate": null
+  },
+  "Cassiopeia": {
+    "pro_win_rate": 48.4,
+    "pro_pick_rate": 3.1,
+    "pro_games": 378,
+    "global_pick_rate": 0.6,
+    "global_win_rate": null
+  },
+  "Varus": {
+    "pro_win_rate": 51.9,
+    "pro_pick_rate": 21.8,
+    "pro_games": 2628,
+    "global_pick_rate": 2.8,
+    "global_win_rate": null
+  },
+  "Sett": {
+    "pro_win_rate": 50.2,
+    "pro_pick_rate": 8.1,
+    "pro_games": 979,
+    "global_pick_rate": 3.7,
+    "global_win_rate": null
+  },
+  "Annie": {
+    "pro_win_rate": 53.6,
+    "pro_pick_rate": 5.3,
+    "pro_games": 634,
+    "global_pick_rate": 1.6,
+    "global_win_rate": null
+  },
+  "Garen": {
+    "pro_win_rate": 50.0,
+    "pro_pick_rate": 0.2,
+    "pro_games": 26,
+    "global_pick_rate": 2.3,
+    "global_win_rate": null
+  },
+  "Udyr": {
+    "pro_win_rate": 46.6,
+    "pro_pick_rate": 5.5,
+    "pro_games": 659,
+    "global_pick_rate": 1.2,
+    "global_win_rate": null
+  },
+  "Ashe": {
+    "pro_win_rate": 51.3,
+    "pro_pick_rate": 11.5,
+    "pro_games": 1383,
+    "global_pick_rate": 3.2,
+    "global_win_rate": null
+  },
+  "Heimerdinger": {
+    "pro_win_rate": 48.9,
+    "pro_pick_rate": 1.4,
+    "pro_games": 174,
+    "global_pick_rate": 0.6,
+    "global_win_rate": null
+  },
+  "Viktor": {
+    "pro_win_rate": 43.7,
+    "pro_pick_rate": 6.2,
+    "pro_games": 746,
+    "global_pick_rate": 3.3,
+    "global_win_rate": null
+  },
+  "Zed": {
+    "pro_win_rate": 45.2,
+    "pro_pick_rate": 0.5,
+    "pro_games": 62,
+    "global_pick_rate": 7.4,
+    "global_win_rate": null
+  },
+  "Malzahar": {
+    "pro_win_rate": 50.5,
+    "pro_pick_rate": 0.9,
+    "pro_games": 105,
+    "global_pick_rate": 3.1,
+    "global_win_rate": null
+  },
+  "Dr. Mundo": {
+    "pro_win_rate": 45.7,
+    "pro_pick_rate": 2.3,
+    "pro_games": 276,
+    "global_pick_rate": 3.1,
+    "global_win_rate": null
+  },
+  "Soraka": {
+    "pro_win_rate": 52.3,
+    "pro_pick_rate": 0.9,
+    "pro_games": 111,
+    "global_pick_rate": 2.4,
+    "global_win_rate": null
+  },
+  "Sivir": {
+    "pro_win_rate": 45.3,
+    "pro_pick_rate": 5.6,
+    "pro_games": 675,
+    "global_pick_rate": 4.6,
+    "global_win_rate": null
+  },
+  "Renata Glasc": {
+    "pro_win_rate": 52.9,
+    "pro_pick_rate": 3.9,
+    "pro_games": 465,
+    "global_pick_rate": 1.0,
+    "global_win_rate": null
+  },
+  "Hecarim": {
+    "pro_win_rate": 52.2,
+    "pro_pick_rate": 2.8,
+    "pro_games": 335,
+    "global_pick_rate": 1.7,
+    "global_win_rate": null
+  },
+  "Ornn": {
+    "pro_win_rate": 49.8,
+    "pro_pick_rate": 12.5,
+    "pro_games": 1505,
+    "global_pick_rate": 1.9,
+    "global_win_rate": null
+  },
+  "Viego": {
+    "pro_win_rate": 48.6,
+    "pro_pick_rate": 8.1,
+    "pro_games": 980,
+    "global_pick_rate": 5.7,
+    "global_win_rate": null
+  },
+  "Maokai": {
+    "pro_win_rate": 54.1,
+    "pro_pick_rate": 10.6,
+    "pro_games": 1275,
+    "global_pick_rate": 0.7,
+    "global_win_rate": null
+  },
+  "LeBlanc": {
+    "pro_win_rate": 50.0,
+    "pro_pick_rate": 9.2,
+    "pro_games": 1103,
+    "global_pick_rate": 2.5,
+    "global_win_rate": null
+  },
+  "Kai'Sa": {
+    "pro_win_rate": 51.6,
+    "pro_pick_rate": 21.8,
+    "pro_games": 2619,
+    "global_pick_rate": 8.0,
+    "global_win_rate": null
+  },
+  "Rammus": {
+    "pro_win_rate": 0,
+    "pro_pick_rate": 0,
+    "pro_games": 0,
+    "global_pick_rate": 0.8,
+    "global_win_rate": null
+  },
+  "Ahri": {
+    "pro_win_rate": 47.9,
+    "pro_pick_rate": 7.1,
+    "pro_games": 849,
+    "global_pick_rate": 3.9,
+    "global_win_rate": null
+  },
+  "Tryndamere": {
+    "pro_win_rate": 37.5,
+    "pro_pick_rate": 0.1,
+    "pro_games": 8,
+    "global_pick_rate": 1.1,
+    "global_win_rate": null
+  },
+  "Jarvan IV": {
+    "pro_win_rate": 49.2,
+    "pro_pick_rate": 11.6,
+    "pro_games": 1392,
+    "global_pick_rate": 3.6,
+    "global_win_rate": null
+  },
+  "Leona": {
+    "pro_win_rate": 48.0,
+    "pro_pick_rate": 15.4,
+    "pro_games": 1853,
+    "global_pick_rate": 2.8,
+    "global_win_rate": null
+  },
+  "Akali": {
+    "pro_win_rate": 50.6,
+    "pro_pick_rate": 8.6,
+    "pro_games": 1034,
+    "global_pick_rate": 3.2,
+    "global_win_rate": null
+  },
+  "Tahm Kench": {
+    "pro_win_rate": 50.5,
+    "pro_pick_rate": 14.9,
+    "pro_games": 1794,
+    "global_pick_rate": 1.4,
+    "global_win_rate": null
+  },
+  "Brand": {
+    "pro_win_rate": 47.3,
+    "pro_pick_rate": 1.7,
+    "pro_games": 203,
+    "global_pick_rate": 1.0,
+    "global_win_rate": null
+  },
+  "Talon": {
+    "pro_win_rate": 53.3,
+    "pro_pick_rate": 0.4,
+    "pro_games": 45,
+    "global_pick_rate": 1.5,
+    "global_win_rate": null
+  },
+  "Zyra": {
+    "pro_win_rate": 46.9,
+    "pro_pick_rate": 2.0,
+    "pro_games": 243,
+    "global_pick_rate": 1.4,
+    "global_win_rate": null
+  },
+  "Gwen": {
+    "pro_win_rate": 50.1,
+    "pro_pick_rate": 6.1,
+    "pro_games": 735,
+    "global_pick_rate": 1.9,
+    "global_win_rate": null
+  },
+  "Jayce": {
+    "pro_win_rate": 52.2,
+    "pro_pick_rate": 14.7,
+    "pro_games": 1769,
+    "global_pick_rate": 2.1,
+    "global_win_rate": null
+  },
+  "Evelynn": {
+    "pro_win_rate": 58.1,
+    "pro_pick_rate": 0.3,
+    "pro_games": 31,
+    "global_pick_rate": 1.4,
+    "global_win_rate": null
+  },
+  "Kalista": {
+    "pro_win_rate": 52.9,
+    "pro_pick_rate": 12.0,
+    "pro_games": 1445,
+    "global_pick_rate": 0.6,
+    "global_win_rate": null
+  },
+  "Xayah": {
+    "pro_win_rate": 53.4,
+    "pro_pick_rate": 15.9,
+    "pro_games": 1917,
+    "global_pick_rate": 2.7,
+    "global_win_rate": null
+  },
+  "Samira": {
+    "pro_win_rate": 40.5,
+    "pro_pick_rate": 1.7,
+    "pro_games": 200,
+    "global_pick_rate": 2.5,
+    "global_win_rate": null
+  },
+  "Briar": {
+    "pro_win_rate": 0,
+    "pro_pick_rate": 0,
+    "pro_games": 0,
+    "global_pick_rate": 2.1,
+    "global_win_rate": null
+  }
+}
