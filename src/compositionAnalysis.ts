@@ -26,10 +26,30 @@ export const analyzeComposition = (players: Player[]): CompositionResult => {
 
   champNames.forEach(name => {
     const data = CHAMPION_DATA[name];
-    if (data.tags.includes('ad')) adCount++;
-    if (data.tags.includes('ap')) apCount++;
-    if (data.tags.includes('tank')) tankCount++;
-    if (data.tags.includes('utility')) utilityCount++;
+    if (!data) return; // Safety check
+
+    // Map Classes to Damage Types (Heuristic)
+    const classes = (data.classes || []).map(c => c.toLowerCase());
+    
+    // AD: Marksman, Assassin (usually), Fighter (often)
+    if (classes.includes('marksman') || classes.includes('fighter') || classes.includes('skirmisher') || classes.includes('diver')) {
+        adCount++;
+    }
+    
+    // AP: Mage, Burst, Battlemage, Artillery, Enchanter
+    if (classes.includes('mage') || classes.includes('burst') || classes.includes('battlemage') || classes.includes('artillery')) {
+        apCount++;
+    }
+    
+    // Tank: Tank, Warden, Vanguard
+    if (classes.includes('tank') || classes.includes('warden') || classes.includes('vanguard')) {
+        tankCount++;
+    }
+    
+    // Utility: Support, Enchanter, Catcher
+    if (classes.includes('support') || classes.includes('enchanter') || classes.includes('catcher')) {
+        utilityCount++;
+    }
   });
 
   // --- 2. WARNING RULES (Clean Text) ---
