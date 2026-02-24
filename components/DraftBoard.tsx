@@ -84,35 +84,50 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({
         unavailableChampions={unavailableChampions}
       />
 
-      {/* Header */}
-      <div className="p-4 border-b border-gray-800/50 flex justify-between items-center bg-gray-900/40">
-        <div className="flex items-center gap-3 w-2/3">
-           <div className="w-12 h-12 bg-gray-950/40 p-1.5 rounded-lg border border-gray-800/50 shrink-0 shadow-inner">
-              <TeamLogo team={{ id: team.id || 'unknown', name: team.name }} className="w-full h-full object-contain filter drop-shadow-[0_0_2px_rgba(255,255,255,0.4)]" />
-           </div>
-           <input 
-             value={team.name}
-             onChange={(e) => onUpdateName(side, e.target.value)}
-             className={`bg-transparent text-2xl font-display font-bold uppercase tracking-wider ${textColor} w-full focus:outline-none focus:bg-gray-800/50 rounded px-1`}
-           />
-        </div>
-        <div className="flex gap-1">
-          {team.bans.map((ban, idx) => (
-            <button
-              key={idx}
-              onClick={() => openSelect('Top', true, idx)}
-              className="w-8 h-8 bg-black/40 border border-gray-700 rounded flex items-center justify-center hover:border-gray-500 overflow-hidden group"
-            >
-              {ban ? (
-                <div className="relative w-full h-full">
-                   <img src={getIconUrl(ban)} className="w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0" />
-                   <Ban className="absolute inset-0 m-auto text-gray-400 w-4 h-4" />
+      {/* Header - Improved Layout */}
+      <div className="p-4 border-b border-gray-800/50 flex flex-col gap-3 bg-gray-900/40">
+        <div className="flex justify-between items-start">
+            {/* Team Identity */}
+            <div className="flex items-center gap-4 flex-1">
+                <div className="w-16 h-16 bg-gray-950/40 p-2 rounded-xl border border-gray-800/50 shrink-0 shadow-lg relative overflow-hidden group">
+                    <div className={`absolute inset-0 opacity-20 ${isBlue ? 'bg-blue-500' : 'bg-red-500'}`} />
+                    <TeamLogo team={{ id: team.id || 'unknown', name: team.name }} className="w-full h-full object-contain relative z-10" />
                 </div>
-              ) : (
-                <Ban size={12} className="text-gray-600" />
-              )}
-            </button>
-          ))}
+                <div className="flex flex-col flex-1 min-w-0">
+                    <span className={`text-[10px] font-bold tracking-[0.2em] uppercase ${textColor} mb-0.5`}>
+                        {side} Side
+                    </span>
+                    <input 
+                        value={team.name}
+                        onChange={(e) => onUpdateName(side, e.target.value)}
+                        className={`bg-transparent text-3xl font-display font-black uppercase tracking-tight text-white w-full focus:outline-none focus:bg-gray-800/50 rounded -ml-1 px-1 transition-colors truncate placeholder-gray-700`}
+                        placeholder="TEAM NAME"
+                    />
+                </div>
+            </div>
+
+            {/* Bans - Top Right */}
+            <div className="flex gap-1.5 pt-1">
+                {team.bans.map((ban, idx) => (
+                    <button
+                    key={idx}
+                    onClick={() => openSelect('Top', true, idx)}
+                    className="w-9 h-9 bg-black/60 border border-gray-700/80 rounded-lg flex items-center justify-center hover:border-gray-500 hover:bg-gray-800 transition-all overflow-hidden group relative"
+                    title={`Ban ${idx + 1}`}
+                    >
+                    {ban ? (
+                        <>
+                            <img src={getIconUrl(ban)} className="w-full h-full object-cover opacity-70 grayscale group-hover:grayscale-0 transition-all" />
+                            <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-transparent">
+                                <Ban className="text-red-500/80 w-5 h-5 drop-shadow-md" />
+                            </div>
+                        </>
+                    ) : (
+                        <Ban size={14} className="text-gray-700 group-hover:text-gray-500" />
+                    )}
+                    </button>
+                ))}
+            </div>
         </div>
       </div>
 
@@ -143,16 +158,35 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({
             {/* Inputs & Stats */}
             <div className="flex-1 min-w-0 flex flex-col justify-center relative">
                
-               {/* --- COUNTER PICK STRIP (ACTIVE) --- */}
-               {matchups[player.role] && (
+               {/* --- 1. LANE MATCHUP STRIP (Direct Opponent Only) --- */}
+               {matchups[player.role]?.lane && (
                   <div 
                     className={`absolute -left-3 top-0 bottom-0 my-auto h-8 w-1 rounded-r shadow-[0_0_8px_rgba(0,0,0,0.5)]
-                      ${matchups[player.role].type === 'advantage' 
+                      ${matchups[player.role].lane.isGood 
                         ? 'bg-green-500 shadow-[0_0_10px_lime]' 
-                        : 'bg-red-500 shadow-[0_0_10px_red]'}`
+                        : matchups[player.role].lane.isCounter 
+                            ? 'bg-red-500 shadow-[0_0_10px_red]'
+                            : 'bg-gray-500 opacity-20'}`
                     }
-                    title={`${matchups[player.role].type === 'advantage' ? 'Counters' : 'Countered by'} enemy (Historical WR: ${matchups[player.role].winRate.toFixed(1)}%)`}
+                    title={matchups[player.role].lane.isGood 
+                        ? `Counters Lane Opponent (${matchups[player.role].lane.winRate}% WR)` 
+                        : `Countered by Lane Opponent (${matchups[player.role].lane.winRate}% WR)`
+                    }
                   />
+               )}
+
+               {/* --- 2. GLOBAL THREAT ALERT (3+ Counters) --- */}
+               {matchups[player.role]?.globalThreats && matchups[player.role].globalThreats.length >= 3 && (
+                   <div className="absolute -right-1 -top-3 z-20 flex flex-col items-end">
+                       <div 
+                         className="bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded shadow-lg border border-red-400 animate-pulse mb-0.5"
+                       >
+                         !
+                       </div>
+                       <div className="bg-black/90 text-red-400 text-[9px] px-1.5 py-0.5 rounded border border-red-900/50 whitespace-nowrap shadow-xl">
+                          ⚠️ Countered by: {matchups[player.role].globalThreats.join(', ')}
+                       </div>
+                   </div>
                )}
 
                <input 
@@ -196,20 +230,26 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({
         ))}
       </div>
 
-      {/* Composition Analysis */}
+      {/* Composition Analysis (Safe Mode) */}
       {(() => {
-        const { warnings, strengths } = analyzeComposition(team.players);
-        if (warnings.length === 0 && strengths.length === 0) return null;
-        return (
-          <div className="flex flex-wrap gap-2 mb-3 justify-center px-2 py-2 border-t border-gray-800/50">
-            {warnings.map((w, i) => (
-              <span key={i} className="px-2 py-0.5 text-[10px] font-display font-bold tracking-widest text-red-400 bg-red-950/30 border border-red-900/50 rounded uppercase">{w}</span>
-            ))}
-            {strengths.map((s, i) => (
-              <span key={i} className="px-2 py-0.5 text-[10px] font-display font-bold tracking-widest text-esport-gold bg-yellow-950/20 border border-yellow-900/50 rounded uppercase shadow-[0_0_5px_rgba(200,170,110,0.1)]">{s}</span>
-            ))}
-          </div>
-        );
+        try {
+            if (!team.players || team.players.length === 0) return null;
+            const { warnings, strengths } = analyzeComposition(team.players);
+            if (warnings.length === 0 && strengths.length === 0) return null;
+            return (
+              <div className="flex flex-wrap gap-2 mb-3 justify-center px-2 py-2 border-t border-gray-800/50">
+                {warnings.map((w, i) => (
+                  <span key={i} className="px-2 py-0.5 text-[10px] font-display font-bold tracking-widest text-red-400 bg-red-950/30 border border-red-900/50 rounded uppercase">{w}</span>
+                ))}
+                {strengths.map((s, i) => (
+                  <span key={i} className="px-2 py-0.5 text-[10px] font-display font-bold tracking-widest text-esport-gold bg-yellow-950/20 border border-yellow-900/50 rounded uppercase shadow-[0_0_5px_rgba(200,170,110,0.1)]">{s}</span>
+                ))}
+              </div>
+            );
+        } catch (e) {
+            console.warn("Composition analysis failed:", e);
+            return null;
+        }
       })()}
 
       {/* Stats Summary */}

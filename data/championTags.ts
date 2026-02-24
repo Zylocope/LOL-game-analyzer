@@ -1,181 +1,3436 @@
-// AUTO-GENERATED FILE. DO NOT EDIT MANUALLY.
-// Source: Riot DataDragon API
-
-export interface ChampionData {
-  id: string;
-  name: string;
-  classes: string[];
-  tags: string[]; // Our custom simplified tags
-}
-
-export const CHAMPION_DATA: Record<string, ChampionData> = {
-  "Aatrox": { id: "Aatrox", name: "Aatrox", classes: ["Fighter"], tags: ["ad", "skirmish"] },
-  "Ahri": { id: "Ahri", name: "Ahri", classes: ["Mage", "Assassin"], tags: ["ap", "ad", "burst"] },
-  "Akali": { id: "Akali", name: "Akali", classes: ["Assassin"], tags: ["ad", "burst"] },
-  "Akshan": { id: "Akshan", name: "Akshan", classes: ["Marksman", "Assassin"], tags: ["ad", "burst"] },
-  "Alistar": { id: "Alistar", name: "Alistar", classes: ["Tank", "Support"], tags: ["ap", "tank", "utility"] },
-  "Ambessa": { id: "Ambessa", name: "Ambessa", classes: ["Fighter", "Assassin"], tags: ["ad", "burst", "skirmish"] },
-  "Amumu": { id: "Amumu", name: "Amumu", classes: ["Tank", "Support"], tags: ["ap", "tank", "utility"] },
-  "Anivia": { id: "Anivia", name: "Anivia", classes: ["Mage"], tags: ["ap"] },
-  "Annie": { id: "Annie", name: "Annie", classes: ["Mage", "Support"], tags: ["ap", "utility"] },
-  "Aphelios": { id: "Aphelios", name: "Aphelios", classes: ["Marksman"], tags: ["ad"] },
-  "Ashe": { id: "Ashe", name: "Ashe", classes: ["Marksman", "Support"], tags: ["ap", "ad", "utility"] },
-  "Aurelion Sol": { id: "AurelionSol", name: "Aurelion Sol", classes: ["Mage"], tags: ["ap"] },
-  "Aurora": { id: "Aurora", name: "Aurora", classes: ["Mage", "Assassin"], tags: ["ap", "ad", "burst"] },
-  "Azir": { id: "Azir", name: "Azir", classes: ["Mage", "Marksman"], tags: ["ap", "ad"] },
-  "Bard": { id: "Bard", name: "Bard", classes: ["Support", "Mage"], tags: ["ap", "utility"] },
-  "Bel'Veth": { id: "Belveth", name: "Bel'Veth", classes: ["Fighter"], tags: ["ad", "skirmish"] },
-  "Blitzcrank": { id: "Blitzcrank", name: "Blitzcrank", classes: ["Tank", "Support"], tags: ["ap", "tank", "utility"] },
-  "Brand": { id: "Brand", name: "Brand", classes: ["Mage", "Support"], tags: ["ap", "utility"] },
-  "Braum": { id: "Braum", name: "Braum", classes: ["Tank", "Support"], tags: ["ap", "tank", "utility"] },
-  "Briar": { id: "Briar", name: "Briar", classes: ["Fighter", "Assassin"], tags: ["ad", "burst", "skirmish"] },
-  "Caitlyn": { id: "Caitlyn", name: "Caitlyn", classes: ["Marksman"], tags: ["ad"] },
-  "Camille": { id: "Camille", name: "Camille", classes: ["Fighter", "Assassin"], tags: ["ad", "burst", "skirmish"] },
-  "Cassiopeia": { id: "Cassiopeia", name: "Cassiopeia", classes: ["Mage"], tags: ["ap"] },
-  "Cho'Gath": { id: "Chogath", name: "Cho'Gath", classes: ["Tank", "Mage"], tags: ["ap", "tank"] },
-  "Corki": { id: "Corki", name: "Corki", classes: ["Marksman", "Mage"], tags: ["ap", "ad"] },
-  "Darius": { id: "Darius", name: "Darius", classes: ["Fighter", "Tank"], tags: ["ad", "tank", "skirmish"] },
-  "Diana": { id: "Diana", name: "Diana", classes: ["Fighter", "Assassin"], tags: ["ad", "burst", "skirmish"] },
-  "Draven": { id: "Draven", name: "Draven", classes: ["Marksman"], tags: ["ad"] },
-  "Dr. Mundo": { id: "DrMundo", name: "Dr. Mundo", classes: ["Tank", "Fighter"], tags: ["ad", "tank", "skirmish"] },
-  "Ekko": { id: "Ekko", name: "Ekko", classes: ["Assassin", "Mage"], tags: ["ap", "ad", "burst"] },
-  "Elise": { id: "Elise", name: "Elise", classes: ["Assassin", "Mage"], tags: ["ap", "ad", "burst"] },
-  "Evelynn": { id: "Evelynn", name: "Evelynn", classes: ["Assassin", "Mage"], tags: ["ap", "ad", "burst"] },
-  "Ezreal": { id: "Ezreal", name: "Ezreal", classes: ["Marksman", "Mage"], tags: ["ap", "ad"] },
-  "Fiddlesticks": { id: "Fiddlesticks", name: "Fiddlesticks", classes: ["Mage", "Support"], tags: ["ap", "utility"] },
-  "Fiora": { id: "Fiora", name: "Fiora", classes: ["Fighter", "Assassin"], tags: ["ad", "burst", "skirmish"] },
-  "Fizz": { id: "Fizz", name: "Fizz", classes: ["Assassin", "Fighter"], tags: ["ad", "burst", "skirmish"] },
-  "Galio": { id: "Galio", name: "Galio", classes: ["Tank", "Mage"], tags: ["ap", "tank"] },
-  "Gangplank": { id: "Gangplank", name: "Gangplank", classes: ["Fighter"], tags: ["ad", "skirmish"] },
-  "Garen": { id: "Garen", name: "Garen", classes: ["Fighter", "Tank"], tags: ["ad", "tank", "skirmish"] },
-  "Gnar": { id: "Gnar", name: "Gnar", classes: ["Fighter", "Tank"], tags: ["ad", "tank", "skirmish"] },
-  "Gragas": { id: "Gragas", name: "Gragas", classes: ["Fighter", "Mage"], tags: ["ap", "ad", "skirmish"] },
-  "Graves": { id: "Graves", name: "Graves", classes: ["Marksman"], tags: ["ad"] },
-  "Gwen": { id: "Gwen", name: "Gwen", classes: ["Fighter"], tags: ["ad", "skirmish"] },
-  "Hecarim": { id: "Hecarim", name: "Hecarim", classes: ["Fighter", "Tank"], tags: ["ad", "tank", "skirmish"] },
-  "Heimerdinger": { id: "Heimerdinger", name: "Heimerdinger", classes: ["Mage", "Support"], tags: ["ap", "utility"] },
-  "Hwei": { id: "Hwei", name: "Hwei", classes: ["Mage", "Support"], tags: ["ap", "utility"] },
-  "Illaoi": { id: "Illaoi", name: "Illaoi", classes: ["Fighter", "Tank"], tags: ["ad", "tank", "skirmish"] },
-  "Irelia": { id: "Irelia", name: "Irelia", classes: ["Fighter", "Assassin"], tags: ["ad", "burst", "skirmish"] },
-  "Ivern": { id: "Ivern", name: "Ivern", classes: ["Support", "Mage"], tags: ["ap", "utility"] },
-  "Janna": { id: "Janna", name: "Janna", classes: ["Support", "Mage"], tags: ["ap", "utility"] },
-  "Jarvan IV": { id: "JarvanIV", name: "Jarvan IV", classes: ["Fighter", "Tank"], tags: ["ad", "tank", "skirmish"] },
-  "Jax": { id: "Jax", name: "Jax", classes: ["Fighter"], tags: ["ad", "skirmish"] },
-  "Jayce": { id: "Jayce", name: "Jayce", classes: ["Marksman", "Fighter"], tags: ["ad", "skirmish"] },
-  "Jhin": { id: "Jhin", name: "Jhin", classes: ["Marksman", "Mage"], tags: ["ap", "ad"] },
-  "Jinx": { id: "Jinx", name: "Jinx", classes: ["Marksman"], tags: ["ad"] },
-  "Kai'Sa": { id: "Kaisa", name: "Kai'Sa", classes: ["Marksman", "Mage"], tags: ["ap", "ad"] },
-  "Kalista": { id: "Kalista", name: "Kalista", classes: ["Marksman"], tags: ["ad"] },
-  "Karma": { id: "Karma", name: "Karma", classes: ["Mage", "Support"], tags: ["ap", "utility"] },
-  "Karthus": { id: "Karthus", name: "Karthus", classes: ["Mage"], tags: ["ap"] },
-  "Kassadin": { id: "Kassadin", name: "Kassadin", classes: ["Assassin", "Mage"], tags: ["ap", "ad", "burst"] },
-  "Katarina": { id: "Katarina", name: "Katarina", classes: ["Assassin", "Mage"], tags: ["ap", "ad", "burst"] },
-  "Kayle": { id: "Kayle", name: "Kayle", classes: ["Mage", "Marksman"], tags: ["ap", "ad"] },
-  "Kayn": { id: "Kayn", name: "Kayn", classes: ["Fighter", "Assassin"], tags: ["ad", "burst", "skirmish"] },
-  "Kennen": { id: "Kennen", name: "Kennen", classes: ["Mage"], tags: ["ap"] },
-  "Kha'Zix": { id: "Khazix", name: "Kha'Zix", classes: ["Assassin"], tags: ["ad", "burst"] },
-  "Kindred": { id: "Kindred", name: "Kindred", classes: ["Marksman"], tags: ["ad"] },
-  "Kled": { id: "Kled", name: "Kled", classes: ["Fighter"], tags: ["ad", "skirmish"] },
-  "Kog'Maw": { id: "KogMaw", name: "Kog'Maw", classes: ["Marksman", "Mage"], tags: ["ap", "ad"] },
-  "K'Sante": { id: "KSante", name: "K'Sante", classes: ["Tank", "Fighter"], tags: ["ad", "tank", "skirmish"] },
-  "LeBlanc": { id: "Leblanc", name: "LeBlanc", classes: ["Assassin", "Mage"], tags: ["ap", "ad", "burst"] },
-  "Lee Sin": { id: "LeeSin", name: "Lee Sin", classes: ["Fighter", "Assassin"], tags: ["ad", "burst", "skirmish"] },
-  "Leona": { id: "Leona", name: "Leona", classes: ["Tank", "Support"], tags: ["ap", "tank", "utility"] },
-  "Lillia": { id: "Lillia", name: "Lillia", classes: ["Fighter", "Mage"], tags: ["ap", "ad", "skirmish"] },
-  "Lissandra": { id: "Lissandra", name: "Lissandra", classes: ["Mage"], tags: ["ap"] },
-  "Lucian": { id: "Lucian", name: "Lucian", classes: ["Marksman", "Assassin"], tags: ["ad", "burst"] },
-  "Lulu": { id: "Lulu", name: "Lulu", classes: ["Support", "Mage"], tags: ["ap", "utility"] },
-  "Lux": { id: "Lux", name: "Lux", classes: ["Mage", "Support"], tags: ["ap", "utility"] },
-  "Malphite": { id: "Malphite", name: "Malphite", classes: ["Tank", "Mage"], tags: ["ap", "tank"] },
-  "Malzahar": { id: "Malzahar", name: "Malzahar", classes: ["Mage"], tags: ["ap"] },
-  "Maokai": { id: "Maokai", name: "Maokai", classes: ["Tank", "Support"], tags: ["ap", "tank", "utility"] },
-  "Master Yi": { id: "MasterYi", name: "Master Yi", classes: ["Assassin", "Fighter"], tags: ["ad", "burst", "skirmish"] },
-  "Milio": { id: "Milio", name: "Milio", classes: ["Support", "Mage"], tags: ["ap", "utility"] },
-  "Miss Fortune": { id: "MissFortune", name: "Miss Fortune", classes: ["Marksman", "Mage"], tags: ["ap", "ad"] },
-  "Wukong": { id: "MonkeyKing", name: "Wukong", classes: ["Fighter", "Tank"], tags: ["ad", "tank", "skirmish"] },
-  "Mordekaiser": { id: "Mordekaiser", name: "Mordekaiser", classes: ["Fighter", "Mage"], tags: ["ap", "ad", "skirmish"] },
-  "Morgana": { id: "Morgana", name: "Morgana", classes: ["Mage", "Support"], tags: ["ap", "utility"] },
-  "Naafiri": { id: "Naafiri", name: "Naafiri", classes: ["Assassin", "Fighter"], tags: ["ad", "burst", "skirmish"] },
-  "Nami": { id: "Nami", name: "Nami", classes: ["Support", "Mage"], tags: ["ap", "utility"] },
-  "Nasus": { id: "Nasus", name: "Nasus", classes: ["Fighter", "Tank"], tags: ["ad", "tank", "skirmish"] },
-  "Nautilus": { id: "Nautilus", name: "Nautilus", classes: ["Tank", "Support"], tags: ["ap", "tank", "utility"] },
-  "Neeko": { id: "Neeko", name: "Neeko", classes: ["Mage", "Support"], tags: ["ap", "utility"] },
-  "Nidalee": { id: "Nidalee", name: "Nidalee", classes: ["Assassin", "Mage"], tags: ["ap", "ad", "burst"] },
-  "Nilah": { id: "Nilah", name: "Nilah", classes: ["Fighter", "Assassin"], tags: ["ad", "burst", "skirmish"] },
-  "Nocturne": { id: "Nocturne", name: "Nocturne", classes: ["Fighter", "Assassin"], tags: ["ad", "burst", "skirmish"] },
-  "Nunu & Willump": { id: "Nunu", name: "Nunu & Willump", classes: ["Tank", "Mage"], tags: ["ap", "tank"] },
-  "Olaf": { id: "Olaf", name: "Olaf", classes: ["Fighter", "Tank"], tags: ["ad", "tank", "skirmish"] },
-  "Orianna": { id: "Orianna", name: "Orianna", classes: ["Mage", "Support"], tags: ["ap", "utility"] },
-  "Ornn": { id: "Ornn", name: "Ornn", classes: ["Tank"], tags: ["tank"] },
-  "Pantheon": { id: "Pantheon", name: "Pantheon", classes: ["Fighter", "Assassin"], tags: ["ad", "burst", "skirmish"] },
-  "Poppy": { id: "Poppy", name: "Poppy", classes: ["Tank", "Fighter"], tags: ["ad", "tank", "skirmish"] },
-  "Pyke": { id: "Pyke", name: "Pyke", classes: ["Support", "Assassin"], tags: ["ap", "ad", "burst", "utility"] },
-  "Qiyana": { id: "Qiyana", name: "Qiyana", classes: ["Assassin"], tags: ["ad", "burst"] },
-  "Quinn": { id: "Quinn", name: "Quinn", classes: ["Marksman", "Assassin"], tags: ["ad", "burst"] },
-  "Rakan": { id: "Rakan", name: "Rakan", classes: ["Support"], tags: ["ap", "utility"] },
-  "Rammus": { id: "Rammus", name: "Rammus", classes: ["Tank"], tags: ["tank"] },
-  "Rek'Sai": { id: "RekSai", name: "Rek'Sai", classes: ["Fighter", "Tank"], tags: ["ad", "tank", "skirmish"] },
-  "Rell": { id: "Rell", name: "Rell", classes: ["Tank", "Support"], tags: ["ap", "tank", "utility"] },
-  "Renata Glasc": { id: "Renata", name: "Renata Glasc", classes: ["Support", "Mage"], tags: ["ap", "utility"] },
-  "Renekton": { id: "Renekton", name: "Renekton", classes: ["Fighter", "Tank"], tags: ["ad", "tank", "skirmish"] },
-  "Rengar": { id: "Rengar", name: "Rengar", classes: ["Assassin", "Fighter"], tags: ["ad", "burst", "skirmish"] },
-  "Riven": { id: "Riven", name: "Riven", classes: ["Fighter", "Assassin"], tags: ["ad", "burst", "skirmish"] },
-  "Rumble": { id: "Rumble", name: "Rumble", classes: ["Fighter", "Mage"], tags: ["ap", "ad", "skirmish"] },
-  "Ryze": { id: "Ryze", name: "Ryze", classes: ["Mage"], tags: ["ap"] },
-  "Samira": { id: "Samira", name: "Samira", classes: ["Marksman", "Assassin"], tags: ["ad", "burst"] },
-  "Sejuani": { id: "Sejuani", name: "Sejuani", classes: ["Tank"], tags: ["tank"] },
-  "Senna": { id: "Senna", name: "Senna", classes: ["Support", "Marksman"], tags: ["ap", "ad", "utility"] },
-  "Seraphine": { id: "Seraphine", name: "Seraphine", classes: ["Support", "Mage"], tags: ["ap", "utility"] },
-  "Sett": { id: "Sett", name: "Sett", classes: ["Fighter", "Tank"], tags: ["ad", "tank", "skirmish"] },
-  "Shaco": { id: "Shaco", name: "Shaco", classes: ["Assassin"], tags: ["ad", "burst"] },
-  "Shen": { id: "Shen", name: "Shen", classes: ["Tank"], tags: ["tank"] },
-  "Shyvana": { id: "Shyvana", name: "Shyvana", classes: ["Fighter", "Mage"], tags: ["ap", "ad", "skirmish"] },
-  "Singed": { id: "Singed", name: "Singed", classes: ["Tank", "Mage"], tags: ["ap", "tank"] },
-  "Sion": { id: "Sion", name: "Sion", classes: ["Tank", "Fighter"], tags: ["ad", "tank", "skirmish"] },
-  "Sivir": { id: "Sivir", name: "Sivir", classes: ["Marksman"], tags: ["ad"] },
-  "Skarner": { id: "Skarner", name: "Skarner", classes: ["Tank", "Fighter"], tags: ["ad", "tank", "skirmish"] },
-  "Smolder": { id: "Smolder", name: "Smolder", classes: ["Marksman", "Mage"], tags: ["ap", "ad"] },
-  "Sona": { id: "Sona", name: "Sona", classes: ["Support", "Mage"], tags: ["ap", "utility"] },
-  "Soraka": { id: "Soraka", name: "Soraka", classes: ["Support", "Mage"], tags: ["ap", "utility"] },
-  "Swain": { id: "Swain", name: "Swain", classes: ["Mage", "Support"], tags: ["ap", "utility"] },
-  "Sylas": { id: "Sylas", name: "Sylas", classes: ["Mage", "Assassin"], tags: ["ap", "ad", "burst"] },
-  "Syndra": { id: "Syndra", name: "Syndra", classes: ["Mage"], tags: ["ap"] },
-  "Tahm Kench": { id: "TahmKench", name: "Tahm Kench", classes: ["Tank", "Support"], tags: ["ap", "tank", "utility"] },
-  "Taliyah": { id: "Taliyah", name: "Taliyah", classes: ["Mage", "Support"], tags: ["ap", "utility"] },
-  "Talon": { id: "Talon", name: "Talon", classes: ["Assassin"], tags: ["ad", "burst"] },
-  "Taric": { id: "Taric", name: "Taric", classes: ["Support", "Tank"], tags: ["ap", "tank", "utility"] },
-  "Teemo": { id: "Teemo", name: "Teemo", classes: ["Marksman", "Mage"], tags: ["ap", "ad"] },
-  "Thresh": { id: "Thresh", name: "Thresh", classes: ["Support", "Tank"], tags: ["ap", "tank", "utility"] },
-  "Tristana": { id: "Tristana", name: "Tristana", classes: ["Marksman", "Assassin"], tags: ["ad", "burst"] },
-  "Trundle": { id: "Trundle", name: "Trundle", classes: ["Fighter", "Tank"], tags: ["ad", "tank", "skirmish"] },
-  "Tryndamere": { id: "Tryndamere", name: "Tryndamere", classes: ["Fighter", "Assassin"], tags: ["ad", "burst", "skirmish"] },
-  "Twisted Fate": { id: "TwistedFate", name: "Twisted Fate", classes: ["Mage", "Marksman"], tags: ["ap", "ad"] },
-  "Twitch": { id: "Twitch", name: "Twitch", classes: ["Marksman", "Assassin"], tags: ["ad", "burst"] },
-  "Udyr": { id: "Udyr", name: "Udyr", classes: ["Fighter", "Tank"], tags: ["ad", "tank", "skirmish"] },
-  "Urgot": { id: "Urgot", name: "Urgot", classes: ["Fighter", "Tank"], tags: ["ad", "tank", "skirmish"] },
-  "Varus": { id: "Varus", name: "Varus", classes: ["Marksman", "Mage"], tags: ["ap", "ad"] },
-  "Vayne": { id: "Vayne", name: "Vayne", classes: ["Marksman", "Assassin"], tags: ["ad", "burst"] },
-  "Veigar": { id: "Veigar", name: "Veigar", classes: ["Mage"], tags: ["ap"] },
-  "Vel'Koz": { id: "Velkoz", name: "Vel'Koz", classes: ["Mage", "Support"], tags: ["ap", "utility"] },
-  "Vex": { id: "Vex", name: "Vex", classes: ["Mage"], tags: ["ap"] },
-  "Vi": { id: "Vi", name: "Vi", classes: ["Fighter", "Assassin"], tags: ["ad", "burst", "skirmish"] },
-  "Viego": { id: "Viego", name: "Viego", classes: ["Fighter", "Assassin"], tags: ["ad", "burst", "skirmish"] },
-  "Viktor": { id: "Viktor", name: "Viktor", classes: ["Mage"], tags: ["ap"] },
-  "Vladimir": { id: "Vladimir", name: "Vladimir", classes: ["Mage", "Fighter"], tags: ["ap", "ad", "skirmish"] },
-  "Volibear": { id: "Volibear", name: "Volibear", classes: ["Fighter", "Tank"], tags: ["ad", "tank", "skirmish"] },
-  "Warwick": { id: "Warwick", name: "Warwick", classes: ["Fighter", "Tank"], tags: ["ad", "tank", "skirmish"] },
-  "Xayah": { id: "Xayah", name: "Xayah", classes: ["Marksman"], tags: ["ad"] },
-  "Xerath": { id: "Xerath", name: "Xerath", classes: ["Mage", "Support"], tags: ["ap", "utility"] },
-  "Xin Zhao": { id: "XinZhao", name: "Xin Zhao", classes: ["Fighter", "Tank"], tags: ["ad", "tank", "skirmish"] },
-  "Yasuo": { id: "Yasuo", name: "Yasuo", classes: ["Fighter", "Assassin"], tags: ["ad", "burst", "skirmish"] },
-  "Yone": { id: "Yone", name: "Yone", classes: ["Fighter", "Assassin"], tags: ["ad", "burst", "skirmish"] },
-  "Yorick": { id: "Yorick", name: "Yorick", classes: ["Fighter", "Tank"], tags: ["ad", "tank", "skirmish"] },
-  "Yuumi": { id: "Yuumi", name: "Yuumi", classes: ["Support", "Mage"], tags: ["ap", "utility"] },
-  "Zac": { id: "Zac", name: "Zac", classes: ["Tank", "Fighter"], tags: ["ad", "tank", "skirmish"] },
-  "Zed": { id: "Zed", name: "Zed", classes: ["Assassin"], tags: ["ad", "burst"] },
-  "Zeri": { id: "Zeri", name: "Zeri", classes: ["Marksman"], tags: ["ad"] },
-  "Ziggs": { id: "Ziggs", name: "Ziggs", classes: ["Mage"], tags: ["ap"] },
-  "Zilean": { id: "Zilean", name: "Zilean", classes: ["Support", "Mage"], tags: ["ap", "utility"] },
-  "Zoe": { id: "Zoe", name: "Zoe", classes: ["Mage"], tags: ["ap"] },
-  "Zyra": { id: "Zyra", name: "Zyra", classes: ["Mage", "Support"], tags: ["ap", "utility"] },
+// Auto-generated by update_frontend_data.py
+export const CHAMPION_DATA: Record<string, { id: string, name: string, title: string, classes: string[], roles: string[], attackType: string, stats: { proWinRate: number, proPickRate: number, globalPickRate: number, globalWinRate: number | null } }> = {
+  "Aatrox": {
+    "id": "Aatrox",
+    "name": "Aatrox",
+    "title": "the Darkin Blade",
+    "classes": [
+      "Fighter",
+      "Juggernaut",
+      "Tank"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 47.5,
+      "proPickRate": 14.2,
+      "globalPickRate": 4.7,
+      "globalWinRate": null
+    }
+  },
+  "Ahri": {
+    "id": "Ahri",
+    "name": "Ahri",
+    "title": "the Nine-Tailed Fox",
+    "classes": [
+      "Assassin",
+      "Burst",
+      "Mage"
+    ],
+    "roles": [
+      "mid"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 47.9,
+      "proPickRate": 7.1,
+      "globalPickRate": 3.9,
+      "globalWinRate": null
+    }
+  },
+  "Akali": {
+    "id": "Akali",
+    "name": "Akali",
+    "title": "the Rogue Assassin",
+    "classes": [
+      "Assassin"
+    ],
+    "roles": [
+      "top",
+      "mid"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 50.6,
+      "proPickRate": 8.6,
+      "globalPickRate": 3.2,
+      "globalWinRate": null
+    }
+  },
+  "Akshan": {
+    "id": "Akshan",
+    "name": "Akshan",
+    "title": "the Rogue Sentinel",
+    "classes": [
+      "Assassin",
+      "Marksman"
+    ],
+    "roles": [
+      "mid"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 0,
+      "proPickRate": 0,
+      "globalPickRate": 1.1,
+      "globalWinRate": null
+    }
+  },
+  "Alistar": {
+    "id": "Alistar",
+    "name": "Alistar",
+    "title": "the Minotaur",
+    "classes": [
+      "Support",
+      "Tank",
+      "Vanguard"
+    ],
+    "roles": [
+      "support"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 51.7,
+      "proPickRate": 19.0,
+      "globalPickRate": 3.0,
+      "globalWinRate": null
+    }
+  },
+  "Ambessa": {
+    "id": "Ambessa",
+    "name": "Ambessa",
+    "title": "Matriarch of War",
+    "classes": [
+      "Assassin",
+      "Diver",
+      "Fighter",
+      "Skirmisher"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 43.5,
+      "proPickRate": 3.5,
+      "globalPickRate": 2.5,
+      "globalWinRate": null
+    }
+  },
+  "Amumu": {
+    "id": "Amumu",
+    "name": "Amumu",
+    "title": "the Sad Mummy",
+    "classes": [
+      "Support",
+      "Tank",
+      "Vanguard"
+    ],
+    "roles": [
+      "jungle",
+      "support"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 61.3,
+      "proPickRate": 0.3,
+      "globalPickRate": 1.3,
+      "globalWinRate": null
+    }
+  },
+  "Anivia": {
+    "id": "Anivia",
+    "name": "Anivia",
+    "title": "the Cryophoenix",
+    "classes": [
+      "Battlemage",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "mid"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 51.4,
+      "proPickRate": 0.3,
+      "globalPickRate": 0.9,
+      "globalWinRate": null
+    }
+  },
+  "Annie": {
+    "id": "Annie",
+    "name": "Annie",
+    "title": "the Dark Child",
+    "classes": [
+      "Burst",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "mid"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 53.6,
+      "proPickRate": 5.3,
+      "globalPickRate": 1.6,
+      "globalWinRate": null
+    }
+  },
+  "Aphelios": {
+    "id": "Aphelios",
+    "name": "Aphelios",
+    "title": "the Weapon of the Faithful",
+    "classes": [
+      "Marksman"
+    ],
+    "roles": [
+      "bot"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 49.9,
+      "proPickRate": 15.3,
+      "globalPickRate": 3.6,
+      "globalWinRate": null
+    }
+  },
+  "Ashe": {
+    "id": "Ashe",
+    "name": "Ashe",
+    "title": "the Frost Archer",
+    "classes": [
+      "Marksman",
+      "Support"
+    ],
+    "roles": [
+      "bot",
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 51.3,
+      "proPickRate": 11.5,
+      "globalPickRate": 3.2,
+      "globalWinRate": null
+    }
+  },
+  "Aurelion Sol": {
+    "id": "AurelionSol",
+    "name": "Aurelion Sol",
+    "title": "The Star Forger",
+    "classes": [
+      "Battlemage",
+      "Mage"
+    ],
+    "roles": [
+      "mid"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 48.6,
+      "proPickRate": 1.1,
+      "globalPickRate": 1.1,
+      "globalWinRate": null
+    }
+  },
+  "Aurora": {
+    "id": "Aurora",
+    "name": "Aurora",
+    "title": "the Witch Between Worlds",
+    "classes": [
+      "Assassin",
+      "Burst",
+      "Mage"
+    ],
+    "roles": [
+      "top",
+      "mid"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 47.2,
+      "proPickRate": 3.0,
+      "globalPickRate": 2.7,
+      "globalWinRate": null
+    }
+  },
+  "Azir": {
+    "id": "Azir",
+    "name": "Azir",
+    "title": "the Emperor of the Sands",
+    "classes": [
+      "Mage",
+      "Marksman",
+      "Specialist"
+    ],
+    "roles": [
+      "mid"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 49.9,
+      "proPickRate": 20.6,
+      "globalPickRate": 2.1,
+      "globalWinRate": null
+    }
+  },
+  "Bard": {
+    "id": "Bard",
+    "name": "Bard",
+    "title": "the Wandering Caretaker",
+    "classes": [
+      "Catcher",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 53.4,
+      "proPickRate": 3.6,
+      "globalPickRate": 2.4,
+      "globalWinRate": null
+    }
+  },
+  "Bel'Veth": {
+    "id": "Belveth",
+    "name": "Bel'Veth",
+    "title": "the Empress of the Void",
+    "classes": [
+      "Fighter",
+      "Skirmisher"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 50.0,
+      "proPickRate": 0.1,
+      "globalPickRate": 1.1,
+      "globalWinRate": null
+    }
+  },
+  "Blitzcrank": {
+    "id": "Blitzcrank",
+    "name": "Blitzcrank",
+    "title": "the Great Steam Golem",
+    "classes": [
+      "Catcher",
+      "Support",
+      "Tank"
+    ],
+    "roles": [
+      "support"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 55.4,
+      "proPickRate": 2.4,
+      "globalPickRate": 2.9,
+      "globalWinRate": null
+    }
+  },
+  "Brand": {
+    "id": "Brand",
+    "name": "Brand",
+    "title": "the Burning Vengeance",
+    "classes": [
+      "Burst",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "jungle",
+      "mid",
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 47.3,
+      "proPickRate": 1.7,
+      "globalPickRate": 1.0,
+      "globalWinRate": null
+    }
+  },
+  "Braum": {
+    "id": "Braum",
+    "name": "Braum",
+    "title": "the Heart of the Freljord",
+    "classes": [
+      "Support",
+      "Tank",
+      "Warden"
+    ],
+    "roles": [
+      "support"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 49.1,
+      "proPickRate": 17.4,
+      "globalPickRate": 3.6,
+      "globalWinRate": null
+    }
+  },
+  "Briar": {
+    "id": "Briar",
+    "name": "Briar",
+    "title": "the Restrained Hunger",
+    "classes": [
+      "Assassin",
+      "Diver",
+      "Fighter"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 0,
+      "proPickRate": 0,
+      "globalPickRate": 2.1,
+      "globalWinRate": null
+    }
+  },
+  "Caitlyn": {
+    "id": "Caitlyn",
+    "name": "Caitlyn",
+    "title": "the Sheriff of Piltover",
+    "classes": [
+      "Marksman"
+    ],
+    "roles": [
+      "bot"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 49.0,
+      "proPickRate": 4.9,
+      "globalPickRate": 6.1,
+      "globalWinRate": null
+    }
+  },
+  "Camille": {
+    "id": "Camille",
+    "name": "Camille",
+    "title": "the Steel Shadow",
+    "classes": [
+      "Assassin",
+      "Diver",
+      "Fighter"
+    ],
+    "roles": [
+      "top",
+      "support"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 53.9,
+      "proPickRate": 9.0,
+      "globalPickRate": 1.4,
+      "globalWinRate": null
+    }
+  },
+  "Cassiopeia": {
+    "id": "Cassiopeia",
+    "name": "Cassiopeia",
+    "title": "the Serpent's Embrace",
+    "classes": [
+      "Battlemage",
+      "Mage"
+    ],
+    "roles": [
+      "mid"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 48.4,
+      "proPickRate": 3.1,
+      "globalPickRate": 0.6,
+      "globalWinRate": null
+    }
+  },
+  "Cho'Gath": {
+    "id": "Chogath",
+    "name": "Cho'Gath",
+    "title": "the Terror of the Void",
+    "classes": [
+      "Mage",
+      "Specialist",
+      "Tank"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 52.3,
+      "proPickRate": 2.2,
+      "globalPickRate": 1.7,
+      "globalWinRate": null
+    }
+  },
+  "Corki": {
+    "id": "Corki",
+    "name": "Corki",
+    "title": "the Daring Bombardier",
+    "classes": [
+      "Mage",
+      "Marksman"
+    ],
+    "roles": [
+      "mid"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 47.0,
+      "proPickRate": 12.3,
+      "globalPickRate": 1.1,
+      "globalWinRate": null
+    }
+  },
+  "Darius": {
+    "id": "Darius",
+    "name": "Darius",
+    "title": "the Hand of Noxus",
+    "classes": [
+      "Fighter",
+      "Juggernaut",
+      "Tank"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 49.7,
+      "proPickRate": 1.3,
+      "globalPickRate": 3.4,
+      "globalWinRate": null
+    }
+  },
+  "Diana": {
+    "id": "Diana",
+    "name": "Diana",
+    "title": "Scorn of the Moon",
+    "classes": [
+      "Assassin",
+      "Diver",
+      "Fighter"
+    ],
+    "roles": [
+      "jungle",
+      "mid"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 52.8,
+      "proPickRate": 2.7,
+      "globalPickRate": 4.5,
+      "globalWinRate": null
+    }
+  },
+  "Dr. Mundo": {
+    "id": "DrMundo",
+    "name": "Dr. Mundo",
+    "title": "the Madman of Zaun",
+    "classes": [
+      "Fighter",
+      "Juggernaut",
+      "Tank"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 45.7,
+      "proPickRate": 2.3,
+      "globalPickRate": 3.1,
+      "globalWinRate": null
+    }
+  },
+  "Draven": {
+    "id": "Draven",
+    "name": "Draven",
+    "title": "the Glorious Executioner",
+    "classes": [
+      "Marksman"
+    ],
+    "roles": [
+      "bot"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 50.1,
+      "proPickRate": 2.8,
+      "globalPickRate": 1.8,
+      "globalWinRate": null
+    }
+  },
+  "Ekko": {
+    "id": "Ekko",
+    "name": "Ekko",
+    "title": "the Boy Who Shattered Time",
+    "classes": [
+      "Assassin",
+      "Mage"
+    ],
+    "roles": [
+      "jungle",
+      "mid"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 48.6,
+      "proPickRate": 1.2,
+      "globalPickRate": 3.9,
+      "globalWinRate": null
+    }
+  },
+  "Elise": {
+    "id": "Elise",
+    "name": "Elise",
+    "title": "the Spider Queen",
+    "classes": [
+      "Assassin",
+      "Diver",
+      "Mage"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 50.4,
+      "proPickRate": 4.1,
+      "globalPickRate": 1.2,
+      "globalWinRate": null
+    }
+  },
+  "Evelynn": {
+    "id": "Evelynn",
+    "name": "Evelynn",
+    "title": "Agony's Embrace",
+    "classes": [
+      "Assassin",
+      "Mage"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 58.1,
+      "proPickRate": 0.3,
+      "globalPickRate": 1.4,
+      "globalWinRate": null
+    }
+  },
+  "Ezreal": {
+    "id": "Ezreal",
+    "name": "Ezreal",
+    "title": "the Prodigal Explorer",
+    "classes": [
+      "Mage",
+      "Marksman"
+    ],
+    "roles": [
+      "bot"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 48.3,
+      "proPickRate": 21.8,
+      "globalPickRate": 5.7,
+      "globalWinRate": null
+    }
+  },
+  "Fiddlesticks": {
+    "id": "Fiddlesticks",
+    "name": "Fiddlesticks",
+    "title": "the Ancient Fear",
+    "classes": [
+      "Mage",
+      "Specialist",
+      "Support"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 44.9,
+      "proPickRate": 0.7,
+      "globalPickRate": 1.3,
+      "globalWinRate": null
+    }
+  },
+  "Fiora": {
+    "id": "Fiora",
+    "name": "Fiora",
+    "title": "the Grand Duelist",
+    "classes": [
+      "Assassin",
+      "Fighter",
+      "Skirmisher"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 46.6,
+      "proPickRate": 2.1,
+      "globalPickRate": 2.2,
+      "globalWinRate": null
+    }
+  },
+  "Fizz": {
+    "id": "Fizz",
+    "name": "Fizz",
+    "title": "the Tidal Trickster",
+    "classes": [
+      "Assassin",
+      "Fighter"
+    ],
+    "roles": [
+      "mid"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 60.0,
+      "proPickRate": 0.1,
+      "globalPickRate": 1.8,
+      "globalWinRate": null
+    }
+  },
+  "Galio": {
+    "id": "Galio",
+    "name": "Galio",
+    "title": "the Colossus",
+    "classes": [
+      "Mage",
+      "Tank",
+      "Warden"
+    ],
+    "roles": [
+      "mid",
+      "support"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 50.1,
+      "proPickRate": 10.8,
+      "globalPickRate": 2.4,
+      "globalWinRate": null
+    }
+  },
+  "Gangplank": {
+    "id": "Gangplank",
+    "name": "Gangplank",
+    "title": "the Saltwater Scourge",
+    "classes": [
+      "Fighter",
+      "Specialist"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 52.4,
+      "proPickRate": 7.4,
+      "globalPickRate": 2.0,
+      "globalWinRate": null
+    }
+  },
+  "Garen": {
+    "id": "Garen",
+    "name": "Garen",
+    "title": "The Might of Demacia",
+    "classes": [
+      "Fighter",
+      "Juggernaut",
+      "Tank"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 50.0,
+      "proPickRate": 0.2,
+      "globalPickRate": 2.3,
+      "globalWinRate": null
+    }
+  },
+  "Gnar": {
+    "id": "Gnar",
+    "name": "Gnar",
+    "title": "the Missing Link",
+    "classes": [
+      "Fighter",
+      "Specialist",
+      "Tank"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 49.8,
+      "proPickRate": 13.7,
+      "globalPickRate": 1.5,
+      "globalWinRate": null
+    }
+  },
+  "Gragas": {
+    "id": "Gragas",
+    "name": "Gragas",
+    "title": "the Rabble Rouser",
+    "classes": [
+      "Fighter",
+      "Mage",
+      "Vanguard"
+    ],
+    "roles": [
+      "jungle",
+      "top",
+      "mid"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 51.2,
+      "proPickRate": 13.3,
+      "globalPickRate": 1.7,
+      "globalWinRate": null
+    }
+  },
+  "Graves": {
+    "id": "Graves",
+    "name": "Graves",
+    "title": "the Outlaw",
+    "classes": [
+      "Marksman",
+      "Specialist"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 45.5,
+      "proPickRate": 5.0,
+      "globalPickRate": 2.5,
+      "globalWinRate": null
+    }
+  },
+  "Gwen": {
+    "id": "Gwen",
+    "name": "Gwen",
+    "title": "The Hallowed Seamstress",
+    "classes": [
+      "Assassin",
+      "Fighter",
+      "Skirmisher"
+    ],
+    "roles": [
+      "jungle",
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 50.1,
+      "proPickRate": 6.1,
+      "globalPickRate": 1.9,
+      "globalWinRate": null
+    }
+  },
+  "Hecarim": {
+    "id": "Hecarim",
+    "name": "Hecarim",
+    "title": "the Shadow of War",
+    "classes": [
+      "Diver",
+      "Fighter",
+      "Tank"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 52.2,
+      "proPickRate": 2.8,
+      "globalPickRate": 1.7,
+      "globalWinRate": null
+    }
+  },
+  "Heimerdinger": {
+    "id": "Heimerdinger",
+    "name": "Heimerdinger",
+    "title": "the Revered Inventor",
+    "classes": [
+      "Mage",
+      "Specialist",
+      "Support"
+    ],
+    "roles": [
+      "top",
+      "mid",
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 48.9,
+      "proPickRate": 1.4,
+      "globalPickRate": 0.6,
+      "globalWinRate": null
+    }
+  },
+  "Hwei": {
+    "id": "Hwei",
+    "name": "Hwei",
+    "title": "the Visionary",
+    "classes": [
+      "Artillery",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "mid",
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 46.6,
+      "proPickRate": 2.1,
+      "globalPickRate": 2.5,
+      "globalWinRate": null
+    }
+  },
+  "Illaoi": {
+    "id": "Illaoi",
+    "name": "Illaoi",
+    "title": "the Kraken Priestess",
+    "classes": [
+      "Fighter",
+      "Juggernaut",
+      "Tank"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 34.5,
+      "proPickRate": 0.2,
+      "globalPickRate": 1.1,
+      "globalWinRate": null
+    }
+  },
+  "Irelia": {
+    "id": "Irelia",
+    "name": "Irelia",
+    "title": "the Blade Dancer",
+    "classes": [
+      "Assassin",
+      "Diver",
+      "Fighter"
+    ],
+    "roles": [
+      "top",
+      "mid"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 47.1,
+      "proPickRate": 4.9,
+      "globalPickRate": 3.6,
+      "globalWinRate": null
+    }
+  },
+  "Ivern": {
+    "id": "Ivern",
+    "name": "Ivern",
+    "title": "the Green Father",
+    "classes": [
+      "Catcher",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 54.6,
+      "proPickRate": 1.8,
+      "globalPickRate": 0.7,
+      "globalWinRate": null
+    }
+  },
+  "Janna": {
+    "id": "Janna",
+    "name": "Janna",
+    "title": "the Storm's Fury",
+    "classes": [
+      "Enchanter",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 48.7,
+      "proPickRate": 0.6,
+      "globalPickRate": 1.9,
+      "globalWinRate": null
+    }
+  },
+  "Jarvan IV": {
+    "id": "JarvanIV",
+    "name": "Jarvan IV",
+    "title": "the Exemplar of Demacia",
+    "classes": [
+      "Diver",
+      "Fighter",
+      "Tank"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 49.2,
+      "proPickRate": 11.6,
+      "globalPickRate": 3.6,
+      "globalWinRate": null
+    }
+  },
+  "Jax": {
+    "id": "Jax",
+    "name": "Jax",
+    "title": "Grandmaster at Arms",
+    "classes": [
+      "Assassin",
+      "Fighter",
+      "Skirmisher"
+    ],
+    "roles": [
+      "jungle",
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 49.5,
+      "proPickRate": 8.7,
+      "globalPickRate": 3.6,
+      "globalWinRate": null
+    }
+  },
+  "Jayce": {
+    "id": "Jayce",
+    "name": "Jayce",
+    "title": "the Defender of Tomorrow",
+    "classes": [
+      "Artillery",
+      "Fighter",
+      "Marksman"
+    ],
+    "roles": [
+      "top",
+      "mid"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 52.2,
+      "proPickRate": 14.7,
+      "globalPickRate": 2.1,
+      "globalWinRate": null
+    }
+  },
+  "Jhin": {
+    "id": "Jhin",
+    "name": "Jhin",
+    "title": "the Virtuoso",
+    "classes": [
+      "Catcher",
+      "Mage",
+      "Marksman"
+    ],
+    "roles": [
+      "bot"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 45.0,
+      "proPickRate": 6.9,
+      "globalPickRate": 7.2,
+      "globalWinRate": null
+    }
+  },
+  "Jinx": {
+    "id": "Jinx",
+    "name": "Jinx",
+    "title": "the Loose Cannon",
+    "classes": [
+      "Marksman"
+    ],
+    "roles": [
+      "bot"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 51.0,
+      "proPickRate": 5.7,
+      "globalPickRate": 6.2,
+      "globalWinRate": null
+    }
+  },
+  "K'Sante": {
+    "id": "KSante",
+    "name": "K'Sante",
+    "title": "the Pride of Nazumah",
+    "classes": [
+      "Fighter",
+      "Skirmisher",
+      "Tank",
+      "Warden"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 49.6,
+      "proPickRate": 15.7,
+      "globalPickRate": 1.9,
+      "globalWinRate": null
+    }
+  },
+  "Kai'Sa": {
+    "id": "Kaisa",
+    "name": "Kai'Sa",
+    "title": "Daughter of the Void",
+    "classes": [
+      "Mage",
+      "Marksman"
+    ],
+    "roles": [
+      "bot"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 51.6,
+      "proPickRate": 21.8,
+      "globalPickRate": 8.0,
+      "globalWinRate": null
+    }
+  },
+  "Kalista": {
+    "id": "Kalista",
+    "name": "Kalista",
+    "title": "the Spear of Vengeance",
+    "classes": [
+      "Marksman"
+    ],
+    "roles": [
+      "bot"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 52.9,
+      "proPickRate": 12.0,
+      "globalPickRate": 0.6,
+      "globalWinRate": null
+    }
+  },
+  "Karma": {
+    "id": "Karma",
+    "name": "Karma",
+    "title": "the Enlightened One",
+    "classes": [
+      "Burst",
+      "Enchanter",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "top",
+      "mid",
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 45.8,
+      "proPickRate": 8.5,
+      "globalPickRate": 4.0,
+      "globalWinRate": null
+    }
+  },
+  "Karthus": {
+    "id": "Karthus",
+    "name": "Karthus",
+    "title": "the Deathsinger",
+    "classes": [
+      "Battlemage",
+      "Mage"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 49.4,
+      "proPickRate": 1.9,
+      "globalPickRate": 0.8,
+      "globalWinRate": null
+    }
+  },
+  "Kassadin": {
+    "id": "Kassadin",
+    "name": "Kassadin",
+    "title": "the Void Walker",
+    "classes": [
+      "Assassin",
+      "Mage"
+    ],
+    "roles": [
+      "mid"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 53.4,
+      "proPickRate": 1.6,
+      "globalPickRate": 1.1,
+      "globalWinRate": null
+    }
+  },
+  "Katarina": {
+    "id": "Katarina",
+    "name": "Katarina",
+    "title": "the Sinister Blade",
+    "classes": [
+      "Assassin",
+      "Mage"
+    ],
+    "roles": [
+      "mid"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 0,
+      "proPickRate": 0,
+      "globalPickRate": 3.0,
+      "globalWinRate": null
+    }
+  },
+  "Kayle": {
+    "id": "Kayle",
+    "name": "Kayle",
+    "title": "the Righteous",
+    "classes": [
+      "Mage",
+      "Marksman",
+      "Specialist"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 51.7,
+      "proPickRate": 0.5,
+      "globalPickRate": 1.8,
+      "globalWinRate": null
+    }
+  },
+  "Kayn": {
+    "id": "Kayn",
+    "name": "Kayn",
+    "title": "the Shadow Reaper",
+    "classes": [
+      "Assassin",
+      "Fighter",
+      "Skirmisher"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 49.0,
+      "proPickRate": 0.4,
+      "globalPickRate": 3.9,
+      "globalWinRate": null
+    }
+  },
+  "Kennen": {
+    "id": "Kennen",
+    "name": "Kennen",
+    "title": "the Heart of the Tempest",
+    "classes": [
+      "Mage",
+      "Marksman",
+      "Specialist"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 50.6,
+      "proPickRate": 7.3,
+      "globalPickRate": 1.0,
+      "globalWinRate": null
+    }
+  },
+  "Kha'Zix": {
+    "id": "Khazix",
+    "name": "Kha'Zix",
+    "title": "the Voidreaver",
+    "classes": [
+      "Assassin"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 50.3,
+      "proPickRate": 2.8,
+      "globalPickRate": 3.1,
+      "globalWinRate": null
+    }
+  },
+  "Kindred": {
+    "id": "Kindred",
+    "name": "Kindred",
+    "title": "The Eternal Hunters",
+    "classes": [
+      "Marksman"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 49.5,
+      "proPickRate": 3.5,
+      "globalPickRate": 1.5,
+      "globalWinRate": null
+    }
+  },
+  "Kled": {
+    "id": "Kled",
+    "name": "Kled",
+    "title": "the Cantankerous Cavalier",
+    "classes": [
+      "Fighter",
+      "Skirmisher",
+      "Tank"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 54.9,
+      "proPickRate": 1.2,
+      "globalPickRate": 1.3,
+      "globalWinRate": null
+    }
+  },
+  "Kog'Maw": {
+    "id": "KogMaw",
+    "name": "Kog'Maw",
+    "title": "the Mouth of the Abyss",
+    "classes": [
+      "Mage",
+      "Marksman"
+    ],
+    "roles": [
+      "bot"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 45.7,
+      "proPickRate": 1.9,
+      "globalPickRate": 1.0,
+      "globalWinRate": null
+    }
+  },
+  "LeBlanc": {
+    "id": "Leblanc",
+    "name": "LeBlanc",
+    "title": "the Deceiver",
+    "classes": [
+      "Assassin",
+      "Burst",
+      "Mage"
+    ],
+    "roles": [
+      "mid"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 50.0,
+      "proPickRate": 9.2,
+      "globalPickRate": 2.5,
+      "globalWinRate": null
+    }
+  },
+  "Lee Sin": {
+    "id": "LeeSin",
+    "name": "Lee Sin",
+    "title": "the Blind Monk",
+    "classes": [
+      "Assassin",
+      "Diver",
+      "Fighter"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 49.8,
+      "proPickRate": 16.6,
+      "globalPickRate": 7.1,
+      "globalWinRate": null
+    }
+  },
+  "Leona": {
+    "id": "Leona",
+    "name": "Leona",
+    "title": "the Radiant Dawn",
+    "classes": [
+      "Support",
+      "Tank",
+      "Vanguard"
+    ],
+    "roles": [
+      "support"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 48.0,
+      "proPickRate": 15.4,
+      "globalPickRate": 2.8,
+      "globalWinRate": null
+    }
+  },
+  "Lillia": {
+    "id": "Lillia",
+    "name": "Lillia",
+    "title": "the Bashful Bloom",
+    "classes": [
+      "Fighter",
+      "Mage",
+      "Skirmisher"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 50.1,
+      "proPickRate": 5.3,
+      "globalPickRate": 1.7,
+      "globalWinRate": null
+    }
+  },
+  "Lissandra": {
+    "id": "Lissandra",
+    "name": "Lissandra",
+    "title": "the Ice Witch",
+    "classes": [
+      "Burst",
+      "Mage"
+    ],
+    "roles": [
+      "mid"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 54.0,
+      "proPickRate": 4.2,
+      "globalPickRate": 1.4,
+      "globalWinRate": null
+    }
+  },
+  "Lucian": {
+    "id": "Lucian",
+    "name": "Lucian",
+    "title": "the Purifier",
+    "classes": [
+      "Assassin",
+      "Marksman"
+    ],
+    "roles": [
+      "bot"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 48.0,
+      "proPickRate": 14.5,
+      "globalPickRate": 6.3,
+      "globalWinRate": null
+    }
+  },
+  "Lulu": {
+    "id": "Lulu",
+    "name": "Lulu",
+    "title": "the Fae Sorceress",
+    "classes": [
+      "Enchanter",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 46.4,
+      "proPickRate": 6.4,
+      "globalPickRate": 5.8,
+      "globalWinRate": null
+    }
+  },
+  "Lux": {
+    "id": "Lux",
+    "name": "Lux",
+    "title": "the Lady of Luminosity",
+    "classes": [
+      "Artillery",
+      "Burst",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "mid",
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 55.8,
+      "proPickRate": 2.4,
+      "globalPickRate": 5.6,
+      "globalWinRate": null
+    }
+  },
+  "Malphite": {
+    "id": "Malphite",
+    "name": "Malphite",
+    "title": "Shard of the Monolith",
+    "classes": [
+      "Mage",
+      "Tank",
+      "Vanguard"
+    ],
+    "roles": [
+      "top",
+      "mid",
+      "support"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 40.9,
+      "proPickRate": 1.5,
+      "globalPickRate": 2.5,
+      "globalWinRate": null
+    }
+  },
+  "Malzahar": {
+    "id": "Malzahar",
+    "name": "Malzahar",
+    "title": "the Prophet of the Void",
+    "classes": [
+      "Assassin",
+      "Battlemage",
+      "Mage"
+    ],
+    "roles": [
+      "mid"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 50.5,
+      "proPickRate": 0.9,
+      "globalPickRate": 3.1,
+      "globalWinRate": null
+    }
+  },
+  "Maokai": {
+    "id": "Maokai",
+    "name": "Maokai",
+    "title": "the Twisted Treant",
+    "classes": [
+      "Support",
+      "Tank",
+      "Vanguard"
+    ],
+    "roles": [
+      "jungle",
+      "support"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 54.1,
+      "proPickRate": 10.6,
+      "globalPickRate": 0.7,
+      "globalWinRate": null
+    }
+  },
+  "Master Yi": {
+    "id": "MasterYi",
+    "name": "Master Yi",
+    "title": "the Wuju Bladesman",
+    "classes": [
+      "Assassin",
+      "Fighter",
+      "Skirmisher"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 33.3,
+      "proPickRate": 0.1,
+      "globalPickRate": 2.6,
+      "globalWinRate": null
+    }
+  },
+  "Mel": {
+    "id": "Mel",
+    "name": "Mel",
+    "title": "the Soul's Reflection",
+    "classes": [
+      "Artillery",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "mid",
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 15.4,
+      "proPickRate": 0.1,
+      "globalPickRate": 0,
+      "globalWinRate": null
+    }
+  },
+  "Milio": {
+    "id": "Milio",
+    "name": "Milio",
+    "title": "The Gentle Flame",
+    "classes": [
+      "Enchanter",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 45.8,
+      "proPickRate": 2.4,
+      "globalPickRate": 4.0,
+      "globalWinRate": null
+    }
+  },
+  "Miss Fortune": {
+    "id": "MissFortune",
+    "name": "Miss Fortune",
+    "title": "the Bounty Hunter",
+    "classes": [
+      "Mage",
+      "Marksman"
+    ],
+    "roles": [
+      "bot"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 47.2,
+      "proPickRate": 7.6,
+      "globalPickRate": 3.3,
+      "globalWinRate": null
+    }
+  },
+  "Mordekaiser": {
+    "id": "Mordekaiser",
+    "name": "Mordekaiser",
+    "title": "the Iron Revenant",
+    "classes": [
+      "Fighter",
+      "Juggernaut",
+      "Mage"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 49.6,
+      "proPickRate": 3.0,
+      "globalPickRate": 3.0,
+      "globalWinRate": null
+    }
+  },
+  "Morgana": {
+    "id": "Morgana",
+    "name": "Morgana",
+    "title": "the Fallen",
+    "classes": [
+      "Catcher",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 46.9,
+      "proPickRate": 3.9,
+      "globalPickRate": 2.5,
+      "globalWinRate": null
+    }
+  },
+  "Naafiri": {
+    "id": "Naafiri",
+    "name": "Naafiri",
+    "title": "the Hound of a Hundred Bites",
+    "classes": [
+      "Assassin",
+      "Fighter"
+    ],
+    "roles": [
+      "mid"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 50.8,
+      "proPickRate": 1.6,
+      "globalPickRate": 1.5,
+      "globalWinRate": null
+    }
+  },
+  "Nami": {
+    "id": "Nami",
+    "name": "Nami",
+    "title": "the Tidecaller",
+    "classes": [
+      "Enchanter",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 49.4,
+      "proPickRate": 4.2,
+      "globalPickRate": 5.3,
+      "globalWinRate": null
+    }
+  },
+  "Nasus": {
+    "id": "Nasus",
+    "name": "Nasus",
+    "title": "the Curator of the Sands",
+    "classes": [
+      "Fighter",
+      "Juggernaut",
+      "Tank"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 48.0,
+      "proPickRate": 0.2,
+      "globalPickRate": 1.7,
+      "globalWinRate": null
+    }
+  },
+  "Nautilus": {
+    "id": "Nautilus",
+    "name": "Nautilus",
+    "title": "the Titan of the Depths",
+    "classes": [
+      "Support",
+      "Tank",
+      "Vanguard"
+    ],
+    "roles": [
+      "support"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 47.1,
+      "proPickRate": 22.9,
+      "globalPickRate": 4.3,
+      "globalWinRate": null
+    }
+  },
+  "Neeko": {
+    "id": "Neeko",
+    "name": "Neeko",
+    "title": "the Curious Chameleon",
+    "classes": [
+      "Burst",
+      "Catcher",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "mid",
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 52.4,
+      "proPickRate": 6.7,
+      "globalPickRate": 1.5,
+      "globalWinRate": null
+    }
+  },
+  "Nidalee": {
+    "id": "Nidalee",
+    "name": "Nidalee",
+    "title": "the Bestial Huntress",
+    "classes": [
+      "Assassin",
+      "Mage",
+      "Specialist"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 53.4,
+      "proPickRate": 5.9,
+      "globalPickRate": 2.1,
+      "globalWinRate": null
+    }
+  },
+  "Nilah": {
+    "id": "Nilah",
+    "name": "Nilah",
+    "title": "the Joy Unbound",
+    "classes": [
+      "Assassin",
+      "Fighter",
+      "Skirmisher"
+    ],
+    "roles": [
+      "bot"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 52.0,
+      "proPickRate": 0.2,
+      "globalPickRate": 1.0,
+      "globalWinRate": null
+    }
+  },
+  "Nocturne": {
+    "id": "Nocturne",
+    "name": "Nocturne",
+    "title": "the Eternal Nightmare",
+    "classes": [
+      "Assassin",
+      "Fighter"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 46.8,
+      "proPickRate": 5.8,
+      "globalPickRate": 3.3,
+      "globalWinRate": null
+    }
+  },
+  "Nunu & Willump": {
+    "id": "Nunu",
+    "name": "Nunu & Willump",
+    "title": "the Boy and His Yeti",
+    "classes": [
+      "Mage",
+      "Tank",
+      "Vanguard"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 25.0,
+      "proPickRate": 0.1,
+      "globalPickRate": 1.2,
+      "globalWinRate": null
+    }
+  },
+  "Olaf": {
+    "id": "Olaf",
+    "name": "Olaf",
+    "title": "the Berserker",
+    "classes": [
+      "Diver",
+      "Fighter",
+      "Tank"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 52.1,
+      "proPickRate": 10.2,
+      "globalPickRate": 0.8,
+      "globalWinRate": null
+    }
+  },
+  "Orianna": {
+    "id": "Orianna",
+    "name": "Orianna",
+    "title": "the Lady of Clockwork",
+    "classes": [
+      "Burst",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "mid"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 49.9,
+      "proPickRate": 11.5,
+      "globalPickRate": 2.9,
+      "globalWinRate": null
+    }
+  },
+  "Ornn": {
+    "id": "Ornn",
+    "name": "Ornn",
+    "title": "The Fire below the Mountain",
+    "classes": [
+      "Fighter",
+      "Tank",
+      "Vanguard"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 49.8,
+      "proPickRate": 12.5,
+      "globalPickRate": 1.9,
+      "globalWinRate": null
+    }
+  },
+  "Pantheon": {
+    "id": "Pantheon",
+    "name": "Pantheon",
+    "title": "the Unbreakable Spear",
+    "classes": [
+      "Assassin",
+      "Diver",
+      "Fighter"
+    ],
+    "roles": [
+      "jungle",
+      "top",
+      "mid",
+      "support"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 49.4,
+      "proPickRate": 4.5,
+      "globalPickRate": 6.6,
+      "globalWinRate": null
+    }
+  },
+  "Poppy": {
+    "id": "Poppy",
+    "name": "Poppy",
+    "title": "Keeper of the Hammer",
+    "classes": [
+      "Fighter",
+      "Tank",
+      "Warden"
+    ],
+    "roles": [
+      "jungle",
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 53.6,
+      "proPickRate": 6.9,
+      "globalPickRate": 1.4,
+      "globalWinRate": null
+    }
+  },
+  "Pyke": {
+    "id": "Pyke",
+    "name": "Pyke",
+    "title": "the Bloodharbor Ripper",
+    "classes": [
+      "Assassin",
+      "Catcher",
+      "Support"
+    ],
+    "roles": [
+      "support"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 47.2,
+      "proPickRate": 1.8,
+      "globalPickRate": 3.7,
+      "globalWinRate": null
+    }
+  },
+  "Qiyana": {
+    "id": "Qiyana",
+    "name": "Qiyana",
+    "title": "Empress of the Elements",
+    "classes": [
+      "Assassin",
+      "Fighter"
+    ],
+    "roles": [
+      "mid"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 56.7,
+      "proPickRate": 1.5,
+      "globalPickRate": 1.2,
+      "globalWinRate": null
+    }
+  },
+  "Quinn": {
+    "id": "Quinn",
+    "name": "Quinn",
+    "title": "Demacia's Wings",
+    "classes": [
+      "Assassin",
+      "Marksman",
+      "Specialist"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 53.0,
+      "proPickRate": 0.5,
+      "globalPickRate": 1.0,
+      "globalWinRate": null
+    }
+  },
+  "Rakan": {
+    "id": "Rakan",
+    "name": "Rakan",
+    "title": "The Charmer",
+    "classes": [
+      "Catcher",
+      "Support"
+    ],
+    "roles": [
+      "support"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 54.3,
+      "proPickRate": 20.3,
+      "globalPickRate": 2.5,
+      "globalWinRate": null
+    }
+  },
+  "Rammus": {
+    "id": "Rammus",
+    "name": "Rammus",
+    "title": "the Armordillo",
+    "classes": [
+      "Fighter",
+      "Tank",
+      "Vanguard"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 0,
+      "proPickRate": 0,
+      "globalPickRate": 0.8,
+      "globalWinRate": null
+    }
+  },
+  "Rek'Sai": {
+    "id": "RekSai",
+    "name": "Rek'Sai",
+    "title": "the Void Burrower",
+    "classes": [
+      "Diver",
+      "Fighter",
+      "Tank"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 50.9,
+      "proPickRate": 5.3,
+      "globalPickRate": 0.5,
+      "globalWinRate": null
+    }
+  },
+  "Rell": {
+    "id": "Rell",
+    "name": "Rell",
+    "title": "the Iron Maiden",
+    "classes": [
+      "Support",
+      "Tank",
+      "Vanguard"
+    ],
+    "roles": [
+      "support"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 50.7,
+      "proPickRate": 14.9,
+      "globalPickRate": 2.3,
+      "globalWinRate": null
+    }
+  },
+  "Renata Glasc": {
+    "id": "Renata",
+    "name": "Renata Glasc",
+    "title": "the Chem-Baroness",
+    "classes": [
+      "Enchanter",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 52.9,
+      "proPickRate": 3.9,
+      "globalPickRate": 1.0,
+      "globalWinRate": null
+    }
+  },
+  "Renekton": {
+    "id": "Renekton",
+    "name": "Renekton",
+    "title": "the Butcher of the Sands",
+    "classes": [
+      "Diver",
+      "Fighter",
+      "Tank"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 50.3,
+      "proPickRate": 19.4,
+      "globalPickRate": 3.1,
+      "globalWinRate": null
+    }
+  },
+  "Rengar": {
+    "id": "Rengar",
+    "name": "Rengar",
+    "title": "the Pridestalker",
+    "classes": [
+      "Assassin",
+      "Diver",
+      "Fighter"
+    ],
+    "roles": [
+      "jungle",
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 49.1,
+      "proPickRate": 0.5,
+      "globalPickRate": 1.5,
+      "globalWinRate": null
+    }
+  },
+  "Riven": {
+    "id": "Riven",
+    "name": "Riven",
+    "title": "the Exile",
+    "classes": [
+      "Assassin",
+      "Fighter",
+      "Skirmisher"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 53.1,
+      "proPickRate": 0.4,
+      "globalPickRate": 2.0,
+      "globalWinRate": null
+    }
+  },
+  "Rumble": {
+    "id": "Rumble",
+    "name": "Rumble",
+    "title": "the Mechanized Menace",
+    "classes": [
+      "Battlemage",
+      "Fighter",
+      "Mage"
+    ],
+    "roles": [
+      "top",
+      "mid"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 49.1,
+      "proPickRate": 11.3,
+      "globalPickRate": 0.9,
+      "globalWinRate": null
+    }
+  },
+  "Ryze": {
+    "id": "Ryze",
+    "name": "Ryze",
+    "title": "the Rune Mage",
+    "classes": [
+      "Battlemage",
+      "Fighter",
+      "Mage"
+    ],
+    "roles": [
+      "mid"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 48.3,
+      "proPickRate": 12.3,
+      "globalPickRate": 1.8,
+      "globalWinRate": null
+    }
+  },
+  "Samira": {
+    "id": "Samira",
+    "name": "Samira",
+    "title": "the Desert Rose",
+    "classes": [
+      "Assassin",
+      "Marksman"
+    ],
+    "roles": [
+      "bot"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 40.5,
+      "proPickRate": 1.7,
+      "globalPickRate": 2.5,
+      "globalWinRate": null
+    }
+  },
+  "Sejuani": {
+    "id": "Sejuani",
+    "name": "Sejuani",
+    "title": "Fury of the North",
+    "classes": [
+      "Fighter",
+      "Tank",
+      "Vanguard"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 47.5,
+      "proPickRate": 20.4,
+      "globalPickRate": 1.3,
+      "globalWinRate": null
+    }
+  },
+  "Senna": {
+    "id": "Senna",
+    "name": "Senna",
+    "title": "the Redeemer",
+    "classes": [
+      "Enchanter",
+      "Marksman",
+      "Support"
+    ],
+    "roles": [
+      "bot",
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 55.2,
+      "proPickRate": 7.2,
+      "globalPickRate": 4.4,
+      "globalWinRate": null
+    }
+  },
+  "Seraphine": {
+    "id": "Seraphine",
+    "name": "Seraphine",
+    "title": "the Starry-Eyed Songstress",
+    "classes": [
+      "Burst",
+      "Enchanter",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "bot",
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 46.8,
+      "proPickRate": 1.3,
+      "globalPickRate": 1.5,
+      "globalWinRate": null
+    }
+  },
+  "Sett": {
+    "id": "Sett",
+    "name": "Sett",
+    "title": "the Boss",
+    "classes": [
+      "Fighter",
+      "Juggernaut",
+      "Tank"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 50.2,
+      "proPickRate": 8.1,
+      "globalPickRate": 3.7,
+      "globalWinRate": null
+    }
+  },
+  "Shaco": {
+    "id": "Shaco",
+    "name": "Shaco",
+    "title": "the Demon Jester",
+    "classes": [
+      "Assassin"
+    ],
+    "roles": [
+      "jungle",
+      "support"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 0,
+      "proPickRate": 0,
+      "globalPickRate": 3.9,
+      "globalWinRate": null
+    }
+  },
+  "Shen": {
+    "id": "Shen",
+    "name": "Shen",
+    "title": "the Eye of Twilight",
+    "classes": [
+      "Tank",
+      "Warden"
+    ],
+    "roles": [
+      "top",
+      "support"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 51.4,
+      "proPickRate": 3.9,
+      "globalPickRate": 2.1,
+      "globalWinRate": null
+    }
+  },
+  "Shyvana": {
+    "id": "Shyvana",
+    "name": "Shyvana",
+    "title": "the Half-Dragon",
+    "classes": [
+      "Fighter",
+      "Juggernaut",
+      "Mage"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 26.7,
+      "proPickRate": 0.2,
+      "globalPickRate": 0.9,
+      "globalWinRate": null
+    }
+  },
+  "Singed": {
+    "id": "Singed",
+    "name": "Singed",
+    "title": "the Mad Chemist",
+    "classes": [
+      "Mage",
+      "Specialist",
+      "Tank"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 44.4,
+      "proPickRate": 0.4,
+      "globalPickRate": 1.0,
+      "globalWinRate": null
+    }
+  },
+  "Sion": {
+    "id": "Sion",
+    "name": "Sion",
+    "title": "The Undead Juggernaut",
+    "classes": [
+      "Fighter",
+      "Tank",
+      "Vanguard"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 48.9,
+      "proPickRate": 10.0,
+      "globalPickRate": 2.5,
+      "globalWinRate": null
+    }
+  },
+  "Sivir": {
+    "id": "Sivir",
+    "name": "Sivir",
+    "title": "the Battle Mistress",
+    "classes": [
+      "Marksman"
+    ],
+    "roles": [
+      "bot"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 45.3,
+      "proPickRate": 5.6,
+      "globalPickRate": 4.6,
+      "globalWinRate": null
+    }
+  },
+  "Skarner": {
+    "id": "Skarner",
+    "name": "Skarner",
+    "title": "the Primordial Sovereign",
+    "classes": [
+      "Fighter",
+      "Juggernaut",
+      "Tank",
+      "Vanguard"
+    ],
+    "roles": [
+      "jungle",
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 52.3,
+      "proPickRate": 6.0,
+      "globalPickRate": 0.6,
+      "globalWinRate": null
+    }
+  },
+  "Smolder": {
+    "id": "Smolder",
+    "name": "Smolder",
+    "title": "the Fiery Fledgling",
+    "classes": [
+      "Mage",
+      "Marksman"
+    ],
+    "roles": [
+      "bot",
+      "top",
+      "mid"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 47.2,
+      "proPickRate": 1.9,
+      "globalPickRate": 3.8,
+      "globalWinRate": null
+    }
+  },
+  "Sona": {
+    "id": "Sona",
+    "name": "Sona",
+    "title": "Maven of the Strings",
+    "classes": [
+      "Enchanter",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 51.7,
+      "proPickRate": 0.7,
+      "globalPickRate": 1.3,
+      "globalWinRate": null
+    }
+  },
+  "Soraka": {
+    "id": "Soraka",
+    "name": "Soraka",
+    "title": "the Starchild",
+    "classes": [
+      "Enchanter",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 52.3,
+      "proPickRate": 0.9,
+      "globalPickRate": 2.4,
+      "globalWinRate": null
+    }
+  },
+  "Swain": {
+    "id": "Swain",
+    "name": "Swain",
+    "title": "the Noxian Grand General",
+    "classes": [
+      "Battlemage",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "bot",
+      "mid",
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 55.0,
+      "proPickRate": 2.5,
+      "globalPickRate": 1.4,
+      "globalWinRate": null
+    }
+  },
+  "Sylas": {
+    "id": "Sylas",
+    "name": "Sylas",
+    "title": "the Unshackled",
+    "classes": [
+      "Assassin",
+      "Burst",
+      "Mage",
+      "Skirmisher"
+    ],
+    "roles": [
+      "top",
+      "mid"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 51.5,
+      "proPickRate": 10.8,
+      "globalPickRate": 4.6,
+      "globalWinRate": null
+    }
+  },
+  "Syndra": {
+    "id": "Syndra",
+    "name": "Syndra",
+    "title": "the Dark Sovereign",
+    "classes": [
+      "Burst",
+      "Mage"
+    ],
+    "roles": [
+      "mid"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 47.8,
+      "proPickRate": 8.4,
+      "globalPickRate": 2.4,
+      "globalWinRate": null
+    }
+  },
+  "Tahm Kench": {
+    "id": "TahmKench",
+    "name": "Tahm Kench",
+    "title": "The River King",
+    "classes": [
+      "Support",
+      "Tank",
+      "Warden"
+    ],
+    "roles": [
+      "top",
+      "support"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 50.5,
+      "proPickRate": 14.9,
+      "globalPickRate": 1.4,
+      "globalWinRate": null
+    }
+  },
+  "Taliyah": {
+    "id": "Taliyah",
+    "name": "Taliyah",
+    "title": "the Stoneweaver",
+    "classes": [
+      "Battlemage",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "jungle",
+      "mid"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 53.7,
+      "proPickRate": 11.6,
+      "globalPickRate": 1.3,
+      "globalWinRate": null
+    }
+  },
+  "Talon": {
+    "id": "Talon",
+    "name": "Talon",
+    "title": "the Blade's Shadow",
+    "classes": [
+      "Assassin"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 53.3,
+      "proPickRate": 0.4,
+      "globalPickRate": 1.5,
+      "globalWinRate": null
+    }
+  },
+  "Taric": {
+    "id": "Taric",
+    "name": "Taric",
+    "title": "the Shield of Valoran",
+    "classes": [
+      "Enchanter",
+      "Support",
+      "Tank",
+      "Warden"
+    ],
+    "roles": [
+      "mid",
+      "support"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 49.0,
+      "proPickRate": 3.0,
+      "globalPickRate": 0.6,
+      "globalWinRate": null
+    }
+  },
+  "Teemo": {
+    "id": "Teemo",
+    "name": "Teemo",
+    "title": "the Swift Scout",
+    "classes": [
+      "Mage",
+      "Marksman",
+      "Specialist"
+    ],
+    "roles": [
+      "jungle",
+      "top",
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 0,
+      "proPickRate": 0,
+      "globalPickRate": 1.7,
+      "globalWinRate": null
+    }
+  },
+  "Thresh": {
+    "id": "Thresh",
+    "name": "Thresh",
+    "title": "the Chain Warden",
+    "classes": [
+      "Catcher",
+      "Support",
+      "Tank"
+    ],
+    "roles": [
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 50.2,
+      "proPickRate": 10.8,
+      "globalPickRate": 6.2,
+      "globalWinRate": null
+    }
+  },
+  "Tristana": {
+    "id": "Tristana",
+    "name": "Tristana",
+    "title": "the Yordle Gunner",
+    "classes": [
+      "Assassin",
+      "Marksman"
+    ],
+    "roles": [
+      "bot",
+      "mid"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 51.0,
+      "proPickRate": 10.9,
+      "globalPickRate": 2.6,
+      "globalWinRate": null
+    }
+  },
+  "Trundle": {
+    "id": "Trundle",
+    "name": "Trundle",
+    "title": "the Troll King",
+    "classes": [
+      "Fighter",
+      "Juggernaut",
+      "Tank"
+    ],
+    "roles": [
+      "jungle",
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 50.5,
+      "proPickRate": 9.6,
+      "globalPickRate": 4.5,
+      "globalWinRate": null
+    }
+  },
+  "Tryndamere": {
+    "id": "Tryndamere",
+    "name": "Tryndamere",
+    "title": "the Barbarian King",
+    "classes": [
+      "Assassin",
+      "Fighter",
+      "Skirmisher"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 37.5,
+      "proPickRate": 0.1,
+      "globalPickRate": 1.1,
+      "globalWinRate": null
+    }
+  },
+  "Twisted Fate": {
+    "id": "TwistedFate",
+    "name": "Twisted Fate",
+    "title": "the Card Master",
+    "classes": [
+      "Burst",
+      "Mage",
+      "Marksman"
+    ],
+    "roles": [
+      "bot",
+      "top",
+      "mid"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 58.1,
+      "proPickRate": 5.4,
+      "globalPickRate": 2.9,
+      "globalWinRate": null
+    }
+  },
+  "Twitch": {
+    "id": "Twitch",
+    "name": "Twitch",
+    "title": "the Plague Rat",
+    "classes": [
+      "Assassin",
+      "Marksman"
+    ],
+    "roles": [
+      "bot",
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 39.3,
+      "proPickRate": 0.2,
+      "globalPickRate": 2.1,
+      "globalWinRate": null
+    }
+  },
+  "Udyr": {
+    "id": "Udyr",
+    "name": "Udyr",
+    "title": "the Spirit Walker",
+    "classes": [
+      "Fighter",
+      "Juggernaut",
+      "Tank"
+    ],
+    "roles": [
+      "jungle",
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 46.6,
+      "proPickRate": 5.5,
+      "globalPickRate": 1.2,
+      "globalWinRate": null
+    }
+  },
+  "Urgot": {
+    "id": "Urgot",
+    "name": "Urgot",
+    "title": "the Dreadnought",
+    "classes": [
+      "Fighter",
+      "Juggernaut",
+      "Tank"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 48.5,
+      "proPickRate": 3.1,
+      "globalPickRate": 1.3,
+      "globalWinRate": null
+    }
+  },
+  "Varus": {
+    "id": "Varus",
+    "name": "Varus",
+    "title": "the Arrow of Retribution",
+    "classes": [
+      "Artillery",
+      "Mage",
+      "Marksman"
+    ],
+    "roles": [
+      "bot"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 51.9,
+      "proPickRate": 21.8,
+      "globalPickRate": 2.8,
+      "globalWinRate": null
+    }
+  },
+  "Vayne": {
+    "id": "Vayne",
+    "name": "Vayne",
+    "title": "the Night Hunter",
+    "classes": [
+      "Assassin",
+      "Marksman"
+    ],
+    "roles": [
+      "bot",
+      "top"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 50.4,
+      "proPickRate": 2.3,
+      "globalPickRate": 3.3,
+      "globalWinRate": null
+    }
+  },
+  "Veigar": {
+    "id": "Veigar",
+    "name": "Veigar",
+    "title": "the Tiny Master of Evil",
+    "classes": [
+      "Burst",
+      "Mage"
+    ],
+    "roles": [
+      "mid",
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 45.8,
+      "proPickRate": 0.9,
+      "globalPickRate": 1.8,
+      "globalWinRate": null
+    }
+  },
+  "Vel'Koz": {
+    "id": "Velkoz",
+    "name": "Vel'Koz",
+    "title": "the Eye of the Void",
+    "classes": [
+      "Artillery",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "mid",
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 44.9,
+      "proPickRate": 0.6,
+      "globalPickRate": 1.3,
+      "globalWinRate": null
+    }
+  },
+  "Vex": {
+    "id": "Vex",
+    "name": "Vex",
+    "title": "the Gloomist",
+    "classes": [
+      "Burst",
+      "Mage"
+    ],
+    "roles": [
+      "mid"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 75.0,
+      "proPickRate": 0.1,
+      "globalPickRate": 1.4,
+      "globalWinRate": null
+    }
+  },
+  "Vi": {
+    "id": "Vi",
+    "name": "Vi",
+    "title": "the Piltover Enforcer",
+    "classes": [
+      "Assassin",
+      "Diver",
+      "Fighter"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 52.1,
+      "proPickRate": 9.8,
+      "globalPickRate": 2.5,
+      "globalWinRate": null
+    }
+  },
+  "Viego": {
+    "id": "Viego",
+    "name": "Viego",
+    "title": "The Ruined King",
+    "classes": [
+      "Assassin",
+      "Fighter",
+      "Skirmisher"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 48.6,
+      "proPickRate": 8.1,
+      "globalPickRate": 5.7,
+      "globalWinRate": null
+    }
+  },
+  "Viktor": {
+    "id": "Viktor",
+    "name": "Viktor",
+    "title": "the Herald of the Arcane",
+    "classes": [
+      "Battlemage",
+      "Mage"
+    ],
+    "roles": [
+      "mid"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 43.7,
+      "proPickRate": 6.2,
+      "globalPickRate": 3.3,
+      "globalWinRate": null
+    }
+  },
+  "Vladimir": {
+    "id": "Vladimir",
+    "name": "Vladimir",
+    "title": "the Crimson Reaper",
+    "classes": [
+      "Battlemage",
+      "Fighter",
+      "Mage"
+    ],
+    "roles": [
+      "top",
+      "mid"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 50.3,
+      "proPickRate": 5.0,
+      "globalPickRate": 3.4,
+      "globalWinRate": null
+    }
+  },
+  "Volibear": {
+    "id": "Volibear",
+    "name": "Volibear",
+    "title": "the Relentless Storm",
+    "classes": [
+      "Fighter",
+      "Juggernaut",
+      "Tank"
+    ],
+    "roles": [
+      "jungle",
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 47.1,
+      "proPickRate": 5.4,
+      "globalPickRate": 3.8,
+      "globalWinRate": null
+    }
+  },
+  "Warwick": {
+    "id": "Warwick",
+    "name": "Warwick",
+    "title": "the Uncaged Wrath of Zaun",
+    "classes": [
+      "Diver",
+      "Fighter",
+      "Tank"
+    ],
+    "roles": [
+      "jungle",
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 0,
+      "proPickRate": 0,
+      "globalPickRate": 3.2,
+      "globalWinRate": null
+    }
+  },
+  "Wukong": {
+    "id": "MonkeyKing",
+    "name": "Wukong",
+    "title": "the Monkey King",
+    "classes": [
+      "Diver",
+      "Fighter",
+      "Tank"
+    ],
+    "roles": [
+      "jungle",
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 47.8,
+      "proPickRate": 10.5,
+      "globalPickRate": 1.9,
+      "globalWinRate": null
+    }
+  },
+  "Xayah": {
+    "id": "Xayah",
+    "name": "Xayah",
+    "title": "the Rebel",
+    "classes": [
+      "Marksman"
+    ],
+    "roles": [
+      "bot"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 53.4,
+      "proPickRate": 15.9,
+      "globalPickRate": 2.7,
+      "globalWinRate": null
+    }
+  },
+  "Xerath": {
+    "id": "Xerath",
+    "name": "Xerath",
+    "title": "the Magus Ascendant",
+    "classes": [
+      "Artillery",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "mid",
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 36.0,
+      "proPickRate": 0.2,
+      "globalPickRate": 3.5,
+      "globalWinRate": null
+    }
+  },
+  "Xin Zhao": {
+    "id": "XinZhao",
+    "name": "Xin Zhao",
+    "title": "the Seneschal of Demacia",
+    "classes": [
+      "Diver",
+      "Fighter",
+      "Tank"
+    ],
+    "roles": [
+      "jungle"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 48.4,
+      "proPickRate": 11.5,
+      "globalPickRate": 2.9,
+      "globalWinRate": null
+    }
+  },
+  "Yasuo": {
+    "id": "Yasuo",
+    "name": "Yasuo",
+    "title": "the Unforgiven",
+    "classes": [
+      "Assassin",
+      "Fighter",
+      "Skirmisher"
+    ],
+    "roles": [
+      "bot",
+      "top",
+      "mid"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 48.1,
+      "proPickRate": 2.9,
+      "globalPickRate": 5.9,
+      "globalWinRate": null
+    }
+  },
+  "Yone": {
+    "id": "Yone",
+    "name": "Yone",
+    "title": "the Unforgotten",
+    "classes": [
+      "Assassin",
+      "Fighter",
+      "Skirmisher"
+    ],
+    "roles": [
+      "top",
+      "mid"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 53.4,
+      "proPickRate": 5.1,
+      "globalPickRate": 5.0,
+      "globalWinRate": null
+    }
+  },
+  "Yorick": {
+    "id": "Yorick",
+    "name": "Yorick",
+    "title": "Shepherd of Souls",
+    "classes": [
+      "Fighter",
+      "Juggernaut",
+      "Tank"
+    ],
+    "roles": [
+      "top"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 48.7,
+      "proPickRate": 2.2,
+      "globalPickRate": 1.8,
+      "globalWinRate": null
+    }
+  },
+  "Yunara": {
+    "id": "Yunara",
+    "name": "Yunara",
+    "title": "the Unbroken Faith",
+    "classes": [
+      "Marksman"
+    ],
+    "roles": [
+      "bot"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 56.2,
+      "proPickRate": 0.6,
+      "globalPickRate": 0,
+      "globalWinRate": null
+    }
+  },
+  "Yuumi": {
+    "id": "Yuumi",
+    "name": "Yuumi",
+    "title": "the Magical Cat",
+    "classes": [
+      "Enchanter",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 46.5,
+      "proPickRate": 4.5,
+      "globalPickRate": 3.2,
+      "globalWinRate": null
+    }
+  },
+  "Zac": {
+    "id": "Zac",
+    "name": "Zac",
+    "title": "the Secret Weapon",
+    "classes": [
+      "Fighter",
+      "Tank",
+      "Vanguard"
+    ],
+    "roles": [
+      "jungle",
+      "top",
+      "support"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 49.8,
+      "proPickRate": 2.5,
+      "globalPickRate": 1.5,
+      "globalWinRate": null
+    }
+  },
+  "Zed": {
+    "id": "Zed",
+    "name": "Zed",
+    "title": "the Master of Shadows",
+    "classes": [
+      "Assassin"
+    ],
+    "roles": [
+      "jungle",
+      "mid"
+    ],
+    "attackType": "Melee",
+    "stats": {
+      "proWinRate": 45.2,
+      "proPickRate": 0.5,
+      "globalPickRate": 7.4,
+      "globalWinRate": null
+    }
+  },
+  "Zeri": {
+    "id": "Zeri",
+    "name": "Zeri",
+    "title": "The Spark of Zaun",
+    "classes": [
+      "Marksman"
+    ],
+    "roles": [
+      "bot"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 49.5,
+      "proPickRate": 9.3,
+      "globalPickRate": 2.1,
+      "globalWinRate": null
+    }
+  },
+  "Ziggs": {
+    "id": "Ziggs",
+    "name": "Ziggs",
+    "title": "the Hexplosives Expert",
+    "classes": [
+      "Artillery",
+      "Mage"
+    ],
+    "roles": [
+      "bot",
+      "mid"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 51.5,
+      "proPickRate": 3.3,
+      "globalPickRate": 0.9,
+      "globalWinRate": null
+    }
+  },
+  "Zilean": {
+    "id": "Zilean",
+    "name": "Zilean",
+    "title": "the Chronokeeper",
+    "classes": [
+      "Mage",
+      "Specialist",
+      "Support"
+    ],
+    "roles": [
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 43.4,
+      "proPickRate": 0.8,
+      "globalPickRate": 1.2,
+      "globalWinRate": null
+    }
+  },
+  "Zoe": {
+    "id": "Zoe",
+    "name": "Zoe",
+    "title": "the Aspect of Twilight",
+    "classes": [
+      "Burst",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "mid"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 50.4,
+      "proPickRate": 10.3,
+      "globalPickRate": 1.7,
+      "globalWinRate": null
+    }
+  },
+  "Zyra": {
+    "id": "Zyra",
+    "name": "Zyra",
+    "title": "Rise of the Thorns",
+    "classes": [
+      "Catcher",
+      "Mage",
+      "Support"
+    ],
+    "roles": [
+      "support"
+    ],
+    "attackType": "Ranged",
+    "stats": {
+      "proWinRate": 46.9,
+      "proPickRate": 2.0,
+      "globalPickRate": 1.4,
+      "globalWinRate": null
+    }
+  }
 };

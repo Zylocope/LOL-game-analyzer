@@ -27,7 +27,23 @@ const TeamSelectModal: React.FC<{
   
   if (!isOpen) return null;
 
-  const filtered = teams.filter(t => t.name.toLowerCase().includes(search.toLowerCase()));
+  // SORT BY RANK (If available) - Prefer higher rank (lower number)
+  // Teams with rating are sorted descending.
+  const sortedTeams = [...teams].sort((a, b) => {
+      // Force ratings to numbers, default to 0 if missing
+      const rateA = Number((a as any).rating) || 0;
+      const rateB = Number((b as any).rating) || 0;
+      
+      // If both have ratings, higher rating first
+      if (rateA > 0 || rateB > 0) {
+          return rateB - rateA; 
+      }
+      
+      // Fallback to alphabetical if no ratings
+      return a.name.localeCompare(b.name);
+  });
+
+  const filtered = sortedTeams.filter(t => t.name.toLowerCase().includes(search.toLowerCase()));
   const colorClass = side === 'blue' ? 'border-blue-500 text-blue-400' : 'border-red-500 text-red-400';
   const bgClass = side === 'blue' ? 'hover:bg-blue-900/20 hover:border-blue-500' : 'hover:bg-red-900/20 hover:border-red-500';
 
@@ -62,7 +78,17 @@ const TeamSelectModal: React.FC<{
               </div>
 
               <div className="flex-1">
-                  <span className="font-bold text-gray-300 group-hover:text-white block text-lg">{team.name}</span>
+                  <div className="flex items-center gap-2">
+                      <span className="font-bold text-gray-300 group-hover:text-white block text-lg">{team.name}</span>
+                      {(team as any).rating && (
+                          <span className={`text-[10px] px-1.5 py-0.5 rounded font-mono font-bold tracking-tight
+                              ${(team as any).rating >= 2000 ? 'bg-yellow-500/20 text-yellow-300 border border-yellow-500/30' : 
+                                (team as any).rating >= 1700 ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30' : 
+                                'bg-gray-700 text-gray-400'}`}>
+                              {(team as any).rating}
+                          </span>
+                      )}
+                  </div>
                   <span className="text-xs text-gray-500 group-hover:text-gray-400 uppercase tracking-widest">{team.region}</span>
               </div>
             </button>
@@ -93,15 +119,90 @@ export const Lobby: React.FC<LobbyProps> = ({ onStartMatch }) => {
         const response = await fetch('http://localhost:8000/api/teams');
         const data = await response.json();
         
-        const formatted: LobbyTeam[] = data.teams.map((name: string) => {
-            const existingRichData = PRESET_TEAMS.find(t => t.name.toLowerCase() === name.toLowerCase());
-            return existingRichData || {
-                id: name.toLowerCase().replace(/[^a-z0-9]/g, ''), // Strict regex
-                name: name,
-                region: "World" 
-            };
+        // 1. Map API Ratings & Regions
+        const apiMap = new Map();
+        if (data.teams && Array.isArray(data.teams)) {
+            data.teams.forEach((t: any) => {
+                if (t.team) {
+                    // Store strict lower case key
+                    apiMap.set(t.team.toLowerCase(), t);
+                    // Store normalized key (no spaces)
+                    apiMap.set(t.team.toLowerCase().replace(/[^a-z0-9]/g, ''), t);
+                }
+            });
+        }
+        
+        // ALIAS MAP (Preset Name -> DB Name)
+        const ALIASES: Record<string, string> = {
+            "psg talon": "talon",
+            "karmine corp": "karmine corp blue" // Example if needed
+        };
+
+        // 2. Build the Final List from the API (Active/Veteran Teams)
+        // This is the list of ~58 teams you want.
+        const finalPool: LobbyTeam[] = [];
+        
+        if (data.teams && Array.isArray(data.teams)) {
+            data.teams.forEach((t: any) => {
+                 const name = typeof t === 'string' ? t : t.team;
+                 const rating = typeof t === 'object' ? t.rating : 0;
+                 const region = typeof t === 'object' ? t.region : "World";
+                 
+                 // Skip if blacklisted or known bad data (optional safety)
+                 if (name.includes("Esports Academy") || name.includes("Challengers")) return;
+
+                 // Check if we have a Preset for this team (Logo/Roster)
+                 const preset = PRESET_TEAMS.find(p => p.name.toLowerCase() === name.toLowerCase());
+                 
+                 // ALIAS CHECK: If DB name is "TALON", check if we have "PSG Talon" preset
+                 let foundPreset = preset;
+                 if (!foundPreset) {
+                     const reverseAlias = Object.keys(ALIASES).find(key => ALIASES[key] === name.toLowerCase());
+                     if (reverseAlias) {
+                         foundPreset = PRESET_TEAMS.find(p => p.name.toLowerCase() === reverseAlias);
+                     }
+                 }
+                 
+                 if (foundPreset) {
+                     // MERGE: Use Preset Metadata + API Rating
+                     finalPool.push({
+                         ...foundPreset,
+                         rating: rating,
+                         region: region // Update region if needed
+                     });
+                 } else {
+                     // NEW TEAM: Use API Data (No Logo, but valid team)
+                     finalPool.push({
+                         id: name.toLowerCase().replace(/[^a-z0-9]/g, ''),
+                         name: name,
+                         region: region,
+                         rating: rating
+                     });
+                 }
+            });
+        }
+
+        // 3. Fallback: Ensure all Presets are included even if API missed them
+        PRESET_TEAMS.forEach(preset => {
+            if (!finalPool.find(t => t.name.toLowerCase() === preset.name.toLowerCase())) {
+                finalPool.push({
+                    ...preset,
+                    rating: 0,
+                    region: "World"
+                });
+            }
         });
-        setAllTeams(formatted);
+
+        // 4. SORT: Rating (High->Low) then Name (A->Z)
+        finalPool.sort((a, b) => {
+            const rA = (a as any).rating || 0;
+            const rB = (b as any).rating || 0;
+            if (rA !== rB) return rB - rA;
+            return a.name.localeCompare(b.name);
+        });
+
+        setAllTeams(finalPool);
+
       } catch (error) {
         setAllTeams(PRESET_TEAMS as LobbyTeam[]);
       } finally {
@@ -198,8 +299,9 @@ export const Lobby: React.FC<LobbyProps> = ({ onStartMatch }) => {
                     <>
                         <div className="w-40 h-40 relative flex items-center justify-center">
                             <div className="absolute inset-0 bg-red-500/20 blur-3xl rounded-full animate-pulse" />
-                            <div className="w-40 h-40 z-10 drop-shadow-[0_0_15px_rgba(239,68,68,0.5)] bg-white p-4 rounded-3xl shadow-xl">
-                                <TeamLogo team={selectedRed} className="w-full h-full object-contain" />
+                            {/* Removed bg-white to match Blue side style */}
+                            <div className="w-40 h-40 z-10 drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]">
+                                <TeamLogo team={selectedRed} className="w-full h-full object-contain filter drop-shadow-[0_0_5px_rgba(255,255,255,0.4)]" />
                             </div>
                         </div>
                         <div className="text-center z-10">

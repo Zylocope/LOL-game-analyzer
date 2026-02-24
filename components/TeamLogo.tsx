@@ -108,6 +108,7 @@ export const TEAM_FILENAME_MAP: Record<string, string> = {
   "Suning": "suning.png",
   "T1": "t1.png",
   "TALON": "talon.png",
+  "PSG Talon": "talon.png",
   "TSM": "tsm.png",
   "Team BDS": "team_bds.png",
   "Team BattleComics": "teambattlecomics.png",

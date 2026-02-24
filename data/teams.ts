@@ -251,42 +251,5 @@ export const PRESET_TEAMS: PresetTeam[] = [
       { role: 'Bot', name: 'EasyLove' },
       { role: 'Support', name: 'Elio' }
     ]
-  },
-  
-  {
-    name: "T1 Esports Academy",
-    id: "t1ca",
-    logo: "t1.png",
-    players: [
-      { role: 'Top', name: 'Dal' },
-      { role: 'Jungle', name: 'Guwon' },
-      { role: 'Mid', name: 'Poby' },
-      { role: 'Bot', name: 'Smash' },
-      { role: 'Support', name: 'Rekkles' }
-    ]
-  },
-  {
-    name: "DK Challengers",
-    id: "dkcl",
-    logo: "dplus_kia.png",
-    players: [
-      { role: 'Top', name: 'Siwoo' },
-      { role: 'Jungle', name: 'Sharvel' },
-      { role: 'Mid', name: 'Saint' },
-      { role: 'Bot', name: 'Wayne' },
-      { role: 'Support', name: 'Moham' }
-    ]
-  },
-  {
-    name: "Karmine Corp Blue",
-    id: "kcb",
-    logo: "karmine_corp_blue.png",
-    players: [
-      { role: 'Top', name: 'Maynter' },
-      { role: 'Jungle', name: '113' },
-      { role: 'Mid', name: 'Abbedagge' },
-      { role: 'Bot', name: 'Caliste' },
-      { role: 'Support', name: 'Fleshy' }
-    ]
   }
 ];

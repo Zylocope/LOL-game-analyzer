@@ -141,7 +141,7 @@ export const AnalysisPanel: React.FC<AnalysisPanelProps> = ({ analysis, loading,
              <h4 className="text-gray-300 text-xs font-bold uppercase tracking-wider">Crucial Factors</h4>
            </div>
            <ul className="space-y-3">
-             {analysis.keyFactors.map((factor, i) => (
+             {(analysis.keyFactors || []).map((factor, i) => (
                <li key={i} className="text-xs text-gray-400 flex gap-2 items-start">
                  <span className="text-esport-accent mt-0.5">►</span> 
                  <span className="leading-tight">{factor}</span>
@@ -161,7 +161,7 @@ export const AnalysisPanel: React.FC<AnalysisPanelProps> = ({ analysis, loading,
               <div className="bg-blue-900/10 p-2 rounded border-l-2 border-esport-blue">
                 <span className="text-[10px] text-esport-blue font-bold uppercase mb-1 block opacity-80">{blueName}</span>
                 <ul className="space-y-1">
-                  {analysis.winConditions.blue.map((wc, i) => (
+                  {(analysis.winConditions?.blue || []).map((wc, i) => (
                     <li key={i} className="text-[10px] text-gray-400 truncate flex items-center gap-1.5">
                        <div className="w-1 h-1 bg-gray-500 rounded-full"></div>
                        {wc}
@@ -173,7 +173,7 @@ export const AnalysisPanel: React.FC<AnalysisPanelProps> = ({ analysis, loading,
               <div className="bg-red-900/10 p-2 rounded border-l-2 border-esport-red">
                 <span className="text-[10px] text-esport-red font-bold uppercase mb-1 block opacity-80">{redName}</span>
                 <ul className="space-y-1">
-                  {analysis.winConditions.red.map((wc, i) => (
+                  {(analysis.winConditions?.red || []).map((wc, i) => (
                     <li key={i} className="text-[10px] text-gray-400 truncate flex items-center gap-1.5">
                        <div className="w-1 h-1 bg-gray-500 rounded-full"></div>
                        {wc}

@@ -34,14 +34,27 @@ const TYPES = [
   { id: 'Assassin', label: 'Assassins' },
   { id: 'Marksman', label: 'Marksmen' },
   { id: 'Tank', label: 'Tanks' },
-  { id: 'Support', label: 'Supports' }
+  { id: 'Support', label: 'Supports' },
+  { id: 'Juggernaut', label: 'Juggernauts' },
+  { id: 'Diver', label: 'Divers' },
+  { id: 'Battlemage', label: 'Battlemages' },
+  { id: 'Burst', label: 'Burst Mages' },
+  { id: 'Artillery', label: 'Artillery' },
+  { id: 'Enchanter', label: 'Enchanters' },
+  { id: 'Catcher', label: 'Catchers' },
+  { id: 'Vanguard', label: 'Vanguards' },
+  { id: 'Warden', label: 'Wardens' },
+  { id: 'Skirmisher', label: 'Skirmishers' }
 ];
 
-// Helper to get stats safely
-const getStats = (key: string): ChampStats | null => {
-  // Use keys from stats JSON first if possible, fallback to mapping
-  return (CHAMPION_STATS as any)[key] || null;
-};
+const RANGES = [
+  { id: 'all', label: 'All Ranges' },
+  { id: 'Melee', label: 'Melee' },
+  { id: 'Ranged', label: 'Ranged' }
+];
+
+// Helper to get stats safely (DEPRECATED - stats are now embedded)
+// const getStats = (key: string): ChampStats | null => ...
 
 // Helper for inferring lane roles if not explicit (using BOTH static tags and mined stats)
 const inferRoles = (champ: any, stats: ChampStats | null) => {
@@ -86,15 +99,21 @@ export const ChampionSelectModal: React.FC<ChampionSelectModalProps> = ({ isOpen
   const [search, setSearch] = useState('');
   const [selectedRole, setSelectedRole] = useState('all');
   const [selectedType, setSelectedType] = useState('all');
+  const [selectedRange, setSelectedRange] = useState('all');
   const [sortBy, setSortBy] = useState<'name' | 'winrate' | 'pickrate'>('name');
 
   // Memoized Filter & Sort Logic
   const filteredChamps = useMemo(() => {
     // 1. Convert Dictionary to Array and Attach Stats
     let list = Object.entries(CHAMPION_DATA).map(([key, data]) => {
-      // Key mapping: "Wukong" in Tags -> "MonkeyKing" in Stats
-      const statsKey = data.id === "Wukong" ? "MonkeyKing" : data.id;
-      const stats = getStats(statsKey);
+      // The stats are already embedded in data.stats now (from backend update)
+      // We explicitly prefer PRO stats for sorting as requested.
+      const stats = {
+        name: data.name,
+        winRate: data.stats?.proWinRate || 0,
+        pickRate: data.stats?.proPickRate || 0, 
+        roles: data.roles
+      };
       return { ...data, stats };
     });
 
@@ -106,17 +125,22 @@ export const ChampionSelectModal: React.FC<ChampionSelectModalProps> = ({ isOpen
       );
     }
 
-    // 3. Role Filter (Heuristic)
+    // 3. Role Filter (Data-Driven, NOT Heuristic)
     if (selectedRole !== 'all') {
       list = list.filter(c => {
-        const roles = inferRoles(c, c.stats);
-        return roles.has(selectedRole);
+        // "roles" array from championTags.ts (Mined from DB or inferred from tags)
+        return c.roles && c.roles.includes(selectedRole);
       });
     }
 
-    // 4. Type Filter
+    // 4. Type Filter (Supports Wiki-Level Subclasses)
     if (selectedType !== 'all') {
-      list = list.filter(c => c.classes.includes(selectedType));
+      list = list.filter(c => c.classes && c.classes.includes(selectedType));
+    }
+
+    // 5. Range Filter
+    if (selectedRange !== 'all') {
+      list = list.filter(c => c.attackType === selectedRange);
     }
 
     // 5. Sorting
@@ -135,7 +159,7 @@ export const ChampionSelectModal: React.FC<ChampionSelectModalProps> = ({ isOpen
     });
 
     return list;
-  }, [search, selectedRole, selectedType, sortBy]);
+  }, [search, selectedRole, selectedType, selectedRange, sortBy]);
 
   if (!isOpen) return null;
 
@@ -247,6 +271,15 @@ export const ChampionSelectModal: React.FC<ChampionSelectModalProps> = ({ isOpen
                     {TYPES.map(t => <option key={t.id} value={t.id}>{t.label}</option>)}
                 </select>
 
+                {/* Range Filter */}
+                <select 
+                    value={selectedRange} 
+                    onChange={(e) => setSelectedRange(e.target.value)}
+                    className="bg-gray-800 text-sm text-gray-300 border border-gray-700 rounded-lg px-3 py-2 focus:ring-2 focus:ring-esport-gold outline-none"
+                >
+                    {RANGES.map(r => <option key={r.id} value={r.id}>{r.label}</option>)}
+                </select>
+
                 {/* Sort Dropdown */}
                 <select 
                     value={sortBy} 
@@ -254,8 +287,8 @@ export const ChampionSelectModal: React.FC<ChampionSelectModalProps> = ({ isOpen
                     className="bg-gray-800 text-sm text-gray-300 border border-gray-700 rounded-lg px-3 py-2 focus:ring-2 focus:ring-esport-gold outline-none cursor-pointer"
                 >
                     <option value="name" className="bg-gray-800">Sort: Name</option>
-                    <option value="winrate" className="bg-gray-800">Sort: Win Rate</option>
-                    <option value="pickrate" className="bg-gray-800">Sort: Pick Rate</option>
+                    <option value="winrate" className="bg-gray-800">Sort: Pro Win Rate</option>
+                    <option value="pickrate" className="bg-gray-800">Sort: Pro Pick Rate</option>
                 </select>
             </div>
           </div>
@@ -301,8 +334,8 @@ export const ChampionSelectModal: React.FC<ChampionSelectModalProps> = ({ isOpen
                      <span className="text-[10px] text-gray-500 font-mono">NO IMG</span>
                   </div>
                   
-                  {/* Real Winrate Badge */}
-                  {hasStats && (
+                  {/* Real Winrate Badge (Pro WR) */}
+                  {hasStats && wr > 0 && (
                      <div className={`absolute top-1 right-1 text-[9px] px-1.5 py-0.5 rounded backdrop-blur font-mono ${getWrColor(wr)}`}>
                         {wr.toFixed(1)}%
                      </div>

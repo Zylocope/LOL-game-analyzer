@@ -4,7 +4,7 @@ import { DraftBoard } from './components/DraftBoard';
 import { AnalysisPanel } from './components/AnalysisPanel';
 import { Lobby } from './components/Lobby';
 import { PRESET_TEAMS, PresetTeam } from './data/teams';
-import { fetchTeamData, analyzeMatchup, fetchChampionStats, fetchRealPlayerStats } from './services/geminiService';
+import { fetchTeamData, analyzeMatchup, fetchChampionStats, fetchRealPlayerStats } from './services/analysisService';
 import { collectTeamAdvancedStats, collectPlayerAdvancedStats } from './services/dataCollector';
 import { RefreshCw, Play, Search, Zap, LogOut } from 'lucide-react';
 
@@ -102,8 +102,27 @@ const handleStartMatch = async (blue: PresetTeam, red: PresetTeam) => {
     });
 
     // Fetch team stats in background
-    fetchTeamData(blue.name).then(stats => setBlueTeam(prev => ({...prev, stats})));
-    fetchTeamData(red.name).then(stats => setRedTeam(prev => ({...prev, stats})));
+    fetchTeamData(blue.name).then(stats => {
+      setBlueTeam(prev => ({
+        ...prev, 
+        stats,
+        // Auto-fill roster from DB if available
+        players: (stats as any).roster && (stats as any).roster.length === 5 
+          ? (stats as any).roster.map((p: any) => ({ name: p.name, role: p.role }))
+          : prev.players
+      }));
+    });
+
+    fetchTeamData(red.name).then(stats => {
+      setRedTeam(prev => ({
+        ...prev, 
+        stats,
+        // Auto-fill roster from DB if available
+        players: (stats as any).roster && (stats as any).roster.length === 5 
+          ? (stats as any).roster.map((p: any) => ({ name: p.name, role: p.role }))
+          : prev.players
+      }));
+    });
 
     setView('analyzer');
   };
@@ -267,10 +286,102 @@ const handleFetchChampionStats = async (side: 'blue' | 'red', role: Role, champi
           
           {/* Action Bar */}
           <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-             <div className="flex gap-2">
+             <div className="flex gap-2 items-center">
                 <span className="bg-gray-800 border border-gray-700 text-gray-400 px-3 py-1 rounded text-xs font-bold uppercase tracking-wider flex items-center gap-2">
                    Manual Draft Mode
                 </span>
+                
+                {/* --- DEBUG TOOLS (V5: FULL 10-MAN) --- */}
+                <div className="h-6 w-px bg-gray-700 mx-2"></div>
+                <button 
+                    onClick={() => {
+                        // SCENARIO 1: META vs TROLL
+                        // Blue: Standard Pro Comp
+                        const bluePicks = [
+                            { r: 'Top', c: "K'Sante" }, { r: 'Jungle', c: 'Sejuani' },
+                            { r: 'Mid', c: 'Azir' }, { r: 'Bot', c: "Kai'Sa" }, { r: 'Support', c: 'Nautilus' }
+                        ];
+                        // Red: Full Grief
+                        const redPicks = [
+                            { r: 'Top', c: 'Janna' }, { r: 'Jungle', c: 'Yuumi' },
+                            { r: 'Mid', c: 'Soraka' }, { r: 'Bot', c: 'Braum' }, { r: 'Support', c: 'Zed' }
+                        ];
+
+                        bluePicks.forEach(p => {
+                            handleUpdatePlayer('blue', p.r, p.c);
+                            handleFetchChampionStats('blue', p.r, p.c);
+                        });
+                        redPicks.forEach(p => {
+                            handleUpdatePlayer('red', p.r, p.c);
+                            handleFetchChampionStats('red', p.r, p.c);
+                        });
+                    }}
+                    className="px-2 py-1 bg-red-900/30 border border-red-800 rounded text-[10px] text-red-400 hover:bg-red-900/50 uppercase font-bold tracking-wider"
+                >
+                    Test: Corrupt
+                </button>
+                <button 
+                    onClick={() => {
+                        // SCENARIO 2: HARD COUNTER (Armor Stack vs Full AD)
+                        // Red: Full AD Squishies
+                        const redPicks = [
+                            { r: 'Top', c: 'Riven' }, { r: 'Jungle', c: 'Master Yi' },
+                            { r: 'Mid', c: 'Yasuo' }, { r: 'Bot', c: 'Draven' }, { r: 'Support', c: 'Pyke' }
+                        ];
+                        // Blue: The Wall (Armor/Anti-AD)
+                        const bluePicks = [
+                            { r: 'Top', c: 'Malphite' }, { r: 'Jungle', c: 'Rammus' },
+                            { r: 'Mid', c: 'Galio' }, { r: 'Bot', c: 'Nilah' }, { r: 'Support', c: 'Taric' }
+                        ];
+
+                        bluePicks.forEach(p => {
+                            handleUpdatePlayer('blue', p.r, p.c);
+                            handleFetchChampionStats('blue', p.r, p.c);
+                        });
+                        redPicks.forEach(p => {
+                            handleUpdatePlayer('red', p.r, p.c);
+                            handleFetchChampionStats('red', p.r, p.c);
+                        });
+                    }}
+                    className="px-2 py-1 bg-blue-900/30 border border-blue-800 rounded text-[10px] text-blue-400 hover:bg-blue-900/50 uppercase font-bold tracking-wider"
+                >
+                    Test: Counters
+                </button>
+                <button 
+                    onClick={() => {
+                        // SCENARIO 3: BOTH MIDS GETTING CAMPED (ALL COUNTERS)
+                        
+                        // Blue Team: Counters for Kassadin
+                        const bluePicks = [
+                            { r: 'Mid', c: 'Viktor' },
+                            { r: 'Top', c: 'Pantheon' },   // AD Burst -> Counters Kass
+                            { r: 'Jungle', c: 'Talon' },   // AD Assassin -> Counters Kass
+                            { r: 'Bot', c: 'Tristana' },   // AD Burst -> Counters Kass
+                            { r: 'Support', c: 'Leona' }   // Lockdown -> Counters Kass
+                        ];
+
+                        // Red Team: Counters for Viktor
+                        const redPicks = [
+                            { r: 'Mid', c: 'Kassadin' }, // 1. Lane Counter
+                            { r: 'Jungle', c: 'Vi' },    // 2. Dive
+                            { r: 'Top', c: 'Irelia' },   // 3. Dive
+                            { r: 'Support', c: 'Blitzcrank' }, // 4. Hook
+                            { r: 'Bot', c: 'Ashe' }      // 5. Global Ult
+                        ];
+
+                        bluePicks.forEach(p => {
+                            handleUpdatePlayer('blue', p.r, p.c);
+                            handleFetchChampionStats('blue', p.r, p.c);
+                        });
+                        redPicks.forEach(p => {
+                            handleUpdatePlayer('red', p.r, p.c);
+                            handleFetchChampionStats('red', p.r, p.c);
+                        });
+                    }}
+                    className="px-2 py-1 bg-purple-900/30 border border-purple-800 rounded text-[10px] text-purple-400 hover:bg-purple-900/50 uppercase font-bold tracking-wider"
+                >
+                    Test: All Counter
+                </button>
              </div>
              
              <div className="flex gap-3">
@@ -352,8 +463,21 @@ const handleFetchChampionStats = async (side: 'blue' | 'red', role: Role, champi
       )}
 
       {/* Footer */}
-      <footer className="border-t border-gray-800 mt-auto py-8 text-center text-gray-600 text-sm">
-        <p>Nexus Sight AI • Powered by Gemini • Not affiliated with Riot Games</p>
+      <footer className="border-t border-gray-800 bg-gray-900 py-6 mt-auto">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600">
+          <div className="flex items-center gap-2 mb-4 md:mb-0">
+            <Zap size={14} className="text-gray-700" />
+            <span>NEXUS SIGHT v1.0</span>
+          </div>
+          <div className="flex gap-6">
+            <a href="#" className="hover:text-esport-gold transition-colors">Methodology</a>
+            <a href="#" className="hover:text-esport-gold transition-colors">About</a>
+            <a href="#" className="hover:text-esport-gold transition-colors">Disclaimer</a>
+          </div>
+          <div className="mt-4 md:mt-0 opacity-50">
+            Not affiliated with Riot Games. Data for educational purposes.
+          </div>
+        </div>
       </footer>
     </div>
   );
