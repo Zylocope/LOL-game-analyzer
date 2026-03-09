@@ -1,5 +1,5 @@
 {
   "name": "Nexus Sight - LoL Esports Analyzer",
-  "description": "Real-time League of Legends match analyzer using Gemini to predict winners based on live draft, historical team data, and meta trends.",
+  "description": "Real-time League of Legends match analyzer using AI to predict winners based on live draft, historical team data, and meta trends.",
   "requestFramePermissions": []
 }

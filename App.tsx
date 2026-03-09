@@ -153,7 +153,7 @@ const handleStartMatch = async (blue: PresetTeam, red: PresetTeam) => {
 const handleFetchChampionStats = async (side: 'blue' | 'red', role: Role, champion: string) => {
     if (!champion) return;
     try {
-        // 1. Get Generic Info (Meta Tier) from Gemini
+        // 1. Get Generic Info (Meta Tier) from AI
         // We use this as a "Baseline" object to fill in gaps (like metaTier)
         const aiStats = await fetchChampionStats(champion, role);
         

@@ -12,9 +12,11 @@ from sklearn.ensemble import GradientBoostingClassifier
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(BASE_DIR, "nexus_sight.db")
 TAGS_PATH = os.path.join(BASE_DIR, "../data/championTags.ts")
+CHAMP_STATS_PATH = os.path.join(BASE_DIR, "champion_stats_pro.json")
 DATASET_OUTPUT_PATH = os.path.join(BASE_DIR, "dataset_v4.csv")
 MODEL_OUTPUT_PATH = os.path.join(BASE_DIR, "match_predictor_v4.pkl")
 MATRIX_PATH = os.path.join(BASE_DIR, "data", "matchup_matrix.json")
+MIN_PRO_GAMES_FOR_CONFIDENT = 50
 
 # --- 1. LOADERS ---
 
@@ -73,6 +75,61 @@ def load_team_elo():
         elo_map[entry['team']] = entry['rating']
     return elo_map
 
+
+def load_champion_strengths(alpha: float = 50.0):
+    """
+    Loads champion-level pro meta strength from champion_stats_pro.json.
+    Returns:
+        meta_map: normalized champ name -> smoothed winrate (0-1)
+        global_avg: global average pro winrate (0-1)
+        games_map: normalized champ name -> pro games count
+    """
+    if not os.path.exists(CHAMP_STATS_PATH):
+        return {}, 0.5, {}
+    
+    with open(CHAMP_STATS_PATH, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    
+    # Compute global average win rate weighted by pro games
+    total_games = 0
+    weighted_wins = 0.0
+    for stats in data.values():
+        games = max(0, stats.get("pro_games", 0))
+        wr = stats.get("pro_win_rate", None)
+        if wr is None:
+            continue
+        total_games += games
+        weighted_wins += games * (wr / 100.0)
+    
+    global_avg = (weighted_wins / total_games) if total_games > 0 else 0.5
+    
+    meta_map = {}
+    games_map = {}
+    
+    for name, stats in data.items():
+        games = max(0, stats.get("pro_games", 0))
+        raw_wr = stats.get("pro_win_rate", None)
+        if raw_wr is None:
+            base_wr = global_avg
+        else:
+            base_wr = raw_wr / 100.0
+        
+        # Bayesian smoothing towards global average
+        denom = games + alpha
+        if denom > 0:
+            smoothed = (base_wr * games + alpha * global_avg) / denom
+        else:
+            smoothed = global_avg
+        
+        norm_key = name.lower().replace(" ", "").replace("'", "").replace(".", "")
+        
+        meta_map[norm_key] = smoothed
+        meta_map[name.lower()] = smoothed
+        games_map[norm_key] = games
+        games_map[name.lower()] = games
+    
+    return meta_map, global_avg, games_map
+
 # --- 2. DATA GENERATION ---
 
 def generate_data():
@@ -97,6 +154,7 @@ def generate_data():
     
     role_map, class_map = load_champion_meta()
     elo_map = load_team_elo()
+    champ_meta_map, champ_global_avg, champ_games_map = load_champion_strengths()
     
     # Load Matchup Matrix
     matchup_matrix = {}
@@ -135,6 +193,9 @@ def generate_data():
             r_score = 0
             roster_data = []
             class_counts = {c: 0 for c in TRACKED_CLASSES}
+            meta_sum = 0.0
+            low_data_count = 0
+            zero_pro_count = 0
             
             # Helper to map position to champion for counter lookup
             my_champs = {} 
@@ -148,9 +209,20 @@ def generate_data():
                 
                 # Role Score
                 valid = role_map.get(c, [])
-                if not valid: val = 0.5 
-                else: val = 1.0 if p in valid else -1.0
+                if not valid:
+                    val = 0.5
+                else:
+                    val = 1.0 if p in valid else -1.0
                 r_score += val
+                
+                # Champion meta strength (centered around 0)
+                meta_val = champ_meta_map.get(c, champ_global_avg)
+                games = champ_games_map.get(c, 0)
+                meta_sum += (meta_val * 100.0 - 50.0)
+                if games == 0:
+                    zero_pro_count += 1
+                elif games < MIN_PRO_GAMES_FOR_CONFIDENT:
+                    low_data_count += 1
                 
                 # Class Counts
                 my_classes = class_map.get(c, [])
@@ -178,16 +250,20 @@ def generate_data():
 
             elo = elo_map.get(t_name.replace(" ", ""), elo_map.get(t_name, 1200))
             result = rows.iloc[0]['result']
-            return elo, r_score, result, roster_data, class_counts, c_score
+            meta_avg = meta_sum / max(1, len(rows))
+            return elo, r_score, result, roster_data, class_counts, c_score, meta_avg, low_data_count, zero_pro_count
 
         # 1. Get Real Stats
-        t1_elo, t1_role, t1_res, t1_roster, t1_classes, t1_counter = get_team_features(t1_rows, t1_name, t2_rows)
-        t2_elo, t2_role, t2_res, t2_roster, t2_classes, t2_counter = get_team_features(t2_rows, t2_name, t1_rows)
+        t1_elo, t1_role, t1_res, t1_roster, t1_classes, t1_counter, t1_meta, t1_low, t1_zero = get_team_features(t1_rows, t1_name, t2_rows)
+        t2_elo, t2_role, t2_res, t2_roster, t2_classes, t2_counter, t2_meta, t2_low, t2_zero = get_team_features(t2_rows, t2_name, t1_rows)
         
         real_row = {
             'elo_diff': t1_elo - t2_elo,
             'role_diff': t1_role - t2_role,
-            'counter_score': t1_counter, # T1 advantage vs T2
+            'counter_score': t1_counter,  # T1 advantage vs T2
+            'draft_meta_diff': t1_meta - t2_meta,
+            'low_data_diff': t1_low - t2_low,
+            'zero_pro_diff': t1_zero - t2_zero,
             'target': 1 if t1_res == 1 else 0,
             'type': 'real'
         }
@@ -228,7 +304,14 @@ def train_model_v4():
             'catcher', 'vanguard', 'enchanter'
         ]
         
-        features = ['elo_diff', 'role_diff', 'counter_score'] + [f'diff_{c}' for c in TRACKED_CLASSES]
+        features = [
+            'elo_diff',
+            'role_diff',
+            'counter_score',
+            'draft_meta_diff',
+            'low_data_diff',
+            'zero_pro_diff',
+        ] + [f'diff_{c}' for c in TRACKED_CLASSES]
         
         X = df[features]
         y = df['target']

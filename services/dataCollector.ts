@@ -3,7 +3,7 @@ import { Team, Player, AdvancedTeamStats, AdvancedPlayerStats } from '../types';
 /**
  * DATA COLLECTOR SERVICE
  * 
- * This file is responsible for structuring the data sent to the Gemini AI.
+ * This file is responsible for structuring the data for analysis.
  * In a real application, replace the 'generateMock...' functions with real API calls.
  */
 

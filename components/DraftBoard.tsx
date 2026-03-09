@@ -5,6 +5,7 @@ import { ChampionSelectModal } from './ChampionSelectModal';
 import { analyzeComposition } from '../src/compositionAnalysis'; // Verify this path matches your folder structure
 import { useMatchups } from '../src/hooks/useMatchups';
 import { TeamLogo } from './TeamLogo';
+import { CHAMPION_DATA } from '../data/championTags';
 
 interface DraftBoardProps {
   team: Team;
@@ -199,32 +200,75 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({
                  {player.champion || "Select Champion"}
                </div>
                
-               {player.champion && player.championStats && (
-                  <div className="flex items-center gap-2 mt-1 w-full overflow-hidden">
-                     {player.championStats.gamesPlayed && player.championStats.gamesPlayed > 0 ? (
-                        <span className={`text-[10px] px-1.5 py-0.5 rounded border font-bold whitespace-nowrap shrink-0
-                            ${parseInt(player.championStats.winRate) >= 60 
+               {player.champion && player.championStats && (() => {
+                  const meta = CHAMPION_DATA[player.champion as keyof typeof CHAMPION_DATA];
+                  const laneKey = player.role.toLowerCase() as 'top' | 'jungle' | 'mid' | 'bot' | 'support';
+                  const validRoles = meta?.roles ?? [];
+                  const isValidRole = validRoles.includes(laneKey);
+                  const proPickRate = meta?.stats?.proPickRate ?? null;
+                  const neverPlayedPro = proPickRate === 0;
+
+                  // OFF-ROLE: do not show winrate badge at all, just a warning
+                  if (!isValidRole && meta) {
+                    return (
+                      <div className="flex items-center gap-2 mt-1 w-full overflow-hidden">
+                        <span className="text-[10px] px-1.5 py-0.5 rounded border font-bold whitespace-nowrap shrink-0 bg-red-900/60 text-red-200 border-red-700">
+                          OFF-ROLE
+                        </span>
+                        <span className="text-[10px] text-gray-500 flex items-center gap-1 flex-1 min-w-0">
+                          <span className="shrink-0 opacity-50">◎</span>
+                          <span className="truncate w-full text-red-300">
+                            Not a standard {laneKey} pick in pro play
+                          </span>
+                        </span>
+                      </div>
+                    );
+                  }
+
+                  // Default: keep global 50% prior behaviour, but annotate "never played" when applicable
+                  const hasRealGames = player.championStats.gamesPlayed && player.championStats.gamesPlayed > 0;
+                  const winRateValue = parseInt(player.championStats.winRate);
+
+                  const secondaryText = neverPlayedPro
+                    ? 'Never played in pro matches (last 7 years)'
+                    : (player.championStats.gamesPlayed && player.championStats.gamesPlayed > 5
+                        ? 'Main'
+                        : player.championStats.roleEffectiveness || 'Unknown');
+
+                  return (
+                    <div className="flex items-center gap-2 mt-1 w-full overflow-hidden">
+                      {hasRealGames ? (
+                        <span
+                          className={`text-[10px] px-1.5 py-0.5 rounded border font-bold whitespace-nowrap shrink-0
+                            ${winRateValue >= 60 
                               ? 'bg-yellow-900/40 text-yellow-200 border-yellow-700/50' 
                               : 'bg-blue-900/40 text-blue-200 border-blue-700'
-                            }`}>
-                            {player.championStats.winRate} ({player.championStats.gamesPlayed}G)
+                            }`}
+                        >
+                          {player.championStats.winRate} ({player.championStats.gamesPlayed}G)
                         </span>
-                     ) : (
-                        <span className={`text-[10px] px-1.5 py-0.5 rounded whitespace-nowrap shrink-0 font-bold ${parseInt(player.championStats.winRate) > 50 ? 'bg-green-900/30 text-green-400' : 'bg-red-900/30 text-red-400'}`}>
+                      ) : (
+                        <span
+                          className={`text-[10px] px-1.5 py-0.5 rounded whitespace-nowrap shrink-0 font-bold ${
+                            winRateValue > 50 ? 'bg-green-900/30 text-green-400' : 'bg-red-900/30 text-red-400'
+                          }`}
+                        >
                           {player.championStats.winRate} Global
                         </span>
-                     )}
-                     <span className="text-[10px] text-gray-500 flex items-center gap-1 flex-1 min-w-0">
-                       <span className="shrink-0 opacity-50">◎</span>
-                       <span className="truncate w-full text-gray-400">
-                         {player.championStats.gamesPlayed && player.championStats.gamesPlayed > 5 
-                            ? <span className="text-esport-gold font-bold">Main</span> 
-                            : player.championStats.roleEffectiveness || "Unknown"
-                         }
-                       </span>
-                     </span>
-                  </div>
-               )}
+                      )}
+                      <span className="text-[10px] text-gray-500 flex items-center gap-1 flex-1 min-w-0">
+                        <span className="shrink-0 opacity-50">◎</span>
+                        <span className="truncate w-full text-gray-400">
+                          {secondaryText === 'Main' ? (
+                            <span className="text-esport-gold font-bold">Main</span>
+                          ) : (
+                            secondaryText
+                          )}
+                        </span>
+                      </span>
+                    </div>
+                  );
+               })()}
             </div>
           </div>
         ))}

@@ -24,6 +24,8 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "match_predictor_v4.pkl")
 RATINGS_PATH = os.path.join(BASE_DIR, "team_ratings.json")
 TAGS_PATH = os.path.join(BASE_DIR, "../data/championTags.ts")
+CHAMP_STATS_PATH = os.path.join(BASE_DIR, "champion_stats_pro.json")
+MIN_PRO_GAMES_FOR_CONFIDENT = 50
 
 # Global State
 model_data = None
@@ -31,6 +33,9 @@ model = None
 elo_map = {}
 role_map = {}
 class_map = {}
+champ_meta_map = {}
+champ_games_map = {}
+champ_global_avg = 0.5
 
 # --- LOADERS ---
 
@@ -79,6 +84,58 @@ def load_team_elo():
         e_map[entry['team']] = entry['rating']
     return e_map
 
+def load_champion_strengths(alpha: float = 50.0):
+    """
+    Loads champion-level pro meta strength from champion_stats_pro.json.
+    Returns:
+        meta_map: normalized champ name -> smoothed winrate (0-1)
+        global_avg: global average pro winrate (0-1)
+        games_map: normalized champ name -> pro games count
+    """
+    if not os.path.exists(CHAMP_STATS_PATH):
+        print("⚠️ Champion stats file not found, skipping champion strength features.")
+        return {}, 0.5, {}
+    
+    with open(CHAMP_STATS_PATH, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    
+    total_games = 0
+    weighted_wins = 0.0
+    for stats in data.values():
+        games = max(0, stats.get("pro_games", 0))
+        wr = stats.get("pro_win_rate", None)
+        if wr is None:
+            continue
+        total_games += games
+        weighted_wins += games * (wr / 100.0)
+    
+    global_avg = (weighted_wins / total_games) if total_games > 0 else 0.5
+    
+    meta_map = {}
+    games_map = {}
+    for name, stats in data.items():
+        games = max(0, stats.get("pro_games", 0))
+        raw_wr = stats.get("pro_win_rate", None)
+        if raw_wr is None:
+            base_wr = global_avg
+        else:
+            base_wr = raw_wr / 100.0
+        
+        denom = games + alpha
+        if denom > 0:
+            smoothed = (base_wr * games + alpha * global_avg) / denom
+        else:
+            smoothed = global_avg
+        
+        norm_key = name.lower().replace(" ", "").replace("'", "").replace(".", "")
+        
+        meta_map[norm_key] = smoothed
+        meta_map[name.lower()] = smoothed
+        games_map[norm_key] = games
+        games_map[name.lower()] = games
+    
+    return meta_map, global_avg, games_map
+
 # Initialize Resources
 try:
     if os.path.exists(MODEL_PATH):
@@ -107,6 +164,7 @@ except Exception as e:
 
 elo_map = load_team_elo()
 role_map, class_map = load_champion_meta()
+champ_meta_map, champ_global_avg, champ_games_map = load_champion_strengths()
 
 # --- API ---
 
@@ -193,6 +251,9 @@ def predict_match(match_data: dict):
         counter_warnings = []
         class_counts = {c: 0 for c in TRACKED_CLASSES}
         total_counter_score = 0.0
+        meta_sum = 0.0
+        low_data_count = 0
+        zero_pro_count = 0
         
         for i, champ in enumerate(draft):
             if i >= 5: break
@@ -218,6 +279,15 @@ def predict_match(match_data: dict):
             for cls in my_classes:
                 if cls in class_counts:
                     class_counts[cls] += 1
+
+            # Champion meta strength (centered around 0)
+            meta_val = champ_meta_map.get(c_norm, champ_global_avg)
+            games = champ_games_map.get(c_norm, 0)
+            meta_sum += (meta_val * 100.0 - 50.0)
+            if games == 0:
+                zero_pro_count += 1
+            elif games < MIN_PRO_GAMES_FOR_CONFIDENT:
+                low_data_count += 1
 
             # B. Counter Check (Am I being camped?)
             counters = []
@@ -257,12 +327,16 @@ def predict_match(match_data: dict):
             if len(counters) >= 3:
                 counter_warnings.append(f"⚠️ {champ} is countered by {', '.join(counters)}")
 
-        return score, off_role_detected, details, counter_warnings, class_counts, total_counter_score
+        meta_avg = meta_sum / max(1, len(draft))
+        return score, off_role_detected, details, counter_warnings, class_counts, total_counter_score, meta_avg, low_data_count, zero_pro_count
 
-    t1_role_score, t1_bad, t1_details, t1_counters, t1_classes, t1_c_score = get_role_score(blue_draft, red_draft)
-    t2_role_score, t2_bad, t2_details, t2_counters, t2_classes, t2_c_score = get_role_score(red_draft, blue_draft)
+    t1_role_score, t1_bad, t1_details, t1_counters, t1_classes, t1_c_score, t1_meta, t1_low, t1_zero = get_role_score(blue_draft, red_draft)
+    t2_role_score, t2_bad, t2_details, t2_counters, t2_classes, t2_c_score, t2_meta, t2_low, t2_zero = get_role_score(red_draft, blue_draft)
     
     role_diff = t1_role_score - t2_role_score
+    draft_meta_diff = t1_meta - t2_meta
+    low_data_diff = t1_low - t2_low
+    zero_pro_diff = t1_zero - t2_zero
     
     # 3. Predict (Pure ML V4)
     blue_win_pct = 50.0 
@@ -270,7 +344,14 @@ def predict_match(match_data: dict):
     if model:
         try:
             # Create input vector matching training columns
-            input_data = {'elo_diff': elo_diff, 'role_diff': role_diff, 'counter_score': t1_c_score}
+            input_data = {
+                'elo_diff': elo_diff,
+                'role_diff': role_diff,
+                'counter_score': t1_c_score,
+                'draft_meta_diff': draft_meta_diff,
+                'low_data_diff': low_data_diff,
+                'zero_pro_diff': zero_pro_diff,
+            }
             for cls in TRACKED_CLASSES:
                 input_data[f'diff_{cls}'] = t1_classes[cls] - t2_classes[cls]
                 
