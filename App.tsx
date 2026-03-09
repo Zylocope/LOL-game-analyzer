@@ -163,7 +163,7 @@ const handleFetchChampionStats = async (side: 'blue' | 'red', role: Role, champi
   
         // 2. Try to get REAL Stats from Python DB
         // Returns null if player has never played this champ in our DB
-        const realStats = await fetchRealPlayerStats(playerName, champion);
+        const realStats = await fetchRealPlayerStats(playerName, champion, role);
         
         // 3. Fallback to simulation/AI
         const simulatedData = getSimulatedPlayerData(champion, role, playerName);
@@ -173,11 +173,15 @@ const handleFetchChampionStats = async (side: 'blue' | 'red', role: Role, champi
         // A. Construct the final "Badge" stats
         // If we have real stats, we OVERWRITE the AI's generic winrate with the player's real winrate
         const finalChampionStats = realStats ? {
-            ...aiStats, // Keep generic meta tier info
-            winRate: realStats.winRate, // Use REAL winrate (e.g. "68%")
-            gamesPlayed: realStats.gamesPlayed, // Use REAL game count
-            roleEffectiveness: realStats.roleEffectiveness // Use REAL mastery tag ("Signature Pick")
-        } : aiStats; // Otherwise use generic AI stats
+            ...aiStats, // Keep generic/meta info
+            winRate: realStats.winRate,
+            gamesPlayed: realStats.gamesPlayed,
+            roleEffectiveness: realStats.roleEffectiveness,
+            source: realStats.source ?? 'pro',
+        } : {
+            ...aiStats,
+            source: 'ai' as const,
+        };
   
         // B. Determine Game Count for the UI logic
         const finalGames = realStats ? realStats.gamesPlayed : simulatedData.gamesOnChamp;

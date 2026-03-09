@@ -205,8 +205,6 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({
                   const laneKey = player.role.toLowerCase() as 'top' | 'jungle' | 'mid' | 'bot' | 'support';
                   const validRoles = meta?.roles ?? [];
                   const isValidRole = validRoles.includes(laneKey);
-                  const proPickRate = meta?.stats?.proPickRate ?? null;
-                  const neverPlayedPro = proPickRate === 0;
 
                   // OFF-ROLE: do not show winrate badge at all, just a warning
                   if (!isValidRole && meta) {
@@ -228,24 +226,67 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({
                   // Default: keep global 50% prior behaviour, but annotate "never played" when applicable
                   const hasRealGames = player.championStats.gamesPlayed && player.championStats.gamesPlayed > 0;
                   const winRateValue = parseInt(player.championStats.winRate);
+                  const source = player.championStats.source || 'ai';
 
-                  const secondaryText = neverPlayedPro
-                    ? 'Never played in pro matches (last 7 years)'
-                    : (player.championStats.gamesPlayed && player.championStats.gamesPlayed > 5
-                        ? 'Main'
-                        : player.championStats.roleEffectiveness || 'Unknown');
+                  let secondaryText: string;
+                  const proPickRate = meta?.stats?.proPickRate ?? null;
+
+                  // If truly no pro data anywhere, surface that explicitly (only when not using player/pro sources)
+                  if (
+                    proPickRate === 0 &&
+                    (!player.championStats.gamesPlayed ||
+                      (source !== 'player' && source !== 'pro'))
+                  ) {
+                    secondaryText = 'Never played in pro matches (last 7 years)';
+                  } else {
+                    if (source === 'player') {
+                      // Only favourites can be called "Main"
+                      if (player.championStats.gamesPlayed && player.championStats.gamesPlayed > 5) {
+                        secondaryText = 'Main';
+                      } else {
+                        secondaryText = player.championStats.roleEffectiveness || 'Favourite pick';
+                      }
+                    } else if (source === 'pro') {
+                      secondaryText = 'Pro (7-year aggregate)';
+                    } else if (source === 'global') {
+                      secondaryText = 'Global win rate';
+                    } else {
+                      secondaryText = player.championStats.roleEffectiveness || 'Unknown';
+                    }
+                  }
+
+                  // Color + label based on source type
+                  let badgeClass = '';
+                  let badgeLabelSuffix = '';
+                  if (source === 'player') {
+                    badgeClass = winRateValue >= 50
+                      ? 'bg-yellow-900/60 text-yellow-200 border-yellow-500/60'
+                      : 'bg-yellow-950/40 text-yellow-300 border-yellow-800';
+                    badgeLabelSuffix = ' Fav';
+                  } else if (source === 'pro') {
+                    badgeClass = winRateValue >= 50
+                      ? 'bg-blue-900/60 text-blue-200 border-blue-500/60'
+                      : 'bg-blue-950/40 text-blue-300 border-blue-800';
+                    badgeLabelSuffix = ' Pro';
+                  } else if (source === 'global') {
+                    badgeClass = winRateValue >= 50
+                      ? 'bg-green-900/50 text-green-200 border-green-500/60'
+                      : 'bg-green-950/40 text-green-300 border-green-800';
+                    badgeLabelSuffix = ' Global';
+                  } else {
+                    badgeClass = winRateValue >= 50
+                      ? 'bg-gray-800 text-gray-200 border-gray-600'
+                      : 'bg-gray-900 text-gray-300 border-gray-700';
+                    badgeLabelSuffix = '';
+                  }
 
                   return (
                     <div className="flex items-center gap-2 mt-1 w-full overflow-hidden">
                       {hasRealGames ? (
                         <span
-                          className={`text-[10px] px-1.5 py-0.5 rounded border font-bold whitespace-nowrap shrink-0
-                            ${winRateValue >= 60 
-                              ? 'bg-yellow-900/40 text-yellow-200 border-yellow-700/50' 
-                              : 'bg-blue-900/40 text-blue-200 border-blue-700'
-                            }`}
+                          className={`text-[10px] px-1.5 py-0.5 rounded border font-bold whitespace-nowrap shrink-0 ${badgeClass}`}
                         >
-                          {player.championStats.winRate} ({player.championStats.gamesPlayed}G)
+                          {player.championStats.winRate} ({player.championStats.gamesPlayed}G){badgeLabelSuffix}
                         </span>
                       ) : (
                         <span

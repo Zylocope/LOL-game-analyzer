@@ -5,6 +5,8 @@ export interface ChampionStats {
   roleEffectiveness: string;
   counterNotes: string;
   metaTier?: 'S+' | 'S' | 'A' | 'B' | 'C' | 'D';
+  gamesPlayed?: number;
+  source?: 'player' | 'pro' | 'global' | 'ai';
 }
 
 export interface AdvancedPlayerStats {
