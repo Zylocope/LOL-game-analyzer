@@ -1,4 +1,5 @@
 import { MatchContext, AnalysisResult, TeamStats, ChampionStats } from '../types';
+import CHAMPION_STATS from '../data/championStats.json';
 
 const LOCAL_API_URL = "http://localhost:8000"; // Address of your Python Backend
 const HF_API_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2";
@@ -105,25 +106,58 @@ export const fetchTeamData = async (teamName: string): Promise<TeamStats> => {
 };
 
 /**
- * Fetches Real Player Stats from Python DB
+ * Fetches layered stats for a champ:
+ * 1) Player-specific (favourite)
+ * 2) Global pro (7-year DB)
+ * 3) Fallback handled by AI champion stats
  */
-export const fetchRealPlayerStats = async (playerName: string, champion: string) => {
+export const fetchRealPlayerStats = async (playerName: string, champion: string, role?: string) => {
   try {
+    // 1) Player-specific stats
     const url = `${LOCAL_API_URL}/api/player/${encodeURIComponent(playerName)}/champion/${encodeURIComponent(champion)}`;
     const response = await fetch(url);
     const json = await response.json();
 
     if (json.found && json.data) {
-      return {
-        winRate: `${json.data.winRate}%`,
-        gamesPlayed: json.data.games,
-        roleEffectiveness: json.data.mastery_tag,
-        counterNotes: "",
-        metaTier: "S"
-      };
+      const games: number = json.data.games;
+      const wr: number = json.data.winRate;
+
+      // If favourite sample is too small in games played, do NOT treat as favourite.
+      // Always fall back to champion-level pro/global stats when games < 5.
+      const isWeakSample = games < 5;
+
+      if (!isWeakSample) {
+        return {
+          winRate: `${wr}%`,
+          gamesPlayed: games,
+          roleEffectiveness: json.data.mastery_tag,
+          counterNotes: "",
+          metaTier: "S",
+          source: 'player' as const,
+        };
+      }
+      // else: deliberately skip to champion-level pro stats below
+    }
+
+    // 2) Global pro stats for this champion+role
+    if (role) {
+      const champUrl = `${LOCAL_API_URL}/api/champion/${encodeURIComponent(champion)}/role/${encodeURIComponent(role)}`;
+      const champRes = await fetch(champUrl);
+      const champJson = await champRes.json();
+
+      if (champJson.found && champJson.data) {
+        return {
+          winRate: `${champJson.data.winRate}%`,
+          gamesPlayed: champJson.data.games,
+          roleEffectiveness: champJson.data.mastery_tag, // "Global Pro"
+          counterNotes: "",
+          metaTier: "S",
+          source: 'pro' as const,
+        };
+      }
     }
   } catch (e) { 
-    console.error("Player stat fetch failed", e); 
+    console.error("Player/champion stat fetch failed", e); 
   }
   return null;
 };
@@ -132,6 +166,34 @@ export const fetchRealPlayerStats = async (playerName: string, champion: string)
  * Fetches Generic Champion Meta Info using AI
  */
 export const fetchChampionStats = async (championName: string, role: string): Promise<ChampionStats> => {
+  // 1) Prefer mined GLOBAL win rate from championStats.json
+  try {
+    const allEntries = Object.values(CHAMPION_STATS) as Array<{ name: string; winRate: number }>;
+    const entry = allEntries.find(e => e.name === championName);
+    if (entry && typeof entry.winRate === 'number') {
+      const wr = entry.winRate;
+      let roleEffectiveness = "Balanced globally";
+      if (wr >= 52) roleEffectiveness = "Strong globally";
+      else if (wr <= 48) roleEffectiveness = "Weak globally";
+
+      let metaTier: ChampionStats['metaTier'] = 'B';
+      if (wr >= 54) metaTier = 'S';
+      else if (wr >= 51) metaTier = 'A';
+      else if (wr <= 47) metaTier = 'C';
+
+      return {
+        winRate: `${wr.toFixed(1)}%`,
+        roleEffectiveness,
+        counterNotes: "-",
+        metaTier,
+        source: 'global',
+      };
+    }
+  } catch (e) {
+    console.warn("Global champ stats lookup failed, falling back to AI:", e);
+  }
+
+  // 2) Fallback: AI-based generic stats (labelled as AI)
   try {
     const prompt = `Provide LoL stats for champion "${championName}" in role ${role}.
     Return a strict JSON object with fields: "winRate" (e.g. "52%"), "roleEffectiveness" (short phrase), "counterNotes", "metaTier" (S/A/B/C).
@@ -142,17 +204,16 @@ export const fetchChampionStats = async (championName: string, role: string): Pr
     const stats = extractJSON(text);
 
     if (stats) {
-       // Clean winrate
        if (stats.winRate) {
            const match = stats.winRate.match(/(\d+(\.\d+)?)/);
            stats.winRate = match ? match[0] + "%" : "N/A";
        }
-       return stats as ChampionStats;
+       return { ...(stats as ChampionStats), source: 'ai' };
     }
     throw new Error("Invalid JSON");
 
   } catch (error) {
-    return { winRate: "50%", roleEffectiveness: "Unknown", counterNotes: "-", metaTier: 'B' };
+    return { winRate: "50%", roleEffectiveness: "Unknown", counterNotes: "-", metaTier: 'B', source: 'ai' };
   }
 };
 

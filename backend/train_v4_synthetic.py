@@ -196,6 +196,7 @@ def generate_data():
             meta_sum = 0.0
             low_data_count = 0
             zero_pro_count = 0
+            off_role_count = 0
             
             # Helper to map position to champion for counter lookup
             my_champs = {} 
@@ -212,7 +213,11 @@ def generate_data():
                 if not valid:
                     val = 0.5
                 else:
-                    val = 1.0 if p in valid else -1.0
+                    if p in valid:
+                        val = 1.0
+                    else:
+                        val = -1.0
+                        off_role_count += 1
                 r_score += val
                 
                 # Champion meta strength (centered around 0)
@@ -251,11 +256,11 @@ def generate_data():
             elo = elo_map.get(t_name.replace(" ", ""), elo_map.get(t_name, 1200))
             result = rows.iloc[0]['result']
             meta_avg = meta_sum / max(1, len(rows))
-            return elo, r_score, result, roster_data, class_counts, c_score, meta_avg, low_data_count, zero_pro_count
+            return elo, r_score, result, roster_data, class_counts, c_score, meta_avg, low_data_count, zero_pro_count, off_role_count
 
         # 1. Get Real Stats
-        t1_elo, t1_role, t1_res, t1_roster, t1_classes, t1_counter, t1_meta, t1_low, t1_zero = get_team_features(t1_rows, t1_name, t2_rows)
-        t2_elo, t2_role, t2_res, t2_roster, t2_classes, t2_counter, t2_meta, t2_low, t2_zero = get_team_features(t2_rows, t2_name, t1_rows)
+        t1_elo, t1_role, t1_res, t1_roster, t1_classes, t1_counter, t1_meta, t1_low, t1_zero, t1_off = get_team_features(t1_rows, t1_name, t2_rows)
+        t2_elo, t2_role, t2_res, t2_roster, t2_classes, t2_counter, t2_meta, t2_low, t2_zero, t2_off = get_team_features(t2_rows, t2_name, t1_rows)
         
         real_row = {
             'elo_diff': t1_elo - t2_elo,
@@ -264,6 +269,7 @@ def generate_data():
             'draft_meta_diff': t1_meta - t2_meta,
             'low_data_diff': t1_low - t2_low,
             'zero_pro_diff': t1_zero - t2_zero,
+            'off_role_diff': t1_off - t2_off,
             'target': 1 if t1_res == 1 else 0,
             'type': 'real'
         }
@@ -311,6 +317,7 @@ def train_model_v4():
             'draft_meta_diff',
             'low_data_diff',
             'zero_pro_diff',
+            'off_role_diff',
         ] + [f'diff_{c}' for c in TRACKED_CLASSES]
         
         X = df[features]

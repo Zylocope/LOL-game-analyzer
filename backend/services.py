@@ -109,6 +109,47 @@ def get_player_stats(player_name: str, champion: str):
         print(f"Error fetching player stats: {e}")
         return None
 
+
+def get_champion_pro_stats(champion: str, role: Optional[str] = None):
+    """
+    Global pro stats for a champion, optionally filtered by role (Top/Jungle/Mid/Bot/Support).
+    Uses the same 7-year player_stats table, aggregating over all players.
+    """
+    conn = get_db_connection()
+    try:
+        params = [champion]
+        role_filter = ""
+        if role:
+            role_map = {"Top": "top", "Jungle": "jng", "Mid": "mid", "Bot": "bot", "Support": "sup"}
+            db_pos = role_map.get(role, role.lower())
+            role_filter = "AND position = ? COLLATE NOCASE"
+            params.append(db_pos)
+
+        query = f"""
+        SELECT COUNT(*) as games, SUM(CASE WHEN result = 1 THEN 1 ELSE 0 END) as wins
+        FROM player_stats
+        WHERE champion = ? COLLATE NOCASE
+        {role_filter}
+        """
+        df = pd.read_sql(query, conn, params=params)
+        conn.close()
+
+        if df.empty or df.iloc[0]["games"] == 0:
+            return None
+
+        games = int(df.iloc[0]["games"])
+        wins = int(df.iloc[0]["wins"])
+        win_rate = (wins / games) * 100.0
+
+        return {
+            "games": games,
+            "winRate": round(win_rate, 1),
+            "mastery_tag": "Global Pro"
+        }
+    except Exception as e:
+        print(f"Error fetching champion pro stats: {e}")
+        return None
+
 def get_matchup_stats(my_champ: str, enemy_champ: str, role: str):
     if not my_champ or not enemy_champ: return None
     

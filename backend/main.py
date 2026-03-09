@@ -1,6 +1,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .services import get_team_stats, get_player_stats, get_db_connection, get_all_teams, get_matchup_stats, get_composition_analysis
+from .services import (
+    get_team_stats,
+    get_player_stats,
+    get_db_connection,
+    get_all_teams,
+    get_matchup_stats,
+    get_composition_analysis,
+    get_champion_pro_stats,
+)
 import joblib
 import pandas as pd
 import numpy as np
@@ -216,6 +224,18 @@ def api_matchup_stats(my_champ: str, enemy_champ: str, role: str):
     if not data: return {"found": False}
     return {"found": True, "data": data}
 
+
+@app.get("/api/champion/{champion}/role/{role}")
+def api_champion_stats(champion: str, role: str):
+    """
+    Global pro stats (7-year DB) for a champion in a given role.
+    Used when a specific player has no games on that champ.
+    """
+    data = get_champion_pro_stats(champion, role)
+    if not data:
+        return {"found": False}
+    return {"found": True, "data": data}
+
 @app.post("/api/predict")
 def predict_match(match_data: dict):
     """
@@ -247,6 +267,7 @@ def predict_match(match_data: dict):
     def get_role_score(draft, enemy_draft):
         score = 0
         off_role_detected = False
+        off_role_count = 0
         details = []
         counter_warnings = []
         class_counts = {c: 0 for c in TRACKED_CLASSES}
@@ -271,6 +292,7 @@ def predict_match(match_data: dict):
             else:
                 val = -1.0
                 off_role_detected = True
+                off_role_count += 1
                 details.append(f"{champ} in {pos_req}")
             score += val
             
@@ -328,10 +350,10 @@ def predict_match(match_data: dict):
                 counter_warnings.append(f"⚠️ {champ} is countered by {', '.join(counters)}")
 
         meta_avg = meta_sum / max(1, len(draft))
-        return score, off_role_detected, details, counter_warnings, class_counts, total_counter_score, meta_avg, low_data_count, zero_pro_count
+        return score, off_role_detected, off_role_count, details, counter_warnings, class_counts, total_counter_score, meta_avg, low_data_count, zero_pro_count
 
-    t1_role_score, t1_bad, t1_details, t1_counters, t1_classes, t1_c_score, t1_meta, t1_low, t1_zero = get_role_score(blue_draft, red_draft)
-    t2_role_score, t2_bad, t2_details, t2_counters, t2_classes, t2_c_score, t2_meta, t2_low, t2_zero = get_role_score(red_draft, blue_draft)
+    t1_role_score, t1_bad, t1_off_count, t1_details, t1_counters, t1_classes, t1_c_score, t1_meta, t1_low, t1_zero = get_role_score(blue_draft, red_draft)
+    t2_role_score, t2_bad, t2_off_count, t2_details, t2_counters, t2_classes, t2_c_score, t2_meta, t2_low, t2_zero = get_role_score(red_draft, blue_draft)
     
     role_diff = t1_role_score - t2_role_score
     draft_meta_diff = t1_meta - t2_meta
@@ -366,7 +388,16 @@ def predict_match(match_data: dict):
         # Fallback if model file missing
         blue_win_pct = 50.0 + (elo_diff / 20) + (role_diff * 5)
 
-    # 4. Final Polish (Rounding)
+    # 4. Hard sanity clamp for troll drafts
+    # If one team has 3+ clear off-role champs and the other has 0, heavily punish that team.
+    if t1_off_count >= 3 and t2_off_count == 0:
+        # Blue is trolling
+        blue_win_pct = min(blue_win_pct, 20.0)
+    elif t2_off_count >= 3 and t1_off_count == 0:
+        # Red is trolling
+        blue_win_pct = max(blue_win_pct, 80.0)
+
+    # 5. Final Polish (Rounding)
     # Ensure 100.0 sum
     blue_win_pct = round(blue_win_pct, 1)
     red_win_pct = round(100.0 - blue_win_pct, 1)
@@ -375,7 +406,7 @@ def predict_match(match_data: dict):
     blue_win_pct = max(1.0, min(99.0, blue_win_pct))
     red_win_pct = round(100.0 - blue_win_pct, 1) # Recalculate red to ensure sum match
 
-    # 5. Factors Explanation
+    # 6. Factors Explanation
     factors = []
     
     if abs(elo_diff) > 50:
