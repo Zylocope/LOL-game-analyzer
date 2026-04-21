@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .services import (
+from services import (
     get_team_stats,
     get_player_stats,
     get_db_connection,
@@ -15,6 +15,76 @@ import numpy as np
 import os
 import json
 import re
+
+def _analyze_champion_role(champion_normalized_name: str, required_position: str, role_map: dict):
+    valid_roles = role_map.get(champion_normalized_name, [])
+    is_off_role = False
+    score_impact = 0.0
+
+    if not valid_roles:
+        score_impact = 0.0 # Unknown role, neutral impact
+    elif required_position in valid_roles:
+        score_impact = 1.0 # Correct role, positive impact
+    else:
+        score_impact = -1.0 # Off-role, negative impact
+        is_off_role = True
+    
+    return {"score_impact": score_impact, "is_off_role": is_off_role}
+
+def _analyze_champion_meta(champion_normalized_name: str, champ_meta_map: dict, champ_global_avg: float, champ_games_map: dict, min_pro_games_for_confident: int):
+    meta_val = champ_meta_map.get(champion_normalized_name, champ_global_avg)
+    games = champ_games_map.get(champion_normalized_name, 0)
+    meta_score_impact = (meta_val * 100.0 - 50.0)
+    is_zero_pro_games = (games == 0)
+    is_low_data = (games < min_pro_games_for_confident and games > 0)
+    
+    return {
+        "meta_score_impact": meta_score_impact,
+        "is_zero_pro_games": is_zero_pro_games,
+        "is_low_data": is_low_data
+    }
+
+def _analyze_champion_counters(champion: str, my_classes: list, position_index: int, required_position: str, enemy_draft: list, class_map: dict, get_matchup_stats, POSITIONS: list):
+    counters = []
+    total_counter_score = 0.0
+
+    # 1. Lane Counter (Matrix)
+    lane_opp = enemy_draft[position_index] if position_index < len(enemy_draft) else None
+    if lane_opp:
+        stats = get_matchup_stats(champion, lane_opp, required_position)
+        if stats:
+            total_counter_score += (stats["winRate"] - 50.0)
+            if stats["type"] == "disadvantage":
+                counters.append(f"{POSITIONS[position_index].capitalize()} (Lane)")
+
+    # 2. Cross-Role Counter (Class Logic)
+    is_squishy = any(c in ["mage", "marksman", "enchanter", "artillery"] for c in my_classes)
+    is_melee = any(c in ["fighter", "tank", "slayer"] for c in my_classes)
+    
+    for j, enemy_champ in enumerate(enemy_draft):
+        if not enemy_champ: continue
+        if position_index == j: continue 
+        
+        e_norm = enemy_champ.lower().replace(" ", "").replace("\"", "").replace(".", "")
+        e_classes = class_map.get(e_norm, [])
+        
+        is_threat = False
+        
+        if is_squishy:
+            if any(c in ["assassin", "diver", "catcher", "vanguard"] for c in e_classes):
+                is_threat = True
+        if is_melee:
+            if any(c in ["control", "disengage", "warden"] for c in e_classes):
+                is_threat = True
+                
+        if is_threat:
+            counters.append(POSITIONS[j].capitalize())
+    
+    warnings = []
+    if len(counters) >= 3:
+        warnings.append(f"⚠️ {champion} is countered by {", ".join(counters)}")
+
+    return {"counter_score_impact": total_counter_score, "warnings": warnings}
 
 app = FastAPI()
 
@@ -236,6 +306,56 @@ def api_champion_stats(champion: str, role: str):
         return {"found": False}
     return {"found": True, "data": data}
 
+def get_role_score(draft, enemy_draft, POSITIONS, TRACKED_CLASSES, role_map, class_map, champ_meta_map, champ_global_avg, champ_games_map, MIN_PRO_GAMES_FOR_CONFIDENT, get_matchup_stats):
+    score = 0
+    off_role_detected = False
+    off_role_count = 0
+    details = []
+    counter_warnings = []
+    class_counts = {c: 0 for c in TRACKED_CLASSES}
+    total_counter_score = 0.0
+    meta_sum = 0.0
+    low_data_count = 0
+    zero_pro_count = 0
+    
+    for i, champ in enumerate(draft):
+        if i >= 5: break
+        if not champ: continue
+        
+        # A. Off-Role Check
+        c_norm = champ.lower().replace(" ", "").replace("'", "").replace(".", "")
+        pos_req = POSITIONS[i]
+        
+        role_analysis = _analyze_champion_role(c_norm, pos_req, role_map)
+        score += role_analysis["score_impact"]
+        if role_analysis["is_off_role"]:
+            off_role_detected = True
+            off_role_count += 1
+            details.append(f"{champ} in {pos_req}")
+        
+        # Class Counting
+        my_classes = class_map.get(c_norm, [])
+        for cls in my_classes:
+            if cls in class_counts:
+                class_counts[cls] += 1
+
+        # Champion meta strength (centered around 0)
+        meta_analysis = _analyze_champion_meta(c_norm, champ_meta_map, champ_global_avg, champ_games_map, MIN_PRO_GAMES_FOR_CONFIDENT)
+        meta_sum += meta_analysis["meta_score_impact"]
+        if meta_analysis["is_zero_pro_games"]:
+            zero_pro_count += 1
+        elif meta_analysis["is_low_data"]:
+            low_data_count += 1
+
+        # B. Counter Check
+        counter_analysis = _analyze_champion_counters(champ, my_classes, i, pos_req, enemy_draft, class_map, get_matchup_stats, POSITIONS)
+        total_counter_score += counter_analysis["counter_score_impact"]
+        if counter_analysis["warnings"]:
+            counter_warnings.extend(counter_analysis["warnings"])
+
+    meta_avg = meta_sum / max(1, len(draft))
+    return score, off_role_detected, off_role_count, details, counter_warnings, class_counts, total_counter_score, meta_avg, low_data_count, zero_pro_count
+
 @app.post("/api/predict")
 def predict_match(match_data: dict):
     """
@@ -246,6 +366,12 @@ def predict_match(match_data: dict):
     red_name = match_data.get("redTeam", "Red")
     blue_draft = match_data.get("blueDraft", [])
     red_draft = match_data.get("redDraft", [])
+
+    if not blue_draft or not red_draft:
+        return {"error": "Both blueDraft and redDraft must contain champions for prediction.", "blueWinChance": 0.5, "redWinChance": 0.5, "factors": ["Missing draft information."]}
+
+    if model is None:
+        print("⚠️ Model not loaded, operating in Heuristic Mode.")
     
     # 1. Elo Diff
     elo1 = elo_map.get(blue_name.replace(" ", ""), elo_map.get(blue_name, 1200))
@@ -264,174 +390,131 @@ def predict_match(match_data: dict):
     # Import services to access Matchup Matrix
     from .services import get_matchup_stats
 
-    def get_role_score(draft, enemy_draft):
-        score = 0
-        off_role_detected = False
-        off_role_count = 0
-        details = []
-        counter_warnings = []
-        class_counts = {c: 0 for c in TRACKED_CLASSES}
-        total_counter_score = 0.0
-        meta_sum = 0.0
-        low_data_count = 0
-        zero_pro_count = 0
-        
-        for i, champ in enumerate(draft):
-            if i >= 5: break
-            if not champ: continue
-            
-            # A. Off-Role Check
-            c_norm = champ.lower().replace(" ", "").replace("'", "").replace(".", "")
-            pos_req = POSITIONS[i]
-            valid = role_map.get(c_norm, [])
-            
-            if not valid:
-                val = 0.0
-            elif pos_req in valid:
-                val = 1.0
-            else:
-                val = -1.0
-                off_role_detected = True
-                off_role_count += 1
-                details.append(f"{champ} in {pos_req}")
-            score += val
-            
-            # Class Counting
-            my_classes = class_map.get(c_norm, [])
-            for cls in my_classes:
-                if cls in class_counts:
-                    class_counts[cls] += 1
+    blue_score, blue_off_role_detected, blue_off_role_count, blue_details, blue_counter_warnings, blue_class_counts, blue_total_counter_score, blue_meta_avg, blue_low_data_count, blue_zero_pro_count = get_role_score(blue_draft, red_draft, POSITIONS, TRACKED_CLASSES, role_map, class_map, champ_meta_map, champ_global_avg, champ_games_map, MIN_PRO_GAMES_FOR_CONFIDENT, get_matchup_stats)
+    red_score, red_off_role_detected, red_off_role_count, red_details, red_counter_warnings, red_class_counts, red_total_counter_score, red_meta_avg, red_low_data_count, red_zero_pro_count = get_role_score(red_draft, blue_draft, POSITIONS, TRACKED_CLASSES, role_map, class_map, champ_meta_map, champ_global_avg, champ_games_map, MIN_PRO_GAMES_FOR_CONFIDENT, get_matchup_stats)
 
-            # Champion meta strength (centered around 0)
-            meta_val = champ_meta_map.get(c_norm, champ_global_avg)
-            games = champ_games_map.get(c_norm, 0)
-            meta_sum += (meta_val * 100.0 - 50.0)
-            if games == 0:
-                zero_pro_count += 1
-            elif games < MIN_PRO_GAMES_FOR_CONFIDENT:
-                low_data_count += 1
+    # 3. Model Prediction
+    input_features = [
+        elo_diff,
+        blue_score,
+        red_score,
+        blue_total_counter_score,
+        red_total_counter_score,
+        blue_meta_avg,
+        red_meta_avg,
+        blue_class_counts['marksman'],
+        blue_class_counts['tank'],
+        blue_class_counts['support'],
+        blue_class_counts['fighter'],
+        blue_class_counts['mage'],
+        blue_class_counts['assassin'],
+        blue_class_counts['catcher'],
+        blue_class_counts['vanguard'],
+        blue_class_counts['enchanter'],
+        red_class_counts['marksman'],
+        red_class_counts['tank'],
+        red_class_counts['support'],
+        red_class_counts['fighter'],
+        red_class_counts['mage'],
+        red_class_counts['assassin'],
+        red_class_counts['catcher'],
+        red_class_counts['vanguard'],
+        red_class_counts['enchanter'],
+    ]
 
-            # B. Counter Check (Am I being camped?)
-            counters = []
-            
-            # 1. Lane Counter (Matrix)
-            lane_opp = enemy_draft[i] if i < len(enemy_draft) else None
-            if lane_opp:
-                stats = get_matchup_stats(champ, lane_opp, pos_req)
-                if stats:
-                    total_counter_score += (stats['winRate'] - 50.0)
-                    if stats['type'] == 'disadvantage':
-                        counters.append(f"{POSITIONS[i].capitalize()} (Lane)")
-
-            # 2. Cross-Role Counter (Class Logic)
-            is_squishy = any(c in ['mage', 'marksman', 'enchanter', 'artillery'] for c in my_classes)
-            is_melee = any(c in ['fighter', 'tank', 'slayer'] for c in my_classes)
-            
-            for j, enemy_champ in enumerate(enemy_draft):
-                if not enemy_champ: continue
-                if i == j: continue 
-                
-                e_norm = enemy_champ.lower().replace(" ", "").replace("'", "").replace(".", "")
-                e_classes = class_map.get(e_norm, [])
-                
-                is_threat = False
-                
-                if is_squishy:
-                    if any(c in ['assassin', 'diver', 'catcher', 'vanguard'] for c in e_classes):
-                        is_threat = True
-                if is_melee:
-                    if any(c in ['control', 'disengage', 'warden'] for c in e_classes):
-                        is_threat = True
-                        
-                if is_threat:
-                    counters.append(POSITIONS[j].capitalize())
-            
-            if len(counters) >= 3:
-                counter_warnings.append(f"⚠️ {champ} is countered by {', '.join(counters)}")
-
-        meta_avg = meta_sum / max(1, len(draft))
-        return score, off_role_detected, off_role_count, details, counter_warnings, class_counts, total_counter_score, meta_avg, low_data_count, zero_pro_count
-
-    t1_role_score, t1_bad, t1_off_count, t1_details, t1_counters, t1_classes, t1_c_score, t1_meta, t1_low, t1_zero = get_role_score(blue_draft, red_draft)
-    t2_role_score, t2_bad, t2_off_count, t2_details, t2_counters, t2_classes, t2_c_score, t2_meta, t2_low, t2_zero = get_role_score(red_draft, blue_draft)
-    
-    role_diff = t1_role_score - t2_role_score
-    draft_meta_diff = t1_meta - t2_meta
-    low_data_diff = t1_low - t2_low
-    zero_pro_diff = t1_zero - t2_zero
-    
-    # 3. Predict (Pure ML V4)
-    blue_win_pct = 50.0 
-    
+    prediction = 0.5 # Default to 50/50
     if model:
         try:
-            # Create input vector matching training columns
-            input_data = {
-                'elo_diff': elo_diff,
-                'role_diff': role_diff,
-                'counter_score': t1_c_score,
-                'draft_meta_diff': draft_meta_diff,
-                'low_data_diff': low_data_diff,
-                'zero_pro_diff': zero_pro_diff,
-            }
-            for cls in TRACKED_CLASSES:
-                input_data[f'diff_{cls}'] = t1_classes[cls] - t2_classes[cls]
-                
-            input_vector = pd.DataFrame([input_data])
-            probs = model.predict_proba(input_vector)[0]
-            blue_win_pct = probs[1] * 100
+            prediction = model.predict_proba([input_features])[0][1]
         except Exception as e:
-            print(f"⚠️ ML Prediction failed: {e}")
-            # Only fallback if model crashes
-            blue_win_pct = 50.0 + (elo_diff / 20) + (role_diff * 5)
-    else:
-        # Fallback if model file missing
-        blue_win_pct = 50.0 + (elo_diff / 20) + (role_diff * 5)
+            print(f"Model prediction failed: {e}. Falling back to enhanced heuristic.")
+            # Enhanced Heuristic fallback if model fails
+            # Weights can be tuned further
+            heuristic_score = (
+                (elo_diff / 2000) * 0.2 +  # Elo difference contribution
+                ((blue_score - red_score) / 10) * 0.3 + # Role score contribution
+                ((blue_total_counter_score - red_total_counter_score) / 100) * 0.2 + # Counter score contribution
+                ((blue_meta_avg - red_meta_avg) * 100) * 0.1 # Meta average contribution
+            )
+            prediction = 0.5 + heuristic_score
+            prediction = np.clip(prediction, 0.1, 0.9) # Clamp to reasonable range
 
-    # 4. Hard sanity clamp for troll drafts
-    # If one team has 3+ clear off-role champs and the other has 0, heavily punish that team.
-    if t1_off_count >= 3 and t2_off_count == 0:
-        # Blue is trolling
-        blue_win_pct = min(blue_win_pct, 20.0)
-    elif t2_off_count >= 3 and t1_off_count == 0:
-        # Red is trolling
-        blue_win_pct = max(blue_win_pct, 80.0)
-
-    # 5. Final Polish (Rounding)
-    # Ensure 100.0 sum
-    blue_win_pct = round(blue_win_pct, 1)
-    red_win_pct = round(100.0 - blue_win_pct, 1)
+    # Hard sanity clamp for extreme off-roles or low data
+    troll_penalty_blue = 0.0
+    if blue_off_role_count == 1: troll_penalty_blue += 0.05
+    elif blue_off_role_count >= 2: troll_penalty_blue += 0.15
     
-    # Clamp to avoid 101% or -5%
-    blue_win_pct = max(1.0, min(99.0, blue_win_pct))
-    red_win_pct = round(100.0 - blue_win_pct, 1) # Recalculate red to ensure sum match
+    if blue_zero_pro_count == 1: troll_penalty_blue += 0.03
+    elif blue_zero_pro_count == 2: troll_penalty_blue += 0.07
+    elif blue_zero_pro_count >= 3: troll_penalty_blue += 0.12
 
-    # 6. Factors Explanation
+    if blue_low_data_count >= 3: troll_penalty_blue += 0.05
+
+    troll_penalty_red = 0.0
+    if red_off_role_count == 1: troll_penalty_red += 0.05
+    elif red_off_role_count >= 2: troll_penalty_red += 0.15
+    
+    if red_zero_pro_count == 1: troll_penalty_red += 0.03
+    elif red_zero_pro_count == 2: troll_penalty_red += 0.07
+    elif red_zero_pro_count >= 3: troll_penalty_red += 0.12
+
+    if red_low_data_count >= 3: troll_penalty_red += 0.05
+
+    prediction -= (troll_penalty_blue - troll_penalty_red)
+    prediction = np.clip(prediction, 0.05, 0.95) # Final clamp
+
+    # Factors Explanation
     factors = []
-    
-    if abs(elo_diff) > 50:
-        leader = blue_name if elo_diff > 0 else red_name
-        factors.append(f"🏆 Power Gap: {leader} (+{abs(elo_diff):.0f} Elo)")
-        
-    if t1_bad:
-        factors.append(f"⚠️ OFF-ROLE: {blue_name} ({', '.join(t1_details)})")
-    if t2_bad:
-        factors.append(f"⚠️ OFF-ROLE: {red_name} ({', '.join(t2_details)})")
-        
-    # Counter Warnings (New)
-    # factors.extend(t1_counters) <- Remove flat add
-    # factors.extend(t2_counters)
-        
-    if not t1_bad and not t2_bad:
-        if role_diff > 1:
-            factors.append(f"✅ Composition: {blue_name} role advantage.")
-        elif role_diff < -1:
-            factors.append(f"✅ Composition: {red_name} role advantage.")
+    if elo_diff > 0:
+        factors.append(f"Blue team has a higher Elo rating (Elo difference: {elo_diff:.0f}).")
+    elif elo_diff < 0:
+        factors.append(f"Red team has a higher Elo rating (Elo difference: {-elo_diff:.0f}).")
+
+    if blue_score > red_score:
+        factors.append(f"Blue team has a better role composition score ({blue_score:.1f} vs {red_score:.1f}).")
+    elif red_score > blue_score:
+        factors.append(f"Red team has a better role composition score ({red_score:.1f} vs {blue_score:.1f}).")
+
+    if blue_total_counter_score < red_total_counter_score:
+        factors.append(f"Blue team has a more favorable matchup against the enemy team.")
+    elif red_total_counter_score < blue_total_counter_score:
+        factors.append(f"Red team has a more favorable matchup against the enemy team.")
+
+    if blue_meta_avg > red_meta_avg:
+        factors.append(f"Blue team picked more meta champions (Avg WR: {blue_meta_avg*100:.1f}% vs {red_meta_avg*100:.1f}%).")
+    elif red_meta_avg > blue_meta_avg:
+        factors.append(f"Red team picked more meta champions (Avg WR: {red_meta_avg*100:.1f}% vs {blue_meta_avg*100:.1f}%).")
+
+    if blue_off_role_detected:
+        factors.append(f"Blue team has off-role picks: {', '.join(blue_details)}.")
+    if red_off_role_detected:
+        factors.append(f"Red team has off-role picks: {', '.join(red_details)}.")
+
+    if blue_zero_pro_count > 0:
+        factors.append(f"Blue team has {blue_zero_pro_count} champions with no pro play data.")
+    if red_zero_pro_count > 0:
+        factors.append(f"Red team has {red_zero_pro_count} champions with no pro play data.")
+
+    if blue_low_data_count > 0:
+        factors.append(f"Blue team has {blue_low_data_count} champions with limited pro play data.")
+    if red_low_data_count > 0:
+        factors.append(f"Red team has {red_low_data_count} champions with limited pro play data.")
+
+    if troll_penalty_blue > 0:
+        factors.append(f"Blue team received a penalty ({troll_penalty_blue*100:.0f}%) for unusual draft choices.")
+    if troll_penalty_red > 0:
+        factors.append(f"Red team received a penalty ({troll_penalty_red*100:.0f}%) for unusual draft choices.")
+
+    # Add a general factor if the model failed and heuristic was used
+    if model is None:
+        factors.append("Prediction based on heuristic due to model unavailability.")
+
+    # Add counter warnings
+    factors.extend(blue_counter_warnings)
+    factors.extend(red_counter_warnings)
 
     return {
-        "blueWin": blue_win_pct,
-        "redWin": red_win_pct,
-        "factors": factors,
-        "blueWarnings": t1_counters, # New explicit field
-        "redWarnings": t2_counters   # New explicit field
+        "blueWinChance": prediction,
+        "redWinChance": 1 - prediction,
+        "factors": factors
     }
