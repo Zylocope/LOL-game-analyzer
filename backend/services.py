@@ -3,7 +3,10 @@ import pandas as pd
 import json
 import os
 from typing import Dict, List, Optional
-from .champion_meta import get_champ_profile
+try:
+    from .champion_meta import get_champ_profile
+except ImportError:
+    from champion_meta import get_champ_profile
 
 # Database
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))

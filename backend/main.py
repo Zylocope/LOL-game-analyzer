@@ -1,14 +1,25 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from services import (
-    get_team_stats,
-    get_player_stats,
-    get_db_connection,
-    get_all_teams,
-    get_matchup_stats,
-    get_composition_analysis,
-    get_champion_pro_stats,
-)
+try:
+    from .services import (
+        get_team_stats,
+        get_player_stats,
+        get_db_connection,
+        get_all_teams,
+        get_matchup_stats,
+        get_composition_analysis,
+        get_champion_pro_stats,
+    )
+except ImportError:
+    from services import (
+        get_team_stats,
+        get_player_stats,
+        get_db_connection,
+        get_all_teams,
+        get_matchup_stats,
+        get_composition_analysis,
+        get_champion_pro_stats,
+    )
 import joblib
 import pandas as pd
 import numpy as np
@@ -82,7 +93,8 @@ def _analyze_champion_counters(champion: str, my_classes: list, position_index: 
     
     warnings = []
     if len(counters) >= 3:
-        warnings.append(f"⚠️ {champion} is countered by {", ".join(counters)}")
+        counter_list = ", ".join(counters)
+        warnings.append(f"⚠️ {champion} is countered by {counter_list}")
 
     return {"counter_score_impact": total_counter_score, "warnings": warnings}
 
@@ -228,11 +240,14 @@ try:
     else:
         raise FileNotFoundError("Model missing")
 except Exception as e:
-    print(f"⚠️ Model load failed ({e}). Retraining locally to fix version mismatch...")
+    print(f"⚠️ Model load failed ({e}). This might be due to Python 3.13 incompatibility or a missing model file. Attempting to retrain locally...")
     try:
         # DYNAMIC RETRAINING ON STARTUP
         # This ensures the model is compatible with the current OS/Python/Numpy
-        from .train_v4_synthetic import train_model_v4
+        try:
+            from train_v4_synthetic import train_model_v4
+        except ModuleNotFoundError:
+            from backend.train_v4_synthetic import train_model_v4
         model = train_model_v4() 
         print("✅ Model retrained and loaded successfully.")
     except Exception as train_err:
@@ -387,9 +402,6 @@ def predict_match(match_data: dict):
         'catcher', 'vanguard', 'enchanter'
     ]
     
-    # Import services to access Matchup Matrix
-    from .services import get_matchup_stats
-
     blue_score, blue_off_role_detected, blue_off_role_count, blue_details, blue_counter_warnings, blue_class_counts, blue_total_counter_score, blue_meta_avg, blue_low_data_count, blue_zero_pro_count = get_role_score(blue_draft, red_draft, POSITIONS, TRACKED_CLASSES, role_map, class_map, champ_meta_map, champ_global_avg, champ_games_map, MIN_PRO_GAMES_FOR_CONFIDENT, get_matchup_stats)
     red_score, red_off_role_detected, red_off_role_count, red_details, red_counter_warnings, red_class_counts, red_total_counter_score, red_meta_avg, red_low_data_count, red_zero_pro_count = get_role_score(red_draft, blue_draft, POSITIONS, TRACKED_CLASSES, role_map, class_map, champ_meta_map, champ_global_avg, champ_games_map, MIN_PRO_GAMES_FOR_CONFIDENT, get_matchup_stats)
 
