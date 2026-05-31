@@ -299,6 +299,31 @@ const handleFetchChampionStats = async (side: 'blue' | 'red', role: Role, champi
                 <div className="h-6 w-px bg-gray-700 mx-2"></div>
                 <button 
                     onClick={() => {
+                        // SCENARIO 0: NORMAL PRO DRAFT
+                        const bluePicks = [
+                            { r: 'Top', c: "K'Sante" }, { r: 'Jungle', c: 'Sejuani' },
+                            { r: 'Mid', c: 'Azir' }, { r: 'Bot', c: "Kai'Sa" }, { r: 'Support', c: 'Rakan' }
+                        ];
+                        const redPicks = [
+                            { r: 'Top', c: 'Renekton' }, { r: 'Jungle', c: 'Vi' },
+                            { r: 'Mid', c: 'Orianna' }, { r: 'Bot', c: 'Aphelios' }, { r: 'Support', c: 'Nautilus' }
+                        ];
+
+                        bluePicks.forEach(p => {
+                            handleUpdatePlayer('blue', p.r, p.c);
+                            handleFetchChampionStats('blue', p.r, p.c);
+                        });
+                        redPicks.forEach(p => {
+                            handleUpdatePlayer('red', p.r, p.c);
+                            handleFetchChampionStats('red', p.r, p.c);
+                        });
+                    }}
+                    className="px-2 py-1 bg-emerald-900/30 border border-emerald-800 rounded text-[10px] text-emerald-400 hover:bg-emerald-900/50 uppercase font-bold tracking-wider"
+                >
+                    Test: Normal
+                </button>
+                <button 
+                    onClick={() => {
                         // SCENARIO 1: META vs TROLL
                         // Blue: Standard Pro Comp
                         const bluePicks = [

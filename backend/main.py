@@ -116,10 +116,35 @@ RATINGS_PATH = os.path.join(BASE_DIR, "team_ratings.json")
 TAGS_PATH = os.path.join(BASE_DIR, "../data/championTags.ts")
 CHAMP_STATS_PATH = os.path.join(BASE_DIR, "champion_stats_pro.json")
 MIN_PRO_GAMES_FOR_CONFIDENT = 50
+TRACKED_CLASSES = [
+    'assassin', 'catcher', 'vanguard', 'enchanter'
+]
+MODEL_FEATURES = [
+    'elo_diff',
+    'blue_score',
+    'red_score',
+    'blue_total_counter_score',
+    'red_total_counter_score',
+    'blue_meta_avg',
+    'red_meta_avg',
+    'blue_off_role_count',
+    'red_off_role_count',
+    'blue_unknown_role_count',
+    'red_unknown_role_count',
+    'blue_support_capable_count',
+    'red_support_capable_count',
+    'blue_jungle_capable_count',
+    'red_jungle_capable_count',
+    'blue_low_data_count',
+    'red_low_data_count',
+    'blue_zero_pro_count',
+    'red_zero_pro_count',
+] + [f'blue_{c}' for c in TRACKED_CLASSES] + [f'red_{c}' for c in TRACKED_CLASSES]
 
 # Global State
 model_data = None
 model = None
+model_features = None
 elo_map = {}
 role_map = {}
 class_map = {}
@@ -234,6 +259,7 @@ try:
         # Handle if it was saved as dict or raw model
         if isinstance(model_data, dict) and 'model' in model_data:
             model = model_data['model']
+            model_features = model_data.get('features')
         else:
             model = model_data
         print(f"✅ Loaded V4 Model")
@@ -332,6 +358,9 @@ def get_role_score(draft, enemy_draft, POSITIONS, TRACKED_CLASSES, role_map, cla
     meta_sum = 0.0
     low_data_count = 0
     zero_pro_count = 0
+    unknown_role_count = 0
+    support_capable_count = 0
+    jungle_capable_count = 0
     
     for i, champ in enumerate(draft):
         if i >= 5: break
@@ -342,7 +371,14 @@ def get_role_score(draft, enemy_draft, POSITIONS, TRACKED_CLASSES, role_map, cla
         pos_req = POSITIONS[i]
         
         role_analysis = _analyze_champion_role(c_norm, pos_req, role_map)
+        valid_roles = role_map.get(c_norm, [])
         score += role_analysis["score_impact"]
+        if not valid_roles:
+            unknown_role_count += 1
+        if "support" in valid_roles:
+            support_capable_count += 1
+        if "jungle" in valid_roles:
+            jungle_capable_count += 1
         if role_analysis["is_off_role"]:
             off_role_detected = True
             off_role_count += 1
@@ -369,7 +405,7 @@ def get_role_score(draft, enemy_draft, POSITIONS, TRACKED_CLASSES, role_map, cla
             counter_warnings.extend(counter_analysis["warnings"])
 
     meta_avg = meta_sum / max(1, len(draft))
-    return score, off_role_detected, off_role_count, details, counter_warnings, class_counts, total_counter_score, meta_avg, low_data_count, zero_pro_count
+    return score, off_role_detected, off_role_count, details, counter_warnings, class_counts, total_counter_score, meta_avg, low_data_count, zero_pro_count, unknown_role_count, support_capable_count, jungle_capable_count
 
 @app.post("/api/predict")
 def predict_match(match_data: dict):
@@ -395,49 +431,52 @@ def predict_match(match_data: dict):
     
     # 2. Role Diff & Counter Analysis
     POSITIONS = ['top', 'jungle', 'mid', 'bot', 'support']
-    # The "Big Hitters" + "Sub-Class Trinity"
-    TRACKED_CLASSES = [
-        'marksman', 'tank', 'support', 
-        'fighter', 'mage', 'assassin',
-        'catcher', 'vanguard', 'enchanter'
-    ]
     
-    blue_score, blue_off_role_detected, blue_off_role_count, blue_details, blue_counter_warnings, blue_class_counts, blue_total_counter_score, blue_meta_avg, blue_low_data_count, blue_zero_pro_count = get_role_score(blue_draft, red_draft, POSITIONS, TRACKED_CLASSES, role_map, class_map, champ_meta_map, champ_global_avg, champ_games_map, MIN_PRO_GAMES_FOR_CONFIDENT, get_matchup_stats)
-    red_score, red_off_role_detected, red_off_role_count, red_details, red_counter_warnings, red_class_counts, red_total_counter_score, red_meta_avg, red_low_data_count, red_zero_pro_count = get_role_score(red_draft, blue_draft, POSITIONS, TRACKED_CLASSES, role_map, class_map, champ_meta_map, champ_global_avg, champ_games_map, MIN_PRO_GAMES_FOR_CONFIDENT, get_matchup_stats)
+    blue_score, blue_off_role_detected, blue_off_role_count, blue_details, blue_counter_warnings, blue_class_counts, blue_total_counter_score, blue_meta_avg, blue_low_data_count, blue_zero_pro_count, blue_unknown_role_count, blue_support_capable_count, blue_jungle_capable_count = get_role_score(blue_draft, red_draft, POSITIONS, TRACKED_CLASSES, role_map, class_map, champ_meta_map, champ_global_avg, champ_games_map, MIN_PRO_GAMES_FOR_CONFIDENT, get_matchup_stats)
+    red_score, red_off_role_detected, red_off_role_count, red_details, red_counter_warnings, red_class_counts, red_total_counter_score, red_meta_avg, red_low_data_count, red_zero_pro_count, red_unknown_role_count, red_support_capable_count, red_jungle_capable_count = get_role_score(red_draft, blue_draft, POSITIONS, TRACKED_CLASSES, role_map, class_map, champ_meta_map, champ_global_avg, champ_games_map, MIN_PRO_GAMES_FOR_CONFIDENT, get_matchup_stats)
 
     # 3. Model Prediction
-    input_features = [
-        elo_diff,
-        blue_score,
-        red_score,
-        blue_total_counter_score,
-        red_total_counter_score,
-        blue_meta_avg,
-        red_meta_avg,
-        blue_class_counts['marksman'],
-        blue_class_counts['tank'],
-        blue_class_counts['support'],
-        blue_class_counts['fighter'],
-        blue_class_counts['mage'],
-        blue_class_counts['assassin'],
-        blue_class_counts['catcher'],
-        blue_class_counts['vanguard'],
-        blue_class_counts['enchanter'],
-        red_class_counts['marksman'],
-        red_class_counts['tank'],
-        red_class_counts['support'],
-        red_class_counts['fighter'],
-        red_class_counts['mage'],
-        red_class_counts['assassin'],
-        red_class_counts['catcher'],
-        red_class_counts['vanguard'],
-        red_class_counts['enchanter'],
-    ]
+    input_feature_map = {
+        'elo_diff': elo_diff,
+        'blue_score': blue_score,
+        'red_score': red_score,
+        'blue_total_counter_score': blue_total_counter_score,
+        'red_total_counter_score': red_total_counter_score,
+        'blue_meta_avg': blue_meta_avg,
+        'red_meta_avg': red_meta_avg,
+        'blue_off_role_count': blue_off_role_count,
+        'red_off_role_count': red_off_role_count,
+        'blue_unknown_role_count': blue_unknown_role_count,
+        'red_unknown_role_count': red_unknown_role_count,
+        'blue_support_capable_count': blue_support_capable_count,
+        'red_support_capable_count': red_support_capable_count,
+        'blue_jungle_capable_count': blue_jungle_capable_count,
+        'red_jungle_capable_count': red_jungle_capable_count,
+        'blue_low_data_count': blue_low_data_count,
+        'red_low_data_count': red_low_data_count,
+        'blue_zero_pro_count': blue_zero_pro_count,
+        'red_zero_pro_count': red_zero_pro_count,
+        'role_diff': blue_score - red_score,
+        'counter_score': blue_total_counter_score,
+        'draft_meta_diff': blue_meta_avg - red_meta_avg,
+        'low_data_diff': blue_low_data_count - red_low_data_count,
+        'zero_pro_diff': blue_zero_pro_count - red_zero_pro_count,
+        'off_role_diff': blue_off_role_count - red_off_role_count,
+    }
+    for champion_class in TRACKED_CLASSES:
+        input_feature_map[f'blue_{champion_class}'] = blue_class_counts[champion_class]
+        input_feature_map[f'red_{champion_class}'] = red_class_counts[champion_class]
+        input_feature_map[f'diff_{champion_class}'] = blue_class_counts[champion_class] - red_class_counts[champion_class]
 
     prediction = 0.5 # Default to 50/50
     if model:
         try:
-            prediction = model.predict_proba([input_features])[0][1]
+            active_features = model_features or MODEL_FEATURES
+            model_input = pd.DataFrame(
+                [[input_feature_map[feature] for feature in active_features]],
+                columns=active_features,
+            )
+            prediction = model.predict_proba(model_input)[0][1]
         except Exception as e:
             print(f"Model prediction failed: {e}. Falling back to enhanced heuristic.")
             # Enhanced Heuristic fallback if model fails
@@ -475,6 +514,17 @@ def predict_match(match_data: dict):
     prediction -= (troll_penalty_blue - troll_penalty_red)
     prediction = np.clip(prediction, 0.05, 0.95) # Final clamp
 
+    # Draft integrity guardrail: if one team has an extreme number of off-role picks
+    # and the opponent has a normal role assignment, do not let noisy matchup/model
+    # signals claim the broken draft is favored.
+    draft_integrity_guardrail = None
+    if blue_off_role_count == 0 and red_off_role_count >= 4:
+        prediction = max(prediction, 0.75 if red_off_role_count == 4 else 0.80)
+        draft_integrity_guardrail = "Red team has an extreme off-role draft, so prediction was guarded against favoring the broken composition."
+    elif red_off_role_count == 0 and blue_off_role_count >= 4:
+        prediction = min(prediction, 0.25 if blue_off_role_count == 4 else 0.20)
+        draft_integrity_guardrail = "Blue team has an extreme off-role draft, so prediction was guarded against favoring the broken composition."
+
     # Factors Explanation
     factors = []
     if elo_diff > 0:
@@ -493,9 +543,9 @@ def predict_match(match_data: dict):
         factors.append(f"Red team has a more favorable matchup against the enemy team.")
 
     if blue_meta_avg > red_meta_avg:
-        factors.append(f"Blue team picked more meta champions (Avg WR: {blue_meta_avg*100:.1f}% vs {red_meta_avg*100:.1f}%).")
+        factors.append(f"Blue team picked more meta champions (Avg WR: {blue_meta_avg + 50.0:.1f}% vs {red_meta_avg + 50.0:.1f}%).")
     elif red_meta_avg > blue_meta_avg:
-        factors.append(f"Red team picked more meta champions (Avg WR: {red_meta_avg*100:.1f}% vs {blue_meta_avg*100:.1f}%).")
+        factors.append(f"Red team picked more meta champions (Avg WR: {red_meta_avg + 50.0:.1f}% vs {blue_meta_avg + 50.0:.1f}%).")
 
     if blue_off_role_detected:
         factors.append(f"Blue team has off-role picks: {', '.join(blue_details)}.")
@@ -516,6 +566,9 @@ def predict_match(match_data: dict):
         factors.append(f"Blue team received a penalty ({troll_penalty_blue*100:.0f}%) for unusual draft choices.")
     if troll_penalty_red > 0:
         factors.append(f"Red team received a penalty ({troll_penalty_red*100:.0f}%) for unusual draft choices.")
+
+    if draft_integrity_guardrail:
+        factors.append(draft_integrity_guardrail)
 
     # Add a general factor if the model failed and heuristic was used
     if model is None:

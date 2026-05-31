@@ -10,6 +10,10 @@ interface AnalysisPanelProps {
 }
 
 export const AnalysisPanel: React.FC<AnalysisPanelProps> = ({ analysis, loading, blueName, redName }) => {
+  const blueWin = Math.round(Math.max(0, Math.min(100, analysis?.winProbability.blue ?? 50)));
+  const redWin = Math.round(Math.max(0, Math.min(100, analysis?.winProbability.red ?? 100 - blueWin)));
+  const leader = blueWin === redWin ? 'even' : blueWin > redWin ? 'blue' : 'red';
+
   // Loading State
   if (loading) {
     return (
@@ -66,49 +70,47 @@ export const AnalysisPanel: React.FC<AnalysisPanelProps> = ({ analysis, loading,
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-esport-blue/5 rounded-full blur-3xl -ml-16 -mb-16 pointer-events-none"></div>
 
         <div className="relative z-10">
-          <div className="flex justify-between items-center mb-6">
+          <div className="flex justify-between items-center mb-6 gap-4">
             {/* Blue Side Stats */}
-            <div className="text-left">
+            <div className="text-left min-w-0 flex-1">
               <div className="flex items-center gap-2 mb-1">
                  <Shield size={14} className="text-esport-blue" />
-                 <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">{blueName}</span>
+                 <span className="text-xs font-bold text-gray-400 uppercase tracking-wider truncate">{blueName}</span>
               </div>
-              <div className="text-5xl font-display font-bold text-white drop-shadow-[0_0_10px_rgba(0,168,255,0.5)]">
-                {analysis.winProbability.blue}<span className="text-2xl text-gray-500">%</span>
+              <div className={`text-5xl font-display font-bold transition-colors duration-500 ${leader === 'blue' ? 'text-esport-blue' : 'text-white'}`}>
+                {blueWin}<span className="text-2xl text-gray-500">%</span>
               </div>
             </div>
 
             {/* VS Badge */}
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center shrink-0">
                <span className="text-xs text-gray-600 font-bold uppercase tracking-widest mb-1">Win Rate</span>
                <div className="w-px h-8 bg-gray-700"></div>
             </div>
 
             {/* Red Side Stats */}
-            <div className="text-right">
+            <div className="text-right min-w-0 flex-1">
               <div className="flex items-center gap-2 mb-1 justify-end">
-                 <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">{redName}</span>
+                 <span className="text-xs font-bold text-gray-400 uppercase tracking-wider truncate">{redName}</span>
                  <Shield size={14} className="text-esport-red" />
               </div>
-              <div className="text-5xl font-display font-bold text-white drop-shadow-[0_0_10px_rgba(255,51,51,0.5)]">
-                {analysis.winProbability.red}<span className="text-2xl text-gray-500">%</span>
+              <div className={`text-5xl font-display font-bold transition-colors duration-500 ${leader === 'red' ? 'text-esport-red' : 'text-white'}`}>
+                {redWin}<span className="text-2xl text-gray-500">%</span>
               </div>
             </div>
           </div>
 
           {/* Probability Bar */}
-          <div className="h-3 bg-gray-800 rounded-full overflow-hidden flex relative shadow-inner">
-             {/* Middle Marker */}
-             <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-white/20 z-20 -translate-x-1/2"></div>
-             
+          <div className="relative h-4 overflow-hidden rounded bg-esport-red/80 shadow-inner">
+             <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/35 z-20 -translate-x-1/2"></div>
              <div 
-               className="h-full bg-gradient-to-r from-blue-900 to-esport-blue shadow-[0_0_20px_rgba(0,168,255,0.6)]" 
-               style={{ width: `${analysis.winProbability.blue}%` }}
+               className="h-full bg-esport-blue transition-[width] duration-700 ease-out" 
+               style={{ width: `${blueWin}%` }}
              />
-             <div 
-               className="h-full bg-gradient-to-l from-red-900 to-esport-red shadow-[0_0_20px_rgba(255,51,51,0.6)]" 
-               style={{ width: `${analysis.winProbability.red}%` }}
-             />
+          </div>
+          <div className="mt-2 flex justify-between text-[10px] font-bold uppercase tracking-wider text-gray-500">
+            <span>{blueName}</span>
+            <span>{redName}</span>
           </div>
         </div>
       </div>

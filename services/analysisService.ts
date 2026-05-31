@@ -7,6 +7,7 @@ const HF_API_URL = "https://api-inference.huggingface.co/models/mistralai/Mistra
 // If no key is provided, the API might be rate limited or require a key. 
 // For this demo, we assume the user might provide one or we use a public limited access.
 const HF_TOKEN = import.meta.env.VITE_HF_API_KEY || ""; 
+const ENABLE_AI_ANALYSIS = import.meta.env.VITE_ENABLE_AI_ANALYSIS === "true" && Boolean(HF_TOKEN);
 
 /**
  * Helper to call Hugging Face Inference API
@@ -56,6 +57,60 @@ function extractJSON(text: string) {
         console.warn("Failed to extract JSON from HF output", e);
     }
     return null;
+}
+
+function normalizeWinPercent(value: unknown): number | null {
+  if (typeof value !== "number" || !Number.isFinite(value)) {
+    return null;
+  }
+
+  const percent = value <= 1 ? value * 100 : value;
+  return Math.round(Math.max(0, Math.min(100, percent)));
+}
+
+function normalizePredictionPayload(data: any) {
+  const blue = normalizeWinPercent(data?.blueWinChance ?? data?.blueWin);
+  const red = normalizeWinPercent(data?.redWinChance ?? data?.redWin);
+
+  if (blue === null && red === null) {
+    return null;
+  }
+
+  if (blue === null) {
+    return { blueWin: 100 - red!, redWin: red!, factors: data?.factors || [] };
+  }
+
+  if (red === null) {
+    return { blueWin: blue, redWin: 100 - blue, factors: data?.factors || [] };
+  }
+
+  return { blueWin: blue, redWin: red, factors: data?.factors || [] };
+}
+
+function buildLocalMatchAnalysis(match: MatchContext, mlData: { blueWin: number; redWin: number; factors: string[] }): AnalysisResult {
+  const blueFavored = mlData.blueWin >= mlData.redWin;
+  const favoredName = blueFavored ? match.blueTeam.name : match.redTeam.name;
+  const favoredPercent = blueFavored ? mlData.blueWin : mlData.redWin;
+  const edge = Math.abs(mlData.blueWin - mlData.redWin);
+  const confidence = edge >= 20 ? "clear" : edge >= 10 ? "moderate" : "narrow";
+  const factors = mlData.factors?.length ? mlData.factors : ["Model found a close draft with no dominant single factor."];
+
+  return {
+    winProbability: { blue: mlData.blueWin, red: mlData.redWin },
+    reasoning: `${favoredName} has a ${confidence} statistical edge at ${favoredPercent}% based on the current draft, team rating, role fit, matchup pressure, and champion meta strength.`,
+    keyFactors: factors,
+    winConditions: {
+      blue: [
+        mlData.blueWin >= mlData.redWin ? "Play through the model-favored lanes and protect the draft advantage." : "Stabilize early lanes and avoid giving over matchup tempo.",
+        "Force fights around completed item timings."
+      ],
+      red: [
+        mlData.redWin >= mlData.blueWin ? "Play through the model-favored lanes and protect the draft advantage." : "Stabilize early lanes and avoid giving over matchup tempo.",
+        "Trade objectives cleanly when direct fights are unfavorable."
+      ],
+    },
+    sources: []
+  };
 }
 
 
@@ -236,7 +291,7 @@ export const analyzeMatchup = async (match: MatchContext): Promise<AnalysisResul
     });
     
     if (response.ok) {
-        mlData = await response.json();
+        mlData = normalizePredictionPayload(await response.json());
     }
   } catch (error) {
       console.warn("ML Model unreachable:", error);
@@ -251,6 +306,10 @@ export const analyzeMatchup = async (match: MatchContext): Promise<AnalysisResul
         winConditions: { blue: [], red: [] },
         sources: []
       };
+  }
+
+  if (!ENABLE_AI_ANALYSIS) {
+      return buildLocalMatchAnalysis(match, mlData);
   }
 
   // 2. Try AI for Text (Flavor)
@@ -289,16 +348,7 @@ export const analyzeMatchup = async (match: MatchContext): Promise<AnalysisResul
 
   } catch (error) {
     console.warn("AI Text Generation failed, using raw ML stats:", error);
-    return {
-        winProbability: { blue: mlData.blueWin, red: mlData.redWin },
-        reasoning: `Statistical Model predicts ${mlData.blueWin > 50 ? 'Blue' : 'Red'} advantage based on historic Elo and Role integrity.`,
-        keyFactors: mlData.factors,
-        winConditions: { 
-            blue: mlData.blueWarnings || ["Standard Play"], 
-            red: mlData.redWarnings || ["Standard Play"] 
-        },
-        sources: []
-    };
+    return buildLocalMatchAnalysis(match, mlData);
   }
 };
 
