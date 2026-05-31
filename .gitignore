@@ -23,6 +23,8 @@ dist-ssr
 .env.local
 .env.*.local
 .cache/
+__pycache__/
+*.py[cod]
 hub/
 models/
 huggingface/
@@ -30,3 +32,9 @@ huggingface/
 *.safetensors
 *.pth
 *.onnx
+# Database files and backups
+*.db
+*.sqlite
+*.db.backup
+nexus_sight.db
+/backend/Data/
