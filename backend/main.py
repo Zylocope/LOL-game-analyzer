@@ -243,6 +243,8 @@ class PredictionRequest(BaseModel):
 def model_status():
     return {'ready': model is not None, 'version': model_data.get('version') if model_data else None,
             'evaluation': model_data.get('evaluation') if model_data else None,
+            'holdout': model_data.get('holdout') if model_data else None,
+            'ratings_through': model_data.get('ratings_through') if model_data else None,
             'latest_patch': getattr(model_data.get('state'), 'latest_patch', None) if model_data else None}
 
 # --- API ---
@@ -392,7 +394,7 @@ def predict_v6(request):
         raise HTTPException(status_code=503, detail='Model inference failed') from exc
     factors = [f"Model selected on past-season validation: {model_data['evaluation']['selected_on_validation']}.",
                f"Team Elo difference: {vector[0]:+.0f}. Patch context: {patch}.",
-               f"Historical data through {model_data['evaluation']['data']['last_date']}."]
+               f"Ratings and form use results through {str(model_data.get('ratings_through') or model_data['evaluation']['data']['last_date'])[:10]}."]
     if 'player_elo_diff' in model_features:
         factors.append(f"Starting-player rating difference: {vector[1]:+.0f}.")
     unknown = sum(row['player'] not in state.players for row in blue + red)

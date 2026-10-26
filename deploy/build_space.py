@@ -20,7 +20,7 @@ INCLUDE = ["requirements.txt", "backend", "frontend"]
 SKIP_NAMES = {".env", "__pycache__", "tests", "node_modules", "dist", ".git", ".ipynb_checkpoints"}
 SKIP_SUFFIXES = {".csv", ".backup", ".ipynb", ".pyc", ".log"}
 SKIP_FILES = {"match_predictor.pkl", "match_predictor_v2.pkl", "match_predictor_v3.pkl",
-              "match_predictor_v4.pkl", "model_v5.pkl"}
+              "match_predictor_v4.pkl", "model_v5.pkl", "model_v6.original.pkl"}
 
 
 def skip(p: Path) -> bool:

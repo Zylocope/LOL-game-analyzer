@@ -54,3 +54,6 @@ scripts/v7/artifacts/
 *.db-journal
 *.db-wal
 *.db-shm
+
+# Model bundles (rebuilt locally)
+backend/*.pkl

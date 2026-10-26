@@ -1,0 +1,15 @@
+.git
+.venv
+.env
+**/node_modules
+**/dist
+**/__pycache__
+scripts/v7/data
+scripts/v7/artifacts
+data/ranked
+tools
+docs
+*.csv
+*.backup
+*.v6-original.db
+backend/model_v6.original.pkl

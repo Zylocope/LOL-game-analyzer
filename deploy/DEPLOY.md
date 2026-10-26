@@ -1,40 +1,53 @@
-# Put Nexus Sight online (Hugging Face Spaces, free)
+# Put Nexus Sight online (Render, free)
 
-One container serves the website and the API. The result is a public link like
-`https://huggingface.co/spaces/<your-hf-username>/nexus-sight`.
-Files in this folder: `Dockerfile`, `serve.py` (website + API on one URL), `build_space.py`
-(packs the app), `space_README.md` (the Space's page). No app code was changed.
+One Docker container serves the website and the API. Render's free web service builds it straight from the GitHub
+repo. Free services sleep after 15 minutes without visitors; the next visit takes about a minute to wake them.
+Memory use is about 215 MB (the free plan allows 512 MB).
 
-## First time (about 15 minutes)
+> Hugging Face Spaces now require a paid PRO plan for Docker apps, so Render is the free option.
 
-1. **Create the Space.** Sign in at huggingface.co → **New Space**:
-   name `nexus-sight`, SDK **Docker** → **Blank**, hardware **CPU basic (free)**, **Public**.
-2. **Pack the app.** In PowerShell, from `D:\C_analyzer\LOL-game-analyzer`:
-   ```
-   python deploy\build_space.py
-   ```
-   This creates `D:\C_analyzer\nexus-sight-space` (~120 MB). No `.env`, datasets or tests are included.
-3. **Log in once.** Create a token with **Write** access at huggingface.co/settings/tokens, then:
-   ```
-   pip install -U huggingface_hub
-   hf auth login
-   ```
-   Paste the token when asked. Don't put the token in any file or chat.
-4. **Upload.**
-   ```
-   hf upload <your-hf-username>/nexus-sight D:\C_analyzer\nexus-sight-space . --repo-type space
-   ```
-   The 100 MB database uploads automatically as a large file.
-5. **Wait for the build** (~5 minutes; watch the **Logs** tab on the Space). Then open the **App** tab.
-   Direct link without the Hugging Face frame: `https://<your-hf-username>-nexus-sight.hf.space`
+## First time
 
-## After retraining or code changes
+### 1. Push the latest code
+```powershell
+git add -A
+git commit -m "Deploy setup for Render"
+git push
+```
 
-Run steps 2 and 4 again. The Space rebuilds itself.
+### 2. Upload the database and model as a GitHub release (they are too big for Git)
+1. Open https://github.com/Zylocope/LOL-game-analyzer/releases/new
+2. **Choose a tag** → type `data-2026-10-26` → **Create new tag**.
+3. Title: `Data and model (2026-10-26)`.
+4. Drag in two files from `D:\C_analyzer\LOL-game-analyzer\backend\`: **`nexus_sight.db`** and **`model_v6.pkl`**.
+   Wait until both finish uploading.
+5. **Publish release**.
+
+The Dockerfile downloads these two files from that release during the build (`DATA_URL` in `deploy/Dockerfile`).
+
+### 3. Create the Render service
+1. Sign up at https://render.com with your GitHub account.
+2. **New → Web Service** → pick **Zylocope/LOL-game-analyzer**.
+3. Settings:
+   - **Language:** Docker
+   - **Branch:** main
+   - **Dockerfile Path:** `deploy/Dockerfile`
+   - **Docker Build Context Directory:** `.` (the repo root)
+   - **Instance Type:** Free
+   - **Health Check Path** (under Advanced): `/healthz`
+4. **Deploy Web Service**. The first build takes about 5–10 minutes; watch the **Logs**.
+5. Your link: `https://<service-name>.onrender.com`. Open it, pick two teams and a draft, and check that a
+   prediction appears.
+
+## After new data or code changes
+
+- **Code only:** push to `main`; Render rebuilds automatically.
+- **New data:** import games, run `py -m backend.refresh_ratings`, upload the new `nexus_sight.db` and
+  `model_v6.pkl` to a new release (e.g. `data-2027-01-15`), change `DATA_URL` in `deploy/Dockerfile` to that tag,
+  then push.
 
 ## Good to know
 
-- Free Spaces go to sleep after a long time with no visitors; the first visit then takes about a minute to wake up.
-- The site is public, so keep secrets out of the repo. The app needs no API keys.
-- Tested: website, `/api/teams`, `/api/team/{name}`, `/api/champion/...`, `/api/model` and `/api/predict`
-  (Gen.G vs T1 full draft → 69% / 31% in 0.03 s) with Python 3.12 and the pinned `requirements.txt`.
+- The app needs no API keys. Never add secrets to the repo or the release.
+- Tested locally: website, `/api/teams`, `/api/team/{name}`, `/api/champions/recent`, `/api/model`, `/api/predict`.
+- `deploy/build_space.py` still packs a folder for Hugging Face Spaces if you ever get PRO.

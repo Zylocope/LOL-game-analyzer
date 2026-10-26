@@ -12,15 +12,17 @@ export function ModelStatus() {
   }, []);
   const report = status?.evaluation;
   const current = report?.version === 'v6_elo_corrections';
-  const draft = current ? report?.test?.selected : report?.test?.draft_and_elo;
-  const elo = current ? report?.test?.elo_formula : report?.test?.elo_model;
+  const holdout = status?.holdout;
+  const draft = holdout ? holdout.model : current ? report?.test?.selected : report?.test?.draft_and_elo;
+  const elo = holdout ? holdout.elo : current ? report?.test?.elo_formula : report?.test?.elo_model;
+  const through = (status?.ratings_through || report?.data?.last_date || '').slice(0, 10);
   return <aside className="mb-6 rounded-xl border border-gray-700 bg-gray-900 p-4 text-sm" aria-live="polite">
     <p className="font-bold text-gray-200">{status === null ? 'Checking prediction engine…' : status.ready ? 'Prediction engine ready' : 'Prediction engine unavailable'}</p>
     {draft && elo ? <>
-      <p className="mt-1 text-gray-400">{current ? '2025 retrospective benchmark' : 'Historical test'} · {draft.games.toLocaleString()} games</p>
+      <p className="mt-1 text-gray-400">{holdout ? 'Sealed 2026 test, evaluated once' : current ? '2025 retrospective benchmark' : 'Historical test'} · {draft.games.toLocaleString()} games</p>
       <p className="mt-1 text-gray-400">Model accuracy {(draft.accuracy * 100).toFixed(2)}% · Elo {(elo.accuracy * 100).toFixed(2)}%</p>
       <p className="mt-1 text-gray-400">Log loss {draft.log_loss.toFixed(4)} · Elo {elo.log_loss.toFixed(4)} · Lower is better</p>
-      <p className="mt-1 text-xs text-gray-500">Model chosen on earlier seasons. Historical performance does not guarantee future results. Data through {report.data?.last_date?.slice(0, 10)}{status.latest_patch ? ` · Latest recorded patch ${status.latest_patch}` : ''}.</p>
+      <p className="mt-1 text-xs text-gray-500">Model chosen on earlier seasons and frozen before the test. Past performance does not guarantee future results. Ratings through {through}{status.latest_patch ? ` · Latest recorded patch ${status.latest_patch}` : ''}.</p>
     </> : status && <p className="mt-1 text-gray-400">Predictions need a trained model and a reachable backend.</p>}
   </aside>;
 }

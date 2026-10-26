@@ -133,6 +133,12 @@ python -m backend.train
 
 Alternatively put CSVs in `backend/Data` and run `python -m backend.db_builder`. The importer streams chunks, retains the `W` Worlds code and historical `Wxx` codes, rejects contradictory outcomes, and stages imports before replacing the live database. Reimporting the same rows does not duplicate them. `--replace` explicitly rebuilds from supplied CSVs. Data is not included in a fresh clone.
 
+## Refresh ratings without retraining
+
+After new games are imported, `python -m backend.refresh_ratings` replays the rating, form and champion history through
+the latest game with the K-factor and season shrink chosen during development, swaps that state into `model_v6.pkl`,
+rebuilds `team_ratings.json` and attaches the sealed 2026 holdout result. The fitted coefficients do not change.
+
 ## Checks and structure
 
 ```powershell

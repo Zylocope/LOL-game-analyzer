@@ -74,7 +74,8 @@ class Riot:
                     return json.loads(resp.read().decode("utf-8"))
             except urllib.error.HTTPError as e:
                 if e.code in (401, 403):
-                    raise KeyProblem("The API key was rejected (expired or invalid).")
+                    raise KeyProblem(f"Riot answered HTTP {e.code} for {path.split('?')[0]} "
+                                     f"({'no key sent' if e.code == 401 else 'key expired, invalid, or not allowed here'}).")
                 if e.code == 404:
                     return None
                 if e.code == 429:

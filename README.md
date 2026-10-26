@@ -22,6 +22,7 @@ evaluated a single time after every model choice was frozen.
   **+0.004 to +0.017** (bootstrap by match day), which excludes zero.
 - Accuracy is about one point higher, within noise. Most of what is predictable in pro play is team strength;
   the draft mainly improves *how confident* the model should be, not *which* team it picks.
+- The tested copy was fitted on games through 2024; the app serves the same method fitted through September 2025.
 - The interval does not include uncertainty from choosing between models. Full report:
   [`scripts/v7/FINAL_REPORT.md`](scripts/v7/FINAL_REPORT.md).
 
@@ -90,8 +91,9 @@ See [`docs/RANKED_MODE.md`](docs/RANKED_MODE.md).
 
 - Accuracy is close to an Elo baseline; gains are in probability quality, not in picking more winners.
 - Rare picks and unusual roles have little data, so those predictions are weaker (see above).
-- The served model's ratings were fitted on data up to September 2025; refreshing them with the 2026 games is the next
-  step. Stats shown in the app already use data up to October 2026.
+- The tested copy of v6 was fitted on games through 2024; the served copy uses the same method and settings fitted
+  through September 2025. After the sealed 2026 test, only ratings and form were refreshed with games through
+  October 2026 (`python -m backend.refresh_ratings`); the coefficients themselves were not refitted.
 - Match end times are estimated (start + max(2 h, game length + 15 min)), not official.
 - Best-of-series format is not available in the source data; series are linked approximately.
 - Only major leagues and international events are reported; smaller leagues are used for ratings only (v7).
@@ -100,7 +102,7 @@ See [`docs/RANKED_MODE.md`](docs/RANKED_MODE.md).
 
 ## Future work
 
-- Refresh ratings with 2026 data for the live demo, then evaluate on 2027 games as a new sealed test.
+- Evaluate on 2027 games as a new sealed test, then decide whether to refit the coefficients on 2025–2026.
 - Finish **Ranked mode** (see above) and add a mode switch to the app.
 - Explanations per prediction (which factors moved the probability).
 - Comparison against bookmaker odds.

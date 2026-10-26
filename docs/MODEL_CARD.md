@@ -23,7 +23,9 @@ an Elo-based expectation. **Not intended for betting**; it has not been compared
 
 ## Evaluation
 
-Sealed 2026 holdout (1,970 games), downloaded and hashed before development, evaluated once after freezing:
+Sealed 2026 holdout (1,970 games), downloaded and hashed before development, evaluated once after freezing.
+The tested copy of v6 was fitted on games through 2024 (same method and settings as the served copy, which is fitted
+through September 2025):
 
 | Model | Accuracy | Log loss | Brier |
 |---|---:|---:|---:|
@@ -47,7 +49,8 @@ Source: `scripts/analysis/rare_and_offrole_2026.py`. The rare-pick subgroup is s
 ## Known limitations
 
 - Probability quality improves over Elo; accuracy essentially does not.
-- Ratings in the served model stop in September 2025 until refreshed with 2026 games.
+- Coefficients are frozen from development; ratings and form were refreshed with games through October 2026 after
+  the sealed test (`python -m backend.refresh_ratings`). The original bundle is kept as `model_v6.original.pkl`.
 - Rare champions, unusual roles, new players and new patches have little or no history; the app warns about the first
   two, and unknown players receive neutral ratings.
 - Match completion times and series structure are approximated.
