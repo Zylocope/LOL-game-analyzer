@@ -1,6 +1,6 @@
 # Nexus Sight
 
-**Pre-game win probability for professional League of Legends matches.** Pick two teams and their draft; Nexus Sight
+**Draft analysis for League of Legends, in two modes: Pro (teams + draft) and Ranked (draft only, Master+ solo queue).** In Pro mode, pick two teams and their draft; Nexus Sight
 estimates each side's chance to win from team and player strength, recent form and the draft, and tells you when a
 prediction is less reliable.
 
@@ -92,7 +92,7 @@ Riot API. **Test:** the newest 4,502 games (23–26 Oct, patch 16.21), evaluated
 
 The draft model beats simple champion win rates (log-loss gain +0.003 to +0.008, 95% interval), but its edge over
 the blue-side baseline is within noise (−0.003 to +0.005). In matchmade high-rank games, the draft alone carries
-very little signal. Not yet in the app.
+very little signal. It is in the app as an experimental mode that shows this caveat next to every prediction.
 
 ## Limitations
 
@@ -110,7 +110,7 @@ very little signal. Not yet in the app.
 ## Future work
 
 - Evaluate on 2027 games as a new sealed test, then decide whether to refit the coefficients on 2025–2026.
-- Ranked mode: more patches and servers, player champion experience, and a fresh test on newer games before adding it to the app.
+- Ranked mode: more patches and servers, player champion experience, and a fresh test on newer games.
 - Explanations per prediction (which factors moved the probability).
 - Comparison against bookmaker odds.
 - Scheduled data updates (e.g. a weekly GitHub Action).

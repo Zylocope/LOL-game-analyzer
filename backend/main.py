@@ -450,6 +450,72 @@ def draft_reliability_warnings(blue_draft, red_draft):
     return warnings
 
 
+# --- Ranked mode: draft-only model for high-rank solo queue (weights from scripts/ranked/train.py) ---
+RANKED_PATH = os.path.join(BASE_DIR, "ranked_model.json")
+RANKED_ROLES = [("top", "Top"), ("jungle", "Jungle"), ("middle", "Mid"), ("bottom", "Bot"), ("utility", "Support")]
+try:
+    with open(RANKED_PATH, encoding="utf-8") as _f:
+        ranked_model = json.load(_f)
+except (OSError, ValueError):
+    ranked_model = None
+try:
+    with open(os.path.join(BASE_DIR, "datadragon_champions.json"), encoding="utf-8") as _f:
+        CHAMPION_NAMES = {cid: c.get("name", cid) for cid, c in json.load(_f).get("data", {}).items()}
+except (OSError, ValueError):
+    CHAMPION_NAMES = {}
+
+
+class RankedRequest(BaseModel):
+    # Riot champion ids in role order: Top, Jungle, Mid, Bot, Support
+    blue: list[Annotated[str, Field(min_length=1, max_length=40)]] = Field(min_length=5, max_length=5)
+    red: list[Annotated[str, Field(min_length=1, max_length=40)]] = Field(min_length=5, max_length=5)
+
+    @model_validator(mode='after')
+    def ten_different(self):
+        if len({c.lower() for c in self.blue + self.red}) != 10:
+            raise ValueError('Pick ten different champions')
+        return self
+
+
+@app.get("/api/ranked/info")
+def ranked_info():
+    return {"ready": ranked_model is not None, "summary": ranked_model.get("summary") if ranked_model else None}
+
+
+@app.post("/api/ranked/predict")
+def ranked_predict(request: RankedRequest):
+    if ranked_model is None:
+        raise HTTPException(status_code=503, detail="Ranked model unavailable")
+    weights, logit, picks, unseen = ranked_model["weights"], ranked_model["side"], [], []
+    for side, sign, draft in (("blue", 1.0, request.blue), ("red", -1.0, request.red)):
+        for (role, label), champ in zip(RANKED_ROLES, draft):
+            key = f"{role}:{champ}"
+            w = weights.get(key)
+            if w is None:
+                unseen.append(f"{CHAMPION_NAMES.get(champ, champ)} ({label})")
+                w = 0.0
+            logit += sign * w
+            # Effect in percentage points around an even game (slope of the logistic curve at 50% is 1/4).
+            picks.append({"side": side, "role": label, "champion": CHAMPION_NAMES.get(champ, champ), "id": champ,
+                          "effect": round(25 * w, 1)})
+    import math
+    p = 1 / (1 + math.exp(-logit))
+    factors = []
+    best = sorted(picks, key=lambda x: -x["effect"])
+    strong = [f"{x['champion']} ({x['side'].title()} {x['role']})" for x in best[:2] if x["effect"] >= 0.5]
+    weak = [f"{x['champion']} ({x['side'].title()} {x['role']})" for x in best[::-1][:2] if x["effect"] <= -0.5]
+    if strong:
+        factors.append("Doing well in recent Master+ games: " + ", ".join(strong) + ".")
+    if weak:
+        factors.append("Struggling in recent Master+ games: " + ", ".join(weak) + ".")
+    if unseen:
+        factors.append("Too few recent games to judge: " + ", ".join(unseen) + ".")
+    factors.append("In ranked, matchmaking pairs players of similar skill, so a draft usually moves the odds by only "
+                   "a few percent. Player skill decides most games.")
+    return {"blueWinChance": p, "redWinChance": 1 - p, "factors": factors, "picks": picks,
+            "summary": ranked_model.get("summary")}
+
+
 @app.post("/api/predict")
 def predict_match(request: PredictionRequest):
     if model is None:

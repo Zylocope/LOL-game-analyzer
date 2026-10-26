@@ -4,6 +4,8 @@ import { Team, Role, Player, MatchContext, AnalysisResult } from './types';
 import { DraftBoard } from './components/DraftBoard';
 import { AnalysisPanel } from './components/AnalysisPanel';
 import { Lobby } from './components/Lobby';
+import { Landing } from './components/Landing';
+import { RankedDraft } from './components/RankedDraft';
 import { PRESET_TEAMS, PresetTeam } from './data/teams';
 import { fetchTeamData, analyzeMatchup, fetchChampionStats, fetchRealPlayerStats } from './services/analysisService';
 import { RefreshCw, Play, Search, Zap, LogOut } from 'lucide-react';
@@ -31,7 +33,23 @@ const createEmptyTeam = (id: 'blue' | 'red'): Team => ({
 export default function App() {
   const matchVersion = useRef(0);
   const predictionVersion = useRef(0);
-  const [view, setView] = useState<'lobby' | 'analyzer'>('lobby');
+  type View = 'home' | 'lobby' | 'analyzer' | 'ranked';
+  const viewFromHash = (): View => (location.hash === '#/pro' ? 'lobby' : location.hash === '#/ranked' ? 'ranked' : 'home');
+  const [view, setViewState] = useState<View>(viewFromHash);
+  const setView = (next: View) => {
+    setViewState(next);
+    const hash = next === 'home' ? '' : next === 'ranked' ? '#/ranked' : '#/pro';
+    if (location.hash !== hash) history.pushState(null, '', hash || location.pathname);
+    window.scrollTo(0, 0);
+  };
+  useEffect(() => {
+    const onPop = () => setViewState(v => {
+      const next = viewFromHash();
+      return v === 'analyzer' && next === 'lobby' ? v : next;
+    });
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
   const [blueTeam, setBlueTeam] = useState<Team>(createEmptyTeam('blue'));
   const [redTeam, setRedTeam] = useState<Team>(createEmptyTeam('red'));
   const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
@@ -266,18 +284,32 @@ const handleFetchChampionStats = async (side: 'blue' | 'red', role: Role, champi
     }
   };
 
+  if (view === 'home') {
+    return <Landing onPro={() => setView('lobby')} onRanked={() => setView('ranked')} />;
+  }
+
   return (
     <div className="min-h-screen bg-esport-dark text-gray-200 font-sans selection:bg-esport-gold/30 flex flex-col">
 
       {/* Navbar */}
       <header className="border-b border-gray-800 bg-gray-900/50 backdrop-blur sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3 cursor-pointer" onClick={() => setView('lobby')}>
+          <div className="flex items-center gap-3 cursor-pointer" onClick={() => setView('home')}>
             <Zap className="text-esport-gold animate-pulse" />
             <h1 className="text-2xl font-display font-bold text-white tracking-widest">
               NEXUS<span className="text-esport-gold">SIGHT</span>
             </h1>
           </div>
+          {view === 'ranked' && (
+            <button onClick={() => setView('lobby')} className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-white">
+              Pro mode
+            </button>
+          )}
+          {view === 'lobby' && (
+            <button onClick={() => setView('ranked')} className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-white">
+              Ranked mode
+            </button>
+          )}
           {view === 'analyzer' && (
             <button
               onClick={() => setView('lobby')}
@@ -289,27 +321,16 @@ const handleFetchChampionStats = async (side: 'blue' | 'red', role: Role, champi
         </div>
       </header>
 
-      {view === 'lobby' ? (
+      {view === 'ranked' ? (
+        <RankedDraft />
+      ) : view === 'lobby' ? (
         <Lobby onStartMatch={handleStartMatch} />
       ) : (
         <main className="max-w-7xl mx-auto px-4 py-8 flex-1">
 
           <ModelStatus />
-          <label className="mb-5 flex items-center gap-3 text-sm text-gray-400">
-            Patch
-            <input aria-label="Patch" value={patch} onChange={e => setPatch(e.target.value)}
-              placeholder="Latest in training data" pattern="[0-9]{1,2}\.[0-9]{2}"
-              className="rounded-lg border border-gray-700 bg-gray-900 px-3 py-2 text-gray-200" />
-          </label>
           {/* Action Bar */}
-          <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-             <div className="flex gap-2 items-center">
-                <span className="bg-gray-800 border border-gray-700 text-gray-400 px-3 py-1 rounded text-xs font-bold uppercase tracking-wider flex items-center gap-2">
-                   Manual Draft Mode
-                </span>
-
-             </div>
-
+          <div className="flex flex-col md:flex-row justify-end items-center mb-8 gap-4">
              <div className="flex gap-3">
                <button
                   onClick={() => fetchStats('blue')}
@@ -394,15 +415,15 @@ const handleFetchChampionStats = async (side: 'blue' | 'red', role: Role, champi
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600">
           <div className="flex items-center gap-2 mb-4 md:mb-0">
             <Zap size={14} className="text-gray-700" />
-            <span>NEXUS SIGHT v1.0</span>
+            <span>NEXUS SIGHT</span>
           </div>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-esport-gold transition-colors">Methodology</a>
-            <a href="#" className="hover:text-esport-gold transition-colors">About</a>
-            <a href="#" className="hover:text-esport-gold transition-colors">Disclaimer</a>
+            <a href="https://github.com/Zylocope/LOL-game-analyzer/blob/main/docs/MODEL_CARD.md" target="_blank" rel="noopener" className="hover:text-esport-gold transition-colors">How it works</a>
+            <a href="https://github.com/Zylocope/LOL-game-analyzer" target="_blank" rel="noopener" className="hover:text-esport-gold transition-colors">GitHub</a>
+            <a href="https://zylocope.github.io" target="_blank" rel="noopener" className="hover:text-esport-gold transition-colors">About the author</a>
           </div>
           <div className="mt-4 md:mt-0 opacity-50">
-            Not affiliated with Riot Games. Data for educational purposes.
+            Not endorsed by Riot Games. Pro data: Oracle's Elixir.
           </div>
         </div>
       </footer>

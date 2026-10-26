@@ -89,6 +89,20 @@ def bootstrap_improvement(y, p_base, p_model, reps=2000, seed=7):
     return [float(np.percentile(diffs, 2.5)), float(np.percentile(diffs, 97.5))]
 
 
+def export_json(model, index, report, path):
+    """Plain-JSON weights for the app (small enough to commit; no pickle needed at serve time)."""
+    coef = model.coef_[0]
+    weights = {key: round(float(coef[j]), 6) for key, j in index.items() if abs(coef[j]) > 1e-9}
+    t = report["test"]
+    data = {"version": "ranked-draft-v1", "roles": ROLES, "side": round(float(coef[-1]), 6), "weights": weights,
+            "summary": {"matches": report["matches"], "test_games": t["draft_model"]["games"],
+                        "test_period": report["test_period"], "patches": report["patches_in_test"],
+                        "accuracy": t["draft_model"]["accuracy"], "blue_side_accuracy": t["blue_side_rate"]["accuracy"],
+                        "champion_rate_accuracy": t["champion_win_rates"]["accuracy"],
+                        "server": "KR", "tiers": "Master, Grandmaster, Challenger"}}
+    Path(path).write_text(json.dumps(data, separators=(",", ":")) + "\n", encoding="utf-8")
+
+
 def main():
     df = load()
     n = len(df)
@@ -129,6 +143,7 @@ def main():
         "log_loss_improvement_vs_blue_side_95": bootstrap_improvement(y_te, p_side, p_model),
         "log_loss_improvement_vs_champion_rates_95": bootstrap_improvement(y_te, p_champ, p_model),
     }
+    export_json(model, index, report, REPO / "backend" / "ranked_model.json")
     with open(REPO / "backend" / "ranked_model.pkl", "wb") as f:
         pickle.dump({"model": model, "index": index, "roles": ROLES, "report": report}, f)
     t = report["test"]
