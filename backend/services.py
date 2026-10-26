@@ -44,7 +44,7 @@ def get_team_stats(team_name: str) -> Dict:
         AVG(dragons) / (AVG(dragons) + AVG(opp_dragons)) * 100 as dragon_control,
         AVG(ckpm) as aggression_score
     FROM team_stats 
-    WHERE teamname = ? 
+    WHERE teamname = ? AND date >= (SELECT datetime(MAX(date), '-365 days') FROM team_stats)
     """
     roster_query = """
     SELECT position, playername
@@ -57,9 +57,16 @@ def get_team_stats(team_name: str) -> Dict:
         df_roster = pd.read_sql(roster_query, conn, params=(team_name, team_name))
         conn.close()
         
-        if df_stats.empty or pd.isna(df_stats.iloc[0]['win_rate']):
-            return None
-            
+        recent = not (df_stats.empty or pd.isna(df_stats.iloc[0]['win_rate']))
+        if not recent:
+            # No games in the last 12 months: use the full history for the roster and style numbers.
+            conn = get_db_connection()
+            df_stats = pd.read_sql(stats_query.replace(
+                "AND date >= (SELECT datetime(MAX(date), '-365 days') FROM team_stats)", ""), conn, params=(team_name,))
+            conn.close()
+            if df_stats.empty or pd.isna(df_stats.iloc[0]['win_rate']):
+                return None
+
         row = df_stats.iloc[0]
         role_map = {"top": "Top", "jng": "Jungle", "mid": "Mid", "bot": "Bot", "sup": "Support"}
         roster = []
@@ -69,7 +76,7 @@ def get_team_stats(team_name: str) -> Dict:
                 roster.append({"role": role_map[pos], "name": r['playername']})
         
         return {
-            "winRateSeason": f"{row['win_rate']:.1f}%",
+            "winRateSeason": f"{row['win_rate']:.1f}%" if recent else "No games in last 12 months",
             "recentAchievements": ["Data Powered by Oracle's Elixir"],
             "playstyle": f"Aggression: {row['aggression_score']:.1f} kills/min",
             "roster": roster,
@@ -77,7 +84,7 @@ def get_team_stats(team_name: str) -> Dict:
                 "goldDiff15": f"{row['avg_gd15']:+.0f}",
                 "dragonControl": f"{row['dragon_control']:.0f}%",
                 "aggressionRating": int(row['aggression_score'] * 30),
-                "firstBloodRate": "50%" 
+                "firstBloodRate": "N/A" 
             }
         }
     except Exception as e:

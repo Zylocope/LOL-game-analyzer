@@ -40,18 +40,9 @@ function buildLocalMatchAnalysis(match: MatchContext, mlData: { blueWin: number;
 
   return {
     winProbability: { blue: mlData.blueWin, red: mlData.redWin },
-    reasoning: `${favoredName} has a ${confidence} statistical edge at ${favoredPercent}% based on the selected statistical model and historical results.`,
+    reasoning: `${favoredName} ${confidence === 'narrow' ? 'is slightly favoured' : confidence === 'moderate' ? 'is favoured' : 'is clearly favoured'}, with a ${favoredPercent}% chance to win.`,
     keyFactors: factors,
-    winConditions: {
-      blue: [
-        mlData.blueWin >= mlData.redWin ? "Play through the model-favored lanes and protect the draft advantage." : "Stabilize early lanes and avoid giving over matchup tempo.",
-        "Force fights around completed item timings."
-      ],
-      red: [
-        mlData.redWin >= mlData.blueWin ? "Play through the model-favored lanes and protect the draft advantage." : "Stabilize early lanes and avoid giving over matchup tempo.",
-        "Trade objectives cleanly when direct fights are unfavorable."
-      ],
-    },
+    winConditions: { blue: [], red: [] },
     sources: []
   };
 }

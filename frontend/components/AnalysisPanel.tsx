@@ -125,7 +125,7 @@ export const AnalysisPanel: React.FC<AnalysisPanelProps> = ({ analysis, loading,
         <div className="relative z-10">
           <div className="flex items-center gap-2 mb-3">
             <Zap size={16} className="text-esport-gold" />
-            <h3 className="text-esport-gold font-bold text-xs uppercase tracking-widest">Tactical Analysis</h3>
+            <h3 className="text-esport-gold font-bold text-xs uppercase tracking-widest">Summary</h3>
           </div>
           <p className="text-gray-300 text-sm leading-relaxed font-medium">
             {analysis.reasoning}
@@ -134,56 +134,22 @@ export const AnalysisPanel: React.FC<AnalysisPanelProps> = ({ analysis, loading,
       </div>
 
       {/* Details Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4">
         
         {/* Key Factors */}
         <div className="bg-gray-900/20 rounded-2xl border border-gray-800 p-4 hover:border-gray-700 transition-colors">
            <div className="flex items-center gap-2 mb-4 border-b border-gray-800 pb-2">
              <AlertTriangle size={16} className="text-esport-accent" />
-             <h4 className="text-gray-300 text-xs font-bold uppercase tracking-wider">Crucial Factors</h4>
+             <h4 className="text-gray-300 text-xs font-bold uppercase tracking-wider">Why</h4>
            </div>
            <ul className="space-y-3">
              {(analysis.keyFactors || []).map((factor, i) => (
-               <li key={i} className="text-xs text-gray-400 flex gap-2 items-start">
+               <li key={i} className="text-sm text-gray-300 flex gap-2 items-start">
                  <span className="text-esport-accent mt-0.5">►</span> 
                  <span className="leading-tight">{factor}</span>
                </li>
              ))}
            </ul>
-        </div>
-
-        {/* Win Conditions */}
-        <div className="bg-gray-900/20 rounded-2xl border border-gray-800 p-4 hover:border-gray-700 transition-colors">
-           <div className="flex items-center gap-2 mb-4 border-b border-gray-800 pb-2">
-             <Target size={16} className="text-green-500" />
-             <h4 className="text-gray-300 text-xs font-bold uppercase tracking-wider">Win Conditions</h4>
-           </div>
-           
-           <div className="space-y-4">
-              <div className="bg-blue-900/10 p-2 rounded border-l-2 border-esport-blue">
-                <span className="text-[10px] text-esport-blue font-bold uppercase mb-1 block opacity-80">{blueName}</span>
-                <ul className="space-y-1">
-                  {(analysis.winConditions?.blue || []).map((wc, i) => (
-                    <li key={i} className="text-[10px] text-gray-400 truncate flex items-center gap-1.5">
-                       <div className="w-1 h-1 bg-gray-500 rounded-full"></div>
-                       {wc}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              
-              <div className="bg-red-900/10 p-2 rounded border-l-2 border-esport-red">
-                <span className="text-[10px] text-esport-red font-bold uppercase mb-1 block opacity-80">{redName}</span>
-                <ul className="space-y-1">
-                  {(analysis.winConditions?.red || []).map((wc, i) => (
-                    <li key={i} className="text-[10px] text-gray-400 truncate flex items-center gap-1.5">
-                       <div className="w-1 h-1 bg-gray-500 rounded-full"></div>
-                       {wc}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-           </div>
         </div>
 
       </div>

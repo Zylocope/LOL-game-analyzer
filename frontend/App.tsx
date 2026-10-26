@@ -329,28 +329,6 @@ const handleFetchChampionStats = async (side: 'blue' | 'red', role: Role, champi
         <main className="max-w-7xl mx-auto px-4 py-8 flex-1">
 
           <ModelStatus />
-          {/* Action Bar */}
-          <div className="flex flex-col md:flex-row justify-end items-center mb-8 gap-4">
-             <div className="flex gap-3">
-               <button
-                  onClick={() => fetchStats('blue')}
-                  disabled={isFetchingBlue || !blueTeam.name}
-                  className="flex items-center gap-2 px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm font-semibold transition-all border border-gray-700 disabled:opacity-50"
-               >
-                  <Search size={16} />
-                  {isFetchingBlue ? 'Scanning Blue...' : 'Fetch Blue Stats'}
-               </button>
-               <button
-                  onClick={() => fetchStats('red')}
-                  disabled={isFetchingRed || !redTeam.name}
-                  className="flex items-center gap-2 px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm font-semibold transition-all border border-gray-700 disabled:opacity-50"
-               >
-                  <Search size={16} />
-                  {isFetchingRed ? 'Scanning Red...' : 'Fetch Red Stats'}
-               </button>
-             </div>
-          </div>
-
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
             <div className="lg:col-span-7 space-y-6">
@@ -387,11 +365,16 @@ const handleFetchChampionStats = async (side: 'blue' | 'red', role: Role, champi
               <button
                 onClick={handleAnalyze}
                 disabled={isAnalyzing || [...blueTeam.players, ...redTeam.players].some(p => !p.champion)}
-                className="w-full mt-4 bg-esport-gold hover:bg-yellow-500 text-black font-bold py-4 rounded-xl shadow-lg shadow-yellow-900/20 transition-all flex items-center justify-center gap-3 text-lg uppercase tracking-wider"
+                className="w-full mt-4 bg-esport-gold hover:bg-yellow-500 text-black font-bold py-4 rounded-xl shadow-lg shadow-yellow-900/20 transition-all flex items-center justify-center gap-3 text-lg uppercase tracking-wider disabled:cursor-not-allowed disabled:bg-gray-800 disabled:text-gray-500 disabled:shadow-none"
               >
                 {isAnalyzing ? <RefreshCw className="animate-spin" /> : <Play fill="currentColor" />}
-                {isAnalyzing ? 'Processing Match Data...' : 'Run Prediction'}
+                {isAnalyzing ? 'Predicting...' : 'Run Prediction'}
               </button>
+              {!isAnalyzing && [...blueTeam.players, ...redTeam.players].some(p => !p.champion) && (
+                <p className="mt-2 text-center text-sm text-gray-500">
+                  Pick all 10 champions to run the prediction ({10 - [...blueTeam.players, ...redTeam.players].filter(p => p.champion).length} left).
+                </p>
+              )}
             </div>
 
             {/* Analysis Column */}

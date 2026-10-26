@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { iconFallback } from '../services/champions';
 import { Team, Role } from '../types';
 import { Swords, Ban } from 'lucide-react';
 import { ChampionSelectModal } from './ChampionSelectModal';
-import { analyzeComposition } from '../src/compositionAnalysis'; // Verify this path matches your folder structure
 import { useMatchups } from '../src/hooks/useMatchups';
 import { TeamLogo } from './TeamLogo';
 import { CHAMPION_DATA } from '../data/championTags';
@@ -148,7 +148,7 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({
                 ${player.champion ? 'ring-2 ring-black' : ''}`}
             >
               {player.champion ? (
-                <img src={getIconUrl(player.champion)} alt={player.champion} className="w-full h-full object-cover" />
+                <img src={getIconUrl(player.champion)} alt={player.champion} onError={iconFallback(player.champion)} className="w-full h-full object-cover" />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-gray-700">
                   <Swords size={18} />
@@ -241,11 +241,7 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({
                   } else {
                     if (source === 'player') {
                       // Only favourites can be called "Main"
-                      if (player.championStats.gamesPlayed && player.championStats.gamesPlayed > 5) {
-                        secondaryText = 'Main';
-                      } else {
-                        secondaryText = player.championStats.roleEffectiveness || 'Favourite pick';
-                      }
+                      secondaryText = "Player's pro record on this champion";
                     } else if (source === 'pro') {
                       secondaryText = 'Pro, last 12 months';
                     } else if (source === 'global') {
@@ -262,7 +258,7 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({
                     badgeClass = winRateValue >= 50
                       ? 'bg-yellow-900/60 text-yellow-200 border-yellow-500/60'
                       : 'bg-yellow-950/40 text-yellow-300 border-yellow-800';
-                    badgeLabelSuffix = ' Fav';
+                    badgeLabelSuffix = '';
                   } else if (source === 'pro') {
                     badgeClass = winRateValue >= 50
                       ? 'bg-blue-900/60 text-blue-200 border-blue-500/60'
@@ -315,33 +311,11 @@ export const DraftBoard: React.FC<DraftBoardProps> = ({
         ))}
       </div>
 
-      {/* Composition Analysis (Safe Mode) */}
-      {(() => {
-        try {
-            if (!team.players || team.players.length === 0) return null;
-            const { warnings, strengths } = analyzeComposition(team.players);
-            if (warnings.length === 0 && strengths.length === 0) return null;
-            return (
-              <div className="flex flex-wrap gap-2 mb-3 justify-center px-2 py-2 border-t border-gray-800/50">
-                {warnings.map((w, i) => (
-                  <span key={i} className="px-2 py-0.5 text-[10px] font-display font-bold tracking-widest text-red-400 bg-red-950/30 border border-red-900/50 rounded uppercase">{w}</span>
-                ))}
-                {strengths.map((s, i) => (
-                  <span key={i} className="px-2 py-0.5 text-[10px] font-display font-bold tracking-widest text-esport-gold bg-yellow-950/20 border border-yellow-900/50 rounded uppercase shadow-[0_0_5px_rgba(200,170,110,0.1)]">{s}</span>
-                ))}
-              </div>
-            );
-        } catch (e) {
-            console.warn("Composition analysis failed:", e);
-            return null;
-        }
-      })()}
-
       {/* Stats Summary */}
       {team.stats && (
         <div className="mt-4 pt-4 border-t border-gray-700/50">
           <div className="flex justify-between items-end mb-2">
-             <span className="text-xs text-gray-400 uppercase">Season Winrate</span>
+             <span className="text-xs text-gray-400 uppercase">Win rate · last 12 months</span>
              <span className={`text-xl font-display font-bold ${textColor}`}>{team.stats.winRateSeason || 'N/A'}</span>
           </div>
           {team.advancedStats && (

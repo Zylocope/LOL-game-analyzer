@@ -3432,5 +3432,38 @@ export const CHAMPION_DATA: Record<string, { id: string, name: string, title: st
       "globalPickRate": 1.4,
       "globalWinRate": null
     }
+  },
+  "Locke": {
+      "id": "Locke",
+      "name": "Locke",
+      "title": "",
+      "classes": [],
+      "roles": [
+          "mid"
+      ],
+      "attackType": "",
+      "stats": {
+          "proWinRate": 47.4,
+          "proPickRate": 3.8,
+          "globalPickRate": 0,
+          "globalWinRate": null
+      }
+  },
+  "Zaahen": {
+      "id": "Zaahen",
+      "name": "Zaahen",
+      "title": "",
+      "classes": [],
+      "roles": [
+          "top",
+          "jungle"
+      ],
+      "attackType": "",
+      "stats": {
+          "proWinRate": 50.4,
+          "proPickRate": 6.8,
+          "globalPickRate": 0,
+          "globalWinRate": null
+      }
   }
 };

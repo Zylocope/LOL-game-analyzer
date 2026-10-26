@@ -3,7 +3,11 @@ import { API_URL } from '../services/api';
 
 interface Props { onPro: () => void; onRanked: () => void }
 
-const STAGES = ['Pro drafts', 'Ranked drafts', 'Honest numbers'];
+const STAGES = [
+  ['Pro drafts', 'Team strength, players, form and the draft'],
+  ['Ranked drafts', 'Ten champions in Master+ solo queue'],
+  ['Honest numbers', 'Tested on games it had never seen'],
+];
 
 /** Particle object that morphs sphere -> ring -> eye as the hero scrolls. Canvas 2D, no libraries. */
 const Orb: React.FC<{ progress: number }> = ({ progress }) => {
@@ -99,16 +103,25 @@ export const Landing: React.FC<Props> = ({ onPro, onRanked }) => {
       {/* Hero: sticky wordmark with the morphing object as the gap between the words */}
       <div ref={hero} className="relative h-[260vh]">
         <div className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden px-4">
-          <h1 className="flex items-center gap-2 font-display font-bold leading-none tracking-tight sm:gap-4"
-              style={{ fontSize: 'clamp(44px, 12vw, 190px)' }}>
-            <span>NEXUS</span>
+          {/* 1fr | orb | 1fr keeps the orb exactly in the middle even though NEXUS is wider than SIGHT */}
+          <h1 className="grid w-full items-center gap-2 font-display font-bold leading-none tracking-tight sm:gap-4"
+              style={{ fontSize: 'clamp(40px, 11vw, 180px)', gridTemplateColumns: '1fr auto 1fr' }}>
+            <span className="justify-self-end">NEXUS</span>
             <span className="inline-block" style={{ width: '1.05em', height: '1.05em' }}><Orb progress={progress} /></span>
-            <span>SIGHT</span>
+            <span className="justify-self-start">SIGHT</span>
           </h1>
           <p className="mt-6 max-w-xl text-center text-sm text-gray-400 sm:text-base">
             League of Legends draft analysis that tells you how much a draft really matters.
           </p>
-          <p className="mt-10 h-5 text-xs font-bold uppercase tracking-[0.3em] text-esport-gold">{STAGES[stage]}</p>
+          <div className="mt-10 flex flex-col items-center" aria-live="polite">
+            <p className="font-display text-2xl font-bold uppercase tracking-[0.25em] text-esport-gold sm:text-3xl">{STAGES[stage][0]}</p>
+            <p className="mt-2 text-sm text-gray-300 sm:text-base">{STAGES[stage][1]}</p>
+            <div className="mt-4 flex gap-2" aria-hidden="true">
+              {STAGES.map((_, i) => (
+                <span key={i} className={`h-1.5 rounded-full transition-all ${i === stage ? 'w-8 bg-esport-gold' : 'w-3 bg-gray-700'}`} />
+              ))}
+            </div>
+          </div>
           <span className="absolute bottom-6 font-mono text-xs text-gray-500">{counter}</span>
         </div>
       </div>
@@ -157,7 +170,7 @@ export const Landing: React.FC<Props> = ({ onPro, onRanked }) => {
         <p className="mb-8 text-xs font-bold uppercase tracking-[0.3em] text-gray-500">( How it works )</p>
         <div className="grid gap-8 md:grid-cols-3">
           {[
-            ['01', 'Real results', 'Pro games from 2018 to today (LCK, LPL, LEC, LCS, MSI, Worlds) and recent Master+ ranked games.'],
+            ['01', 'Real results', 'Pro games from 2018 to October 2026 (LCK, LPL, LEC, LCS, MSI, Worlds) and a month of Korean Master+ ranked games.'],
             ['02', 'Only the past', 'Every rating and statistic is built from games that finished before the one being predicted.'],
             ['03', 'Plain answers', 'A win chance, the reasons behind it, and a warning when the data is too thin to be sure.'],
           ].map(([n, t, d]) => (
