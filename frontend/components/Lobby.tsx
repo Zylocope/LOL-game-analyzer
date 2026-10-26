@@ -221,11 +221,11 @@ export const Lobby: React.FC<LobbyProps> = ({ onStartMatch }) => {
   };
 
   return (
-    <div className="h-full flex flex-col p-8 max-w-5xl mx-auto animate-in fade-in duration-500">
+    <div className="h-full flex flex-col p-4 sm:p-8 max-w-5xl mx-auto animate-in fade-in duration-500">
       
       {/* Header */}
       <div className="text-center mb-12 mt-8">
-        <h1 className="text-6xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-esport-gold via-white to-esport-gold mb-2 tracking-tighter drop-shadow-lg">
+        <h1 className="text-4xl sm:text-6xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-esport-gold via-white to-esport-gold mb-2 tracking-tighter drop-shadow-lg">
           NEXUS SIGHT
         </h1>
         <p className="text-gray-500 font-mono text-sm tracking-widest uppercase">Predictive Draft Analysis Engine</p>
@@ -240,13 +240,13 @@ export const Lobby: React.FC<LobbyProps> = ({ onStartMatch }) => {
         <div className="flex-1 flex flex-col items-center justify-center gap-10">
           
           {/* Spotlight Selectors */}
-          <div className="flex w-full items-center justify-center gap-12">
+          <div className="flex flex-col sm:flex-row w-full items-center justify-center gap-4 sm:gap-12">
             
             {/* BLUE CARD */}
             <button 
                 onClick={() => setModalOpen('blue')}
                 className={`
-                    w-80 h-96 rounded-2xl border-2 flex flex-col items-center justify-center gap-6 transition-all duration-300 group relative overflow-hidden
+                    w-full max-w-xs sm:w-80 h-56 sm:h-96 rounded-2xl border-2 flex flex-col items-center justify-center gap-6 transition-all duration-300 group relative overflow-hidden
                     ${selectedBlue 
                         ? 'border-blue-500 bg-blue-900/10 shadow-[0_0_40px_rgba(59,130,246,0.2)]' 
                         : 'border-gray-800 bg-gray-900/40 hover:border-blue-500/50 hover:bg-gray-900/60'}
@@ -256,12 +256,12 @@ export const Lobby: React.FC<LobbyProps> = ({ onStartMatch }) => {
                 
                 {selectedBlue ? (
                     <>
-                        <div className="w-40 h-40 relative flex items-center justify-center">
+                        <div className="w-24 h-24 sm:w-40 sm:h-40 relative flex items-center justify-center">
                             {/* Glow Effect */}
                             <div className="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full animate-pulse" />
                             
                             {/* Logo with Fallback */}
-                        <div className="w-40 h-40 z-10 drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]">
+                        <div className="w-24 h-24 sm:w-40 sm:h-40 z-10 drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]">
                            <TeamLogo team={selectedBlue} className="w-full h-full object-contain filter drop-shadow-[0_0_5px_rgba(255,255,255,0.4)]" />
                         </div>
                         </div>
@@ -283,13 +283,13 @@ export const Lobby: React.FC<LobbyProps> = ({ onStartMatch }) => {
             </button>
 
             {/* VS */}
-            <div className="text-4xl font-display font-bold text-gray-700 italic select-none">VS</div>
+            <div className="text-2xl sm:text-4xl font-display font-bold text-gray-700 italic select-none">VS</div>
 
             {/* RED CARD */}
             <button 
                 onClick={() => setModalOpen('red')}
                 className={`
-                    w-80 h-96 rounded-2xl border-2 flex flex-col items-center justify-center gap-6 transition-all duration-300 group relative overflow-hidden
+                    w-full max-w-xs sm:w-80 h-56 sm:h-96 rounded-2xl border-2 flex flex-col items-center justify-center gap-6 transition-all duration-300 group relative overflow-hidden
                     ${selectedRed 
                         ? 'border-red-500 bg-red-900/10 shadow-[0_0_40px_rgba(239,68,68,0.2)]' 
                         : 'border-gray-800 bg-gray-900/40 hover:border-red-500/50 hover:bg-gray-900/60'}
@@ -299,10 +299,10 @@ export const Lobby: React.FC<LobbyProps> = ({ onStartMatch }) => {
                 
                 {selectedRed ? (
                     <>
-                        <div className="w-40 h-40 relative flex items-center justify-center">
+                        <div className="w-24 h-24 sm:w-40 sm:h-40 relative flex items-center justify-center">
                             <div className="absolute inset-0 bg-red-500/20 blur-3xl rounded-full animate-pulse" />
                             {/* Removed bg-white to match Blue side style */}
-                            <div className="w-40 h-40 z-10 drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]">
+                            <div className="w-24 h-24 sm:w-40 sm:h-40 z-10 drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]">
                                 <TeamLogo team={selectedRed} className="w-full h-full object-contain filter drop-shadow-[0_0_5px_rgba(255,255,255,0.4)]" />
                             </div>
                         </div>
@@ -329,7 +329,7 @@ export const Lobby: React.FC<LobbyProps> = ({ onStartMatch }) => {
             onClick={handleStart}
             disabled={!selectedBlue || !selectedRed}
             className={`
-              flex items-center gap-3 px-12 py-5 rounded-full font-display font-bold text-lg tracking-widest transition-all duration-300
+              flex items-center gap-3 px-8 sm:px-12 py-4 sm:py-5 rounded-full font-display font-bold text-lg tracking-widest transition-all duration-300
               ${selectedBlue && selectedRed 
                 ? 'bg-esport-gold text-black hover:scale-105 hover:bg-white shadow-[0_0_30px_rgba(200,170,110,0.4)]' 
                 : 'bg-gray-800 text-gray-600 cursor-not-allowed grayscale'}
