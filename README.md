@@ -4,7 +4,7 @@
 estimates each side's chance to win from team and player strength, recent form and the draft, and tells you when a
 prediction is less reliable.
 
-**Live demo:** _coming soon_ · **Stack:** Python (scikit-learn, FastAPI, SQLite) · React + TypeScript (Vite)
+**Live demo:** [lol-game-analyzer.onrender.com](https://lol-game-analyzer.onrender.com) (free hosting: the first visit can take about a minute to wake up) · **Stack:** Python (scikit-learn, FastAPI, SQLite) · React + TypeScript (Vite)
 
 ---
 

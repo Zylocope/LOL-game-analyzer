@@ -32,6 +32,7 @@ import joblib
 import pandas as pd
 import numpy as np
 import os
+from datetime import datetime
 import json
 import re
 
@@ -392,16 +393,29 @@ def predict_v6(request):
         probability = float(model.predict_proba(frame)[0, 1])
     except Exception as exc:
         raise HTTPException(status_code=503, detail='Model inference failed') from exc
-    factors = [f"Model selected on past-season validation: {model_data['evaluation']['selected_on_validation']}.",
-               f"Team Elo difference: {vector[0]:+.0f}. Patch context: {patch}.",
-               f"Ratings and form use results through {str(model_data.get('ratings_through') or model_data['evaluation']['data']['last_date'])[:10]}."]
-    if 'player_elo_diff' in model_features:
-        factors.append(f"Starting-player rating difference: {vector[1]:+.0f}.")
+    values = dict(zip(FEATURES, vector))
+    blue_name, red_name = request.blueTeam, request.redTeam
+    team_gap = values.get('elo_diff', 0.0)
+    if abs(team_gap) < 15:
+        factors = ["The two teams are evenly matched on recent results."]
+    else:
+        stronger = blue_name if team_gap > 0 else red_name
+        factors = [f"{stronger} is the stronger team on recent results (rated {abs(team_gap):.0f} points higher)."]
+    player_gap = values.get('player_elo_diff', 0.0)
+    if 'player_elo_diff' in model_features and abs(player_gap) >= 15:
+        factors.append(f"{blue_name if player_gap > 0 else red_name}'s starting players have the stronger track record.")
     unknown = sum(row['player'] not in state.players for row in blue + red)
     if unknown:
-        factors.append(f"{unknown} players lack rating history; neutral priors are used.")
+        factors.append(f"{unknown} player{'s have' if unknown > 1 else ' has'} no pro history yet, so "
+                       f"{'they are' if unknown > 1 else 'they are'} treated as average.")
     if request.bluePlayers is None or request.redPlayers is None:
-        factors.append('Unspecified starters use the latest recorded lineup where available.')
+        factors.append("Starting players weren't entered, so each team's most recent lineup is used.")
+    through = str(model_data.get('ratings_through') or model_data['evaluation']['data']['last_date'])[:10]
+    try:
+        through = datetime.strptime(through, '%Y-%m-%d').strftime('%d %b %Y').lstrip('0')
+    except ValueError:
+        pass
+    factors.append(f"Based on pro games up to {through} (patch {patch}).")
     warnings = draft_reliability_warnings(request.blueDraft, request.redDraft)
     factors.extend(warnings)
     return {'blueWinChance': probability, 'redWinChance': 1-probability,
@@ -423,18 +437,16 @@ def draft_reliability_warnings(blue_draft, red_draft):
             u = usage.get(norm_champion(champ), {'games': 0, 'roles': {}})
             games, in_role = u['games'], u['roles'].get(pos, 0)
             if games < RARE_PICK_GAMES:
-                rare.append(f"{champ} ({games} pro games)")
+                rare.append(f"{champ} ({games} pro game{'s' if games != 1 else ''})")
             if (games >= 10 and in_role / games < UNCOMMON_ROLE_SHARE) or (games < 10 and in_role == 0):
-                share = f"{in_role / games:.0%} of its pro games" if games else "no pro games"
-                uncommon.append(f"{champ} as {label} ({share})")
+                uncommon.append(f"{champ} as {label}")
     warnings = []
     if rare:
-        warnings.append("Rare pick: " + ", ".join(rare) + ". With little pro data, this prediction is less reliable "
-                        "(on 2026 test games, drafts with a rare pick were predicted correctly 56% of the time vs 65% "
-                        "for other drafts; small sample).")
+        warnings.append("Rare pick: " + ", ".join(rare) + ". Predictions are less certain when a champion has "
+                        "little pro history.")
     if uncommon:
-        warnings.append("Uncommon role: " + ", ".join(uncommon) + ". Drafts with a champion outside its usual role "
-                        "were predicted slightly less accurately on 2026 test games (63% vs 65%).")
+        warnings.append("Unusual role: " + ", ".join(uncommon) + ". Predictions are less certain when a champion "
+                        "plays outside its usual role.")
     return warnings
 
 
