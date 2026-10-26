@@ -29,7 +29,7 @@ def load():
     files = sorted(glob.glob(str(REPO / "data" / "ranked" / "matches_*.csv")))
     if not files:
         raise SystemExit("No data/ranked/matches_*.csv yet. Run scripts/ranked/collect.py first.")
-    df = pd.concat([pd.read_csv(f) for f in files], ignore_index=True).drop_duplicates("match_id")
+    df = pd.concat([pd.read_csv(f, dtype={"patch": str}) for f in files], ignore_index=True).drop_duplicates("match_id")
     df = df.dropna(subset=[f"{s}_{r}" for s in ("blue", "red") for r in ROLES] + ["blue_win"])
     return df.sort_values("game_start_ms").reset_index(drop=True)
 

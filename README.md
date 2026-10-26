@@ -76,16 +76,23 @@ accuracy fell to about 65%, roughly level with Elo. The current version was vali
 once on a sealed 2026 holdout. A later v7 experiment (Glicko-2, TrueSkill, more context) did **not** beat v6 on that
 holdout, so v6 stays in production.
 
-## Ranked mode (in progress)
+## Ranked mode (experiment)
 
-A draft-only model for high-rank solo queue (Master and above), where there are no fixed teams and matchmaking makes
-both sides similar in skill. Data collection and training scripts are in [`scripts/ranked/`](scripts/ranked/).
+A draft-only model for high-rank solo queue, where there are no fixed teams and matchmaking makes both sides similar
+in skill. Scripts: [`scripts/ranked/`](scripts/ranked/) · details: [`docs/RANKED_MODE.md`](docs/RANKED_MODE.md).
 
-- **Data:** _to be added_
-- **Results:** _to be added_
-- **In the app:** _to be added_
+**Data:** 22,508 Korean Master+ ranked games, 26 Sep – 26 Oct 2026 (patches 16.19–16.21), collected with the
+Riot API. **Test:** the newest 4,502 games (23–26 Oct, patch 16.21), evaluated once.
 
-See [`docs/RANKED_MODE.md`](docs/RANKED_MODE.md).
+| Model | Accuracy | Log loss ↓ |
+|---|---:|---:|
+| Always the blue-side rate | 51.2% | 0.6929 |
+| Champion win rates | 53.0% | 0.6974 |
+| Draft model | 53.3% | 0.6917 |
+
+The draft model beats simple champion win rates (log-loss gain +0.003 to +0.008, 95% interval), but its edge over
+the blue-side baseline is within noise (−0.003 to +0.005). In matchmade high-rank games, the draft alone carries
+very little signal. Not yet in the app.
 
 ## Limitations
 
@@ -103,7 +110,7 @@ See [`docs/RANKED_MODE.md`](docs/RANKED_MODE.md).
 ## Future work
 
 - Evaluate on 2027 games as a new sealed test, then decide whether to refit the coefficients on 2025–2026.
-- Finish **Ranked mode** (see above) and add a mode switch to the app.
+- Ranked mode: more patches and servers, player champion experience, and a fresh test on newer games before adding it to the app.
 - Explanations per prediction (which factors moved the probability).
 - Comparison against bookmaker odds.
 - Scheduled data updates (e.g. a weekly GitHub Action).
