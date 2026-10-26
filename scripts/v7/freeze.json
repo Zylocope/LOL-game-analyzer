@@ -1,0 +1,30 @@
+{
+  "frozen_utc": "2026-10-26T04:00:52.331970+00:00",
+  "files": {
+    "scripts/v7/baseline.py": "815e1e8977388c1269f35d3b543d7419351c5830011fd14e31198bacaef67c63",
+    "scripts/v7/data.py": "6795cfe60a7c8e407b4e5186b1557722897bd39ecad51d343700dc7cf3f41b5f",
+    "scripts/v7/download.py": "664035a7a72bcfc40247c18924fe6c27ca393e4725c55990493a413ee9f38e66",
+    "scripts/v7/features.py": "f7888ea6ac412bba2d7f5532a2914acd65f96ea9b21656af1c154edcc2fd0349",
+    "scripts/v7/final.py": "ea013075cf165cf3d05be8273845359178755a695919fc3c3f40c904a9a41a38",
+    "scripts/v7/freeze.py": "6a3625ce78dad91335fcf547fdd7859f048ae73a6521239c79b9d72496b392b9",
+    "scripts/v7/lock.py": "6591dff278b3d239557028b701d6d34e51e4c65da3699b2a8e380a84b0682187",
+    "scripts/v7/modeling.py": "a9b03b113d3f4f0e8d824285c22de2fb7d4689d46f19ca2e2b94e220521efdb9",
+    "scripts/v7/ratings.py": "9da95b18666a9f9e0b5d9cf55ff0beb79b47dd1bfacfd70d32c77e38251085d0",
+    "scripts/v7/reporting.py": "3892aa4e317670487513fb57a960d0ccc23b59ba005738be3fd091376265ed49",
+    "scripts/v7/tests.py": "d7a29bcbd371680f76406ea82a9065ca7e335ef8518eaba5f26dd8e45a9944f6",
+    "scripts/v7/train.py": "1ebf87ffa93ee1621b7c30b5f86da3abcc2ba8a5e93fa17548a07f62f8c9080d",
+    "scripts/v7/__init__.py": "b1e2010c7213858b200cc5a1fc886ae9e5c39eccb056fbfee0241a3ef69db239",
+    "scripts/v7/coverage.json": "f95a6ea1dedea9481f0d4c4aa1b8727aa94699e8f71882b451bf5ae02b155d51",
+    "scripts/v7/development_manifest.json": "b6685d43a2023e8f8eea988c70018e0f3b12fb481b357a763fdaf693d59741fe",
+    "scripts/v7/holdout_manifest.json": "b03a43d288808d23a3cf22cfcf33baa466afb7f4ba9707a148751c4d862e816f",
+    "scripts/v7/protocol.json": "0b06ba38e728bc6aa04f745db4a94d6bc27c8109541c95ee6b50574f23ce9432",
+    "scripts/v7/sources.json": "965fb109b5243968d8f53a24a7a889af5bc15636b48d240e54eaf188a89fa27d",
+    "scripts/v7/v6_manifest.json": "33a720d8254a32fbe06f040074ea2789ea8f57099239469bdd93073884e7c104",
+    "scripts/v7/validation_report.json": "822516731542bfa05b78712f2cc80719c37d51a233724fd794e891da6733283b",
+    "scripts/v7/requirements.txt": "c6a2c7697653f830ee237c371ba5ccfdf6b3b48687f59cd7dbb29dca94abad41",
+    "scripts/v7/DATA_DICTIONARY.md": "6b4b1cf45b55a3675f0a85499d92d64862d75880c563876b7932707f168f72d2",
+    "scripts/v7/artifacts/frozen_bundle.pkl": "d4637ba90d250e626a7f710f38d888d90c90e7d79671c1c7a6031908d6e39c89",
+    "scripts/v7/data/development.sqlite": "36f7df7bad132aa5207ffa45afadd64bc54960245be8dbb35d99952a5203f764"
+  },
+  "policy": "single final evaluator attempt; only deterministic reports may be written afterward"
+}

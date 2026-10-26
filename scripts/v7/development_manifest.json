@@ -1,0 +1,50 @@
+{
+  "2018": {
+    "source": "https://drive.usercontent.google.com/download?id=1GsNetJQOMx0QJ6_FN8M1kwGvU_GPPcPZ&export=download&confirm=t",
+    "sha256": "082b0b040060b9d636e4eadb6353e65827f41e0152a515687a069103722c3027",
+    "path": "data\\development_raw\\2018.csv",
+    "retrieved_utc": "2026-10-26T03:36:34.495824+00:00"
+  },
+  "2019": {
+    "source": "https://drive.usercontent.google.com/download?id=11eKtScnZcpfZcD3w3UrD7nnpfLHvj9_t&export=download&confirm=t",
+    "sha256": "fd8e271c38d11c054e6e588b25d275a9648407e3443a14562fa0868fcab44076",
+    "path": "data\\development_raw\\2019.csv",
+    "retrieved_utc": "2026-10-26T03:36:30.469013+00:00"
+  },
+  "2020": {
+    "source": "https://drive.usercontent.google.com/download?id=1dlSIczXShnv1vIfGNvBjgk-thMKA5j7d&export=download&confirm=t",
+    "sha256": "4c271d944d3747fc26177aeac733069e5568026e16ace799f8895e3bddacd358",
+    "path": "data\\development_raw\\2020.csv",
+    "retrieved_utc": "2026-10-26T03:36:42.733161+00:00"
+  },
+  "2021": {
+    "source": "https://drive.usercontent.google.com/download?id=1fzwTTz77hcnYjOnO9ONeoPrkWCoOSecA&export=download&confirm=t",
+    "sha256": "bf1b54172f7d3af8177fbbf880bdbe07acb791159164331f6e7015e18a542054",
+    "path": "data\\development_raw\\2021.csv",
+    "retrieved_utc": "2026-10-26T03:36:43.534091+00:00"
+  },
+  "2022": {
+    "source": "https://drive.usercontent.google.com/download?id=1EHmptHyzY8owv0BAcNKtkQpMwfkURwRy&export=download&confirm=t",
+    "sha256": "76b7cb8afc1c65c7e220053b1c5296c593e00c3a6dfaee4ef47373aa64b42a0a",
+    "path": "data\\development_raw\\2022.csv",
+    "retrieved_utc": "2026-10-26T03:36:55.984280+00:00"
+  },
+  "2023": {
+    "source": "https://drive.usercontent.google.com/download?id=1XXk2LO0CsNADBB1LRGOV5rUpyZdEZ8s2&export=download&confirm=t",
+    "sha256": "efe4d2abe53ec3a19c77196a1a132ee88864f317b1791e544ca9e0077fd47050",
+    "path": "data\\development_raw\\2023.csv",
+    "retrieved_utc": "2026-10-26T03:36:56.895559+00:00"
+  },
+  "2024": {
+    "source": "https://drive.usercontent.google.com/download?id=1IjIEhLc9n8eLKeY-yh_YigKVWbhgGBsN&export=download&confirm=t",
+    "sha256": "a2c67680a53c73622cc974db4f534e49e44cc11dab2e5fd5ecfae421f772d865",
+    "path": "data\\development_raw\\2024.csv",
+    "retrieved_utc": "2026-10-26T03:37:03.172119+00:00"
+  },
+  "2025": {
+    "source": "https://drive.usercontent.google.com/download?id=1v6LRphp2kYciU4SXp0PCjEMuev1bDejc&export=download&confirm=t",
+    "sha256": "882245414e94e13a9c70f14ed1047a36bffe2279f29526bffe884130d4aaf592",
+    "path": "data\\development_raw\\2025.csv",
+    "retrieved_utc": "2026-10-26T03:37:07.335212+00:00"
+  }
+}

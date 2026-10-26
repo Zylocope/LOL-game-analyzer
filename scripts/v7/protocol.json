@@ -1,0 +1,15 @@
+{
+  "version": "v7-preregistered",
+  "development": "2018-2024 expanding-year folds; tuning uses expanding 2019-2024 folds only",
+  "validation": "2025; first 70% of distinct dates fit calibration, last 30% choose none/Platt/isotonic; final chosen calibrator refit on all 2025",
+  "holdout": "Sealed official 2026 snapshot; single final run; online history may update after recorded result availability; no refitting or tuning",
+  "cohorts": ["LCK", "LPL", "LEC", "NA (LCS/NA LCS/LTA/LTA N)", "International (MSI/Worlds)"],
+  "secondary": "LCKC/CK, LDL, PCS/LCP/LMS, VCS, CBLOL/LTA S, LJL: ratings only",
+  "rating_grid": [[16, 0.2, 0.0], [32, 0.2, 0.0], [48, 0.2, 0.0], [16, 0.0, 0.0], [16, 0.4, 0.0], [16, 0.2, 0.001]],
+  "logistic_C": [0.01, 0.1, 1.0],
+  "lightgbm_grid": [[100, 7], [200, 15]],
+  "selection": "minimum pooled development fold log loss; no base-model selection on 2025",
+  "baseline": "v6 code unchanged, fixed v6 selected model/settings; re-fit on primary 2018-2024; same reporting games; tuned Elo also development-selected",
+  "series_policy": "OE game ordinal and available prior same-day team-pair results; scheduled best-of absent unless explicit pre-game schedule supplied; no inference from final series length",
+  "freeze": "Hash source, manifests, input DB, fitted models, calibration, protocol and feature lists before opening holdout. Exclusive single-run claim; no rerun or code changes afterward."
+}

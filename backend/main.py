@@ -1,4 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel, Field, model_validator
+from typing import Annotated
 from fastapi.middleware.cors import CORSMiddleware
 try:
     from .services import (
@@ -9,6 +11,9 @@ try:
         get_matchup_stats,
         get_composition_analysis,
         get_champion_pro_stats,
+        get_recent_champion_table,
+        get_champion_usage,
+        norm_champion,
     )
 except ImportError:
     from services import (
@@ -19,6 +24,9 @@ except ImportError:
         get_matchup_stats,
         get_composition_analysis,
         get_champion_pro_stats,
+        get_recent_champion_table,
+        get_champion_usage,
+        norm_champion,
     )
 import joblib
 import pandas as pd
@@ -39,7 +47,7 @@ def _analyze_champion_role(champion_normalized_name: str, required_position: str
     else:
         score_impact = -1.0 # Off-role, negative impact
         is_off_role = True
-    
+
     return {"score_impact": score_impact, "is_off_role": is_off_role}
 
 def _analyze_champion_meta(champion_normalized_name: str, champ_meta_map: dict, champ_global_avg: float, champ_games_map: dict, min_pro_games_for_confident: int):
@@ -48,7 +56,7 @@ def _analyze_champion_meta(champion_normalized_name: str, champ_meta_map: dict, 
     meta_score_impact = (meta_val * 100.0 - 50.0)
     is_zero_pro_games = (games == 0)
     is_low_data = (games < min_pro_games_for_confident and games > 0)
-    
+
     return {
         "meta_score_impact": meta_score_impact,
         "is_zero_pro_games": is_zero_pro_games,
@@ -71,26 +79,26 @@ def _analyze_champion_counters(champion: str, my_classes: list, position_index: 
     # 2. Cross-Role Counter (Class Logic)
     is_squishy = any(c in ["mage", "marksman", "enchanter", "artillery"] for c in my_classes)
     is_melee = any(c in ["fighter", "tank", "slayer"] for c in my_classes)
-    
+
     for j, enemy_champ in enumerate(enemy_draft):
         if not enemy_champ: continue
-        if position_index == j: continue 
-        
-        e_norm = enemy_champ.lower().replace(" ", "").replace("\"", "").replace(".", "")
+        if position_index == j: continue
+
+        e_norm = enemy_champ.lower().replace(" ", "").replace("'", "").replace(".", "")
         e_classes = class_map.get(e_norm, [])
-        
+
         is_threat = False
-        
+
         if is_squishy:
             if any(c in ["assassin", "diver", "catcher", "vanguard"] for c in e_classes):
                 is_threat = True
         if is_melee:
             if any(c in ["control", "disengage", "warden"] for c in e_classes):
                 is_threat = True
-                
+
         if is_threat:
             counters.append(POSITIONS[j].capitalize())
-    
+
     warnings = []
     if len(counters) >= 3:
         counter_list = ", ".join(counters)
@@ -102,18 +110,20 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], 
-    allow_credentials=True,
+    allow_origins=os.getenv("CORS_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000").split(","),
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 # --- CONFIG ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-# Load V4 Model (XGBoost + Elo + Roles)
-MODEL_PATH = os.path.join(BASE_DIR, "match_predictor_v4.pkl")
+# Load the explicitly trained chronological model bundle
+MODEL_PATH = os.path.join(BASE_DIR, "model_v6.pkl")
+if not os.path.exists(MODEL_PATH):
+    MODEL_PATH = os.path.join(BASE_DIR, "model_v5.pkl")
 RATINGS_PATH = os.path.join(BASE_DIR, "team_ratings.json")
-TAGS_PATH = os.path.join(BASE_DIR, "../data/championTags.ts")
+TAGS_PATH = os.path.join(BASE_DIR, "../frontend/data/championTags.ts")
 CHAMP_STATS_PATH = os.path.join(BASE_DIR, "champion_stats_pro.json")
 MIN_PRO_GAMES_FOR_CONFIDENT = 50
 TRACKED_CLASSES = [
@@ -159,13 +169,13 @@ def load_champion_meta():
     if not os.path.exists(TAGS_PATH): return {}, {}
     with open(TAGS_PATH, 'r', encoding='utf-8') as f:
         content = f.read()
-    
+
     match = re.search(r'=\s*({.*})', content, re.DOTALL)
     if not match: return {}, {}
-    
+
     json_str = match.group(1)
     json_str = re.sub(r',(\s*[}\]])', r'\1', json_str) # clean trailing commas
-    
+
     try:
         data = json.loads(json_str)
     except:
@@ -179,117 +189,67 @@ def load_champion_meta():
         roles = [r.lower() for r in details.get('roles', [])]
         r_map[norm_key] = roles
         r_map[name.lower()] = roles # backup
-        
+
         classes = [c.lower() for c in details.get('classes', [])]
         c_map[norm_key] = classes
         c_map[name.lower()] = classes
-        
+
     return r_map, c_map
 
-def load_team_elo():
-    print("🏆 Loading Team Ratings...")
-    if not os.path.exists(RATINGS_PATH): return {}
-    with open(RATINGS_PATH, 'r') as f:
-        ratings_list = json.load(f)
-    
-    e_map = {}
-    for entry in ratings_list:
-        norm_name = entry['team'].lower().replace(" ", "")
-        e_map[norm_name] = entry['rating']
-        e_map[entry['team']] = entry['rating']
-    return e_map
-
-def load_champion_strengths(alpha: float = 50.0):
-    """
-    Loads champion-level pro meta strength from champion_stats_pro.json.
-    Returns:
-        meta_map: normalized champ name -> smoothed winrate (0-1)
-        global_avg: global average pro winrate (0-1)
-        games_map: normalized champ name -> pro games count
-    """
-    if not os.path.exists(CHAMP_STATS_PATH):
-        print("⚠️ Champion stats file not found, skipping champion strength features.")
-        return {}, 0.5, {}
-    
-    with open(CHAMP_STATS_PATH, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    
-    total_games = 0
-    weighted_wins = 0.0
-    for stats in data.values():
-        games = max(0, stats.get("pro_games", 0))
-        wr = stats.get("pro_win_rate", None)
-        if wr is None:
-            continue
-        total_games += games
-        weighted_wins += games * (wr / 100.0)
-    
-    global_avg = (weighted_wins / total_games) if total_games > 0 else 0.5
-    
-    meta_map = {}
-    games_map = {}
-    for name, stats in data.items():
-        games = max(0, stats.get("pro_games", 0))
-        raw_wr = stats.get("pro_win_rate", None)
-        if raw_wr is None:
-            base_wr = global_avg
-        else:
-            base_wr = raw_wr / 100.0
-        
-        denom = games + alpha
-        if denom > 0:
-            smoothed = (base_wr * games + alpha * global_avg) / denom
-        else:
-            smoothed = global_avg
-        
-        norm_key = name.lower().replace(" ", "").replace("'", "").replace(".", "")
-        
-        meta_map[norm_key] = smoothed
-        meta_map[name.lower()] = smoothed
-        games_map[norm_key] = games
-        games_map[name.lower()] = games
-    
-    return meta_map, global_avg, games_map
-
-# Initialize Resources
+# Only explicitly trained past-only bundles are served. Startup never retrains.
 try:
-    if os.path.exists(MODEL_PATH):
-        # Try loading with joblib first
-        model_data = joblib.load(MODEL_PATH)
-        # Handle if it was saved as dict or raw model
-        if isinstance(model_data, dict) and 'model' in model_data:
-            model = model_data['model']
-            model_features = model_data.get('features')
-        else:
-            model = model_data
-        print(f"✅ Loaded V4 Model")
-    else:
-        raise FileNotFoundError("Model missing")
-except Exception as e:
-    print(f"⚠️ Model load failed ({e}). This might be due to Python 3.13 incompatibility or a missing model file. Attempting to retrain locally...")
-    try:
-        # DYNAMIC RETRAINING ON STARTUP
-        # This ensures the model is compatible with the current OS/Python/Numpy
-        try:
-            from train_v4_synthetic import train_model_v4
-        except ModuleNotFoundError:
-            from backend.train_v4_synthetic import train_model_v4
-        model = train_model_v4() 
-        print("✅ Model retrained and loaded successfully.")
-    except Exception as train_err:
-        print(f"❌ Retraining failed: {train_err}")
-        print("⚠️ Falling back to Heuristic Mode (Elo + Role Logic)")
-        model = None
+    model_data = joblib.load(MODEL_PATH)
+    if model_data.get('version') not in ('v5_past_only', 'v6_elo_corrections'):
+        raise ValueError('Unsupported model version; run python -m backend.train')
+    model = model_data['model']
+    model_features = model_data['features']
+except Exception as exc:
+    print(f'Model unavailable: {exc}')
+    model_data, model = None, None
 
-elo_map = load_team_elo()
 role_map, class_map = load_champion_meta()
-champ_meta_map, champ_global_avg, champ_games_map = load_champion_strengths()
+if model_data:
+    snapshot = model_data['snapshot']
+    elo_map, role_map = snapshot['elo'], snapshot['roles']
+    champ_meta_map, champ_games_map = snapshot['meta'], snapshot['games']
+    # Serving uses exactly the same smoothed aggregates as training.
+    try:
+        from . import services as stats_service
+    except ImportError:
+        import services as stats_service
+    stats_service.MATCHUP_MATRIX = snapshot['matrix']
+
+class PredictionRequest(BaseModel):
+    blueTeam: str = Field(min_length=1, max_length=200)
+    redTeam: str = Field(min_length=1, max_length=200)
+    blueDraft: list[Annotated[str, Field(min_length=1, max_length=60)]] = Field(min_length=5, max_length=5)
+    redDraft: list[Annotated[str, Field(min_length=1, max_length=60)]] = Field(min_length=5, max_length=5)
+
+    bluePlayers: list[Annotated[str, Field(max_length=120)]] | None = Field(default=None, min_length=5, max_length=5)
+    redPlayers: list[Annotated[str, Field(max_length=120)]] | None = Field(default=None, min_length=5, max_length=5)
+    patch: str | None = Field(default=None, pattern=r'^\d{1,2}\.\d{2}$')
+
+    @model_validator(mode='after')
+    def validate_champions(self):
+        normalized = [c.lower().replace(' ', '').replace("'", '').replace('.', '')
+                      for c in self.blueDraft + self.redDraft]
+        if len(set(normalized)) != 10:
+            raise ValueError('Each champion can only be picked once')
+        if any(c not in class_map for c in normalized):
+            raise ValueError('Draft contains an unknown champion')
+        return self
+
+@app.get('/api/model')
+def model_status():
+    return {'ready': model is not None, 'version': model_data.get('version') if model_data else None,
+            'evaluation': model_data.get('evaluation') if model_data else None,
+            'latest_patch': getattr(model_data.get('state'), 'latest_patch', None) if model_data else None}
 
 # --- API ---
 
 @app.get("/")
 def read_root():
-    return {"status": "Nexus Sight API is running (V4 Brain)"}
+    return {"status": "Nexus Sight API is running (past-only model)"}
 
 @app.get("/api/teams")
 def api_all_teams():
@@ -298,22 +258,27 @@ def api_all_teams():
     if os.path.exists(RATINGS_PATH):
         with open(RATINGS_PATH, 'r') as f:
             all_ratings = json.load(f)
-            
+
     # 2. Get Filtered List from DB (Smart Filter)
     filtered_teams_list = get_all_teams()
     filtered_set = set(filtered_teams_list)
 
     # 3. Intersection
     final_list = [t for t in all_ratings if t['team'] in filtered_set]
-    
+
     # 4. Safety
     rated_names = {t['team'] for t in final_list}
     for team_name in filtered_teams_list:
         if team_name not in rated_names:
              final_list.append({"rank": 999, "team": team_name, "rating": 1000, "region": "Unknown"})
-             
+
     # 5. Sort by Rating
+    for entry in final_list:
+        key = entry['team'].lower().replace(' ', '').replace("'", '').replace('.', '')
+        entry['rating'] = round(elo_map.get(key, 1200))
     final_list.sort(key=lambda x: x['rating'], reverse=True)
+    for rank, entry in enumerate(final_list, 1):
+        entry['rank'] = rank
 
     return {"teams": final_list}
 
@@ -336,10 +301,16 @@ def api_matchup_stats(my_champ: str, enemy_champ: str, role: str):
     return {"found": True, "data": data}
 
 
+@app.get("/api/champions/recent")
+def api_recent_champions():
+    """Win rate, pick rate and role split for every champion over the last 12 months of pro games."""
+    return get_recent_champion_table()
+
+
 @app.get("/api/champion/{champion}/role/{role}")
 def api_champion_stats(champion: str, role: str):
     """
-    Global pro stats (7-year DB) for a champion in a given role.
+    Pro stats for a champion in a given role over the last 12 months (smoothed toward 50%).
     Used when a specific player has no games on that champ.
     """
     data = get_champion_pro_stats(champion, role)
@@ -361,15 +332,15 @@ def get_role_score(draft, enemy_draft, POSITIONS, TRACKED_CLASSES, role_map, cla
     unknown_role_count = 0
     support_capable_count = 0
     jungle_capable_count = 0
-    
+
     for i, champ in enumerate(draft):
         if i >= 5: break
         if not champ: continue
-        
+
         # A. Off-Role Check
         c_norm = champ.lower().replace(" ", "").replace("'", "").replace(".", "")
         pos_req = POSITIONS[i]
-        
+
         role_analysis = _analyze_champion_role(c_norm, pos_req, role_map)
         valid_roles = role_map.get(c_norm, [])
         score += role_analysis["score_impact"]
@@ -383,7 +354,7 @@ def get_role_score(draft, enemy_draft, POSITIONS, TRACKED_CLASSES, role_map, cla
             off_role_detected = True
             off_role_count += 1
             details.append(f"{champ} in {pos_req}")
-        
+
         # Class Counting
         my_classes = class_map.get(c_norm, [])
         for cls in my_classes:
@@ -407,8 +378,71 @@ def get_role_score(draft, enemy_draft, POSITIONS, TRACKED_CLASSES, role_map, cla
     meta_avg = meta_sum / max(1, len(draft))
     return score, off_role_detected, off_role_count, details, counter_warnings, class_counts, total_counter_score, meta_avg, low_data_count, zero_pro_count, unknown_role_count, support_capable_count, jungle_capable_count
 
+def predict_v6(request):
+    from backend.features import FEATURES, request_roster, patch_key
+    state = model_data['state']
+    blue = request_roster(state, request.blueTeam, request.blueDraft, request.bluePlayers)
+    red = request_roster(state, request.redTeam, request.redDraft, request.redPlayers)
+    patch = patch_key(request.patch) if request.patch else state.latest_patch
+    vector = state.vector(blue, red, patch)
+    frame = pd.DataFrame([vector], columns=FEATURES)
+    try:
+        probability = float(model.predict_proba(frame)[0, 1])
+    except Exception as exc:
+        raise HTTPException(status_code=503, detail='Model inference failed') from exc
+    factors = [f"Model selected on past-season validation: {model_data['evaluation']['selected_on_validation']}.",
+               f"Team Elo difference: {vector[0]:+.0f}. Patch context: {patch}.",
+               f"Historical data through {model_data['evaluation']['data']['last_date']}."]
+    if 'player_elo_diff' in model_features:
+        factors.append(f"Starting-player rating difference: {vector[1]:+.0f}.")
+    unknown = sum(row['player'] not in state.players for row in blue + red)
+    if unknown:
+        factors.append(f"{unknown} players lack rating history; neutral priors are used.")
+    if request.bluePlayers is None or request.redPlayers is None:
+        factors.append('Unspecified starters use the latest recorded lineup where available.')
+    warnings = draft_reliability_warnings(request.blueDraft, request.redDraft)
+    factors.extend(warnings)
+    return {'blueWinChance': probability, 'redWinChance': 1-probability,
+            'factors': factors, 'warnings': warnings, 'modelVersion': model_data['version'], 'patch': patch}
+
+
+# Thresholds and measured effects come from scripts/analysis/rare_and_offrole_2026.py
+# (v6 on the untouched 2026 test games).
+RARE_PICK_GAMES = 50          # fewer all-time pro games than this = rare pick
+UNCOMMON_ROLE_SHARE = 0.10    # played in this role in under 10% of its pro games = uncommon role
+DRAFT_POSITIONS = [('top', 'Top'), ('jng', 'Jungle'), ('mid', 'Mid'), ('bot', 'Bot'), ('sup', 'Support')]
+
+
+def draft_reliability_warnings(blue_draft, red_draft):
+    usage = get_champion_usage()
+    rare, uncommon = [], []
+    for draft in (blue_draft, red_draft):
+        for (pos, label), champ in zip(DRAFT_POSITIONS, draft):
+            u = usage.get(norm_champion(champ), {'games': 0, 'roles': {}})
+            games, in_role = u['games'], u['roles'].get(pos, 0)
+            if games < RARE_PICK_GAMES:
+                rare.append(f"{champ} ({games} pro games)")
+            if (games >= 10 and in_role / games < UNCOMMON_ROLE_SHARE) or (games < 10 and in_role == 0):
+                share = f"{in_role / games:.0%} of its pro games" if games else "no pro games"
+                uncommon.append(f"{champ} as {label} ({share})")
+    warnings = []
+    if rare:
+        warnings.append("Rare pick: " + ", ".join(rare) + ". With little pro data, this prediction is less reliable "
+                        "(on 2026 test games, drafts with a rare pick were predicted correctly 56% of the time vs 65% "
+                        "for other drafts; small sample).")
+    if uncommon:
+        warnings.append("Uncommon role: " + ", ".join(uncommon) + ". Drafts with a champion outside its usual role "
+                        "were predicted slightly less accurately on 2026 test games (63% vs 65%).")
+    return warnings
+
+
 @app.post("/api/predict")
-def predict_match(match_data: dict):
+def predict_match(request: PredictionRequest):
+    if model is None:
+        raise HTTPException(status_code=503, detail="Prediction model unavailable. Run python -m backend.train.")
+    if model_data and model_data.get('version') == 'v6_elo_corrections':
+        return predict_v6(request)
+    match_data = request.model_dump()
     """
     V4 PREDICTION:
     Uses Elo Diff + Role Diff.
@@ -423,15 +457,15 @@ def predict_match(match_data: dict):
 
     if model is None:
         print("⚠️ Model not loaded, operating in Heuristic Mode.")
-    
+
     # 1. Elo Diff
-    elo1 = elo_map.get(blue_name.replace(" ", ""), elo_map.get(blue_name, 1200))
-    elo2 = elo_map.get(red_name.replace(" ", ""), elo_map.get(red_name, 1200))
+    elo1 = elo_map.get(blue_name.lower().replace(" ", "").replace("'", "").replace(".", ""), elo_map.get(blue_name, 1200))
+    elo2 = elo_map.get(red_name.lower().replace(" ", "").replace("'", "").replace(".", ""), elo_map.get(red_name, 1200))
     elo_diff = elo1 - elo2
-    
+
     # 2. Role Diff & Counter Analysis
     POSITIONS = ['top', 'jungle', 'mid', 'bot', 'support']
-    
+
     blue_score, blue_off_role_detected, blue_off_role_count, blue_details, blue_counter_warnings, blue_class_counts, blue_total_counter_score, blue_meta_avg, blue_low_data_count, blue_zero_pro_count, blue_unknown_role_count, blue_support_capable_count, blue_jungle_capable_count = get_role_score(blue_draft, red_draft, POSITIONS, TRACKED_CLASSES, role_map, class_map, champ_meta_map, champ_global_avg, champ_games_map, MIN_PRO_GAMES_FOR_CONFIDENT, get_matchup_stats)
     red_score, red_off_role_detected, red_off_role_count, red_details, red_counter_warnings, red_class_counts, red_total_counter_score, red_meta_avg, red_low_data_count, red_zero_pro_count, red_unknown_role_count, red_support_capable_count, red_jungle_capable_count = get_role_score(red_draft, blue_draft, POSITIONS, TRACKED_CLASSES, role_map, class_map, champ_meta_map, champ_global_avg, champ_games_map, MIN_PRO_GAMES_FOR_CONFIDENT, get_matchup_stats)
 
@@ -476,54 +510,21 @@ def predict_match(match_data: dict):
                 [[input_feature_map[feature] for feature in active_features]],
                 columns=active_features,
             )
-            prediction = model.predict_proba(model_input)[0][1]
+            swapped = dict(input_feature_map)
+            swapped['elo_diff'] = -input_feature_map['elo_diff']
+            for key in input_feature_map:
+                if key.startswith('blue_'):
+                    swapped[key] = input_feature_map['red_' + key[5:]]
+                elif key.startswith('red_'):
+                    swapped[key] = input_feature_map['blue_' + key[4:]]
+            mirror = pd.DataFrame([[swapped[f] for f in active_features]], columns=active_features)
+            prediction = float((model.predict_proba(model_input)[0][1] + 1 - model.predict_proba(mirror)[0][1]) / 2)
         except Exception as e:
-            print(f"Model prediction failed: {e}. Falling back to enhanced heuristic.")
-            # Enhanced Heuristic fallback if model fails
-            # Weights can be tuned further
-            heuristic_score = (
-                (elo_diff / 2000) * 0.2 +  # Elo difference contribution
-                ((blue_score - red_score) / 10) * 0.3 + # Role score contribution
-                ((blue_total_counter_score - red_total_counter_score) / 100) * 0.2 + # Counter score contribution
-                ((blue_meta_avg - red_meta_avg) * 100) * 0.1 # Meta average contribution
-            )
-            prediction = 0.5 + heuristic_score
-            prediction = np.clip(prediction, 0.1, 0.9) # Clamp to reasonable range
+            raise HTTPException(status_code=503, detail="Model inference failed") from e
 
-    # Hard sanity clamp for extreme off-roles or low data
-    troll_penalty_blue = 0.0
-    if blue_off_role_count == 1: troll_penalty_blue += 0.05
-    elif blue_off_role_count >= 2: troll_penalty_blue += 0.15
-    
-    if blue_zero_pro_count == 1: troll_penalty_blue += 0.03
-    elif blue_zero_pro_count == 2: troll_penalty_blue += 0.07
-    elif blue_zero_pro_count >= 3: troll_penalty_blue += 0.12
-
-    if blue_low_data_count >= 3: troll_penalty_blue += 0.05
-
-    troll_penalty_red = 0.0
-    if red_off_role_count == 1: troll_penalty_red += 0.05
-    elif red_off_role_count >= 2: troll_penalty_red += 0.15
-    
-    if red_zero_pro_count == 1: troll_penalty_red += 0.03
-    elif red_zero_pro_count == 2: troll_penalty_red += 0.07
-    elif red_zero_pro_count >= 3: troll_penalty_red += 0.12
-
-    if red_low_data_count >= 3: troll_penalty_red += 0.05
-
-    prediction -= (troll_penalty_blue - troll_penalty_red)
-    prediction = np.clip(prediction, 0.05, 0.95) # Final clamp
-
-    # Draft integrity guardrail: if one team has an extreme number of off-role picks
-    # and the opponent has a normal role assignment, do not let noisy matchup/model
-    # signals claim the broken draft is favored.
+    # No unvalidated probability penalties: serve the estimator evaluated in the report.
+    troll_penalty_blue = troll_penalty_red = 0.0
     draft_integrity_guardrail = None
-    if blue_off_role_count == 0 and red_off_role_count >= 4:
-        prediction = max(prediction, 0.75 if red_off_role_count == 4 else 0.80)
-        draft_integrity_guardrail = "Red team has an extreme off-role draft, so prediction was guarded against favoring the broken composition."
-    elif red_off_role_count == 0 and blue_off_role_count >= 4:
-        prediction = min(prediction, 0.25 if blue_off_role_count == 4 else 0.20)
-        draft_integrity_guardrail = "Blue team has an extreme off-role draft, so prediction was guarded against favoring the broken composition."
 
     # Factors Explanation
     factors = []
@@ -537,9 +538,9 @@ def predict_match(match_data: dict):
     elif red_score > blue_score:
         factors.append(f"Red team has a better role composition score ({red_score:.1f} vs {blue_score:.1f}).")
 
-    if blue_total_counter_score < red_total_counter_score:
+    if blue_total_counter_score > red_total_counter_score:
         factors.append(f"Blue team has a more favorable matchup against the enemy team.")
-    elif red_total_counter_score < blue_total_counter_score:
+    elif red_total_counter_score > blue_total_counter_score:
         factors.append(f"Red team has a more favorable matchup against the enemy team.")
 
     if blue_meta_avg > red_meta_avg:

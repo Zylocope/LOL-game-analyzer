@@ -83,6 +83,8 @@ def get_team_stats(team_name: str) -> Dict:
     except Exception as e:
         print(f"Error fetching team {team_name}: {e}")
         return None
+    finally:
+        conn.close()
 
 def get_player_stats(player_name: str, champion: str):
     conn = get_db_connection()
@@ -111,47 +113,110 @@ def get_player_stats(player_name: str, champion: str):
     except Exception as e:
         print(f"Error fetching player stats: {e}")
         return None
+    finally:
+        conn.close()
+
+
+# --- Recent pro statistics (computed from the database, never hard-coded) ---
+RECENT_DAYS = 365          # win/pick rates use the last 12 months of pro games in the database
+PRIOR_GAMES = 10           # Bayesian smoothing: every champion starts as if it had 10 games at 50%
+POS_DB = {"top": "top", "jungle": "jng", "jng": "jng", "mid": "mid", "bot": "bot", "adc": "bot",
+          "support": "sup", "sup": "sup"}
+_CACHE = {}
+
+
+def norm_champion(name: str) -> str:
+    return "".join(ch for ch in str(name).lower() if ch.isalnum())
+
+
+def smoothed_win_rate(wins: float, games: float) -> float:
+    return round(100.0 * (wins + PRIOR_GAMES * 0.5) / (games + PRIOR_GAMES), 1)
+
+
+def _recent_window(conn):
+    end = conn.execute("SELECT MAX(date) FROM player_stats").fetchone()[0]
+    start = conn.execute("SELECT datetime(?, ?)", (end, f"-{RECENT_DAYS} days")).fetchone()[0]
+    return start, end
 
 
 def get_champion_pro_stats(champion: str, role: Optional[str] = None):
     """
-    Global pro stats for a champion, optionally filtered by role (Top/Jungle/Mid/Bot/Support).
-    Uses the same 7-year player_stats table, aggregating over all players.
+    Pro stats for a champion (optionally in one role) over the last 12 months of the database.
+    winRate is smoothed toward 50% so small samples don't show extreme numbers; rawWinRate is unsmoothed.
     """
     conn = get_db_connection()
     try:
-        params = [champion]
-        role_filter = ""
+        start, end = _recent_window(conn)
+        role_sql, role_params = "", []
         if role:
-            role_map = {"Top": "top", "Jungle": "jng", "Mid": "mid", "Bot": "bot", "Support": "sup"}
-            db_pos = role_map.get(role, role.lower())
-            role_filter = "AND position = ? COLLATE NOCASE"
-            params.append(db_pos)
-
-        query = f"""
-        SELECT COUNT(*) as games, SUM(CASE WHEN result = 1 THEN 1 ELSE 0 END) as wins
-        FROM player_stats
-        WHERE champion = ? COLLATE NOCASE
-        {role_filter}
-        """
-        df = pd.read_sql(query, conn, params=params)
-        conn.close()
-
-        if df.empty or df.iloc[0]["games"] == 0:
+            role_sql = "AND position = ?"
+            role_params = [POS_DB.get(role.lower(), role.lower())]
+        recent = conn.execute(
+            f"SELECT COUNT(*) AS g, COALESCE(SUM(result), 0) AS w FROM player_stats "
+            f"WHERE champion = ? COLLATE NOCASE AND date >= ? {role_sql}", [champion, start] + role_params).fetchone()
+        all_time = conn.execute(
+            f"SELECT COUNT(*) AS g FROM player_stats WHERE champion = ? COLLATE NOCASE {role_sql}",
+            [champion] + role_params).fetchone()
+        games, wins = int(recent["g"]), int(recent["w"])
+        if games == 0:
             return None
-
-        games = int(df.iloc[0]["games"])
-        wins = int(df.iloc[0]["wins"])
-        win_rate = (wins / games) * 100.0
-
         return {
             "games": games,
-            "winRate": round(win_rate, 1),
-            "mastery_tag": "Global Pro"
+            "winRate": smoothed_win_rate(wins, games),
+            "rawWinRate": round(100.0 * wins / games, 1),
+            "allTimeGames": int(all_time["g"]),
+            "period": f"{start[:10]} to {end[:10]}",
+            "mastery_tag": "Pro, last 12 months",
         }
     except Exception as e:
         print(f"Error fetching champion pro stats: {e}")
         return None
+    finally:
+        conn.close()
+
+
+def get_recent_champion_table():
+    """Win rate, pick rate and role split for every champion over the last 12 months (cached)."""
+    if "recent" in _CACHE:
+        return _CACHE["recent"]
+    conn = get_db_connection()
+    try:
+        start, end = _recent_window(conn)
+        total = conn.execute("SELECT COUNT(DISTINCT gameid) FROM player_stats WHERE date >= ?", (start,)).fetchone()[0]
+        rows = conn.execute(
+            "SELECT champion, position, COUNT(*) AS g, COALESCE(SUM(result), 0) AS w FROM player_stats "
+            "WHERE date >= ? GROUP BY champion, position", (start,)).fetchall()
+    finally:
+        conn.close()
+    champs = {}
+    for r in rows:
+        c = champs.setdefault(r["champion"], {"games": 0, "wins": 0, "roles": {}})
+        c["games"] += r["g"]; c["wins"] += r["w"]; c["roles"][r["position"]] = r["g"]
+    data = {
+        "from": start[:10], "to": end[:10], "games": total, "priorGames": PRIOR_GAMES,
+        "champions": {name: {"games": v["games"], "winRate": smoothed_win_rate(v["wins"], v["games"]),
+                             "pickRate": round(100.0 * v["games"] / max(1, total), 1), "roles": v["roles"]}
+                      for name, v in champs.items()},
+    }
+    _CACHE["recent"] = data
+    return data
+
+
+def get_champion_usage():
+    """All-time pro games per champion and per position, keyed by normalized name (cached)."""
+    if "usage" in _CACHE:
+        return _CACHE["usage"]
+    conn = get_db_connection()
+    try:
+        rows = conn.execute("SELECT champion, position, COUNT(*) AS g FROM player_stats GROUP BY champion, position").fetchall()
+    finally:
+        conn.close()
+    usage = {}
+    for r in rows:
+        u = usage.setdefault(norm_champion(r["champion"]), {"games": 0, "roles": {}})
+        u["games"] += r["g"]; u["roles"][r["position"]] = r["g"]
+    _CACHE["usage"] = usage
+    return usage
 
 def get_matchup_stats(my_champ: str, enemy_champ: str, role: str):
     if not my_champ or not enemy_champ: return None
@@ -178,12 +243,12 @@ def get_matchup_stats(my_champ: str, enemy_champ: str, role: str):
     conn = get_db_connection()
     try:
         role_map = {"Top": "top", "Jungle": "jng", "Mid": "mid", "Bot": "bot", "Support": "sup"}
-        db_pos = role_map.get(role, role.lower())
+        db_pos = {"jungle": "jng", "support": "sup"}.get(role.lower(), role.lower())
         query = """
         SELECT COUNT(*) as games, SUM(CASE WHEN p1.result = 1 THEN 1 ELSE 0 END) as wins
         FROM player_stats p1 JOIN player_stats p2 ON p1.gameid = p2.gameid 
         WHERE p1.champion = ? COLLATE NOCASE AND p2.champion = ? COLLATE NOCASE 
-        AND p1.position = ? COLLATE NOCASE AND p1.position = p2.position
+        AND p1.position = ? COLLATE NOCASE AND p1.position = p2.position AND p1.teamid != p2.teamid
         """
         df = pd.read_sql(query, conn, params=(my_champ, enemy_champ, db_pos))
         conn.close()
@@ -199,6 +264,8 @@ def get_matchup_stats(my_champ: str, enemy_champ: str, role: str):
     except Exception as e:
         print(f"Error fetching matchup: {e}")
         return None
+    finally:
+        conn.close()
 
 def get_composition_analysis(champions: List[str]):
     if not champions or len(champions) != 5:
@@ -264,3 +331,5 @@ def get_all_teams() -> List[str]:
     except Exception as e:
         print(f"Error fetching team list: {e}")
         return []
+    finally:
+        conn.close()

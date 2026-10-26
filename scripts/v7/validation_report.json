@@ -1,0 +1,2643 @@
+{
+  "phase": "2025 validation (not final test)",
+  "chosen": "full_logistic_0.01",
+  "protocol": {
+    "version": "v7-preregistered",
+    "development": "2018-2024 expanding-year folds; tuning uses expanding 2019-2024 folds only",
+    "validation": "2025; first 70% of distinct dates fit calibration, last 30% choose none/Platt/isotonic; final chosen calibrator refit on all 2025",
+    "holdout": "Sealed official 2026 snapshot; single final run; online history may update after recorded result availability; no refitting or tuning",
+    "cohorts": [
+      "LCK",
+      "LPL",
+      "LEC",
+      "NA (LCS/NA LCS/LTA/LTA N)",
+      "International (MSI/Worlds)"
+    ],
+    "secondary": "LCKC/CK, LDL, PCS/LCP/LMS, VCS, CBLOL/LTA S, LJL: ratings only",
+    "rating_grid": [
+      [
+        16,
+        0.2,
+        0.0
+      ],
+      [
+        32,
+        0.2,
+        0.0
+      ],
+      [
+        48,
+        0.2,
+        0.0
+      ],
+      [
+        16,
+        0.0,
+        0.0
+      ],
+      [
+        16,
+        0.4,
+        0.0
+      ],
+      [
+        16,
+        0.2,
+        0.001
+      ]
+    ],
+    "logistic_C": [
+      0.01,
+      0.1,
+      1.0
+    ],
+    "lightgbm_grid": [
+      [
+        100,
+        7
+      ],
+      [
+        200,
+        15
+      ]
+    ],
+    "selection": "minimum pooled development fold log loss; no base-model selection on 2025",
+    "baseline": "v6 code unchanged, fixed v6 selected model/settings; re-fit on primary 2018-2024; same reporting games; tuned Elo also development-selected",
+    "series_policy": "OE game ordinal and available prior same-day team-pair results; scheduled best-of absent unless explicit pre-game schedule supplied; no inference from final series length",
+    "freeze": "Hash source, manifests, input DB, fitted models, calibration, protocol and feature lists before opening holdout. Exclusive single-run claim; no rerun or code changes afterward."
+  },
+  "rating_search": [
+    {
+      "k": 16,
+      "shrink": 0.2,
+      "decay": 0.0,
+      "development": {
+        "games": 11625,
+        "accuracy": 0.634494623655914,
+        "log_loss": 0.637407624473341,
+        "brier": 0.2233910470939637
+      }
+    },
+    {
+      "k": 32,
+      "shrink": 0.2,
+      "decay": 0.0,
+      "development": {
+        "games": 11625,
+        "accuracy": 0.6369032258064516,
+        "log_loss": 0.6389968986045211,
+        "brier": 0.2237598232353011
+      }
+    },
+    {
+      "k": 48,
+      "shrink": 0.2,
+      "decay": 0.0,
+      "development": {
+        "games": 11625,
+        "accuracy": 0.6357849462365591,
+        "log_loss": 0.6465037465946616,
+        "brier": 0.22631307318070895
+      }
+    },
+    {
+      "k": 16,
+      "shrink": 0.0,
+      "decay": 0.0,
+      "development": {
+        "games": 11625,
+        "accuracy": 0.6359569892473118,
+        "log_loss": 0.6384042643215209,
+        "brier": 0.22381194574775232
+      }
+    },
+    {
+      "k": 16,
+      "shrink": 0.4,
+      "decay": 0.0,
+      "development": {
+        "games": 11625,
+        "accuracy": 0.6373333333333333,
+        "log_loss": 0.6382716047741477,
+        "brier": 0.22372456112245773
+      }
+    },
+    {
+      "k": 16,
+      "shrink": 0.2,
+      "decay": 0.001,
+      "development": {
+        "games": 11625,
+        "accuracy": 0.6363870967741936,
+        "log_loss": 0.6377296438061847,
+        "brier": 0.22349427538383088
+      }
+    }
+  ],
+  "rating_selected": {
+    "k": 16,
+    "shrink": 0.2,
+    "decay": 0.0,
+    "development": {
+      "games": 11625,
+      "accuracy": 0.634494623655914,
+      "log_loss": 0.637407624473341,
+      "brier": 0.2233910470939637
+    }
+  },
+  "development": {
+    "elo_ratings_logistic_0.01": {
+      "pooled": {
+        "games": 11625,
+        "accuracy": 0.6421505376344085,
+        "log_loss": 0.6315364164935429,
+        "brier": 0.22071851402214854
+      },
+      "folds": [
+        {
+          "year": 2019,
+          "train_games": 1901,
+          "games": 1828,
+          "accuracy": 0.6362144420131292,
+          "log_loss": 0.6350622518446103,
+          "brier": 0.22247445218392561
+        },
+        {
+          "year": 2020,
+          "train_games": 3729,
+          "games": 1838,
+          "accuracy": 0.6256800870511425,
+          "log_loss": 0.6497884393425981,
+          "brier": 0.2287217861277049
+        },
+        {
+          "year": 2021,
+          "train_games": 5567,
+          "games": 2020,
+          "accuracy": 0.6351485148514852,
+          "log_loss": 0.6394209547473813,
+          "brier": 0.22401045277910625
+        },
+        {
+          "year": 2022,
+          "train_games": 7587,
+          "games": 2037,
+          "accuracy": 0.6411389297987237,
+          "log_loss": 0.6258646117623721,
+          "brier": 0.21824923413961572
+        },
+        {
+          "year": 2023,
+          "train_games": 9624,
+          "games": 2007,
+          "accuracy": 0.6527154957648231,
+          "log_loss": 0.6256508757844638,
+          "brier": 0.21793603035334647
+        },
+        {
+          "year": 2024,
+          "train_games": 11631,
+          "games": 1895,
+          "accuracy": 0.6612137203166227,
+          "log_loss": 0.6143578065460223,
+          "brier": 0.21335428313307706
+        }
+      ]
+    },
+    "elo_ratings_logistic_0.1": {
+      "pooled": {
+        "games": 11625,
+        "accuracy": 0.6430107526881721,
+        "log_loss": 0.6316336897213335,
+        "brier": 0.2207240298340563
+      },
+      "folds": [
+        {
+          "year": 2019,
+          "train_games": 1901,
+          "games": 1828,
+          "accuracy": 0.6389496717724289,
+          "log_loss": 0.63526639971498,
+          "brier": 0.2225649480617444
+        },
+        {
+          "year": 2020,
+          "train_games": 3729,
+          "games": 1838,
+          "accuracy": 0.6273122959738846,
+          "log_loss": 0.6508413930422893,
+          "brier": 0.22908863399654364
+        },
+        {
+          "year": 2021,
+          "train_games": 5567,
+          "games": 2020,
+          "accuracy": 0.6341584158415842,
+          "log_loss": 0.6398473319891566,
+          "brier": 0.22417317887197527
+        },
+        {
+          "year": 2022,
+          "train_games": 7587,
+          "games": 2037,
+          "accuracy": 0.6445753559155621,
+          "log_loss": 0.6255610489812651,
+          "brier": 0.218085383445293
+        },
+        {
+          "year": 2023,
+          "train_games": 9624,
+          "games": 2007,
+          "accuracy": 0.6537120079720976,
+          "log_loss": 0.6249879827432951,
+          "brier": 0.21759970020304256
+        },
+        {
+          "year": 2024,
+          "train_games": 11631,
+          "games": 1895,
+          "accuracy": 0.6585751978891821,
+          "log_loss": 0.614310203251221,
+          "brier": 0.21330388747832732
+        }
+      ]
+    },
+    "elo_ratings_logistic_1.0": {
+      "pooled": {
+        "games": 11625,
+        "accuracy": 0.6430967741935484,
+        "log_loss": 0.6317221809713519,
+        "brier": 0.220761035434402
+      },
+      "folds": [
+        {
+          "year": 2019,
+          "train_games": 1901,
+          "games": 1828,
+          "accuracy": 0.638402625820569,
+          "log_loss": 0.6356804866761142,
+          "brier": 0.22277485454320797
+        },
+        {
+          "year": 2020,
+          "train_games": 3729,
+          "games": 1838,
+          "accuracy": 0.6267682263329706,
+          "log_loss": 0.6509147162867026,
+          "brier": 0.22910918115444492
+        },
+        {
+          "year": 2021,
+          "train_games": 5567,
+          "games": 2020,
+          "accuracy": 0.6346534653465347,
+          "log_loss": 0.6400729856577755,
+          "brier": 0.22427786300371474
+        },
+        {
+          "year": 2022,
+          "train_games": 7587,
+          "games": 2037,
+          "accuracy": 0.646539027982327,
+          "log_loss": 0.6255573278317494,
+          "brier": 0.21806812090724997
+        },
+        {
+          "year": 2023,
+          "train_games": 9624,
+          "games": 2007,
+          "accuracy": 0.6532137518684604,
+          "log_loss": 0.6248240480846677,
+          "brier": 0.21751324891314872
+        },
+        {
+          "year": 2024,
+          "train_games": 11631,
+          "games": 1895,
+          "accuracy": 0.658047493403694,
+          "log_loss": 0.614319579570006,
+          "brier": 0.21330701410755026
+        }
+      ]
+    },
+    "glicko_ratings_logistic_0.01": {
+      "pooled": {
+        "games": 11625,
+        "accuracy": 0.6438709677419355,
+        "log_loss": 0.6302213309858509,
+        "brier": 0.22013782599277748
+      },
+      "folds": [
+        {
+          "year": 2019,
+          "train_games": 1901,
+          "games": 1828,
+          "accuracy": 0.6444201312910285,
+          "log_loss": 0.6337509327586499,
+          "brier": 0.22181650710188985
+        },
+        {
+          "year": 2020,
+          "train_games": 3729,
+          "games": 1838,
+          "accuracy": 0.6267682263329706,
+          "log_loss": 0.6484421530427537,
+          "brier": 0.22813870176970974
+        },
+        {
+          "year": 2021,
+          "train_games": 5567,
+          "games": 2020,
+          "accuracy": 0.6356435643564357,
+          "log_loss": 0.6380074093665828,
+          "brier": 0.22339682905114305
+        },
+        {
+          "year": 2022,
+          "train_games": 7587,
+          "games": 2037,
+          "accuracy": 0.6426116838487973,
+          "log_loss": 0.6234004701610882,
+          "brier": 0.21719719082892103
+        },
+        {
+          "year": 2023,
+          "train_games": 9624,
+          "games": 2007,
+          "accuracy": 0.6512207274539114,
+          "log_loss": 0.6248636394168496,
+          "brier": 0.2176123335562992
+        },
+        {
+          "year": 2024,
+          "train_games": 11631,
+          "games": 1895,
+          "accuracy": 0.662269129287599,
+          "log_loss": 0.6138504176184018,
+          "brier": 0.21312004880303084
+        }
+      ]
+    },
+    "glicko_ratings_logistic_0.1": {
+      "pooled": {
+        "games": 11625,
+        "accuracy": 0.6434408602150538,
+        "log_loss": 0.6302251068010883,
+        "brier": 0.2201283573783987
+      },
+      "folds": [
+        {
+          "year": 2019,
+          "train_games": 1901,
+          "games": 1828,
+          "accuracy": 0.6438730853391685,
+          "log_loss": 0.6332241606894772,
+          "brier": 0.22162820381018195
+        },
+        {
+          "year": 2020,
+          "train_games": 3729,
+          "games": 1838,
+          "accuracy": 0.6245919477693145,
+          "log_loss": 0.6497271543293722,
+          "brier": 0.22863477116272338
+        },
+        {
+          "year": 2021,
+          "train_games": 5567,
+          "games": 2020,
+          "accuracy": 0.6316831683168317,
+          "log_loss": 0.6382925933783851,
+          "brier": 0.22352708603861565
+        },
+        {
+          "year": 2022,
+          "train_games": 7587,
+          "games": 2037,
+          "accuracy": 0.6455571919489446,
+          "log_loss": 0.6231844404599493,
+          "brier": 0.21708778711552085
+        },
+        {
+          "year": 2023,
+          "train_games": 9624,
+          "games": 2007,
+          "accuracy": 0.6537120079720976,
+          "log_loss": 0.6241448218003719,
+          "brier": 0.21726711624829742
+        },
+        {
+          "year": 2024,
+          "train_games": 11631,
+          "games": 1895,
+          "accuracy": 0.6606860158311345,
+          "log_loss": 0.6138249023589971,
+          "brier": 0.21310683382540047
+        }
+      ]
+    },
+    "glicko_ratings_logistic_1.0": {
+      "pooled": {
+        "games": 11625,
+        "accuracy": 0.6431827956989248,
+        "log_loss": 0.630292967153647,
+        "brier": 0.22016274409774356
+      },
+      "folds": [
+        {
+          "year": 2019,
+          "train_games": 1901,
+          "games": 1828,
+          "accuracy": 0.6433260393873085,
+          "log_loss": 0.6335249026719258,
+          "brier": 0.22180865516646
+        },
+        {
+          "year": 2020,
+          "train_games": 3729,
+          "games": 1838,
+          "accuracy": 0.6245919477693145,
+          "log_loss": 0.6498528484659142,
+          "brier": 0.22868100063185554
+        },
+        {
+          "year": 2021,
+          "train_games": 5567,
+          "games": 2020,
+          "accuracy": 0.6316831683168317,
+          "log_loss": 0.6384531624342249,
+          "brier": 0.2236071151986472
+        },
+        {
+          "year": 2022,
+          "train_games": 7587,
+          "games": 2037,
+          "accuracy": 0.6445753559155621,
+          "log_loss": 0.6232007174818452,
+          "brier": 0.21708404685526025
+        },
+        {
+          "year": 2023,
+          "train_games": 9624,
+          "games": 2007,
+          "accuracy": 0.6527154957648231,
+          "log_loss": 0.6239447173851562,
+          "brier": 0.21716695066611025
+        },
+        {
+          "year": 2024,
+          "train_games": 11631,
+          "games": 1895,
+          "accuracy": 0.6617414248021108,
+          "log_loss": 0.6138524475867305,
+          "brier": 0.2131236692339386
+        }
+      ]
+    },
+    "trueskill_ratings_logistic_0.01": {
+      "pooled": {
+        "games": 11625,
+        "accuracy": 0.6448172043010753,
+        "log_loss": 0.6299992388133044,
+        "brier": 0.22003469578702578
+      },
+      "folds": [
+        {
+          "year": 2019,
+          "train_games": 1901,
+          "games": 1828,
+          "accuracy": 0.6394967177242888,
+          "log_loss": 0.6338143840262753,
+          "brier": 0.2217903380092113
+        },
+        {
+          "year": 2020,
+          "train_games": 3729,
+          "games": 1838,
+          "accuracy": 0.6267682263329706,
+          "log_loss": 0.6494457976825703,
+          "brier": 0.22857704286945607
+        },
+        {
+          "year": 2021,
+          "train_games": 5567,
+          "games": 2020,
+          "accuracy": 0.6386138613861386,
+          "log_loss": 0.6369047468320176,
+          "brier": 0.2229249866050895
+        },
+        {
+          "year": 2022,
+          "train_games": 7587,
+          "games": 2037,
+          "accuracy": 0.6445753559155621,
+          "log_loss": 0.6227020759455284,
+          "brier": 0.21691348522600207
+        },
+        {
+          "year": 2023,
+          "train_games": 9624,
+          "games": 2007,
+          "accuracy": 0.6596910812157449,
+          "log_loss": 0.6244337567046576,
+          "brier": 0.21740076122326746
+        },
+        {
+          "year": 2024,
+          "train_games": 11631,
+          "games": 1895,
+          "accuracy": 0.6585751978891821,
+          "log_loss": 0.6138347303726142,
+          "brier": 0.21311948587152063
+        }
+      ]
+    },
+    "trueskill_ratings_logistic_0.1": {
+      "pooled": {
+        "games": 11625,
+        "accuracy": 0.6445591397849463,
+        "log_loss": 0.63004181891655,
+        "brier": 0.22004206271569787
+      },
+      "folds": [
+        {
+          "year": 2019,
+          "train_games": 1901,
+          "games": 1828,
+          "accuracy": 0.6422319474835886,
+          "log_loss": 0.6338249997286262,
+          "brier": 0.22184436254851542
+        },
+        {
+          "year": 2020,
+          "train_games": 3729,
+          "games": 1838,
+          "accuracy": 0.6256800870511425,
+          "log_loss": 0.6508544368634624,
+          "brier": 0.22911782550503346
+        },
+        {
+          "year": 2021,
+          "train_games": 5567,
+          "games": 2020,
+          "accuracy": 0.6376237623762376,
+          "log_loss": 0.6371425951113516,
+          "brier": 0.2230256816674687
+        },
+        {
+          "year": 2022,
+          "train_games": 7587,
+          "games": 2037,
+          "accuracy": 0.6435935198821797,
+          "log_loss": 0.6224134285312146,
+          "brier": 0.21677313679689852
+        },
+        {
+          "year": 2023,
+          "train_games": 9624,
+          "games": 2007,
+          "accuracy": 0.6596910812157449,
+          "log_loss": 0.6236264976445365,
+          "brier": 0.21701965381169122
+        },
+        {
+          "year": 2024,
+          "train_games": 11631,
+          "games": 1895,
+          "accuracy": 0.6575197889182058,
+          "log_loss": 0.6136311417574251,
+          "brier": 0.21303520803663137
+        }
+      ]
+    },
+    "trueskill_ratings_logistic_1.0": {
+      "pooled": {
+        "games": 11625,
+        "accuracy": 0.6436129032258064,
+        "log_loss": 0.630161127659316,
+        "brier": 0.22010183609089837
+      },
+      "folds": [
+        {
+          "year": 2019,
+          "train_games": 1901,
+          "games": 1828,
+          "accuracy": 0.6367614879649891,
+          "log_loss": 0.6344743868680094,
+          "brier": 0.2222032090576116
+        },
+        {
+          "year": 2020,
+          "train_games": 3729,
+          "games": 1838,
+          "accuracy": 0.6278563656147987,
+          "log_loss": 0.6510511255803623,
+          "brier": 0.22919218442066108
+        },
+        {
+          "year": 2021,
+          "train_games": 5567,
+          "games": 2020,
+          "accuracy": 0.6371287128712871,
+          "log_loss": 0.6373032841484301,
+          "brier": 0.22310193119221258
+        },
+        {
+          "year": 2022,
+          "train_games": 7587,
+          "games": 2037,
+          "accuracy": 0.6426116838487973,
+          "log_loss": 0.6224029334107755,
+          "brier": 0.2167566823300441
+        },
+        {
+          "year": 2023,
+          "train_games": 9624,
+          "games": 2007,
+          "accuracy": 0.6591928251121076,
+          "log_loss": 0.6234098483020727,
+          "brier": 0.21691297706267407
+        },
+        {
+          "year": 2024,
+          "train_games": 11631,
+          "games": 1895,
+          "accuracy": 0.6569920844327177,
+          "log_loss": 0.6136152961204658,
+          "brier": 0.21303300029279623
+        }
+      ]
+    },
+    "all_ratings_logistic_0.01": {
+      "pooled": {
+        "games": 11625,
+        "accuracy": 0.6477419354838709,
+        "log_loss": 0.6283714862822204,
+        "brier": 0.2192681653279052
+      },
+      "folds": [
+        {
+          "year": 2019,
+          "train_games": 1901,
+          "games": 1828,
+          "accuracy": 0.6466083150984683,
+          "log_loss": 0.633380429640255,
+          "brier": 0.22155701242036194
+        },
+        {
+          "year": 2020,
+          "train_games": 3729,
+          "games": 1838,
+          "accuracy": 0.6311207834602829,
+          "log_loss": 0.6460789706414275,
+          "brier": 0.2270484581654388
+        },
+        {
+          "year": 2021,
+          "train_games": 5567,
+          "games": 2020,
+          "accuracy": 0.6420792079207921,
+          "log_loss": 0.6358468372836398,
+          "brier": 0.22239743951557553
+        },
+        {
+          "year": 2022,
+          "train_games": 7587,
+          "games": 2037,
+          "accuracy": 0.6543937162493864,
+          "log_loss": 0.6219742092617416,
+          "brier": 0.2164467637153247
+        },
+        {
+          "year": 2023,
+          "train_games": 9624,
+          "games": 2007,
+          "accuracy": 0.6502242152466368,
+          "log_loss": 0.6226774204378458,
+          "brier": 0.21659169310823978
+        },
+        {
+          "year": 2024,
+          "train_games": 11631,
+          "games": 1895,
+          "accuracy": 0.6612137203166227,
+          "log_loss": 0.6113035863913485,
+          "brier": 0.21204576440452955
+        }
+      ]
+    },
+    "all_ratings_logistic_0.1": {
+      "pooled": {
+        "games": 11625,
+        "accuracy": 0.648,
+        "log_loss": 0.6281608761630244,
+        "brier": 0.21916575615124678
+      },
+      "folds": [
+        {
+          "year": 2019,
+          "train_games": 1901,
+          "games": 1828,
+          "accuracy": 0.6400437636761488,
+          "log_loss": 0.6339412456628244,
+          "brier": 0.22185782592940145
+        },
+        {
+          "year": 2020,
+          "train_games": 3729,
+          "games": 1838,
+          "accuracy": 0.6349292709466812,
+          "log_loss": 0.646023160900448,
+          "brier": 0.22696457802835782
+        },
+        {
+          "year": 2021,
+          "train_games": 5567,
+          "games": 2020,
+          "accuracy": 0.6465346534653466,
+          "log_loss": 0.6350977477461491,
+          "brier": 0.22202760085804524
+        },
+        {
+          "year": 2022,
+          "train_games": 7587,
+          "games": 2037,
+          "accuracy": 0.6499754540991655,
+          "log_loss": 0.6220265971402905,
+          "brier": 0.21640489995389148
+        },
+        {
+          "year": 2023,
+          "train_games": 9624,
+          "games": 2007,
+          "accuracy": 0.6522172396611858,
+          "log_loss": 0.6223509179317434,
+          "brier": 0.2164780132198431
+        },
+        {
+          "year": 2024,
+          "train_games": 11631,
+          "games": 1895,
+          "accuracy": 0.6633245382585752,
+          "log_loss": 0.610612716346961,
+          "brier": 0.21176834172644998
+        }
+      ]
+    },
+    "all_ratings_logistic_1.0": {
+      "pooled": {
+        "games": 11625,
+        "accuracy": 0.6458494623655914,
+        "log_loss": 0.6281041276960194,
+        "brier": 0.21914844243028495
+      },
+      "folds": [
+        {
+          "year": 2019,
+          "train_games": 1901,
+          "games": 1828,
+          "accuracy": 0.637855579868709,
+          "log_loss": 0.6337988616296238,
+          "brier": 0.2218726517969009
+        },
+        {
+          "year": 2020,
+          "train_games": 3729,
+          "games": 1838,
+          "accuracy": 0.6327529923830251,
+          "log_loss": 0.6447115623355454,
+          "brier": 0.22642192972415096
+        },
+        {
+          "year": 2021,
+          "train_games": 5567,
+          "games": 2020,
+          "accuracy": 0.6420792079207921,
+          "log_loss": 0.6347714941801785,
+          "brier": 0.22181306111987778
+        },
+        {
+          "year": 2022,
+          "train_games": 7587,
+          "games": 2037,
+          "accuracy": 0.6524300441826215,
+          "log_loss": 0.6229708530410243,
+          "brier": 0.21678765682409312
+        },
+        {
+          "year": 2023,
+          "train_games": 9624,
+          "games": 2007,
+          "accuracy": 0.645241654210264,
+          "log_loss": 0.6229492289565157,
+          "brier": 0.21677428939719287
+        },
+        {
+          "year": 2024,
+          "train_games": 11631,
+          "games": 1895,
+          "accuracy": 0.6638522427440633,
+          "log_loss": 0.6103731743695451,
+          "brier": 0.2116776198951669
+        }
+      ]
+    },
+    "add_form_logistic_0.01": {
+      "pooled": {
+        "games": 11625,
+        "accuracy": 0.6472258064516129,
+        "log_loss": 0.6281676454626907,
+        "brier": 0.219169661302448
+      },
+      "folds": [
+        {
+          "year": 2019,
+          "train_games": 1901,
+          "games": 1828,
+          "accuracy": 0.6466083150984683,
+          "log_loss": 0.6331432312126469,
+          "brier": 0.22145297510083312
+        },
+        {
+          "year": 2020,
+          "train_games": 3729,
+          "games": 1838,
+          "accuracy": 0.6294885745375408,
+          "log_loss": 0.6449350381993598,
+          "brier": 0.22654514940074408
+        },
+        {
+          "year": 2021,
+          "train_games": 5567,
+          "games": 2020,
+          "accuracy": 0.6351485148514852,
+          "log_loss": 0.63604727600764,
+          "brier": 0.2224953542148822
+        },
+        {
+          "year": 2022,
+          "train_games": 7587,
+          "games": 2037,
+          "accuracy": 0.6534118802160039,
+          "log_loss": 0.6210419362310001,
+          "brier": 0.21604679446418298
+        },
+        {
+          "year": 2023,
+          "train_games": 9624,
+          "games": 2007,
+          "accuracy": 0.6527154957648231,
+          "log_loss": 0.623002407186429,
+          "brier": 0.2166680424715128
+        },
+        {
+          "year": 2024,
+          "train_games": 11631,
+          "games": 1895,
+          "accuracy": 0.6654353562005277,
+          "log_loss": 0.6118357249474902,
+          "brier": 0.21227471898688058
+        }
+      ]
+    },
+    "add_form_logistic_0.1": {
+      "pooled": {
+        "games": 11625,
+        "accuracy": 0.6451612903225806,
+        "log_loss": 0.6280462242735819,
+        "brier": 0.21909844226937095
+      },
+      "folds": [
+        {
+          "year": 2019,
+          "train_games": 1901,
+          "games": 1828,
+          "accuracy": 0.638402625820569,
+          "log_loss": 0.6339542930070027,
+          "brier": 0.22186038975980324
+        },
+        {
+          "year": 2020,
+          "train_games": 3729,
+          "games": 1838,
+          "accuracy": 0.6289445048966268,
+          "log_loss": 0.6446480156226954,
+          "brier": 0.2263498949231145
+        },
+        {
+          "year": 2021,
+          "train_games": 5567,
+          "games": 2020,
+          "accuracy": 0.6400990099009901,
+          "log_loss": 0.6356384660912242,
+          "brier": 0.22225690448496416
+        },
+        {
+          "year": 2022,
+          "train_games": 7587,
+          "games": 2037,
+          "accuracy": 0.6485027000490918,
+          "log_loss": 0.6211741270372074,
+          "brier": 0.21604378658616114
+        },
+        {
+          "year": 2023,
+          "train_games": 9624,
+          "games": 2007,
+          "accuracy": 0.648729446935725,
+          "log_loss": 0.6226824252494165,
+          "brier": 0.2165473673496831
+        },
+        {
+          "year": 2024,
+          "train_games": 11631,
+          "games": 1895,
+          "accuracy": 0.6654353562005277,
+          "log_loss": 0.6112194359337373,
+          "brier": 0.21201941183397388
+        }
+      ]
+    },
+    "add_form_logistic_1.0": {
+      "pooled": {
+        "games": 11625,
+        "accuracy": 0.6462795698924731,
+        "log_loss": 0.6281094770701627,
+        "brier": 0.21913508522067215
+      },
+      "folds": [
+        {
+          "year": 2019,
+          "train_games": 1901,
+          "games": 1828,
+          "accuracy": 0.6444201312910285,
+          "log_loss": 0.6345437204507886,
+          "brier": 0.2222281136713321
+        },
+        {
+          "year": 2020,
+          "train_games": 3729,
+          "games": 1838,
+          "accuracy": 0.6305767138193689,
+          "log_loss": 0.6433903478408605,
+          "brier": 0.22583079201961334
+        },
+        {
+          "year": 2021,
+          "train_games": 5567,
+          "games": 2020,
+          "accuracy": 0.6415841584158416,
+          "log_loss": 0.6354235951672679,
+          "brier": 0.22207591284827244
+        },
+        {
+          "year": 2022,
+          "train_games": 7587,
+          "games": 2037,
+          "accuracy": 0.6504663721158567,
+          "log_loss": 0.6220390714551088,
+          "brier": 0.21638352200896435
+        },
+        {
+          "year": 2023,
+          "train_games": 9624,
+          "games": 2007,
+          "accuracy": 0.645241654210264,
+          "log_loss": 0.6232486579451919,
+          "brier": 0.21683589352788363
+        },
+        {
+          "year": 2024,
+          "train_games": 11631,
+          "games": 1895,
+          "accuracy": 0.6649076517150396,
+          "log_loss": 0.6109583025525919,
+          "brier": 0.21191512483949146
+        }
+      ]
+    },
+    "add_context_logistic_0.01": {
+      "pooled": {
+        "games": 11625,
+        "accuracy": 0.6449032258064517,
+        "log_loss": 0.6288047967224173,
+        "brier": 0.21942652918163355
+      },
+      "folds": [
+        {
+          "year": 2019,
+          "train_games": 1901,
+          "games": 1828,
+          "accuracy": 0.638402625820569,
+          "log_loss": 0.6363441210291805,
+          "brier": 0.22290829445143018
+        },
+        {
+          "year": 2020,
+          "train_games": 3729,
+          "games": 1838,
+          "accuracy": 0.6305767138193689,
+          "log_loss": 0.6448290087415488,
+          "brier": 0.22636312025084587
+        },
+        {
+          "year": 2021,
+          "train_games": 5567,
+          "games": 2020,
+          "accuracy": 0.6351485148514852,
+          "log_loss": 0.6365401071255893,
+          "brier": 0.22267071240999892
+        },
+        {
+          "year": 2022,
+          "train_games": 7587,
+          "games": 2037,
+          "accuracy": 0.648993618065783,
+          "log_loss": 0.6209260449901057,
+          "brier": 0.21599557991181154
+        },
+        {
+          "year": 2023,
+          "train_games": 9624,
+          "games": 2007,
+          "accuracy": 0.6552067762830095,
+          "log_loss": 0.6224892045734188,
+          "brier": 0.2164520953726239
+        },
+        {
+          "year": 2024,
+          "train_games": 11631,
+          "games": 1895,
+          "accuracy": 0.6601583113456464,
+          "log_loss": 0.612902262254567,
+          "brier": 0.21272001778195607
+        }
+      ]
+    },
+    "add_context_logistic_0.1": {
+      "pooled": {
+        "games": 11625,
+        "accuracy": 0.6440430107526882,
+        "log_loss": 0.6289519416737971,
+        "brier": 0.219460654626853
+      },
+      "folds": [
+        {
+          "year": 2019,
+          "train_games": 1901,
+          "games": 1828,
+          "accuracy": 0.6362144420131292,
+          "log_loss": 0.6385482026464104,
+          "brier": 0.2238880498363739
+        },
+        {
+          "year": 2020,
+          "train_games": 3729,
+          "games": 1838,
+          "accuracy": 0.6305767138193689,
+          "log_loss": 0.6445652040854114,
+          "brier": 0.2261449502683744
+        },
+        {
+          "year": 2021,
+          "train_games": 5567,
+          "games": 2020,
+          "accuracy": 0.6361386138613861,
+          "log_loss": 0.6362464458129687,
+          "brier": 0.222481488551202
+        },
+        {
+          "year": 2022,
+          "train_games": 7587,
+          "games": 2037,
+          "accuracy": 0.6499754540991655,
+          "log_loss": 0.6211315064751949,
+          "brier": 0.21601929505127399
+        },
+        {
+          "year": 2023,
+          "train_games": 9624,
+          "games": 2007,
+          "accuracy": 0.6502242152466368,
+          "log_loss": 0.6221764573840142,
+          "brier": 0.21633554838677277
+        },
+        {
+          "year": 2024,
+          "train_games": 11631,
+          "games": 1895,
+          "accuracy": 0.6601583113456464,
+          "log_loss": 0.6123580544640533,
+          "brier": 0.21249550387223026
+        }
+      ]
+    },
+    "add_context_logistic_1.0": {
+      "pooled": {
+        "games": 11625,
+        "accuracy": 0.645505376344086,
+        "log_loss": 0.6290600244531611,
+        "brier": 0.2195156050703314
+      },
+      "folds": [
+        {
+          "year": 2019,
+          "train_games": 1901,
+          "games": 1828,
+          "accuracy": 0.6389496717724289,
+          "log_loss": 0.639236300834336,
+          "brier": 0.22429715249909238
+        },
+        {
+          "year": 2020,
+          "train_games": 3729,
+          "games": 1838,
+          "accuracy": 0.6338411316648531,
+          "log_loss": 0.6432565425121516,
+          "brier": 0.22559757092251595
+        },
+        {
+          "year": 2021,
+          "train_games": 5567,
+          "games": 2020,
+          "accuracy": 0.6366336633663366,
+          "log_loss": 0.6360977163141306,
+          "brier": 0.2223392729671573
+        },
+        {
+          "year": 2022,
+          "train_games": 7587,
+          "games": 2037,
+          "accuracy": 0.6524300441826215,
+          "log_loss": 0.6221157068454611,
+          "brier": 0.2164035812298564
+        },
+        {
+          "year": 2023,
+          "train_games": 9624,
+          "games": 2007,
+          "accuracy": 0.6472346786248132,
+          "log_loss": 0.6227186938345732,
+          "brier": 0.21661203822301
+        },
+        {
+          "year": 2024,
+          "train_games": 11631,
+          "games": 1895,
+          "accuracy": 0.6633245382585752,
+          "log_loss": 0.6121529292246758,
+          "brier": 0.2124145602882432
+        }
+      ]
+    },
+    "full_logistic_0.01": {
+      "pooled": {
+        "games": 11625,
+        "accuracy": 0.6466236559139785,
+        "log_loss": 0.6277248231380577,
+        "brier": 0.218926889729693
+      },
+      "folds": [
+        {
+          "year": 2019,
+          "train_games": 1901,
+          "games": 1828,
+          "accuracy": 0.6367614879649891,
+          "log_loss": 0.6372961663750248,
+          "brier": 0.22338539842289237
+        },
+        {
+          "year": 2020,
+          "train_games": 3729,
+          "games": 1838,
+          "accuracy": 0.6322089227421109,
+          "log_loss": 0.6434641010006172,
+          "brier": 0.22582741717679253
+        },
+        {
+          "year": 2021,
+          "train_games": 5567,
+          "games": 2020,
+          "accuracy": 0.6410891089108911,
+          "log_loss": 0.6350087976444405,
+          "brier": 0.2219352787499571
+        },
+        {
+          "year": 2022,
+          "train_games": 7587,
+          "games": 2037,
+          "accuracy": 0.6534118802160039,
+          "log_loss": 0.6208884409073937,
+          "brier": 0.21589030121525296
+        },
+        {
+          "year": 2023,
+          "train_games": 9624,
+          "games": 2007,
+          "accuracy": 0.6567015445939213,
+          "log_loss": 0.620090432116721,
+          "brier": 0.21530048339565946
+        },
+        {
+          "year": 2024,
+          "train_games": 11631,
+          "games": 1895,
+          "accuracy": 0.658047493403694,
+          "log_loss": 0.610895850437389,
+          "brier": 0.2118310898122517
+        }
+      ]
+    },
+    "full_logistic_0.1": {
+      "pooled": {
+        "games": 11625,
+        "accuracy": 0.645505376344086,
+        "log_loss": 0.6281004115947729,
+        "brier": 0.21906627279660534
+      },
+      "folds": [
+        {
+          "year": 2019,
+          "train_games": 1901,
+          "games": 1828,
+          "accuracy": 0.6367614879649891,
+          "log_loss": 0.6402150619971014,
+          "brier": 0.22467611465177365
+        },
+        {
+          "year": 2020,
+          "train_games": 3729,
+          "games": 1838,
+          "accuracy": 0.6322089227421109,
+          "log_loss": 0.6434610716997685,
+          "brier": 0.22573975048742817
+        },
+        {
+          "year": 2021,
+          "train_games": 5567,
+          "games": 2020,
+          "accuracy": 0.6351485148514852,
+          "log_loss": 0.6347861045082234,
+          "brier": 0.22179543540847727
+        },
+        {
+          "year": 2022,
+          "train_games": 7587,
+          "games": 2037,
+          "accuracy": 0.6524300441826215,
+          "log_loss": 0.6211683559284268,
+          "brier": 0.21596143582757713
+        },
+        {
+          "year": 2023,
+          "train_games": 9624,
+          "games": 2007,
+          "accuracy": 0.6522172396611858,
+          "log_loss": 0.61995569963566,
+          "brier": 0.21524676131005505
+        },
+        {
+          "year": 2024,
+          "train_games": 11631,
+          "games": 1895,
+          "accuracy": 0.6633245382585752,
+          "log_loss": 0.6104663537587189,
+          "brier": 0.2116555926258697
+        }
+      ]
+    },
+    "full_logistic_1.0": {
+      "pooled": {
+        "games": 11625,
+        "accuracy": 0.6457634408602151,
+        "log_loss": 0.6282825855988985,
+        "brier": 0.21916124502896897
+      },
+      "folds": [
+        {
+          "year": 2019,
+          "train_games": 1901,
+          "games": 1828,
+          "accuracy": 0.638402625820569,
+          "log_loss": 0.6413526769812888,
+          "brier": 0.22529713105915794
+        },
+        {
+          "year": 2020,
+          "train_games": 3729,
+          "games": 1838,
+          "accuracy": 0.6311207834602829,
+          "log_loss": 0.6423240602712033,
+          "brier": 0.22527906314012985
+        },
+        {
+          "year": 2021,
+          "train_games": 5567,
+          "games": 2020,
+          "accuracy": 0.6361386138613861,
+          "log_loss": 0.6346362592010257,
+          "brier": 0.2216742876457655
+        },
+        {
+          "year": 2022,
+          "train_games": 7587,
+          "games": 2037,
+          "accuracy": 0.6504663721158567,
+          "log_loss": 0.6220395117624206,
+          "brier": 0.2163009184906051
+        },
+        {
+          "year": 2023,
+          "train_games": 9624,
+          "games": 2007,
+          "accuracy": 0.6517189835575485,
+          "log_loss": 0.6204591411537481,
+          "brier": 0.21549745707575635
+        },
+        {
+          "year": 2024,
+          "train_games": 11631,
+          "games": 1895,
+          "accuracy": 0.6659630606860159,
+          "log_loss": 0.6102794279394363,
+          "brier": 0.21158468151620738
+        }
+      ]
+    },
+    "full_lightgbm_100_7": {
+      "pooled": {
+        "games": 11625,
+        "accuracy": 0.6428387096774194,
+        "log_loss": 0.6323375586493392,
+        "brier": 0.2208920235178017
+      },
+      "folds": [
+        {
+          "year": 2019,
+          "train_games": 1901,
+          "games": 1828,
+          "accuracy": 0.6143326039387309,
+          "log_loss": 0.6458250205827205,
+          "brier": 0.22715073504602065
+        },
+        {
+          "year": 2020,
+          "train_games": 3729,
+          "games": 1838,
+          "accuracy": 0.6289445048966268,
+          "log_loss": 0.6447994600776475,
+          "brier": 0.22660375528293017
+        },
+        {
+          "year": 2021,
+          "train_games": 5567,
+          "games": 2020,
+          "accuracy": 0.648019801980198,
+          "log_loss": 0.6376588975186684,
+          "brier": 0.22328383553596046
+        },
+        {
+          "year": 2022,
+          "train_games": 7587,
+          "games": 2037,
+          "accuracy": 0.6494845360824743,
+          "log_loss": 0.6266376018733912,
+          "brier": 0.21820949252019026
+        },
+        {
+          "year": 2023,
+          "train_games": 9624,
+          "games": 2007,
+          "accuracy": 0.6507224713502741,
+          "log_loss": 0.6254687803405452,
+          "brier": 0.21771921907015598
+        },
+        {
+          "year": 2024,
+          "train_games": 11631,
+          "games": 1895,
+          "accuracy": 0.6627968337730871,
+          "log_loss": 0.614969374091481,
+          "brier": 0.21300895556740004
+        }
+      ]
+    },
+    "full_lightgbm_200_15": {
+      "pooled": {
+        "games": 11625,
+        "accuracy": 0.6363870967741936,
+        "log_loss": 0.6367800750421587,
+        "brier": 0.22294041067193499
+      },
+      "folds": [
+        {
+          "year": 2019,
+          "train_games": 1901,
+          "games": 1828,
+          "accuracy": 0.6022975929978118,
+          "log_loss": 0.6632472992884927,
+          "brier": 0.23535819086709706
+        },
+        {
+          "year": 2020,
+          "train_games": 3729,
+          "games": 1838,
+          "accuracy": 0.6224156692056583,
+          "log_loss": 0.6512613266132252,
+          "brier": 0.22930056998146958
+        },
+        {
+          "year": 2021,
+          "train_games": 5567,
+          "games": 2020,
+          "accuracy": 0.6386138613861386,
+          "log_loss": 0.6403670845577356,
+          "brier": 0.22446342891633447
+        },
+        {
+          "year": 2022,
+          "train_games": 7587,
+          "games": 2037,
+          "accuracy": 0.6475208640157094,
+          "log_loss": 0.6274786120729843,
+          "brier": 0.21862404511222278
+        },
+        {
+          "year": 2023,
+          "train_games": 9624,
+          "games": 2007,
+          "accuracy": 0.645241654210264,
+          "log_loss": 0.6268559509117099,
+          "brier": 0.21838976038806934
+        },
+        {
+          "year": 2024,
+          "train_games": 11631,
+          "games": 1895,
+          "accuracy": 0.6591029023746702,
+          "log_loss": 0.6138884717000136,
+          "brier": 0.21262875890596358
+        }
+      ]
+    }
+  },
+  "validation_raw": {
+    "Elo": {
+      "games": 2098,
+      "accuracy": 0.6496663489037178,
+      "log_loss": 0.6258905722033461,
+      "brier": 0.21806346046209107,
+      "vs_Elo": {
+        "accuracy_delta": [
+          0.0,
+          0.0
+        ],
+        "log_loss_improvement": [
+          0.0,
+          0.0
+        ],
+        "brier_improvement": [
+          0.0,
+          0.0
+        ]
+      },
+      "vs_v6": {
+        "accuracy_delta": [
+          -0.01874128841461368,
+          0.00819672131147541
+        ],
+        "log_loss_improvement": [
+          -0.013502849669418355,
+          -0.0010569988467338978
+        ],
+        "brier_improvement": [
+          -0.006234674042653647,
+          -0.0007004617235275717
+        ]
+      }
+    },
+    "v6_original_data": {
+      "games": 2098,
+      "accuracy": 0.652049571020019,
+      "log_loss": 0.6202933173425069,
+      "brier": 0.21541614950241417,
+      "vs_Elo": {
+        "accuracy_delta": [
+          -0.010317696930445168,
+          0.01608142078246631
+        ],
+        "log_loss_improvement": [
+          -0.0009628136327611953,
+          0.012129599501294318
+        ],
+        "brier_improvement": [
+          -0.0003412191646083355,
+          0.0055025379045614935
+        ]
+      },
+      "vs_v6": {
+        "accuracy_delta": [
+          -0.010045835666339414,
+          0.003921911571799684
+        ],
+        "log_loss_improvement": [
+          -0.004155032645164053,
+          0.0005981409513671497
+        ],
+        "brier_improvement": [
+          -0.0018739771622925474,
+          0.0001286672109697982
+        ]
+      }
+    },
+    "v6_expanded_data": {
+      "games": 2098,
+      "accuracy": 0.6549094375595805,
+      "log_loss": 0.618429722986612,
+      "brier": 0.21450958451463,
+      "vs_Elo": {
+        "accuracy_delta": [
+          -0.00819672131147541,
+          0.018741288414613675
+        ],
+        "log_loss_improvement": [
+          0.0010569988467338956,
+          0.013502849669418353
+        ],
+        "brier_improvement": [
+          0.000700461723527568,
+          0.006234674042653646
+        ]
+      },
+      "vs_v6": {
+        "accuracy_delta": [
+          0.0,
+          0.0
+        ],
+        "log_loss_improvement": [
+          0.0,
+          0.0
+        ],
+        "brier_improvement": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "v7": {
+      "games": 2098,
+      "accuracy": 0.6568160152526216,
+      "log_loss": 0.6137856139517547,
+      "brier": 0.2125761504780996,
+      "vs_Elo": {
+        "accuracy_delta": [
+          -0.006573234131720644,
+          0.021816897189445433
+        ],
+        "log_loss_improvement": [
+          0.004966667921193013,
+          0.018658099148031796
+        ],
+        "brier_improvement": [
+          0.002434102466952525,
+          0.008370544927476157
+        ]
+      },
+      "vs_v6": {
+        "accuracy_delta": [
+          -0.008872022992364545,
+          0.013476127418326635
+        ],
+        "log_loss_improvement": [
+          0.0014250111957307447,
+          0.008085262021200553
+        ],
+        "brier_improvement": [
+          0.000561275520609436,
+          0.0033881591548963986
+        ]
+      }
+    }
+  },
+  "ablation_validation_raw": {
+    "elo_ratings": {
+      "candidate": "elo_ratings_logistic_0.01",
+      "games": 2098,
+      "accuracy": 0.6544327931363203,
+      "log_loss": 0.6184493719106188,
+      "brier": 0.21462796717997393,
+      "vs_Elo": {
+        "accuracy_delta": [
+          -0.00836071895354238,
+          0.018243007587774567
+        ],
+        "log_loss_improvement": [
+          0.002592616760981621,
+          0.011954651585281044
+        ],
+        "brier_improvement": [
+          0.0013104346893950114,
+          0.005409434416197542
+        ]
+      },
+      "vs_v6": {
+        "accuracy_delta": [
+          -0.013429900778858203,
+          0.013469640825851547
+        ],
+        "log_loss_improvement": [
+          -0.004331169670284586,
+          0.004455126272691637
+        ],
+        "brier_improvement": [
+          -0.002003329187638785,
+          0.0017983418174502006
+        ]
+      }
+    },
+    "glicko_ratings": {
+      "candidate": "glicko_ratings_logistic_0.01",
+      "games": 2098,
+      "accuracy": 0.6582459485224023,
+      "log_loss": 0.6167420439243652,
+      "brier": 0.2138239869685735,
+      "vs_Elo": {
+        "accuracy_delta": [
+          -0.00469969144559512,
+          0.022388241363775086
+        ],
+        "log_loss_improvement": [
+          0.003693801299564028,
+          0.014308556311186325
+        ],
+        "brier_improvement": [
+          0.0019107480866622007,
+          0.006504058074349729
+        ]
+      },
+      "vs_v6": {
+        "accuracy_delta": [
+          -0.008860025309336333,
+          0.01664568500845077
+        ],
+        "log_loss_improvement": [
+          -0.003068954630916377,
+          0.0063065782581840256
+        ],
+        "brier_improvement": [
+          -0.001340144588011635,
+          0.0026869911913688237
+        ]
+      }
+    },
+    "trueskill_ratings": {
+      "candidate": "trueskill_ratings_logistic_0.01",
+      "games": 2098,
+      "accuracy": 0.663489037178265,
+      "log_loss": 0.6161979957157685,
+      "brier": 0.21361788926710926,
+      "vs_Elo": {
+        "accuracy_delta": [
+          0.00045265777676816045,
+          0.02853676279236028
+        ],
+        "log_loss_improvement": [
+          0.0039831229288236625,
+          0.014978787201071877
+        ],
+        "brier_improvement": [
+          0.0020134884068845147,
+          0.006779473973019627
+        ]
+      },
+      "vs_v6": {
+        "accuracy_delta": [
+          -0.004523199462184212,
+          0.023168122680944998
+        ],
+        "log_loss_improvement": [
+          -0.002615931454882408,
+          0.00691528765517501
+        ],
+        "brier_improvement": [
+          -0.0011323153620254147,
+          0.0029223593994690193
+        ]
+      }
+    },
+    "all_ratings": {
+      "candidate": "all_ratings_logistic_1.0",
+      "games": 2098,
+      "accuracy": 0.6582459485224023,
+      "log_loss": 0.6176783776092322,
+      "brier": 0.21429213045055176,
+      "vs_Elo": {
+        "accuracy_delta": [
+          -0.005238847837985769,
+          0.022681544952210274
+        ],
+        "log_loss_improvement": [
+          0.0017069819245298958,
+          0.014342246651296185
+        ],
+        "brier_improvement": [
+          0.001010502684579533,
+          0.006427468997981487
+        ]
+      },
+      "vs_v6": {
+        "accuracy_delta": [
+          -0.009360688636137302,
+          0.01696744808255828
+        ],
+        "log_loss_improvement": [
+          -0.0035308287643382335,
+          0.005063068313747616
+        ],
+        "brier_improvement": [
+          -0.0015717522211988713,
+          0.002047671974693271
+        ]
+      }
+    },
+    "add_form": {
+      "candidate": "add_form_logistic_0.1",
+      "games": 2098,
+      "accuracy": 0.6591992373689228,
+      "log_loss": 0.6177038752464727,
+      "brier": 0.21426457196915147,
+      "vs_Elo": {
+        "accuracy_delta": [
+          -0.0034235303602025294,
+          0.022864259791487155
+        ],
+        "log_loss_improvement": [
+          0.001608099661005067,
+          0.014522556117199149
+        ],
+        "brier_improvement": [
+          0.0009551867895519532,
+          0.006552314299712644
+        ]
+      },
+      "vs_v6": {
+        "accuracy_delta": [
+          -0.008576354120003163,
+          0.01736302351594781
+        ],
+        "log_loss_improvement": [
+          -0.0035361885712667743,
+          0.005066390007020671
+        ],
+        "brier_improvement": [
+          -0.0015775843357822956,
+          0.0021069212450838992
+        ]
+      }
+    },
+    "add_context": {
+      "candidate": "add_context_logistic_0.01",
+      "games": 2098,
+      "accuracy": 0.6563393708293613,
+      "log_loss": 0.6167589742002791,
+      "brier": 0.21387587958618243,
+      "vs_Elo": {
+        "accuracy_delta": [
+          -0.0058455330421885495,
+          0.0193522870466607
+        ],
+        "log_loss_improvement": [
+          0.002744395062955592,
+          0.015171141935286002
+        ],
+        "brier_improvement": [
+          0.0014648320953309184,
+          0.0068786783513735145
+        ]
+      },
+      "vs_v6": {
+        "accuracy_delta": [
+          -0.010086564382031947,
+          0.013459988500839069
+        ],
+        "log_loss_improvement": [
+          -0.0025173508545566947,
+          0.005785212928380169
+        ],
+        "brier_improvement": [
+          -0.0012053622253908687,
+          0.0024600798536181735
+        ]
+      }
+    },
+    "full": {
+      "candidate": "full_logistic_0.01",
+      "games": 2098,
+      "accuracy": 0.6568160152526216,
+      "log_loss": 0.6137856139517547,
+      "brier": 0.2125761504780996,
+      "vs_Elo": {
+        "accuracy_delta": [
+          -0.006573234131720644,
+          0.021816897189445433
+        ],
+        "log_loss_improvement": [
+          0.004966667921193013,
+          0.018658099148031796
+        ],
+        "brier_improvement": [
+          0.002434102466952525,
+          0.008370544927476157
+        ]
+      },
+      "vs_v6": {
+        "accuracy_delta": [
+          -0.008872022992364545,
+          0.013476127418326635
+        ],
+        "log_loss_improvement": [
+          0.0014250111957307447,
+          0.008085262021200553
+        ],
+        "brier_improvement": [
+          0.000561275520609436,
+          0.0033881591548963986
+        ]
+      }
+    }
+  },
+  "calibration_selection": {
+    "Elo": {
+      "selected": "none",
+      "selection_scores": {
+        "none": {
+          "games": 630,
+          "accuracy": 0.6444444444444445,
+          "log_loss": 0.6315933321312034,
+          "brier": 0.22060875667817786
+        },
+        "platt": {
+          "games": 630,
+          "accuracy": 0.6507936507936508,
+          "log_loss": 0.6365425125050834,
+          "brier": 0.2227162560023032
+        },
+        "isotonic": {
+          "games": 630,
+          "accuracy": 0.6412698412698413,
+          "log_loss": 0.6410623284011111,
+          "brier": 0.2239029400124782
+        }
+      },
+      "fit_end_exclusive": "2025-08-04 09:11:58+00:00",
+      "selection_games": 630,
+      "policy": "refit selected calibrator on all 2025 for 2026 only"
+    },
+    "v6_original_data": {
+      "selected": "none",
+      "selection_scores": {
+        "none": {
+          "games": 630,
+          "accuracy": 0.6349206349206349,
+          "log_loss": 0.6345122726296757,
+          "brier": 0.22194694198007975
+        },
+        "platt": {
+          "games": 630,
+          "accuracy": 0.6285714285714286,
+          "log_loss": 0.6394374141023343,
+          "brier": 0.22420198681543857
+        },
+        "isotonic": {
+          "games": 630,
+          "accuracy": 0.6285714285714286,
+          "log_loss": 0.6403102401822317,
+          "brier": 0.22423660519181302
+        }
+      },
+      "fit_end_exclusive": "2025-08-04 09:11:58+00:00",
+      "selection_games": 630,
+      "policy": "refit selected calibrator on all 2025 for 2026 only"
+    },
+    "v6_expanded_data": {
+      "selected": "none",
+      "selection_scores": {
+        "none": {
+          "games": 630,
+          "accuracy": 0.6412698412698413,
+          "log_loss": 0.6325062022687342,
+          "brier": 0.22097637462782307
+        },
+        "platt": {
+          "games": 630,
+          "accuracy": 0.6365079365079365,
+          "log_loss": 0.6375968076223583,
+          "brier": 0.22328219885555026
+        },
+        "isotonic": {
+          "games": 630,
+          "accuracy": 0.6365079365079365,
+          "log_loss": 0.6373865447114491,
+          "brier": 0.22285210681418605
+        }
+      },
+      "fit_end_exclusive": "2025-08-04 09:11:58+00:00",
+      "selection_games": 630,
+      "policy": "refit selected calibrator on all 2025 for 2026 only"
+    },
+    "v7": {
+      "selected": "none",
+      "selection_scores": {
+        "none": {
+          "games": 630,
+          "accuracy": 0.6412698412698413,
+          "log_loss": 0.6272719819929372,
+          "brier": 0.21881110256570907
+        },
+        "platt": {
+          "games": 630,
+          "accuracy": 0.6412698412698413,
+          "log_loss": 0.6320527295746895,
+          "brier": 0.22083652919235247
+        },
+        "isotonic": {
+          "games": 630,
+          "accuracy": 0.6396825396825396,
+          "log_loss": 0.6336555601196938,
+          "brier": 0.22085910420685104
+        }
+      },
+      "fit_end_exclusive": "2025-08-04 09:11:58+00:00",
+      "selection_games": 630,
+      "policy": "refit selected calibrator on all 2025 for 2026 only"
+    }
+  },
+  "calibration_selection_tail": {
+    "Elo": {
+      "raw": {
+        "games": 630,
+        "accuracy": 0.6444444444444445,
+        "log_loss": 0.6315933321312034,
+        "brier": 0.22060875667817786
+      },
+      "calibrated": {
+        "games": 630,
+        "accuracy": 0.6444444444444445,
+        "log_loss": 0.6315933321312034,
+        "brier": 0.22060875667817786
+      }
+    },
+    "v6_original_data": {
+      "raw": {
+        "games": 630,
+        "accuracy": 0.6349206349206349,
+        "log_loss": 0.6345122726296757,
+        "brier": 0.22194694198007975
+      },
+      "calibrated": {
+        "games": 630,
+        "accuracy": 0.6349206349206349,
+        "log_loss": 0.6345122726296757,
+        "brier": 0.22194694198007975
+      }
+    },
+    "v6_expanded_data": {
+      "raw": {
+        "games": 630,
+        "accuracy": 0.6412698412698413,
+        "log_loss": 0.6325062022687342,
+        "brier": 0.22097637462782307
+      },
+      "calibrated": {
+        "games": 630,
+        "accuracy": 0.6412698412698413,
+        "log_loss": 0.6325062022687342,
+        "brier": 0.22097637462782307
+      }
+    },
+    "v7": {
+      "raw": {
+        "games": 630,
+        "accuracy": 0.6412698412698413,
+        "log_loss": 0.6272719819929372,
+        "brier": 0.21881110256570907
+      },
+      "calibrated": {
+        "games": 630,
+        "accuracy": 0.6412698412698413,
+        "log_loss": 0.6272719819929372,
+        "brier": 0.21881110256570907
+      }
+    }
+  },
+  "coverage": {
+    "usable_games": 34097,
+    "excluded_games": 3,
+    "coverage": [
+      {
+        "year": 2018,
+        "league": "CBLOL",
+        "major": false,
+        "games": 188
+      },
+      {
+        "year": 2018,
+        "league": "CK",
+        "major": false,
+        "games": 291
+      },
+      {
+        "year": 2018,
+        "league": "EU LCS",
+        "major": true,
+        "games": 232
+      },
+      {
+        "year": 2018,
+        "league": "LCK",
+        "major": true,
+        "games": 508
+      },
+      {
+        "year": 2018,
+        "league": "LCS",
+        "major": true,
+        "games": 8
+      },
+      {
+        "year": 2018,
+        "league": "LDL",
+        "major": false,
+        "games": 1124
+      },
+      {
+        "year": 2018,
+        "league": "LEC",
+        "major": true,
+        "games": 14
+      },
+      {
+        "year": 2018,
+        "league": "LJL",
+        "major": false,
+        "games": 172
+      },
+      {
+        "year": 2018,
+        "league": "LMS",
+        "major": false,
+        "games": 308
+      },
+      {
+        "year": 2018,
+        "league": "LPL",
+        "major": true,
+        "games": 711
+      },
+      {
+        "year": 2018,
+        "league": "MSI",
+        "major": true,
+        "games": 74
+      },
+      {
+        "year": 2018,
+        "league": "NA LCS",
+        "major": true,
+        "games": 235
+      },
+      {
+        "year": 2018,
+        "league": "VCS",
+        "major": false,
+        "games": 324
+      },
+      {
+        "year": 2018,
+        "league": "WLDs",
+        "major": true,
+        "games": 119
+      },
+      {
+        "year": 2019,
+        "league": "CBLOL",
+        "major": false,
+        "games": 201
+      },
+      {
+        "year": 2019,
+        "league": "CK",
+        "major": false,
+        "games": 295
+      },
+      {
+        "year": 2019,
+        "league": "LCK",
+        "major": true,
+        "games": 496
+      },
+      {
+        "year": 2019,
+        "league": "LCS",
+        "major": true,
+        "games": 245
+      },
+      {
+        "year": 2019,
+        "league": "LDL",
+        "major": false,
+        "games": 1267
+      },
+      {
+        "year": 2019,
+        "league": "LEC",
+        "major": true,
+        "games": 238
+      },
+      {
+        "year": 2019,
+        "league": "LJL",
+        "major": false,
+        "games": 183
+      },
+      {
+        "year": 2019,
+        "league": "LMS",
+        "major": false,
+        "games": 275
+      },
+      {
+        "year": 2019,
+        "league": "LPL",
+        "major": true,
+        "games": 651
+      },
+      {
+        "year": 2019,
+        "league": "MSI",
+        "major": true,
+        "games": 78
+      },
+      {
+        "year": 2019,
+        "league": "VCS",
+        "major": false,
+        "games": 337
+      },
+      {
+        "year": 2019,
+        "league": "WLDs",
+        "major": true,
+        "games": 120
+      },
+      {
+        "year": 2020,
+        "league": "CBLOL",
+        "major": false,
+        "games": 196
+      },
+      {
+        "year": 2020,
+        "league": "CK",
+        "major": false,
+        "games": 302
+      },
+      {
+        "year": 2020,
+        "league": "LCK",
+        "major": true,
+        "games": 483
+      },
+      {
+        "year": 2020,
+        "league": "LCS",
+        "major": true,
+        "games": 264
+      },
+      {
+        "year": 2020,
+        "league": "LDL",
+        "major": false,
+        "games": 919
+      },
+      {
+        "year": 2020,
+        "league": "LEC",
+        "major": true,
+        "games": 241
+      },
+      {
+        "year": 2020,
+        "league": "LJL",
+        "major": false,
+        "games": 165
+      },
+      {
+        "year": 2020,
+        "league": "LPL",
+        "major": true,
+        "games": 736
+      },
+      {
+        "year": 2020,
+        "league": "PCS",
+        "major": false,
+        "games": 272
+      },
+      {
+        "year": 2020,
+        "league": "VCS",
+        "major": false,
+        "games": 324
+      },
+      {
+        "year": 2020,
+        "league": "WLDs",
+        "major": true,
+        "games": 114
+      },
+      {
+        "year": 2021,
+        "league": "CBLOL",
+        "major": false,
+        "games": 221
+      },
+      {
+        "year": 2021,
+        "league": "LCK",
+        "major": true,
+        "games": 488
+      },
+      {
+        "year": 2021,
+        "league": "LCKC",
+        "major": false,
+        "games": 226
+      },
+      {
+        "year": 2021,
+        "league": "LCS",
+        "major": true,
+        "games": 345
+      },
+      {
+        "year": 2021,
+        "league": "LDL",
+        "major": false,
+        "games": 1357
+      },
+      {
+        "year": 2021,
+        "league": "LEC",
+        "major": true,
+        "games": 247
+      },
+      {
+        "year": 2021,
+        "league": "LJL",
+        "major": false,
+        "games": 157
+      },
+      {
+        "year": 2021,
+        "league": "LPL",
+        "major": true,
+        "games": 738
+      },
+      {
+        "year": 2021,
+        "league": "MSI",
+        "major": true,
+        "games": 81
+      },
+      {
+        "year": 2021,
+        "league": "PCS",
+        "major": false,
+        "games": 263
+      },
+      {
+        "year": 2021,
+        "league": "VCS",
+        "major": false,
+        "games": 306
+      },
+      {
+        "year": 2021,
+        "league": "WLDs",
+        "major": true,
+        "games": 121
+      },
+      {
+        "year": 2022,
+        "league": "CBLOL",
+        "major": false,
+        "games": 243
+      },
+      {
+        "year": 2022,
+        "league": "LCK",
+        "major": true,
+        "games": 467
+      },
+      {
+        "year": 2022,
+        "league": "LCKC",
+        "major": false,
+        "games": 395
+      },
+      {
+        "year": 2022,
+        "league": "LCS",
+        "major": true,
+        "games": 306
+      },
+      {
+        "year": 2022,
+        "league": "LDL",
+        "major": false,
+        "games": 939
+      },
+      {
+        "year": 2022,
+        "league": "LEC",
+        "major": true,
+        "games": 243
+      },
+      {
+        "year": 2022,
+        "league": "LJL",
+        "major": false,
+        "games": 215
+      },
+      {
+        "year": 2022,
+        "league": "LPL",
+        "major": true,
+        "games": 786
+      },
+      {
+        "year": 2022,
+        "league": "MSI",
+        "major": true,
+        "games": 80
+      },
+      {
+        "year": 2022,
+        "league": "PCS",
+        "major": false,
+        "games": 273
+      },
+      {
+        "year": 2022,
+        "league": "VCS",
+        "major": false,
+        "games": 325
+      },
+      {
+        "year": 2022,
+        "league": "WLDs",
+        "major": true,
+        "games": 155
+      },
+      {
+        "year": 2023,
+        "league": "CBLOL",
+        "major": false,
+        "games": 242
+      },
+      {
+        "year": 2023,
+        "league": "LCK",
+        "major": true,
+        "games": 487
+      },
+      {
+        "year": 2023,
+        "league": "LCKC",
+        "major": false,
+        "games": 499
+      },
+      {
+        "year": 2023,
+        "league": "LCS",
+        "major": true,
+        "games": 264
+      },
+      {
+        "year": 2023,
+        "league": "LDL",
+        "major": false,
+        "games": 848
+      },
+      {
+        "year": 2023,
+        "league": "LEC",
+        "major": true,
+        "games": 288
+      },
+      {
+        "year": 2023,
+        "league": "LJL",
+        "major": false,
+        "games": 258
+      },
+      {
+        "year": 2023,
+        "league": "LPL",
+        "major": true,
+        "games": 755
+      },
+      {
+        "year": 2023,
+        "league": "MSI",
+        "major": true,
+        "games": 76
+      },
+      {
+        "year": 2023,
+        "league": "PCS",
+        "major": false,
+        "games": 293
+      },
+      {
+        "year": 2023,
+        "league": "VCS",
+        "major": false,
+        "games": 362
+      },
+      {
+        "year": 2023,
+        "league": "WLDs",
+        "major": true,
+        "games": 137
+      },
+      {
+        "year": 2024,
+        "league": "CBLOL",
+        "major": false,
+        "games": 263
+      },
+      {
+        "year": 2024,
+        "league": "LCK",
+        "major": true,
+        "games": 482
+      },
+      {
+        "year": 2024,
+        "league": "LCKC",
+        "major": false,
+        "games": 511
+      },
+      {
+        "year": 2024,
+        "league": "LCS",
+        "major": true,
+        "games": 192
+      },
+      {
+        "year": 2024,
+        "league": "LDL",
+        "major": false,
+        "games": 565
+      },
+      {
+        "year": 2024,
+        "league": "LEC",
+        "major": true,
+        "games": 294
+      },
+      {
+        "year": 2024,
+        "league": "LJL",
+        "major": false,
+        "games": 148
+      },
+      {
+        "year": 2024,
+        "league": "LPL",
+        "major": true,
+        "games": 717
+      },
+      {
+        "year": 2024,
+        "league": "MSI",
+        "major": true,
+        "games": 78
+      },
+      {
+        "year": 2024,
+        "league": "PCS",
+        "major": false,
+        "games": 297
+      },
+      {
+        "year": 2024,
+        "league": "VCS",
+        "major": false,
+        "games": 252
+      },
+      {
+        "year": 2024,
+        "league": "WLDs",
+        "major": true,
+        "games": 132
+      },
+      {
+        "year": 2025,
+        "league": "LCK",
+        "major": true,
+        "games": 555
+      },
+      {
+        "year": 2025,
+        "league": "LCKC",
+        "major": false,
+        "games": 542
+      },
+      {
+        "year": 2025,
+        "league": "LCP",
+        "major": false,
+        "games": 291
+      },
+      {
+        "year": 2025,
+        "league": "LEC",
+        "major": true,
+        "games": 308
+      },
+      {
+        "year": 2025,
+        "league": "LJL",
+        "major": false,
+        "games": 374
+      },
+      {
+        "year": 2025,
+        "league": "LPL",
+        "major": true,
+        "games": 805
+      },
+      {
+        "year": 2025,
+        "league": "LTA",
+        "major": true,
+        "games": 40
+      },
+      {
+        "year": 2025,
+        "league": "LTA N",
+        "major": true,
+        "games": 214
+      },
+      {
+        "year": 2025,
+        "league": "LTA S",
+        "major": false,
+        "games": 222
+      },
+      {
+        "year": 2025,
+        "league": "MSI",
+        "major": true,
+        "games": 80
+      },
+      {
+        "year": 2025,
+        "league": "PCS",
+        "major": false,
+        "games": 302
+      },
+      {
+        "year": 2025,
+        "league": "VCS",
+        "major": false,
+        "games": 141
+      },
+      {
+        "year": 2025,
+        "league": "WLDs",
+        "major": true,
+        "games": 96
+      }
+    ]
+  },
+  "feature_availability": {
+    "scheduled_best_of_known_games": 0,
+    "series_score_known_fraction": 0.5244495647721454,
+    "first_pick_known_fraction": 0.9998079877112135
+  },
+  "limitations": [
+    "Scheduled best-of absent in OE source: masked unknown; no BO inferred from completed series length.",
+    "Series linkage is same-day team pair plus source game ordinal, not an authoritative series ID.",
+    "Fearless era flag is a time proxy, not a tournament-specific rule; constant pre-2025, so its effect is not learned.",
+    "Glicko-2 player updates approximate the opponent team by mean rating and aggregate deviation; TrueSkill uses actual 5v5.",
+    "Validation-tail calibration selection is optimistic; final 2026 is the only locked final evaluation.",
+    "CIs cluster by UTC date and condition on selected models; selection uncertainty is not included.",
+    "v6 code unchanged; v6 expanded-data control and original-data control both refit only through 2024.",
+    "Conservative outcome availability uses max(2 hours, recorded duration + 15 minutes)."
+  ],
+  "seconds": 40.38471969999955
+}

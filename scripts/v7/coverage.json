@@ -1,0 +1,594 @@
+{
+  "usable_games": 34097,
+  "excluded_games": 3,
+  "coverage": [
+    {
+      "year": 2018,
+      "league": "CBLOL",
+      "major": false,
+      "games": 188
+    },
+    {
+      "year": 2018,
+      "league": "CK",
+      "major": false,
+      "games": 291
+    },
+    {
+      "year": 2018,
+      "league": "EU LCS",
+      "major": true,
+      "games": 232
+    },
+    {
+      "year": 2018,
+      "league": "LCK",
+      "major": true,
+      "games": 508
+    },
+    {
+      "year": 2018,
+      "league": "LCS",
+      "major": true,
+      "games": 8
+    },
+    {
+      "year": 2018,
+      "league": "LDL",
+      "major": false,
+      "games": 1124
+    },
+    {
+      "year": 2018,
+      "league": "LEC",
+      "major": true,
+      "games": 14
+    },
+    {
+      "year": 2018,
+      "league": "LJL",
+      "major": false,
+      "games": 172
+    },
+    {
+      "year": 2018,
+      "league": "LMS",
+      "major": false,
+      "games": 308
+    },
+    {
+      "year": 2018,
+      "league": "LPL",
+      "major": true,
+      "games": 711
+    },
+    {
+      "year": 2018,
+      "league": "MSI",
+      "major": true,
+      "games": 74
+    },
+    {
+      "year": 2018,
+      "league": "NA LCS",
+      "major": true,
+      "games": 235
+    },
+    {
+      "year": 2018,
+      "league": "VCS",
+      "major": false,
+      "games": 324
+    },
+    {
+      "year": 2018,
+      "league": "WLDs",
+      "major": true,
+      "games": 119
+    },
+    {
+      "year": 2019,
+      "league": "CBLOL",
+      "major": false,
+      "games": 201
+    },
+    {
+      "year": 2019,
+      "league": "CK",
+      "major": false,
+      "games": 295
+    },
+    {
+      "year": 2019,
+      "league": "LCK",
+      "major": true,
+      "games": 496
+    },
+    {
+      "year": 2019,
+      "league": "LCS",
+      "major": true,
+      "games": 245
+    },
+    {
+      "year": 2019,
+      "league": "LDL",
+      "major": false,
+      "games": 1267
+    },
+    {
+      "year": 2019,
+      "league": "LEC",
+      "major": true,
+      "games": 238
+    },
+    {
+      "year": 2019,
+      "league": "LJL",
+      "major": false,
+      "games": 183
+    },
+    {
+      "year": 2019,
+      "league": "LMS",
+      "major": false,
+      "games": 275
+    },
+    {
+      "year": 2019,
+      "league": "LPL",
+      "major": true,
+      "games": 651
+    },
+    {
+      "year": 2019,
+      "league": "MSI",
+      "major": true,
+      "games": 78
+    },
+    {
+      "year": 2019,
+      "league": "VCS",
+      "major": false,
+      "games": 337
+    },
+    {
+      "year": 2019,
+      "league": "WLDs",
+      "major": true,
+      "games": 120
+    },
+    {
+      "year": 2020,
+      "league": "CBLOL",
+      "major": false,
+      "games": 196
+    },
+    {
+      "year": 2020,
+      "league": "CK",
+      "major": false,
+      "games": 302
+    },
+    {
+      "year": 2020,
+      "league": "LCK",
+      "major": true,
+      "games": 483
+    },
+    {
+      "year": 2020,
+      "league": "LCS",
+      "major": true,
+      "games": 264
+    },
+    {
+      "year": 2020,
+      "league": "LDL",
+      "major": false,
+      "games": 919
+    },
+    {
+      "year": 2020,
+      "league": "LEC",
+      "major": true,
+      "games": 241
+    },
+    {
+      "year": 2020,
+      "league": "LJL",
+      "major": false,
+      "games": 165
+    },
+    {
+      "year": 2020,
+      "league": "LPL",
+      "major": true,
+      "games": 736
+    },
+    {
+      "year": 2020,
+      "league": "PCS",
+      "major": false,
+      "games": 272
+    },
+    {
+      "year": 2020,
+      "league": "VCS",
+      "major": false,
+      "games": 324
+    },
+    {
+      "year": 2020,
+      "league": "WLDs",
+      "major": true,
+      "games": 114
+    },
+    {
+      "year": 2021,
+      "league": "CBLOL",
+      "major": false,
+      "games": 221
+    },
+    {
+      "year": 2021,
+      "league": "LCK",
+      "major": true,
+      "games": 488
+    },
+    {
+      "year": 2021,
+      "league": "LCKC",
+      "major": false,
+      "games": 226
+    },
+    {
+      "year": 2021,
+      "league": "LCS",
+      "major": true,
+      "games": 345
+    },
+    {
+      "year": 2021,
+      "league": "LDL",
+      "major": false,
+      "games": 1357
+    },
+    {
+      "year": 2021,
+      "league": "LEC",
+      "major": true,
+      "games": 247
+    },
+    {
+      "year": 2021,
+      "league": "LJL",
+      "major": false,
+      "games": 157
+    },
+    {
+      "year": 2021,
+      "league": "LPL",
+      "major": true,
+      "games": 738
+    },
+    {
+      "year": 2021,
+      "league": "MSI",
+      "major": true,
+      "games": 81
+    },
+    {
+      "year": 2021,
+      "league": "PCS",
+      "major": false,
+      "games": 263
+    },
+    {
+      "year": 2021,
+      "league": "VCS",
+      "major": false,
+      "games": 306
+    },
+    {
+      "year": 2021,
+      "league": "WLDs",
+      "major": true,
+      "games": 121
+    },
+    {
+      "year": 2022,
+      "league": "CBLOL",
+      "major": false,
+      "games": 243
+    },
+    {
+      "year": 2022,
+      "league": "LCK",
+      "major": true,
+      "games": 467
+    },
+    {
+      "year": 2022,
+      "league": "LCKC",
+      "major": false,
+      "games": 395
+    },
+    {
+      "year": 2022,
+      "league": "LCS",
+      "major": true,
+      "games": 306
+    },
+    {
+      "year": 2022,
+      "league": "LDL",
+      "major": false,
+      "games": 939
+    },
+    {
+      "year": 2022,
+      "league": "LEC",
+      "major": true,
+      "games": 243
+    },
+    {
+      "year": 2022,
+      "league": "LJL",
+      "major": false,
+      "games": 215
+    },
+    {
+      "year": 2022,
+      "league": "LPL",
+      "major": true,
+      "games": 786
+    },
+    {
+      "year": 2022,
+      "league": "MSI",
+      "major": true,
+      "games": 80
+    },
+    {
+      "year": 2022,
+      "league": "PCS",
+      "major": false,
+      "games": 273
+    },
+    {
+      "year": 2022,
+      "league": "VCS",
+      "major": false,
+      "games": 325
+    },
+    {
+      "year": 2022,
+      "league": "WLDs",
+      "major": true,
+      "games": 155
+    },
+    {
+      "year": 2023,
+      "league": "CBLOL",
+      "major": false,
+      "games": 242
+    },
+    {
+      "year": 2023,
+      "league": "LCK",
+      "major": true,
+      "games": 487
+    },
+    {
+      "year": 2023,
+      "league": "LCKC",
+      "major": false,
+      "games": 499
+    },
+    {
+      "year": 2023,
+      "league": "LCS",
+      "major": true,
+      "games": 264
+    },
+    {
+      "year": 2023,
+      "league": "LDL",
+      "major": false,
+      "games": 848
+    },
+    {
+      "year": 2023,
+      "league": "LEC",
+      "major": true,
+      "games": 288
+    },
+    {
+      "year": 2023,
+      "league": "LJL",
+      "major": false,
+      "games": 258
+    },
+    {
+      "year": 2023,
+      "league": "LPL",
+      "major": true,
+      "games": 755
+    },
+    {
+      "year": 2023,
+      "league": "MSI",
+      "major": true,
+      "games": 76
+    },
+    {
+      "year": 2023,
+      "league": "PCS",
+      "major": false,
+      "games": 293
+    },
+    {
+      "year": 2023,
+      "league": "VCS",
+      "major": false,
+      "games": 362
+    },
+    {
+      "year": 2023,
+      "league": "WLDs",
+      "major": true,
+      "games": 137
+    },
+    {
+      "year": 2024,
+      "league": "CBLOL",
+      "major": false,
+      "games": 263
+    },
+    {
+      "year": 2024,
+      "league": "LCK",
+      "major": true,
+      "games": 482
+    },
+    {
+      "year": 2024,
+      "league": "LCKC",
+      "major": false,
+      "games": 511
+    },
+    {
+      "year": 2024,
+      "league": "LCS",
+      "major": true,
+      "games": 192
+    },
+    {
+      "year": 2024,
+      "league": "LDL",
+      "major": false,
+      "games": 565
+    },
+    {
+      "year": 2024,
+      "league": "LEC",
+      "major": true,
+      "games": 294
+    },
+    {
+      "year": 2024,
+      "league": "LJL",
+      "major": false,
+      "games": 148
+    },
+    {
+      "year": 2024,
+      "league": "LPL",
+      "major": true,
+      "games": 717
+    },
+    {
+      "year": 2024,
+      "league": "MSI",
+      "major": true,
+      "games": 78
+    },
+    {
+      "year": 2024,
+      "league": "PCS",
+      "major": false,
+      "games": 297
+    },
+    {
+      "year": 2024,
+      "league": "VCS",
+      "major": false,
+      "games": 252
+    },
+    {
+      "year": 2024,
+      "league": "WLDs",
+      "major": true,
+      "games": 132
+    },
+    {
+      "year": 2025,
+      "league": "LCK",
+      "major": true,
+      "games": 555
+    },
+    {
+      "year": 2025,
+      "league": "LCKC",
+      "major": false,
+      "games": 542
+    },
+    {
+      "year": 2025,
+      "league": "LCP",
+      "major": false,
+      "games": 291
+    },
+    {
+      "year": 2025,
+      "league": "LEC",
+      "major": true,
+      "games": 308
+    },
+    {
+      "year": 2025,
+      "league": "LJL",
+      "major": false,
+      "games": 374
+    },
+    {
+      "year": 2025,
+      "league": "LPL",
+      "major": true,
+      "games": 805
+    },
+    {
+      "year": 2025,
+      "league": "LTA",
+      "major": true,
+      "games": 40
+    },
+    {
+      "year": 2025,
+      "league": "LTA N",
+      "major": true,
+      "games": 214
+    },
+    {
+      "year": 2025,
+      "league": "LTA S",
+      "major": false,
+      "games": 222
+    },
+    {
+      "year": 2025,
+      "league": "MSI",
+      "major": true,
+      "games": 80
+    },
+    {
+      "year": 2025,
+      "league": "PCS",
+      "major": false,
+      "games": 302
+    },
+    {
+      "year": 2025,
+      "league": "VCS",
+      "major": false,
+      "games": 141
+    },
+    {
+      "year": 2025,
+      "league": "WLDs",
+      "major": true,
+      "games": 96
+    }
+  ]
+}

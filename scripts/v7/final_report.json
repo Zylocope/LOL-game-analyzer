@@ -1,0 +1,523 @@
+{
+  "phase": "FINAL 2026 \u2014 no subsequent changes permitted",
+  "evaluated_utc": "2026-10-26T04:01:10.574096+00:00",
+  "holdout_sha256": "012f0ff4ea617bbccf5165b1b090eaf6ee3cb2bdea25912d951aa7fea5c54da6",
+  "freeze_sha256": "c89d7fc844f3782461bdb54200769752e2b887f482833ebead80b4da13a43152",
+  "model": "full_logistic_0.01",
+  "metrics": {
+    "Elo": {
+      "games": 1970,
+      "accuracy": 0.6335025380710659,
+      "log_loss": 0.643745786057383,
+      "brier": 0.22633869918073196,
+      "vs_Elo": {
+        "accuracy_delta": [
+          0.0,
+          0.0
+        ],
+        "log_loss_improvement": [
+          0.0,
+          0.0
+        ],
+        "brier_improvement": [
+          0.0,
+          0.0
+        ]
+      },
+      "vs_v6": {
+        "accuracy_delta": [
+          -0.027470040732407174,
+          0.0024590993018927558
+        ],
+        "log_loss_improvement": [
+          -0.018111057684500113,
+          -0.004380741549373872
+        ],
+        "brier_improvement": [
+          -0.008239051149915329,
+          -0.002251841816815354
+        ]
+      }
+    },
+    "v6_original_data": {
+      "games": 1970,
+      "accuracy": 0.6472081218274112,
+      "log_loss": 0.6339223504561992,
+      "brier": 0.22173253877357083,
+      "vs_Elo": {
+        "accuracy_delta": [
+          -0.0004653723687433326,
+          0.027672457207643344
+        ],
+        "log_loss_improvement": [
+          0.00354305356199392,
+          0.01697192869671943
+        ],
+        "brier_improvement": [
+          0.0018670190443347368,
+          0.007691148346038359
+        ]
+      },
+      "vs_v6": {
+        "accuracy_delta": [
+          -0.004772067530962474,
+          0.00637053314587042
+        ],
+        "log_loss_improvement": [
+          -0.0019906975093974006,
+          0.00012815585045528518
+        ],
+        "brier_improvement": [
+          -0.0009102703261864588,
+          4.2145947378630884e-05
+        ]
+      }
+    },
+    "v6_expanded_data": {
+      "games": 1970,
+      "accuracy": 0.6461928934010153,
+      "log_loss": 0.6329896876670226,
+      "brier": 0.2213010584086812,
+      "vs_Elo": {
+        "accuracy_delta": [
+          -0.0024590993018927605,
+          0.02747004073240717
+        ],
+        "log_loss_improvement": [
+          0.0043807415493738715,
+          0.018111057684500113
+        ],
+        "brier_improvement": [
+          0.0022518418168153537,
+          0.008239051149915329
+        ]
+      },
+      "vs_v6": {
+        "accuracy_delta": [
+          0.0,
+          0.0
+        ],
+        "log_loss_improvement": [
+          0.0,
+          0.0
+        ],
+        "brier_improvement": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "v7_raw": {
+      "games": 1970,
+      "accuracy": 0.6360406091370558,
+      "log_loss": 0.6440252028858302,
+      "brier": 0.22593169793476542,
+      "vs_Elo": {
+        "accuracy_delta": [
+          -0.017116334494085103,
+          0.023110181912348517
+        ],
+        "log_loss_improvement": [
+          -0.01144520586872173,
+          0.011102724402144326
+        ],
+        "brier_improvement": [
+          -0.004521635595915472,
+          0.0053841151891355354
+        ]
+      },
+      "vs_v6": {
+        "accuracy_delta": [
+          -0.028723565116678104,
+          0.008880090497737534
+        ],
+        "log_loss_improvement": [
+          -0.02048596116234066,
+          -0.0015624873558350647
+        ],
+        "brier_improvement": [
+          -0.008874255322254854,
+          -0.00030773069610639414
+        ]
+      }
+    },
+    "Elo_calibrated": {
+      "games": 1970,
+      "accuracy": 0.6335025380710659,
+      "log_loss": 0.643745786057383,
+      "brier": 0.22633869918073196,
+      "vs_Elo": {
+        "accuracy_delta": [
+          0.0,
+          0.0
+        ],
+        "log_loss_improvement": [
+          0.0,
+          0.0
+        ],
+        "brier_improvement": [
+          0.0,
+          0.0
+        ]
+      },
+      "vs_v6": {
+        "accuracy_delta": [
+          -0.027470040732407174,
+          0.0024590993018927558
+        ],
+        "log_loss_improvement": [
+          -0.018111057684500113,
+          -0.004380741549373872
+        ],
+        "brier_improvement": [
+          -0.008239051149915329,
+          -0.002251841816815354
+        ]
+      }
+    },
+    "v6_calibrated": {
+      "games": 1970,
+      "accuracy": 0.6461928934010153,
+      "log_loss": 0.6329896876670226,
+      "brier": 0.2213010584086812,
+      "vs_Elo": {
+        "accuracy_delta": [
+          -0.0024590993018927605,
+          0.02747004073240717
+        ],
+        "log_loss_improvement": [
+          0.0043807415493738715,
+          0.018111057684500113
+        ],
+        "brier_improvement": [
+          0.0022518418168153537,
+          0.008239051149915329
+        ]
+      },
+      "vs_v6": {
+        "accuracy_delta": [
+          0.0,
+          0.0
+        ],
+        "log_loss_improvement": [
+          0.0,
+          0.0
+        ],
+        "brier_improvement": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "v7": {
+      "games": 1970,
+      "accuracy": 0.6360406091370558,
+      "log_loss": 0.6440252028858302,
+      "brier": 0.22593169793476542,
+      "vs_Elo": {
+        "accuracy_delta": [
+          -0.017116334494085103,
+          0.023110181912348517
+        ],
+        "log_loss_improvement": [
+          -0.01144520586872173,
+          0.011102724402144326
+        ],
+        "brier_improvement": [
+          -0.004521635595915472,
+          0.0053841151891355354
+        ]
+      },
+      "vs_v6": {
+        "accuracy_delta": [
+          -0.028723565116678104,
+          0.008880090497737534
+        ],
+        "log_loss_improvement": [
+          -0.02048596116234066,
+          -0.0015624873558350647
+        ],
+        "brier_improvement": [
+          -0.008874255322254854,
+          -0.00030773069610639414
+        ]
+      }
+    }
+  },
+  "ablation": {
+    "elo_ratings": {
+      "games": 1970,
+      "accuracy": 0.6345177664974619,
+      "log_loss": 0.6385042991767859,
+      "brier": 0.2237584859216105,
+      "vs_Elo": {
+        "accuracy_delta": [
+          -0.012066366724385592,
+          0.015526419361500588
+        ],
+        "log_loss_improvement": [
+          0.00039862046212152727,
+          0.010492954543735855
+        ],
+        "brier_improvement": [
+          0.0003790915260451375,
+          0.004928127195167137
+        ]
+      },
+      "vs_v6": {
+        "accuracy_delta": [
+          -0.02457572004741816,
+          0.0014383521526413904
+        ],
+        "log_loss_improvement": [
+          -0.011189571640249411,
+          -0.00036430231698940266
+        ],
+        "brier_improvement": [
+          -0.004929771619657529,
+          -0.0002070695466675372
+        ]
+      }
+    },
+    "glicko_ratings": {
+      "games": 1970,
+      "accuracy": 0.6360406091370558,
+      "log_loss": 0.6372327412291521,
+      "brier": 0.2232233889602586,
+      "vs_Elo": {
+        "accuracy_delta": [
+          -0.010919169641053269,
+          0.017166873173940292
+        ],
+        "log_loss_improvement": [
+          0.0014715986471776625,
+          0.012023317559354808
+        ],
+        "brier_improvement": [
+          0.0008441385068514005,
+          0.0055827703276196535
+        ]
+      },
+      "vs_v6": {
+        "accuracy_delta": [
+          -0.023721332802620083,
+          0.003516131310656015
+        ],
+        "log_loss_improvement": [
+          -0.009844415168147536,
+          0.0007283412929445086
+        ],
+        "brier_improvement": [
+          -0.00436808942911164,
+          0.0002642309913060894
+        ]
+      }
+    },
+    "trueskill_ratings": {
+      "games": 1970,
+      "accuracy": 0.6370558375634517,
+      "log_loss": 0.6352630138158943,
+      "brier": 0.22237252225258364,
+      "vs_Elo": {
+        "accuracy_delta": [
+          -0.011012448530870963,
+          0.020152554894070876
+        ],
+        "log_loss_improvement": [
+          0.0030387617710271,
+          0.014357191987502802
+        ],
+        "brier_improvement": [
+          0.001474874212546538,
+          0.0066345313386827085
+        ]
+      },
+      "vs_v6": {
+        "accuracy_delta": [
+          -0.024067921172562855,
+          0.006832584698813574
+        ],
+        "log_loss_improvement": [
+          -0.007858396974822837,
+          0.003071124549412243
+        ],
+        "brier_improvement": [
+          -0.003527331676997098,
+          0.001272111710858124
+        ]
+      }
+    },
+    "all_ratings": {
+      "games": 1970,
+      "accuracy": 0.6380710659898478,
+      "log_loss": 0.6334023872524682,
+      "brier": 0.2216316343546278,
+      "vs_Elo": {
+        "accuracy_delta": [
+          -0.00936674373967439,
+          0.02008457584165862
+        ],
+        "log_loss_improvement": [
+          0.004164610819857664,
+          0.01709705130158363
+        ],
+        "brier_improvement": [
+          0.0019726399225533974,
+          0.0077634915192367855
+        ]
+      },
+      "vs_v6": {
+        "accuracy_delta": [
+          -0.020588531636641833,
+          0.005844051994011151
+        ],
+        "log_loss_improvement": [
+          -0.005735313181299099,
+          0.005051103481130943
+        ],
+        "brier_improvement": [
+          -0.0027058885343033286,
+          0.002073470614909826
+        ]
+      }
+    },
+    "add_form": {
+      "games": 1970,
+      "accuracy": 0.6335025380710659,
+      "log_loss": 0.6336990764345761,
+      "brier": 0.22172735517814035,
+      "vs_Elo": {
+        "accuracy_delta": [
+          -0.0164866885625966,
+          0.017749990695424
+        ],
+        "log_loss_improvement": [
+          0.003735846076418937,
+          0.01707066528878443
+        ],
+        "brier_improvement": [
+          0.001749089296934671,
+          0.007728933320400362
+        ]
+      },
+      "vs_v6": {
+        "accuracy_delta": [
+          -0.027532535572620167,
+          0.0025829798623447715
+        ],
+        "log_loss_improvement": [
+          -0.005882025444054354,
+          0.004466467771748907
+        ],
+        "brier_improvement": [
+          -0.002714736869639332,
+          0.0019119759643416274
+        ]
+      }
+    },
+    "add_context": {
+      "games": 1970,
+      "accuracy": 0.6340101522842639,
+      "log_loss": 0.6479917992685553,
+      "brier": 0.2278998033367864,
+      "vs_Elo": {
+        "accuracy_delta": [
+          -0.01917354654910525,
+          0.022071752100781713
+        ],
+        "log_loss_improvement": [
+          -0.014782153820714223,
+          0.006217566029522813
+        ],
+        "brier_improvement": [
+          -0.0063764894731547055,
+          0.0031961431813632866
+        ]
+      },
+      "vs_v6": {
+        "accuracy_delta": [
+          -0.03208040458538338,
+          0.007848385616412509
+        ],
+        "log_loss_improvement": [
+          -0.024684479589409315,
+          -0.005525329582947955
+        ],
+        "brier_improvement": [
+          -0.011055482433832765,
+          -0.002316373829113177
+        ]
+      }
+    },
+    "full": {
+      "games": 1970,
+      "accuracy": 0.6360406091370558,
+      "log_loss": 0.6440252028858302,
+      "brier": 0.22593169793476542,
+      "vs_Elo": {
+        "accuracy_delta": [
+          -0.017116334494085103,
+          0.023110181912348517
+        ],
+        "log_loss_improvement": [
+          -0.01144520586872173,
+          0.011102724402144326
+        ],
+        "brier_improvement": [
+          -0.004521635595915472,
+          0.0053841151891355354
+        ]
+      },
+      "vs_v6": {
+        "accuracy_delta": [
+          -0.028723565116678104,
+          0.008880090497737534
+        ],
+        "log_loss_improvement": [
+          -0.02048596116234066,
+          -0.0015624873558350647
+        ],
+        "brier_improvement": [
+          -0.008874255322254854,
+          -0.00030773069610639414
+        ]
+      }
+    }
+  },
+  "excluded_incomplete_games": 0,
+  "date_range": [
+    "2026-01-14 08:13:43+00:00",
+    "2026-10-25 22:43:24+00:00"
+  ],
+  "rating_only_games": 1677,
+  "cohorts": {
+    "LPL": 674,
+    "LCK": 502,
+    "LEC": 383,
+    "NA": 283,
+    "International": 128
+  },
+  "calibration_methods": {
+    "Elo": "none",
+    "v6_original_data": "none",
+    "v6_expanded_data": "none",
+    "v7": "none"
+  },
+  "limitations": [
+    "Scheduled best-of absent in OE source: masked unknown; no BO inferred from completed series length.",
+    "Series linkage is same-day team pair plus source game ordinal, not an authoritative series ID.",
+    "Fearless era flag is a time proxy, not a tournament-specific rule; constant pre-2025, so its effect is not learned.",
+    "Glicko-2 player updates approximate the opponent team by mean rating and aggregate deviation; TrueSkill uses actual 5v5.",
+    "Validation-tail calibration selection is optimistic; final 2026 is the only locked final evaluation.",
+    "CIs cluster by UTC date and condition on selected models; selection uncertainty is not included.",
+    "v6 code unchanged; v6 expanded-data control and original-data control both refit only through 2024.",
+    "Conservative outcome availability uses max(2 hours, recorded duration + 15 minutes).",
+    "The 2026 yearly source is a snapshot at retrieval time, not guaranteed to be the full season.",
+    "Ratings may update online using earlier completed 2026 results; model and calibration never refit.",
+    "No v7 application deployment: the existing app still serves preserved v6."
+  ],
+  "integrity": {
+    "v6_unchanged": true,
+    "single_run_claim": "final_run.claim"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "backend/features.py": "b04a1406a99e3e4763dc4ad548101e9594714d75f04b9c548586464962c84267",
+  "backend/models.py": "567436e8dc65003127df43f96f913e57ec0a81e8d5cd6e60bd9010a2c5069193",
+  "backend/experiment.py": "4859d857f44d859b4b42585f610b9af44b9dfd60a04c358fac3c2dfb3c367385",
+  "backend/model_v6.pkl": "8f58a80e9ee6af70daebc71b97ba2f4de87ad68943916238938daa8f9a352196",
+  "backend/evaluation_v6.json": "d5cd3fe2cac490fa216623d9a03788c62045b160574a59b9057f4a8c7db30db5",
+  "backend/nexus_sight.db": "d88c6eb36ae744f871c773326ad93203e383453ed7dd269b04a490a011f057aa"
+}

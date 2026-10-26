@@ -1,0 +1,1085 @@
+{
+  "version": "v6_elo_corrections",
+  "selected_on_validation": "draft_logistic",
+  "protocol": "Expanding-season development folds; 2025 retrospective reporting only; 2h minimum outcome delay",
+  "data": {
+    "games": 12033,
+    "skipped_games": 1,
+    "first_date": "2018-01-15 09:40:00+00:00",
+    "last_date": "2025-09-28 17:10:18+00:00",
+    "coverage": [
+      {
+        "year": 2018,
+        "league": "LCK",
+        "games": 508
+      },
+      {
+        "year": 2018,
+        "league": "LCS",
+        "games": 8
+      },
+      {
+        "year": 2018,
+        "league": "LEC",
+        "games": 14
+      },
+      {
+        "year": 2018,
+        "league": "LPL",
+        "games": 716
+      },
+      {
+        "year": 2018,
+        "league": "MSI",
+        "games": 74
+      },
+      {
+        "year": 2019,
+        "league": "LCK",
+        "games": 496
+      },
+      {
+        "year": 2019,
+        "league": "LCS",
+        "games": 245
+      },
+      {
+        "year": 2019,
+        "league": "LEC",
+        "games": 238
+      },
+      {
+        "year": 2019,
+        "league": "LPL",
+        "games": 651
+      },
+      {
+        "year": 2019,
+        "league": "MSI",
+        "games": 78
+      },
+      {
+        "year": 2020,
+        "league": "LCK",
+        "games": 483
+      },
+      {
+        "year": 2020,
+        "league": "LCS",
+        "games": 264
+      },
+      {
+        "year": 2020,
+        "league": "LEC",
+        "games": 241
+      },
+      {
+        "year": 2020,
+        "league": "LPL",
+        "games": 738
+      },
+      {
+        "year": 2021,
+        "league": "LCK",
+        "games": 489
+      },
+      {
+        "year": 2021,
+        "league": "LCS",
+        "games": 345
+      },
+      {
+        "year": 2021,
+        "league": "LEC",
+        "games": 247
+      },
+      {
+        "year": 2021,
+        "league": "LPL",
+        "games": 738
+      },
+      {
+        "year": 2021,
+        "league": "MSI",
+        "games": 81
+      },
+      {
+        "year": 2023,
+        "league": "LCK",
+        "games": 487
+      },
+      {
+        "year": 2023,
+        "league": "LCS",
+        "games": 264
+      },
+      {
+        "year": 2023,
+        "league": "LEC",
+        "games": 288
+      },
+      {
+        "year": 2023,
+        "league": "LPL",
+        "games": 755
+      },
+      {
+        "year": 2023,
+        "league": "MSI",
+        "games": 76
+      },
+      {
+        "year": 2024,
+        "league": "LCK",
+        "games": 482
+      },
+      {
+        "year": 2024,
+        "league": "LCS",
+        "games": 192
+      },
+      {
+        "year": 2024,
+        "league": "LEC",
+        "games": 294
+      },
+      {
+        "year": 2024,
+        "league": "LPL",
+        "games": 717
+      },
+      {
+        "year": 2024,
+        "league": "MSI",
+        "games": 78
+      },
+      {
+        "year": 2025,
+        "league": "LCK",
+        "games": 555
+      },
+      {
+        "year": 2025,
+        "league": "LEC",
+        "games": 306
+      },
+      {
+        "year": 2025,
+        "league": "LPL",
+        "games": 805
+      },
+      {
+        "year": 2025,
+        "league": "MSI",
+        "games": 80
+      }
+    ]
+  },
+  "rating_search": [
+    {
+      "k": 16,
+      "season_shrink": 0.0,
+      "validation": {
+        "accuracy": 0.6350984999096331,
+        "log_loss": 0.6345055359003422,
+        "brier_score": 0.22205301568638858,
+        "games": 5533
+      },
+      "replay_seconds": 1.251157300000159
+    },
+    {
+      "k": 32,
+      "season_shrink": 0.0,
+      "validation": {
+        "accuracy": 0.6390746430507862,
+        "log_loss": 0.6371164236759783,
+        "brier_score": 0.2226205090144085,
+        "games": 5533
+      },
+      "replay_seconds": 1.1335933000000296
+    },
+    {
+      "k": 48,
+      "season_shrink": 0.0,
+      "validation": {
+        "accuracy": 0.6388939092716429,
+        "log_loss": 0.6453427235141123,
+        "brier_score": 0.22530254908300082,
+        "games": 5533
+      },
+      "replay_seconds": 1.1180479999993622
+    },
+    {
+      "k": 16,
+      "season_shrink": 0.2,
+      "validation": {
+        "accuracy": 0.6390746430507862,
+        "log_loss": 0.6332415905933502,
+        "brier_score": 0.22146024998281424,
+        "games": 5533
+      },
+      "replay_seconds": 1.119391600000199
+    },
+    {
+      "k": 32,
+      "season_shrink": 0.2,
+      "validation": {
+        "accuracy": 0.6403397795047895,
+        "log_loss": 0.6344930845762702,
+        "brier_score": 0.2216672746723202,
+        "games": 5533
+      },
+      "replay_seconds": 1.1022985999998127
+    },
+    {
+      "k": 48,
+      "season_shrink": 0.2,
+      "validation": {
+        "accuracy": 0.6392553768299295,
+        "log_loss": 0.642101319454402,
+        "brier_score": 0.22425999301699648,
+        "games": 5533
+      },
+      "replay_seconds": 1.1898197000000437
+    }
+  ],
+  "rating_selected": {
+    "k": 16,
+    "season_shrink": 0.2
+  },
+  "validation": {
+    "elo_formula": {
+      "aggregate": {
+        "accuracy": 0.6390746430507862,
+        "log_loss": 0.6332415905933502,
+        "brier_score": 0.22146024998281424,
+        "games": 5533
+      },
+      "folds": [
+        {
+          "year": 2021,
+          "train_games": 4754,
+          "accuracy": 0.6189473684210526,
+          "log_loss": 0.6428828786478655,
+          "brier_score": 0.22560092338921447,
+          "games": 1900
+        },
+        {
+          "year": 2023,
+          "train_games": 6654,
+          "accuracy": 0.6385026737967915,
+          "log_loss": 0.6389477056597245,
+          "brier_score": 0.22399979726956287,
+          "games": 1870
+        },
+        {
+          "year": 2024,
+          "train_games": 8524,
+          "accuracy": 0.6613726602382303,
+          "log_loss": 0.6167986623586936,
+          "brier_score": 0.21430413376138469,
+          "games": 1763
+        }
+      ],
+      "spec": {
+        "features": [
+          "elo_diff"
+        ],
+        "family": "elo"
+      }
+    },
+    "elo_only_residual_0.01": {
+      "aggregate": {
+        "accuracy": 0.6390746430507862,
+        "log_loss": 0.6329317760272783,
+        "brier_score": 0.2213011945961412,
+        "games": 5533
+      },
+      "folds": [
+        {
+          "year": 2021,
+          "train_games": 4754,
+          "accuracy": 0.6189473684210526,
+          "log_loss": 0.6431203064534733,
+          "brier_score": 0.22561810644658128,
+          "games": 1900
+        },
+        {
+          "year": 2023,
+          "train_games": 6654,
+          "accuracy": 0.6385026737967915,
+          "log_loss": 0.6384381889938737,
+          "brier_score": 0.22376767782144563,
+          "games": 1870
+        },
+        {
+          "year": 2024,
+          "train_games": 8524,
+          "accuracy": 0.6613726602382303,
+          "log_loss": 0.6161109024837141,
+          "brier_score": 0.21403264317971718,
+          "games": 1763
+        }
+      ],
+      "spec": {
+        "features": [
+          "elo_diff"
+        ],
+        "family": "residual",
+        "regularization": 0.01
+      }
+    },
+    "elo_only_residual_0.1": {
+      "aggregate": {
+        "accuracy": 0.6390746430507862,
+        "log_loss": 0.6329754775329337,
+        "brier_score": 0.2213311353770228,
+        "games": 5533
+      },
+      "folds": [
+        {
+          "year": 2021,
+          "train_games": 4754,
+          "accuracy": 0.6189473684210526,
+          "log_loss": 0.642979463657818,
+          "brier_score": 0.22558807954519855,
+          "games": 1900
+        },
+        {
+          "year": 2023,
+          "train_games": 6654,
+          "accuracy": 0.6385026737967915,
+          "log_loss": 0.6385684193402282,
+          "brier_score": 0.22382852641184994,
+          "games": 1870
+        },
+        {
+          "year": 2024,
+          "train_games": 8524,
+          "accuracy": 0.6613726602382303,
+          "log_loss": 0.6162617084932736,
+          "brier_score": 0.21409442797222375,
+          "games": 1763
+        }
+      ],
+      "spec": {
+        "features": [
+          "elo_diff"
+        ],
+        "family": "residual",
+        "regularization": 0.1
+      }
+    },
+    "elo_only_residual_1.0": {
+      "aggregate": {
+        "accuracy": 0.6390746430507862,
+        "log_loss": 0.6331548172877258,
+        "brier_score": 0.22142045963686227,
+        "games": 5533
+      },
+      "folds": [
+        {
+          "year": 2021,
+          "train_games": 4754,
+          "accuracy": 0.6189473684210526,
+          "log_loss": 0.642878818991896,
+          "brier_score": 0.2255873454040081,
+          "games": 1900
+        },
+        {
+          "year": 2023,
+          "train_games": 6654,
+          "accuracy": 0.6385026737967915,
+          "log_loss": 0.6388432681198932,
+          "brier_score": 0.22395316355735687,
+          "games": 1870
+        },
+        {
+          "year": 2024,
+          "train_games": 8524,
+          "accuracy": 0.6613726602382303,
+          "log_loss": 0.616641484165731,
+          "brier_score": 0.21424335283657742,
+          "games": 1763
+        }
+      ],
+      "spec": {
+        "features": [
+          "elo_diff"
+        ],
+        "family": "residual",
+        "regularization": 1.0
+      }
+    },
+    "players_residual_0.01": {
+      "aggregate": {
+        "accuracy": 0.6461232604373758,
+        "log_loss": 0.628832309410084,
+        "brier_score": 0.21939349636507469,
+        "games": 5533
+      },
+      "folds": [
+        {
+          "year": 2021,
+          "train_games": 4754,
+          "accuracy": 0.628421052631579,
+          "log_loss": 0.6399406226298175,
+          "brier_score": 0.22418078104646813,
+          "games": 1900
+        },
+        {
+          "year": 2023,
+          "train_games": 6654,
+          "accuracy": 0.6385026737967915,
+          "log_loss": 0.6330401779413662,
+          "brier_score": 0.22118323802204656,
+          "games": 1870
+        },
+        {
+          "year": 2024,
+          "train_games": 8524,
+          "accuracy": 0.6732841747022121,
+          "log_loss": 0.612397533873503,
+          "brier_score": 0.21233583454250796,
+          "games": 1763
+        }
+      ],
+      "spec": {
+        "features": [
+          "elo_diff",
+          "player_elo_diff",
+          "roster_stability_diff"
+        ],
+        "family": "residual",
+        "regularization": 0.01
+      }
+    },
+    "players_residual_0.1": {
+      "aggregate": {
+        "accuracy": 0.6430507861919392,
+        "log_loss": 0.631193551707762,
+        "brier_score": 0.22048930116501825,
+        "games": 5533
+      },
+      "folds": [
+        {
+          "year": 2021,
+          "train_games": 4754,
+          "accuracy": 0.6263157894736842,
+          "log_loss": 0.6418879697588833,
+          "brier_score": 0.22503192455102916,
+          "games": 1900
+        },
+        {
+          "year": 2023,
+          "train_games": 6654,
+          "accuracy": 0.6390374331550802,
+          "log_loss": 0.6361311357314516,
+          "brier_score": 0.22267780070463716,
+          "games": 1870
+        },
+        {
+          "year": 2024,
+          "train_games": 8524,
+          "accuracy": 0.6653431650595576,
+          "log_loss": 0.6144308311057032,
+          "brier_score": 0.21327235359127572,
+          "games": 1763
+        }
+      ],
+      "spec": {
+        "features": [
+          "elo_diff",
+          "player_elo_diff",
+          "roster_stability_diff"
+        ],
+        "family": "residual",
+        "regularization": 0.1
+      }
+    },
+    "players_residual_1.0": {
+      "aggregate": {
+        "accuracy": 0.6401590457256461,
+        "log_loss": 0.6325753300249917,
+        "brier_score": 0.22115065232536785,
+        "games": 5533
+      },
+      "folds": [
+        {
+          "year": 2021,
+          "train_games": 4754,
+          "accuracy": 0.6210526315789474,
+          "log_loss": 0.6425370023259481,
+          "brier_score": 0.225406805495076,
+          "games": 1900
+        },
+        {
+          "year": 2023,
+          "train_games": 6654,
+          "accuracy": 0.6374331550802139,
+          "log_loss": 0.6381063153754243,
+          "brier_score": 0.22360935650587363,
+          "games": 1870
+        },
+        {
+          "year": 2024,
+          "train_games": 8524,
+          "accuracy": 0.6636415201361316,
+          "log_loss": 0.6159728796692762,
+          "brier_score": 0.21395583222327402,
+          "games": 1763
+        }
+      ],
+      "spec": {
+        "features": [
+          "elo_diff",
+          "player_elo_diff",
+          "roster_stability_diff"
+        ],
+        "family": "residual",
+        "regularization": 1.0
+      }
+    },
+    "form_residual_0.01": {
+      "aggregate": {
+        "accuracy": 0.6463039942165191,
+        "log_loss": 0.6295062102545633,
+        "brier_score": 0.21968258135349902,
+        "games": 5533
+      },
+      "folds": [
+        {
+          "year": 2021,
+          "train_games": 4754,
+          "accuracy": 0.63,
+          "log_loss": 0.6403875178045985,
+          "brier_score": 0.22445285748711752,
+          "games": 1900
+        },
+        {
+          "year": 2023,
+          "train_games": 6654,
+          "accuracy": 0.6379679144385026,
+          "log_loss": 0.6336601635942719,
+          "brier_score": 0.22140552946759684,
+          "games": 1870
+        },
+        {
+          "year": 2024,
+          "train_games": 8524,
+          "accuracy": 0.6727169597277368,
+          "log_loss": 0.6133732680592585,
+          "brier_score": 0.21271409716334688,
+          "games": 1763
+        }
+      ],
+      "spec": {
+        "features": [
+          "elo_diff",
+          "player_elo_diff",
+          "roster_stability_diff",
+          "form_diff",
+          "player_form_diff"
+        ],
+        "family": "residual",
+        "regularization": 0.01
+      }
+    },
+    "form_residual_0.1": {
+      "aggregate": {
+        "accuracy": 0.6432315199710826,
+        "log_loss": 0.6313396989984286,
+        "brier_score": 0.22053426494803627,
+        "games": 5533
+      },
+      "folds": [
+        {
+          "year": 2021,
+          "train_games": 4754,
+          "accuracy": 0.6247368421052631,
+          "log_loss": 0.6417676102847529,
+          "brier_score": 0.22503913512134152,
+          "games": 1900
+        },
+        {
+          "year": 2023,
+          "train_games": 6654,
+          "accuracy": 0.6342245989304813,
+          "log_loss": 0.6360279688431838,
+          "brier_score": 0.22257396112494962,
+          "games": 1870
+        },
+        {
+          "year": 2024,
+          "train_games": 8524,
+          "accuracy": 0.6727169597277368,
+          "log_loss": 0.6151286405448221,
+          "brier_score": 0.21351583886743053,
+          "games": 1763
+        }
+      ],
+      "spec": {
+        "features": [
+          "elo_diff",
+          "player_elo_diff",
+          "roster_stability_diff",
+          "form_diff",
+          "player_form_diff"
+        ],
+        "family": "residual",
+        "regularization": 0.1
+      }
+    },
+    "form_residual_1.0": {
+      "aggregate": {
+        "accuracy": 0.6441351888667992,
+        "log_loss": 0.6322909666865998,
+        "brier_score": 0.22100871652406961,
+        "games": 5533
+      },
+      "folds": [
+        {
+          "year": 2021,
+          "train_games": 4754,
+          "accuracy": 0.6247368421052631,
+          "log_loss": 0.6421450507184017,
+          "brier_score": 0.22524233787814482,
+          "games": 1900
+        },
+        {
+          "year": 2023,
+          "train_games": 6654,
+          "accuracy": 0.6438502673796791,
+          "log_loss": 0.6376622509624249,
+          "brier_score": 0.22338359295763202,
+          "games": 1870
+        },
+        {
+          "year": 2024,
+          "train_games": 8524,
+          "accuracy": 0.6653431650595576,
+          "log_loss": 0.6159738587704247,
+          "brier_score": 0.21392709457086215,
+          "games": 1763
+        }
+      ],
+      "spec": {
+        "features": [
+          "elo_diff",
+          "player_elo_diff",
+          "roster_stability_diff",
+          "form_diff",
+          "player_form_diff"
+        ],
+        "family": "residual",
+        "regularization": 1.0
+      }
+    },
+    "draft_residual_0.01": {
+      "aggregate": {
+        "accuracy": 0.6466654617748057,
+        "log_loss": 0.6269625181194197,
+        "brier_score": 0.2185153351000633,
+        "games": 5533
+      },
+      "folds": [
+        {
+          "year": 2021,
+          "train_games": 4754,
+          "accuracy": 0.6294736842105263,
+          "log_loss": 0.637155577417703,
+          "brier_score": 0.22292289111124838,
+          "games": 1900
+        },
+        {
+          "year": 2023,
+          "train_games": 6654,
+          "accuracy": 0.6385026737967915,
+          "log_loss": 0.6314173904802173,
+          "brier_score": 0.22034763030385737,
+          "games": 1870
+        },
+        {
+          "year": 2024,
+          "train_games": 8524,
+          "accuracy": 0.6738513896766875,
+          "log_loss": 0.6112521244827609,
+          "brier_score": 0.21182177386787573,
+          "games": 1763
+        }
+      ],
+      "spec": {
+        "features": [
+          "elo_diff",
+          "player_elo_diff",
+          "form_diff",
+          "player_form_diff",
+          "roster_stability_diff",
+          "patch_strength_diff",
+          "patch_coverage_diff",
+          "comfort_diff",
+          "comfort_residual_diff",
+          "lane_counter_diff"
+        ],
+        "family": "residual",
+        "regularization": 0.01
+      }
+    },
+    "draft_residual_0.1": {
+      "aggregate": {
+        "accuracy": 0.6455810590999458,
+        "log_loss": 0.6287099727686666,
+        "brier_score": 0.21932029118006743,
+        "games": 5533
+      },
+      "folds": [
+        {
+          "year": 2021,
+          "train_games": 4754,
+          "accuracy": 0.6263157894736842,
+          "log_loss": 0.6389593960145532,
+          "brier_score": 0.223712414157089,
+          "games": 1900
+        },
+        {
+          "year": 2023,
+          "train_games": 6654,
+          "accuracy": 0.6406417112299465,
+          "log_loss": 0.6333767395940377,
+          "brier_score": 0.22130401659173554,
+          "games": 1870
+        },
+        {
+          "year": 2024,
+          "train_games": 8524,
+          "accuracy": 0.6715825297787862,
+          "log_loss": 0.6127140804654173,
+          "brier_score": 0.21248274144883642,
+          "games": 1763
+        }
+      ],
+      "spec": {
+        "features": [
+          "elo_diff",
+          "player_elo_diff",
+          "form_diff",
+          "player_form_diff",
+          "roster_stability_diff",
+          "patch_strength_diff",
+          "patch_coverage_diff",
+          "comfort_diff",
+          "comfort_residual_diff",
+          "lane_counter_diff"
+        ],
+        "family": "residual",
+        "regularization": 0.1
+      }
+    },
+    "draft_residual_1.0": {
+      "aggregate": {
+        "accuracy": 0.6434122537502259,
+        "log_loss": 0.6309752746157935,
+        "brier_score": 0.2204009389250587,
+        "games": 5533
+      },
+      "folds": [
+        {
+          "year": 2021,
+          "train_games": 4754,
+          "accuracy": 0.6252631578947369,
+          "log_loss": 0.6409124912377604,
+          "brier_score": 0.22466581529423413,
+          "games": 1900
+        },
+        {
+          "year": 2023,
+          "train_games": 6654,
+          "accuracy": 0.6443850267379679,
+          "log_loss": 0.6362543935385185,
+          "brier_score": 0.22271143366289858,
+          "games": 1870
+        },
+        {
+          "year": 2024,
+          "train_games": 8524,
+          "accuracy": 0.6619398752127056,
+          "log_loss": 0.6146663330575216,
+          "brier_score": 0.21335392232767125,
+          "games": 1763
+        }
+      ],
+      "spec": {
+        "features": [
+          "elo_diff",
+          "player_elo_diff",
+          "form_diff",
+          "player_form_diff",
+          "roster_stability_diff",
+          "patch_strength_diff",
+          "patch_coverage_diff",
+          "comfort_diff",
+          "comfort_residual_diff",
+          "lane_counter_diff"
+        ],
+        "family": "residual",
+        "regularization": 1.0
+      }
+    },
+    "elo_only_logistic": {
+      "aggregate": {
+        "accuracy": 0.6390746430507862,
+        "log_loss": 0.6329291299860054,
+        "brier_score": 0.22130051514261675,
+        "games": 5533
+      },
+      "folds": [
+        {
+          "year": 2021,
+          "train_games": 4754,
+          "accuracy": 0.6189473684210526,
+          "log_loss": 0.6431143489263866,
+          "brier_score": 0.2256166880614606,
+          "games": 1900
+        },
+        {
+          "year": 2023,
+          "train_games": 6654,
+          "accuracy": 0.6385026737967915,
+          "log_loss": 0.6384419147754281,
+          "brier_score": 0.2237694461482773,
+          "games": 1870
+        },
+        {
+          "year": 2024,
+          "train_games": 8524,
+          "accuracy": 0.6613726602382303,
+          "log_loss": 0.6161050667171767,
+          "brier_score": 0.21403016373797204,
+          "games": 1763
+        }
+      ],
+      "spec": {
+        "features": [
+          "elo_diff"
+        ],
+        "family": "logistic",
+        "regularization": 0.1
+      }
+    },
+    "draft_logistic": {
+      "aggregate": {
+        "accuracy": 0.6475691306705224,
+        "log_loss": 0.626398742804218,
+        "brier_score": 0.21824093775604142,
+        "games": 5533
+      },
+      "folds": [
+        {
+          "year": 2021,
+          "train_games": 4754,
+          "accuracy": 0.6326315789473684,
+          "log_loss": 0.6365760115204253,
+          "brier_score": 0.22267509999882742,
+          "games": 1900
+        },
+        {
+          "year": 2023,
+          "train_games": 6654,
+          "accuracy": 0.6390374331550802,
+          "log_loss": 0.6309177018124195,
+          "brier_score": 0.22008151610827925,
+          "games": 1870
+        },
+        {
+          "year": 2024,
+          "train_games": 8524,
+          "accuracy": 0.6727169597277368,
+          "log_loss": 0.6106373906169632,
+          "brier_score": 0.21150991689388707,
+          "games": 1763
+        }
+      ],
+      "spec": {
+        "features": [
+          "elo_diff",
+          "player_elo_diff",
+          "form_diff",
+          "player_form_diff",
+          "roster_stability_diff",
+          "patch_strength_diff",
+          "patch_coverage_diff",
+          "comfort_diff",
+          "comfort_residual_diff",
+          "lane_counter_diff"
+        ],
+        "family": "logistic",
+        "regularization": 0.1
+      }
+    },
+    "draft_boosted": {
+      "aggregate": {
+        "accuracy": 0.6472076631122357,
+        "log_loss": 0.6290369643139401,
+        "brier_score": 0.21931708867855873,
+        "games": 5533
+      },
+      "folds": [
+        {
+          "year": 2021,
+          "train_games": 4754,
+          "accuracy": 0.6342105263157894,
+          "log_loss": 0.638309605176229,
+          "brier_score": 0.2235095593459493,
+          "games": 1900
+        },
+        {
+          "year": 2023,
+          "train_games": 6654,
+          "accuracy": 0.6433155080213904,
+          "log_loss": 0.6317737637445416,
+          "brier_score": 0.22066746127327175,
+          "games": 1870
+        },
+        {
+          "year": 2024,
+          "train_games": 8524,
+          "accuracy": 0.6653431650595576,
+          "log_loss": 0.6161408596210451,
+          "brier_score": 0.21336649819633768,
+          "games": 1763
+        }
+      ],
+      "spec": {
+        "features": [
+          "elo_diff",
+          "player_elo_diff",
+          "form_diff",
+          "player_form_diff",
+          "roster_stability_diff",
+          "patch_strength_diff",
+          "patch_coverage_diff",
+          "comfort_diff",
+          "comfort_residual_diff",
+          "lane_counter_diff"
+        ],
+        "family": "boosted"
+      }
+    }
+  },
+  "development_years": [
+    2021,
+    2023,
+    2024
+  ],
+  "reporting_year": 2025,
+  "test": {
+    "elo_formula": {
+      "candidate": "elo_formula",
+      "accuracy": 0.647766323024055,
+      "log_loss": 0.6286628957126519,
+      "brier_score": 0.21928880140417903,
+      "games": 1746
+    },
+    "elo_only": {
+      "candidate": "elo_only_logistic",
+      "accuracy": 0.647766323024055,
+      "log_loss": 0.6286642487362357,
+      "brier_score": 0.21924778886533416,
+      "games": 1746,
+      "paired_vs_elo": {
+        "method": "2000 paired calendar-day bootstrap replicates; positive favors candidate",
+        "accuracy_delta_95": [
+          0.0,
+          0.0
+        ],
+        "log_loss_improvement_95": [
+          -0.0013783261698850663,
+          0.0013827481110969021
+        ]
+      }
+    },
+    "players": {
+      "candidate": "players_residual_0.01",
+      "accuracy": 0.6426116838487973,
+      "log_loss": 0.6259811706206263,
+      "brier_score": 0.21787599316994669,
+      "games": 1746,
+      "paired_vs_elo": {
+        "method": "2000 paired calendar-day bootstrap replicates; positive favors candidate",
+        "accuracy_delta_95": [
+          -0.013091054904019692,
+          0.002382871257201213
+        ],
+        "log_loss_improvement_95": [
+          -0.000776862652688706,
+          0.0062197189855713484
+        ]
+      }
+    },
+    "form": {
+      "candidate": "form_residual_0.01",
+      "accuracy": 0.6460481099656358,
+      "log_loss": 0.6259642435428476,
+      "brier_score": 0.21788608709792337,
+      "games": 1746,
+      "paired_vs_elo": {
+        "method": "2000 paired calendar-day bootstrap replicates; positive favors candidate",
+        "accuracy_delta_95": [
+          -0.01049608661889322,
+          0.007000656388899106
+        ],
+        "log_loss_improvement_95": [
+          -0.0011327455441137474,
+          0.006390663909597823
+        ]
+      }
+    },
+    "draft": {
+      "candidate": "draft_logistic",
+      "accuracy": 0.6471935853379153,
+      "log_loss": 0.6206608833772008,
+      "brier_score": 0.21551469858602298,
+      "games": 1746,
+      "paired_vs_elo": {
+        "method": "2000 paired calendar-day bootstrap replicates; positive favors candidate",
+        "accuracy_delta_95": [
+          -0.013683964643461957,
+          0.01249326533904642
+        ],
+        "log_loss_improvement_95": [
+          0.002088152606810227,
+          0.01372664308383688
+        ]
+      }
+    },
+    "selected": {
+      "candidate": "draft_logistic",
+      "accuracy": 0.6471935853379153,
+      "log_loss": 0.6206608833772008,
+      "brier_score": 0.21551469858602298,
+      "games": 1746,
+      "paired_vs_elo": {
+        "method": "2000 paired calendar-day bootstrap replicates; positive favors candidate",
+        "accuracy_delta_95": [
+          -0.013683964643461957,
+          0.01249326533904642
+        ],
+        "log_loss_improvement_95": [
+          0.002088152606810227,
+          0.01372664308383688
+        ]
+      }
+    }
+  },
+  "limitations": [
+    "2025 was previously inspected in v5; these are retrospective comparisons, not a new untouched holdout.",
+    "Rating parameters and model hyperparameters share development folds; selection bias remains possible.",
+    "Outcome availability approximated by max(2 hours, duration + 15 minutes), not official completion timestamps.",
+    "No 2022 or Worlds games in the supplied database. LPL and MSI are present.",
+    "Bootstrap intervals do not capture model-selection uncertainty or future data shifts."
+  ],
+  "timing": {
+    "total_seconds": 11.99257149999994,
+    "selected_replay_seconds": 1.119391600000199
+  }
+}

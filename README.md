@@ -1,96 +1,156 @@
-# NEXUS SIGHT
-### Predictive Draft Analysis Engine for League of Legends Esports
+# Nexus Sight
 
+**Pre-game win probability for professional League of Legends matches.** Pick two teams and their draft; Nexus Sight
+estimates each side's chance to win from team and player strength, recent form and the draft, and tells you when a
+prediction is less reliable.
 
-![Status](https://img.shields.io/badge/Status-Production_Ready-0052cc?style=flat-square)
-![Model](https://img.shields.io/badge/Model-XGBoost_Classifier-orange?style=flat-square)
-![Accuracy](https://img.shields.io/badge/Validation_Accuracy-71.0%25-success?style=flat-square)
-
-Nexus Sight is a predictive analytics platform for League of Legends esports. It utilizes a gradient boosting model trained on professional match data to evaluate draft compositions, quantifying win probability based on skill differential, lane matchups, and structural role integrity.
+**Live demo:** _coming soon_ · **Stack:** Python (scikit-learn, FastAPI, SQLite) · React + TypeScript (Vite)
 
 ---
 
-## Core Capabilities
+## Results
 
-### 1. Predictive Modeling Engine
-The system employs an **XGBoost Classifier** trained on 3,000+ competitive matches (LCK, LPL, LEC, LCS, Worlds 2022-2024). Unlike simple win-rate aggregators, it weighs multiple distinct feature vectors to determine game outcome:
+Tested once on **1,970 pro games from 2026** that were downloaded and sealed *before* any model development, then
+evaluated a single time after every model choice was frozen.
 
-*   **Counter Score (56% Importance):** Aggregated lane-specific matchup advantages derived from a historical matrix of 8,900+ unique matchups.
-*   **Skill Differential (35% Importance):** Custom Elo rating system adjusted for regional strength disparity (e.g., LCK vs LCS weighting).
-*   **Compositional Archetypes (9% Importance):** Feature engineering that detects structural advantages (e.g., "Catch" compositions vs "Protect" compositions) via sub-class density analysis (Vanguards, Enchanters, Marksmen).
+| Model | Accuracy | Log loss ↓ | Brier ↓ |
+|---|---:|---:|---:|
+| Tuned Elo (baseline) | 63.4% | 0.644 | 0.226 |
+| **Nexus Sight (v6)** | **64.7%** | **0.634** | **0.222** |
 
-### 2. Global Elo System
-A custom ranking engine tracks team strength over time, anchoring ratings by regional coefficients.
-*   **Active Filtering:** Automatically excludes disbanded organizations, focusing on active franchises (>250 games or active in current season).
-*   **Dynamic Updating:** Ratings adjust match-by-match based on opponent strength.
+- The model's probabilities are measurably better than Elo's: the log-loss improvement has a 95% interval of
+  **+0.004 to +0.017** (bootstrap by match day), which excludes zero.
+- Accuracy is about one point higher, within noise. Most of what is predictable in pro play is team strength;
+  the draft mainly improves *how confident* the model should be, not *which* team it picks.
+- The interval does not include uncertainty from choosing between models. Full report:
+  [`scripts/v7/FINAL_REPORT.md`](scripts/v7/FINAL_REPORT.md).
 
-### 3. Draft Simulation Interface
-A React-based frontend designed for analysts and coaches.
-*   **Real-Time Inference:** Predictions update instantly ( < 100ms ) as champions are selected.
-*   **Threat Detection:** Algorithmic identification of specific high-threat counters (e.g., "Viktor is countered by 3+ enemy champions").
-*   **Draft Integrity Checks:** Flags off-role selections or composition imbalances (e.g., "No Frontline," "Full Magic Damage").
+### When predictions are less reliable
 
----
+Measured on the same 2026 test games ([script](scripts/analysis/rare_and_offrole_2026.py),
+[output](scripts/analysis/rare_and_offrole_2026.txt)):
 
-## Technical Architecture
+| Draft contains | Games | Accuracy | Log loss |
+|---|---:|---:|---:|
+| A **rare pick** (fewer than 50 earlier pro games) | 61 | 55.7% | 0.684 |
+| No rare pick | 1,909 | 65.0% | 0.632 |
+| A champion in an **unusual role** (under 10% of its pro games in that role) | 551 | 63.0% | 0.647 |
+| No unusual role | 1,419 | 65.4% | 0.629 |
 
-### Backend
-*   **Runtime:** Python 3.11
-*   **Framework:** FastAPI
-*   **ML Stack:** Scikit-Learn, XGBoost, Pandas, NumPy
-*   **Data Storage:** SQLite (Optimized for read-heavy analytical queries)
-*   **Key Services:**
-    *   `train_v4_synthetic.py`: Model training pipeline with feature extraction.
-    *   `mine_counters.py`: Matrix generation script for matchup data.
-    *   `main.py`: Inference API and business logic.
+The rare-pick gap is large but based on only 61 games (95% interval for their accuracy: 43–67%), so treat it as a
+warning sign rather than a precise number. The app shows both warnings next to the prediction.
 
-### Frontend
-*   **Framework:** React 18 (Vite)
-*   **Language:** TypeScript
-*   **State Management:** React Hooks (Custom `useMatchups` logic)
-*   **Styling:** TailwindCSS (Custom configuration)
+## What this project claims (and the evidence)
 
----
+| Claim | Evidence |
+|---|---|
+| Better win probabilities than a tuned Elo baseline on unseen games | Sealed 2026 holdout, 1,970 games: log loss 0.634 vs 0.644, 95% interval of the improvement +0.004 to +0.017 ([report](scripts/v7/FINAL_REPORT.md)) |
+| About one point higher accuracy than Elo, **not** a significant accuracy gain | Same holdout: 64.7% vs 63.4%; the accuracy interval includes zero |
+| No outcome leakage in features | Chronological replay with a result-availability delay; regression tests in `backend/tests` check that a game's own and later results are never visible |
+| Predictions are weaker for rare picks and unusual roles | Subgroup analysis on the holdout ([script](scripts/analysis/rare_and_offrole_2026.py)) |
+| A richer v7 model did not help | v7 (Glicko-2, TrueSkill, context) scored 63.6%, log loss 0.644 on the same holdout, so v6 stays in production |
 
-## Installation & Deployment
+Not claimed: betting value, causal champion effects, or performance on leagues outside those listed.
 
-### Prerequisites
-*   Node.js (v18+)
-*   Python (v3.10+)
+## How it works
 
-### 1. Backend Setup
-```bash
-cd backend
+1. **Data:** professional games from [Oracle's Elixir](https://oracleselixir.com/) (LCK, LPL, LEC, LCS/LTA, MSI and
+   Worlds). The app's database holds 17,350 games from January 2018 to October 2026.
+2. **Ratings:** team Elo (tuned K-factor, 20% shrink toward the mean between seasons) and player ratings that follow
+   players across teams.
+3. **Features, all from before the match:** rating differences, roster stability, recent form relative to Elo
+   expectations, patch-and-role champion strength, player comfort on the champion, and lane matchups. A game's result
+   only becomes available to later games after a conservative delay, to avoid leaking outcomes.
+4. **Model:** regularised logistic regression, chosen over gradient boosting on earlier seasons
+   (walk-forward validation), with side-symmetric probabilities.
+5. **App:** FastAPI serves predictions, team/player/champion stats and the model's own benchmark; the React front end
+   is the draft board. Champion win and pick rates are computed from the **last 12 months** of pro games in the
+   database and smoothed toward 50% for champions with few games.
 
-# Create and activate virtual environment
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+### What I learned (the honest part)
 
-# Install dependencies
-pip install fastapi uvicorn pandas scikit-learn xgboost numpy shap
+An early version reported 78% accuracy. An audit showed most of that came from **target leakage**: matchup win rates
+had been computed from all games, including the game being predicted. Rebuilt with strictly chronological features,
+accuracy fell to about 65%, roughly level with Elo. The current version was validated season by season and then tested
+once on a sealed 2026 holdout. A later v7 experiment (Glicko-2, TrueSkill, more context) did **not** beat v6 on that
+holdout, so v6 stays in production.
 
-# Run the API
-uvicorn main:app --reload
+## Ranked mode (in progress)
+
+A draft-only model for high-rank solo queue (Master and above), where there are no fixed teams and matchmaking makes
+both sides similar in skill. Data collection and training scripts are in [`scripts/ranked/`](scripts/ranked/).
+
+- **Data:** _to be added_
+- **Results:** _to be added_
+- **In the app:** _to be added_
+
+See [`docs/RANKED_MODE.md`](docs/RANKED_MODE.md).
+
+## Limitations
+
+- Accuracy is close to an Elo baseline; gains are in probability quality, not in picking more winners.
+- Rare picks and unusual roles have little data, so those predictions are weaker (see above).
+- The served model's ratings were fitted on data up to September 2025; refreshing them with the 2026 games is the next
+  step. Stats shown in the app already use data up to October 2026.
+- Match end times are estimated (start + max(2 h, game length + 15 min)), not official.
+- Best-of-series format is not available in the source data; series are linked approximately.
+- Only major leagues and international events are reported; smaller leagues are used for ratings only (v7).
+- Player names are matched by aliases and IDs; unusual spellings can fall back to neutral ratings.
+- Pre-game only: nothing that happens during the match is used.
+
+## Future work
+
+- Refresh ratings with 2026 data for the live demo, then evaluate on 2027 games as a new sealed test.
+- Finish **Ranked mode** (see above) and add a mode switch to the app.
+- Explanations per prediction (which factors moved the probability).
+- Comparison against bookmaker odds.
+- Scheduled data updates (e.g. a weekly GitHub Action).
+
+## Run locally
+
+Python 3.12+ and Node.js 22+. In PowerShell from the repo root:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+python -m uvicorn backend.main:app --reload --port 8000
 ```
 
-### 2. Frontend Setup
-```bash
-# In project root
-npm install
+In a second terminal:
+
+```powershell
+cd frontend
+npm ci
 npm run dev
 ```
 
-### 3. Model Retraining (Optional)
-To regenerate the predictive model based on the latest database entries:
-```bash
-python backend/train_v4_synthetic.py
+Open http://localhost:3000. The database and model files are not in Git; see
+[`docs/TECHNICAL.md`](docs/TECHNICAL.md) to rebuild them from Oracle's Elixir CSVs and retrain.
+To put the app online, see [`deploy/DEPLOY.md`](deploy/DEPLOY.md).
+
+## Project structure
+
+```
+backend/          FastAPI app (main.py, services.py), features, models, training, data import, tests
+frontend/         React + TypeScript draft board (Vite); data/ holds champion tags and fallback stats
+scripts/
+  v7/             Frozen 2026 holdout evaluation: protocol, report, data dictionary
+  analysis/       Rare-pick and unusual-role analysis on the holdout
+  ranked/         Ranked mode: Riot API collector and draft-only trainer (in progress)
+deploy/           Docker image and packer for Hugging Face Spaces
+docs/             Model card, technical notes, Ranked mode notes, archived reports
+tools/legacy/     Earlier experiments, kept for reference only
 ```
 
----
+Not in Git (rebuilt locally): the SQLite database, trained models, raw CSVs, `.env`.
 
-## Data Methodology
+## More documentation
 
-Feature importance analysis (Gini Impurity) reveals the following hierarchy in professional play outcomes:
-1.  **Counter Score:** The sum of lane-specific win rate deltas is the primary determinant of draft success.
-2.  **Elo Differential:** Team skill disparity remains a significant predictor regardless of composition.
-3.  **Support & Marksman Density:** The presence of specific utility and damage classes correlates more strongly with victory than generic Tank metrics.
+- [`docs/MODEL_CARD.md`](docs/MODEL_CARD.md): intended use, data, evaluation and caveats on one page
+- [`docs/TECHNICAL.md`](docs/TECHNICAL.md): features, leakage protection, data import and tests
+- [`docs/RANKED_MODE.md`](docs/RANKED_MODE.md): solo queue mode (in progress)
+- [`scripts/v7/FINAL_REPORT.md`](scripts/v7/FINAL_REPORT.md): sealed 2026 evaluation, ablations and intervals
+- [`scripts/v7/DATA_DICTIONARY.md`](scripts/v7/DATA_DICTIONARY.md): data fields and reproduction steps
+
+Data: Oracle's Elixir. League of Legends is a trademark of Riot Games; this project is not endorsed by Riot Games.

@@ -1,0 +1,6 @@
+-r ../../requirements.txt
+lightgbm==4.7.0
+trueskill==0.4.5
+glicko2==2.1.0
+matplotlib==3.10.5
+packaging==26.3

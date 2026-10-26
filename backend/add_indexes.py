@@ -2,7 +2,7 @@ import sqlite3
 import os
 
 # Ensure we look in the current folder
-DB_PATH = "nexus_sight.db"
+DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "nexus_sight.db")
 
 def add_indexes():
     print(f"📂 Working Directory: {os.getcwd()}")

@@ -1,0 +1,7 @@
+{
+  "source": "https://drive.usercontent.google.com/download?id=1hnpbrUpBMS1TZI7IovfpKeZfWJH1Aptm&export=download&confirm=t",
+  "path": "data/sealed/2026.csv",
+  "sha256": "012f0ff4ea617bbccf5165b1b090eaf6ee3cb2bdea25912d951aa7fea5c54da6",
+  "downloaded_utc": "2026-10-26T03:34:32.426344+00:00",
+  "policy": "Opaque bytes only until the frozen final evaluator runs once; never parse in development."
+}

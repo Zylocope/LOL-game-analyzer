@@ -38,3 +38,19 @@ huggingface/
 *.db.backup
 nexus_sight.db
 /backend/Data/
+
+.venv/
+.env.*
+!.env.example
+backend/model_v5.pkl
+
+backend/model_v6.pkl
+
+# v7 raw data, sealed holdout, and local models
+scripts/v7/data/
+scripts/v7/artifacts/
+
+# SQLite temporary files
+*.db-journal
+*.db-wal
+*.db-shm

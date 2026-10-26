@@ -1,0 +1,74 @@
+{
+  "version": "v5_past_only",
+  "data": {
+    "skipped_games": 1,
+    "games": 12033,
+    "first_date": "2018-01-15 09:40:00+00:00",
+    "last_date": "2025-09-28 17:10:18+00:00"
+  },
+  "selected_on_validation": "draft_and_elo",
+  "protocol": "60/20/20 timestamp split; past-only rolling features; same timestamps isolated; test scored once",
+  "limitations": [
+    "Champion class taxonomy is a current static annotation, not patch-versioned.",
+    "Rolling test features include earlier completed test matches (online evaluation).",
+    "No claim of causal draft advantage or betting calibration."
+  ],
+  "periods": {
+    "train": {
+      "start": "2018-01-15 09:40:00+00:00",
+      "end": "2023-03-09 12:22:57+00:00",
+      "games": 7219
+    },
+    "validation": {
+      "start": "2023-03-09 13:07:47+00:00",
+      "end": "2024-06-19 12:09:46+00:00",
+      "games": 2408
+    },
+    "test": {
+      "start": "2024-06-19 12:51:44+00:00",
+      "end": "2025-09-28 17:10:18+00:00",
+      "games": 2406
+    }
+  },
+  "test": {
+    "draft_and_elo": {
+      "accuracy": 0.6658354114713217,
+      "log_loss": 0.6219473137920436,
+      "brier_score": 0.21612532376014854,
+      "games": 2406
+    },
+    "elo_model": {
+      "accuracy": 0.6591853699085619,
+      "log_loss": 0.6227197126993054,
+      "brier_score": 0.21650280575697686,
+      "games": 2406
+    },
+    "elo_formula": {
+      "accuracy": 0.6587697423108895,
+      "log_loss": 0.6249611730084329,
+      "brier_score": 0.21688294472226183,
+      "games": 2406
+    },
+    "draft_log_loss_improvement_over_elo_model": 0.0007723989072617732
+  },
+  "validation": {
+    "draft_and_elo": {
+      "log_loss": 0.6262241240538251,
+      "params": {
+        "n_estimators": 120,
+        "learning_rate": 0.05,
+        "max_depth": 2,
+        "random_state": 42
+      }
+    },
+    "elo_model": {
+      "log_loss": 0.6281530204428718,
+      "params": {
+        "n_estimators": 120,
+        "learning_rate": 0.05,
+        "max_depth": 2,
+        "random_state": 42
+      }
+    }
+  }
+}
